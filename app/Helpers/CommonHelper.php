@@ -293,3 +293,33 @@ use Illuminate\Support\Facades\Storage;
         }
     }
 
+    if(!function_exists('send_sms_through_2factor')){
+        function send_sms_through_2factor($data){
+
+            $api_key   = env("SMS_2FACTOR_API_KEY");
+            $sender    = env("SMS_2FACTOR_CREDENTIAL");
+            
+            $url = 'https://2factor.in/API/V1/'.$api_key.'/SMS/'.$data['phone'].'/'.$data['otp'].'/'.$data['template'].'?var1='.$data['student_name'];
+ 
+
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET",
+                CURLOPT_POSTFIELDS => "",
+                CURLOPT_HTTPHEADER => array(
+                "content-type: application/x-www-form-urlencoded"
+                ),
+            ));
+            $response = curl_exec($curl);
+
+            $err = curl_error($curl);
+            curl_close($curl);	    
+                
+        }
+    }

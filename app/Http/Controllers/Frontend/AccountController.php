@@ -169,12 +169,12 @@ class AccountController extends Controller
                 
                 $to = $email;
                 $subject = "$otp is your Manalot Leadership Network Forgot Password Verification Code.";
-                $body = "Hello, <br><br> 
-        For security purposes, please enter the code below to verify your account.<br><br>
-        Forgot Password Verification Code: <b>$otp</b> <br><br>
-        The code is valid for 2 minutes.  <br><br>
-        Having problems with the code? <br><br>
-        The code will not work if timed out. <br><br>
+                $body = "Hello, <br> 
+        For security purposes, please enter the code below to verify your account.<br> 
+        Forgot Password Verification Code: <b>$otp</b> <br>
+        The code is valid for 2 minutes.  <br>
+        Having problems with the code? <br>
+        The code will not work if timed out. <br>
         Please request for a new code.";
 
 
@@ -309,6 +309,14 @@ class AccountController extends Controller
         }elseif($param == "resend-otp"){
 
             $rsp_msg = $this->resendOtp($request);
+
+        }elseif($param == "phone-verify"){
+
+            $rsp_msg = $this->phone_verification($request);
+        
+        }elseif($param == "resend-otp-phone"){
+
+            $rsp_msg = $this->resendOtp_phone($request);
 
         }elseif($param == "personal-info"){
 
@@ -603,12 +611,12 @@ class AccountController extends Controller
 
         $to = $user_info['email'];
         $subject = "$otp is your Manalot Leadership Network Verification Code.";
-        $body = "Hello, <br><br>
-        For security purposes, please enter the code below to verify your account.<br> <br>
-        Account Verification Code: <b>$otp</b> <br><br>
-        The code is valid for 2 minutes.  <br><br>
-        Having problems with the code? <br><br>
-        The code will not work if timed out. <br><br>
+        $body = "Hello, <br> 
+        For security purposes, please enter the code below to verify your account.<br> 
+        Account Verification Code: <b>$otp</b> <br>
+        The code is valid for 2 minutes.  <br>
+        Having problems with the code? <br>
+        The code will not work if timed out. <br>
         Please request for a new code.";
 
         sendEmail($to, $subject, $body);
@@ -625,6 +633,173 @@ class AccountController extends Controller
     }
 
     public function email_verification($request){
+        
+        $validator = Validator::make($request->all(), [
+            'otp' => 'required|digits:6',
+        ]);
+
+        if ($validator->fails()) {
+            $rsp_msg['response'] = 'error';
+            $rsp_msg['message']  = $validator->errors()->all();
+
+            return $rsp_msg; 
+        } 
+
+        $otp = Session::get('otp');
+        $timestamp = Session::get('otp_timestamp');
+
+        // Check if OTP expired (2 minutes)
+        if (Carbon::parse($timestamp)->diffInMinutes(Carbon::now()) > 2) {
+            $rsp_msg['response'] = 'error';
+            $rsp_msg['message']  = "OTP has expired. Please request a new one";
+
+            return $rsp_msg;
+        }
+
+        if ($request->otp == $otp) {
+
+            $user_info = Session::get('user_info');
+
+            // $users_email_temp = DB::table('users')->where('email', $user_info['email'])->get()->first();
+
+            // if($users_email_temp){
+
+            //     DB::table('users')->where('id',$users_email_temp->id)->update([
+            //         'username' => $user_info['username'],
+            //         'email' => $user_info['email'],
+            //         'password' => $user_info['password'],
+            //         'approval' => '0',
+            //         'status' => '0',
+            //         'completed_status' => '0',
+            //         'step' => 1,
+            //         'role_id'  => '2',
+            //         'created_at' => now(),
+            //         'updated_at' => now(),
+            //     ]);
+
+            //     $result = file_upload_od($user_info['newFileName'], $user_info['resume_cv']);
+            //     if($result != 'error on uploding'){
+            //         if (Storage::disk('public')->exists($user_info['resume_cv'])) {
+            //             // Storage::disk('public')->delete($user_info['resume_cv']);
+            //         }
+            //         $path = $result;
+            //     } else{
+            //         $path = $user_info['resume_cv'];
+            //     }
+    
+            //     DB::table('userdetails')->where('user_id',$users_email_temp->id)->update([
+            //         'phone_number' => $user_info['phone_number'],
+            //         'resume_cv' => $path,
+            //         'created_at' => now(),
+            //         'updated_at' => now(),
+            //     ]);
+    
+            //     Session::put('temp_user_id', $users_email_temp->id);
+    
+            // } else {
+    
+            //     $userId = DB::table('users')->insertGetId([
+            //         'username' => $user_info['username'],
+            //         'email' => $user_info['email'],
+            //         'password' => $user_info['password'],
+            //         'approval' => '0',
+            //         'role_id'  => '2',
+            //         'completed_status' => '0',
+            //         'status' => '0',
+            //         'step' => 1,
+            //         'created_at' => now(),
+            //         'updated_at' => now(),
+            //     ]);
+
+            //     $result = file_upload_od($user_info['newFileName'], $user_info['resume_cv']);
+            //     if($result != 'error on uploding'){
+            //         if (Storage::disk('public')->exists($user_info['resume_cv'])) {
+            //             // Storage::disk('public')->delete($user_info['resume_cv']);
+            //         }
+            //         $path = $result;
+            //     } else{
+            //         $path = $user_info['resume_cv'];
+            //     }
+    
+            //     DB::table('userdetails')->insert([
+            //         'user_id' => $userId,
+            //         'phone_number' => $user_info['phone_number'],
+            //         'skill' => '[]',
+            //         'edu_data' => '[]',
+            //         'references' => '[]',
+            //         'resume_cv' => $path,
+            //         'created_at' => now(),
+            //         'updated_at' => now(),
+            //     ]);
+    
+            //     Session::put('temp_user_id', $userId);
+            // }
+
+            // Session::put('step', 2);
+            // session()->forget('user_info');
+
+            $otp = mt_rand(100000, 999999);
+            $timestamp = Carbon::now();
+            Session::put('otp', $otp);
+            Session::put('otp_timestamp', $timestamp);
+
+            $student_name = 'Admin';
+
+            $data['student_name'] = rawurlencode($student_name);
+            $data['template']    = 'LMS%20access%20OTP%2031st%20march';
+            $data['use']          = 'otp_sms';
+            $data['phone']        = str_replace(['+', ' '], '', $user_info['phone_number']);
+            $data['otp']          = $otp;
+
+            send_sms_through_2factor($data);
+
+            $rsp_msg['response'] = 'success';
+            $rsp_msg['message']  = "Email Verified Successfully";
+
+        } else {
+            $rsp_msg['response'] = 'error';
+            $rsp_msg['message']  = "Invalid OTP";
+        }
+        
+
+        return $rsp_msg;
+    }
+
+
+
+    public function resendOtp($request)
+    {
+        $otp = mt_rand(100000, 999999);
+        Session::put('otp', $otp);
+
+        $timestamp = Carbon::now();
+        Session::put('otp_timestamp', $timestamp);
+        
+        $user_info = Session::get('user_info');
+
+        $to = $user_info['email'];
+        $subject = "$otp is your Manalot Leadership Network Reset Verification Code.";
+        $body = "Hello, <br> 
+        For security purposes, please enter the code below to verify your account.<br> 
+        Resend Verification Code: <b>$otp</b> <br>
+        The code is valid for 2 minutes.  <br>
+        Having problems with the code? <br>
+        The code will not work if timed out. <br>
+        Please request for a new code.";
+
+
+        sendEmail($to, $subject, $body);
+
+        $rsp_msg['response'] = 'success';
+        $rsp_msg['message']  = "OTP has been Resend no this Email : " . $user_info['email'];
+
+        return $rsp_msg;
+    }
+
+
+    //---------------------- Phone verification ----------------------------------------//
+
+    public function phone_verification($request){
         
         $validator = Validator::make($request->all(), [
             'otp' => 'required|digits:6',
@@ -731,7 +906,7 @@ class AccountController extends Controller
             session()->forget('user_info');
 
             $rsp_msg['response'] = 'success';
-            $rsp_msg['message']  = "Email Verified Successfully";
+            $rsp_msg['message']  = "Phone Number Verified Successfully";
 
         } else {
             $rsp_msg['response'] = 'error';
@@ -742,7 +917,9 @@ class AccountController extends Controller
         return $rsp_msg;
     }
 
-    public function resendOtp($request)
+
+
+    public function resendOtp_phone($request)
     {
         $otp = mt_rand(100000, 999999);
         Session::put('otp', $otp);
@@ -752,24 +929,34 @@ class AccountController extends Controller
         
         $user_info = Session::get('user_info');
 
-        $to = $user_info['email'];
-        $subject = "$otp is your Manalot Leadership Network Reset Verification Code.";
-        $body = "Hello, <br><br>
-        For security purposes, please enter the code below to verify your account.<br> <br> 
-        Resend Verification Code: <b>$otp</b> <br><br> 
-        The code is valid for 2 minutes.  <br><br> 
-        Having problems with the code? <br><br> 
-        The code will not work if timed out. <br><br> 
-        Please request for a new code.";
+        $student_name = 'Admin';
 
+        $data['student_name'] = rawurlencode($student_name);
+        $data['template']    = 'LMS%20access%20OTP%2031st%20march';
+        $data['use']          = 'otp_sms';
+        $data['phone']        = str_replace(['+', ' '], '', $user_info['phone_number']);
+        $data['otp']          = $otp;
 
-        sendEmail($to, $subject, $body);
+        send_sms_through_2factor($data);
+
+        // $to = $user_info['email'];
+        // $subject = "$otp is your Manalot Leadership Network Reset Verification Code.";
+        // $body = "Hello, <br> 
+        // For security purposes, please enter the code below to verify your account.<br> 
+        // Resend Verification Code: <b>$otp</b> <br>
+        // The code is valid for 2 minutes.  <br>
+        // Having problems with the code? <br>
+        // The code will not work if timed out. <br>
+        // Please request for a new code.";
+
 
         $rsp_msg['response'] = 'success';
-        $rsp_msg['message']  = "OTP has been Resend to this Email : " . $user_info['email'];
+        $rsp_msg['message']  = "OTP has been Resend no this Number : " . $user_info['phone_number'];
 
         return $rsp_msg;
     }
+
+    //----------------------- phone verification ---------------------------------------//
 
 
 

@@ -135,7 +135,7 @@ button.purple_btn {
     font-size: 15px;
     background: linear-gradient(34.89deg, #4B2779 8%, #BE2475 83.76%);
     font-weight: 400;
-    padding: 4px 20px 5px 20px;
+    padding: 4px 33px 5px 33px;
     line-height: 24px;
     text-align: center;
 }
@@ -210,7 +210,7 @@ p.divider {
     font-size: 15px;
     background: linear-gradient(2.17deg, #327192 30.94%, #0C3873 69.79%);
     font-weight: 400;
-    padding: 7px 20px 8px 20px;
+    padding: 7px 33px 8px 33px;
     line-height: 24px;
     text-align: center;
     cursor: pointer;
@@ -3023,22 +3023,4 @@ label.custom-select-all {
     top: 3px;
     padding-right: 0 !important;
     margin-right: 3px;
-}
-
-/* */
-.footer_app .android_app .download img,
-.footer_app .ios_app .download img{
-	height:42px;
-}
-#toast-container.toast-top-right{right: inherit;}
-.auth_form .register_width{margin-top: 30px !important;}
-.right-team-img img{margin-top: 0px;}
-
-@media screen and (min-width: 768px) {
-    .auth_form img.mobile_none {
-        top: 0;
-    }
-    #toast-container.toast-top-right{
-        right: 280px;
-    }
 }
