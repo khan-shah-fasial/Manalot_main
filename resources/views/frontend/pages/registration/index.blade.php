@@ -979,32 +979,37 @@
 
     /*--------------------- user info ------------------*/ 
 
-    /*--------------------- email verify otp ------------------*/
+    initValidate('#email-verify-otp');
 
-        initValidate('#email-verify-otp');
+    $('#email-verify-otp').on('submit', function(e){
+        var form = $(this);
+        ajax_form_submit(e, form, responseHandler_email_verify_otp);
+    });
 
-        $('#email-verify-otp').on('submit', function(e){
-            var form = $(this);
-            ajax_form_submit(e, form, responseHandler_email_verify_otp);
-        });
+    var responseHandler_email_verify_otp = function (response) {
+        var form = $('#email-verify-otp'); 
+        
+        form.find("input[type=text], input[type=email], input[type=password], textarea").val("");
+        form.find("select").prop("selectedIndex", 0); 
+        // setTimeout(function () {
+        //     location.reload();
+        // }, 100);
+        $('#email_otp_model').modal('toggle');
+        $('#phone_otp_model').modal('show');
+        // location.reload();
+        // next_page_preview(2);
 
-        var responseHandler_email_verify_otp = function (response) {
-            var form = $('#email-verify-otp'); 
-            
-            form.find("input[type=text], input[type=email], input[type=password], textarea").val("");
-            form.find("select").prop("selectedIndex", 0); 
-            // setTimeout(function () {
-            //     location.reload();
-            // }, 100);
-            $('#email_otp_model').modal('toggle');
-            location.reload();
-            // next_page_preview(2);
-            
-        };
+        // Show resend OTP button after 30 seconds
+        setTimeout(function() {
+            var resendButton_phone = document.getElementById('resendOTPButton_Phone');
+            resendButton_phone.style.display = 'block';
+        }, 30000); // 30 seconds
+        
+    };
 
-        function close_Emai_modal() {
-            $('#email_otp_model').modal('toggle');
-        };
+    function close_Emai_modal() {
+        $('#email_otp_model').modal('toggle');
+    };
     /*--------------------- email verify otp ------------------*/ 
 
     /*--------------------- Resend-otp------------------*/    
