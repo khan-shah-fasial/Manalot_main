@@ -97,7 +97,7 @@ use Illuminate\Support\Facades\Storage;
         $url = 'https://api.brevo.com/v3/smtp/email';
         
         // API key
-        $apiKey = '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';
+        $apiKey = env("BRAVIO_API");
         
         // Data to be sent
         $data = array(
@@ -131,7 +131,7 @@ use Illuminate\Support\Facades\Storage;
         
         // Execute cURL session
         $response = curl_exec($ch);
-        
+
         // Close cURL session
         curl_close($ch);
         
