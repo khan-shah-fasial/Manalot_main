@@ -169,12 +169,12 @@ class AccountController extends Controller
                 
                 $to = $email;
                 $subject = "$otp is your Manalot Leadership Network Forgot Password Verification Code.";
-                $body = "Hello, <br> 
-        For security purposes, please enter the code below to verify your account.<br> 
-        Forgot Password Verification Code: <b>$otp</b> <br>
-        The code is valid for 2 minutes.  <br>
-        Having problems with the code? <br>
-        The code will not work if timed out. <br>
+                $body = "Hello, <br> <br> 
+        For security purposes, please enter the code below to verify your account.<br> <br> 
+        Forgot Password Verification Code: <b>$otp</b> <br><br>
+        The code is valid for 2 minutes.  <br><br>
+        Having problems with the code? <br><br>
+        The code will not work if timed out. <br><br>
         Please request for a new code.";
 
 
@@ -611,12 +611,12 @@ class AccountController extends Controller
 
         $to = $user_info['email'];
         $subject = "$otp is your Manalot Leadership Network Verification Code.";
-        $body = "Hello, <br> 
-        For security purposes, please enter the code below to verify your account.<br> 
-        Account Verification Code: <b>$otp</b> <br>
-        The code is valid for 2 minutes.  <br>
-        Having problems with the code? <br>
-        The code will not work if timed out. <br>
+        $body = "Hello, <br> <br> 
+        For security purposes, please enter the code below to verify your account.<br> <br> 
+        Account Verification Code: <b>$otp</b> <br><br> 
+        The code is valid for 2 minutes.  <br><br> 
+        Having problems with the code? <br><br> 
+        The code will not work if timed out. <br><br> 
         Please request for a new code.";
 
         sendEmail($to, $subject, $body);
@@ -776,12 +776,12 @@ class AccountController extends Controller
 
         $to = $user_info['email'];
         $subject = "$otp is your Manalot Leadership Network Reset Verification Code.";
-        $body = "Hello, <br> 
-        For security purposes, please enter the code below to verify your account.<br> 
-        Resend Verification Code: <b>$otp</b> <br>
-        The code is valid for 2 minutes.  <br>
-        Having problems with the code? <br>
-        The code will not work if timed out. <br>
+        $body = "Hello, <br> <br> 
+        For security purposes, please enter the code below to verify your account.<br> <br> 
+        Resend Verification Code: <b>$otp</b> <br><br> 
+        The code is valid for 2 minutes.  <br><br> 
+        Having problems with the code? <br><br> 
+        The code will not work if timed out. <br><br> 
         Please request for a new code.";
 
 
