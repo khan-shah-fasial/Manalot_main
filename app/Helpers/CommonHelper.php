@@ -299,7 +299,7 @@ use Illuminate\Support\Facades\Storage;
             $api_key   = env("SMS_2FACTOR_API_KEY");
             $sender    = env("SMS_2FACTOR_CREDENTIAL");
             
-            $url = 'https://2factor.in/API/V1/'.$api_key.'/SMS/'.$data['phone'].'/'.$data['otp'].'/'.$data['template'].'?var1='.$data['student_name'];
+            $url = 'https://2factor.in/API/V1/'.$api_key.'/SMS/'.$data['phone'].'/'.$data['otp'].'/'.$data['template'];
  
 
             $curl = curl_init();

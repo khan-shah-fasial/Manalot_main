@@ -738,15 +738,12 @@ class AccountController extends Controller
             // Session::put('step', 2);
             // session()->forget('user_info');
 
-            $otp = mt_rand(100000, 999999);
+            $otp = mt_rand(1000, 9999);
             $timestamp = Carbon::now();
             Session::put('otp', $otp);
             Session::put('otp_timestamp', $timestamp);
 
-            $student_name = 'Admin';
-
-            $data['student_name'] = rawurlencode($student_name);
-            $data['template']    = 'LMS%20access%20OTP%2031st%20march';
+            $data['template']    = 'MobileVerification';
             $data['use']          = 'otp_sms';
             $data['phone']        = str_replace(['+', ' '], '', $user_info['phone_number']);
             $data['otp']          = $otp;
@@ -921,7 +918,7 @@ class AccountController extends Controller
 
     public function resendOtp_phone($request)
     {
-        $otp = mt_rand(100000, 999999);
+        $otp = mt_rand(1000, 9999);
         Session::put('otp', $otp);
 
         $timestamp = Carbon::now();
@@ -931,8 +928,8 @@ class AccountController extends Controller
 
         $student_name = 'Admin';
 
-        $data['student_name'] = rawurlencode($student_name);
-        $data['template']    = 'LMS%20access%20OTP%2031st%20march';
+
+        $data['template']    = 'MobileVerifications';
         $data['use']          = 'otp_sms';
         $data['phone']        = str_replace(['+', ' '], '', $user_info['phone_number']);
         $data['otp']          = $otp;
