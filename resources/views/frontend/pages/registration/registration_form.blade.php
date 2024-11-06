@@ -277,7 +277,7 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label form-label">Verification Code:</label>
                                 <input type="number" class="form-control" id="recipient-name" name="otp" pattern="[0-9]+" minlength="4"
-                                maxlength="6" placeholder="Please Enter Code" required>
+                                maxlength="4" placeholder="Please Enter Code" required>
                             </div>
                     </div>
                     <div class="modal-footer">
