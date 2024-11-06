@@ -799,7 +799,7 @@ class AccountController extends Controller
     public function phone_verification($request){
         
         $validator = Validator::make($request->all(), [
-            'otp' => 'required|digits:6',
+            'otp' => 'required|digits:4',
         ]);
 
         if ($validator->fails()) {

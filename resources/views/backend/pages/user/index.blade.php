@@ -12,9 +12,13 @@
             </div>
 
             <div class="col">
-                <div class="form-group mb-0">
+                <div class="form-group mb-2">
                     <input type="text" name="user_name" value="{{ request('user_name') }}" class="form-control"
                         placeholder="Search by User Name">
+                </div>
+                <div class="form-group mb-0">
+                    <input type="text" name="email" value="{{ request('email') }}" class="form-control"
+                        placeholder="Search by Email">
                 </div>
             </div>
         

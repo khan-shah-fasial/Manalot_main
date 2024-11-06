@@ -44,30 +44,35 @@ class UserController extends Controller
 
 
     public function userslist(Request $request) {
-        $query = User::where('role_id', '<>', 1)
-            ->leftJoin('userdetails', 'users.id', '=', 'userdetails.user_id')
-            ->select('users.*', 'userdetails.experience_letter', 'userdetails.resume_cv');
-
         $perPage = $request->input('per_page', 10);
-
+    
+        // Initialize the query with a join and select specific columns
+        $query = DB::table('users')
+            ->leftJoin('userdetails', 'users.id', '=', 'userdetails.user_id')
+            ->select('users.*', 'userdetails.experience_letter', 'userdetails.resume_cv')
+            ->where('users.role_id', '<>', 1);
+    
         // Apply filters if present
         if ($request->filled('user_name')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('users.username', 'LIKE', '%' . $request->user_name . '%')
-                  ->orWhere('users.email', 'LIKE', '%' . $request->user_name . '%');
-            });
+            $userName = $request->user_name;
+
+            $query->where('users.username', 'LIKE', '%' . $userName . '%');
         }
 
+        if ($request->filled('email')) {
+            $query->where('users.email', 'LIKE', '%' . $request->email . '%');
+        }
+    
         if ($request->filled('approval_status')) {
             $query->where('users.approval', $request->approval_status);
         }
-
+    
         if ($request->filled('status')) {
             $query->where('users.status', $request->status);
         }
-
+    
         // Paginate the results
-        $users = $query->paginate($perPage); // Adjust the number per page as needed
+        $users = $query->paginate($perPage);
     
         return view('backend.pages.user.index', compact('users'));
     }
