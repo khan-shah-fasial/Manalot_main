@@ -12,6 +12,7 @@ use App\Http\Controllers\backend\ReportController;
 use App\Http\Controllers\backend\ManageController;
 use App\Http\Controllers\backend\PostController;
 use App\Http\Controllers\backend\ExcelImportController;
+use App\Exports\UsersExport;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +92,10 @@ Route::get('/clear-cache', function () {
 //User
 Route::group(['prefix' => 'profile'], function () {
     Route::get('/userslist', [UserController::class, 'userslist'])->name('users.list');
+    // User export
+    Route::get('/export-users', function () {
+        return (new UsersExport)->download();
+    })->name('users.export');
     Route::get('/add', [UserController::class, 'add'])->name('user.add');
     Route::post('/create', [UserController::class, 'create'])->name('user.create');
     // Route::post('/update', [UserController::class, 'update'])->name('user.update');
