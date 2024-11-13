@@ -278,7 +278,10 @@
                                 <label for="recipient-name" class="col-form-label form-label">Verification Code:</label>
                                 <input type="number" class="form-control" id="recipient-name" name="otp" pattern="[0-9]+" minlength="4"
                                 maxlength="4" placeholder="Please Enter Code" required>
-                                <p><b>For texting Purpose otp</b> : 1234 </p>
+                                <p style="
+                                    margin-top: 6px;
+                                    font-size: 14px;
+                                "><b>For texting Purpose otp</b> : 1234 </p>
                             </div>
 
                     </div>
