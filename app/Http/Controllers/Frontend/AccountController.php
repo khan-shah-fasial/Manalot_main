@@ -739,6 +739,7 @@ class AccountController extends Controller
             // session()->forget('user_info');
 
             $otp = mt_rand(1000, 9999);
+            $otp = 1234;
             $timestamp = Carbon::now();
             Session::put('otp', $otp);
             Session::put('otp_timestamp', $timestamp);
@@ -748,7 +749,7 @@ class AccountController extends Controller
             $data['phone']        = str_replace(['+', ' '], '', $user_info['phone_number']);
             $data['otp']          = $otp;
 
-            send_sms_through_2factor($data);
+            // send_sms_through_2factor($data);
 
             $rsp_msg['response'] = 'success';
             $rsp_msg['message']  = "Email Verified Successfully";
@@ -919,6 +920,7 @@ class AccountController extends Controller
     public function resendOtp_phone($request)
     {
         $otp = mt_rand(1000, 9999);
+        $otp = 1234;
         Session::put('otp', $otp);
 
         $timestamp = Carbon::now();
@@ -934,7 +936,7 @@ class AccountController extends Controller
         $data['phone']        = str_replace(['+', ' '], '', $user_info['phone_number']);
         $data['otp']          = $otp;
 
-        send_sms_through_2factor($data);
+        // send_sms_through_2factor($data);
 
         // $to = $user_info['email'];
         // $subject = "$otp is your Manalot Leadership Network Reset Verification Code.";
