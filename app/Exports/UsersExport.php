@@ -52,9 +52,8 @@ class UsersExport
                     'User ID',
                     'Username',
                     'Email',
-                    'Approval',
-                    // 'Status',
-                    // 'Role ID',
+                    'Phone',
+                    'Resume CV',
                     'Full Name',
                     'Profile Photo',
                     'Gender',
@@ -64,8 +63,7 @@ class UsersExport
                     'State',
                     'City',
                     'Pincode',
-                    'Country',
-                    'Resume CV',
+                    'Country',                    
                     'Work Experience Title',
                     'Company Name',
                     'Experience Years',
@@ -102,6 +100,7 @@ class UsersExport
                     'Instagram',
                     'Facebook',
                     'Other',
+                    'Approval',
                     'Created At'
                 ];
 
@@ -249,10 +248,9 @@ class UsersExport
                         $row = [
                             $user->id,
                             $user->username,
-                            $user->email,
-                            formatapprovalBoolean($user->approval),
-                            // formatBoolean($user->status),
-                            // $user->role_id,
+                            $user->email,                    
+                            $userdetails->phone_number,
+                            $userdetails->resume_cv,
                             $userdetails->fullname,
                             $profileImageUrl,
                             $gender,
@@ -262,8 +260,7 @@ class UsersExport
                             $userdetails->state,
                             $userdetails->city,
                             $userdetails->pincode,
-                            $userdetails->country,
-                            $userdetails->resume_cv,
+                            $userdetails->country,                            
                             $userdetails->wrk_exp__title,
                             $userdetails->wrk_exp_company_name,
                             $wrkExpYearRange,
@@ -301,6 +298,7 @@ class UsersExport
                             $userdetails->instagram,
                             $userdetails->facebook,
                             $userdetails->other,
+                            formatapprovalBoolean($user->approval),
                             $user->created_at->toDateTimeString(),
                         ];
 
