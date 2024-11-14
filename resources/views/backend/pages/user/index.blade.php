@@ -49,6 +49,9 @@
                 <div class="resetbtn mx-md-2">
                     <a href="{{ route('users.list') }}" class="btn btn-outline-danger main_button">Reset</a>
                 </div>
+                <div class="exportbtn mx-md-2">
+                    <a target="_blank" href="{{ route('users.export') }}" class="btn btn-outline-success">Export</a>
+                </div>
             </div>
     </form>
 </div>
