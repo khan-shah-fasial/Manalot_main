@@ -873,7 +873,7 @@ form#login-form p {
     font-weight: 300;
     position: relative;
     top: 6px;
-    font-size: 20px
+    font-size: 18px
 }
 
 .register_width p a {
@@ -2749,7 +2749,7 @@ div#social_media_div {
     color: #686868;
     font-weight: 300;
     list-style: none;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .document_required ul {
