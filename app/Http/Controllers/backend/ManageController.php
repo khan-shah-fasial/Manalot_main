@@ -527,7 +527,7 @@ class ManageController extends Controller
 
     public function index_skills(Request $request)
     {
-        $perPage = $request->input('per_page', 10);
+        $perPage = $request->input('per_page', 50);
         $skills = DB::table('skills')->orderBy('id','DESC')->paginate($perPage);
         return view('backend.pages.skills.index', compact('skills'));
     }

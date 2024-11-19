@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 use Illuminate\Support\Facades\Validator;
+use Box\Spout\Common\Helper\EncodingHelper;
 
 class ExcelImportController extends Controller
 {
@@ -32,6 +33,7 @@ class ExcelImportController extends Controller
         $reader = null;
         if ($file->getClientOriginalExtension() === 'csv') {
             $reader = ReaderEntityFactory::createCSVReader();
+            $reader->setEncoding(EncodingHelper::ENCODING_UTF8); // Force UTF-8 encoding
         } else {
             $reader = ReaderEntityFactory::createXLSXReader();
         }
@@ -79,15 +81,19 @@ class ExcelImportController extends Controller
                     continue;
                 }
 
-                // Check if the skill already exists
-                $existingSkill = DB::table('skills')->where('name', $cells[0])->first();
+                // Check and process data
+                $skillName = mb_convert_encoding(trim($cells[0] ?? ''), 'UTF-8', 'UTF-8');
+                $skillStatus = mb_convert_encoding(trim($cells[1] ?? ''), 'UTF-8', 'UTF-8');
 
-                // If not, insert the new skill into the database
-                if (!$existingSkill) {
-                    DB::table('skills')->insert([
-                        'name' => trim($cells[0]),  // Assuming 'name' is in the first column
-                        'status' => trim($cells[1]), // Assuming 'status' is in the second column
-                    ]);
+                if ($skillName) {
+                    $existingSkill = DB::table('skills')->where('name', $skillName)->first();
+
+                    if (!$existingSkill) {
+                        DB::table('skills')->insert([
+                            'name' => $skillName,
+                            'status' => $skillStatus,
+                        ]);
+                    }
                 }
             }
         }

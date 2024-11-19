@@ -698,7 +698,7 @@
         $('#skills-data').select2({
             placeholder: 'Select Key Relevant Skills',
             minimumInputLength: 2,
-            // tags: true,
+            tags: true,
             ajax: {
                 url: '{{ url(route('get.skills')) }}',
                 dataType: 'json',
