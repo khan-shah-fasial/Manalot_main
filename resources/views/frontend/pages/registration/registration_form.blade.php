@@ -98,7 +98,7 @@
 
     <div id="user-add-details" class="register_width d-none">
         <div class="heading mb-4">
-            <h2>Register</h2>
+            <h2>Registers</h2>
         </div>
 
         <form id="user-info" action="{{ route('account.create', ['param' => 'user-info']) }}" method="post"
