@@ -165,7 +165,7 @@ object-fit: contain;
     font-weight: 300;
 }
 
-.work_exp>div:not(.work_exp>div:nth-child(1)) {
+.work_exp > div:not(:first-child):not(:last-child) {
     margin-bottom: 30px;
 }
 

@@ -71,7 +71,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4 d-flex flex-lg-column flex-row gap-lg-0 gap-4">
+				<div class="col-lg-4 d-flex flex-column gap-lg-0 gap-lg-4 gap-2">
 					<div class="profile_manalot_div d-flex align-items-center gap-2 mb-lg-3 mb-1">
 						<img class="profile_manalot_logo" src="/assets/images/favicon.png">
 						<span>Manalot</span>
