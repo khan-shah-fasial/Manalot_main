@@ -56,11 +56,21 @@
 </script>
 
 <script>
-$(document).ready(function(){
-  $(".notification_button").click(function(){
-    $(".notification_box").toggle();
+$(document).ready(function () {
+  $(".notification_button").click(function (e) {
+    e.stopPropagation(); // Prevent click event from bubbling to the document
+    $(".notification_box").toggle(); // Toggle the notification box
+  });
+
+  $(document).click(function () {
+    $(".notification_box").hide(); // Hide the notification box when clicking anywhere else
+  });
+
+  $(".notification_box").click(function (e) {
+    e.stopPropagation(); // Prevent click event on the modal from bubbling to the document
   });
 });
+
 </script>
 
 
