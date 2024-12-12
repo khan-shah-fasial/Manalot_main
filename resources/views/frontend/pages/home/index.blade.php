@@ -8,56 +8,90 @@
 
 @section('page.content')
 
-    <section class="pb-5 mt80" style="background-color: #f6f6f6">
-        <div class="container">
+<style>
+    * {
+		font-family: 'Helvetica Neue', sans-serif;
+        color: #535353;
+	}
+</style>
+
+    <section class="pb-5 mt80" style="background-color: #e7ecef">
+        <div class="container-lg container-fluid">
             <div class="row">
-                <div class="col-md-3 mt-4 pb-5 px-0">
+                <div class="col-md-3 mt-4 pb-md-5 pb-3 px-lg-0 pe-xl-2 order-md-1 order-3 right_sidebar_parent_div">
                     <aside class="right_sidebar">
-                        @if(auth()->user()->role_id == 1)
+                        
                             <div class="activity">
-                                <p class="text-lg">News/Activities</p>
-                                <ul class="list-unstyled d-flex flex-column gap-3">
-                                    <li class="d-flex align-items-center gap-3">
-                                        <img src="/assets/images/newss1.png" alt="" />
-                                        <p class="d-flex flex-column mb-0">
-                                            <span class="text-sm">John Deo Likes your Post</span>
-                                            <span class="text-xs">2 Minutes ago</span>
+                                <div class="d-flex flex-column mb-md-3 mb-2">
+                                    <strong class="text-lg">Trending Now</strong>
+                                    <span class="curated text-sm">Curated by Manalot</span>
+                                </div>
+                                <ul class="list-unstyled d-flex flex-column gap-0">
+                                    <li class="d-flex align-items-center gap-0">
+                                        <!-- <img src="/assets/images/newss1.png" alt="" /> -->
+                                        <p class="d-flex flex-column ">
+                                            <a class="trending_link" href="">
+                                                Green Skills Report
+                                            </a>
+                                            <span class="text-xs">10 min ago&nbsp;&nbsp;
+                                                <a class="watched" href=""><i class="fa fa-eye"></i>&nbsp;&nbsp; 4,532</a>
+                                            </span>
                                         </p>
-                                    </li>
-                                    <li class="d-flex align-items-center gap-3">
-                                        <img src="/assets/images/news2.png" alt="" />
-                                        <p class="d-flex flex-column mb-0">
-                                            <span class="text-sm">John Deo Likes your Post</span>
-                                            <span class="text-xs">2 Minutes ago</span>
+                                    </li>                                    
+                                    
+                                    <li class="d-flex align-items-center gap-0">
+                                        <!-- <img src="/assets/images/newss1.png" alt="" /> -->
+                                        <p class="d-flex flex-column ">
+                                            <a class="trending_link" href="">
+                                                Green Skills Report
+                                            </a>
+                                            <span class="text-xs">10 min ago&nbsp;&nbsp;
+                                                <a class="watched" href=""><i class="fa fa-eye"></i>&nbsp;&nbsp; 4,532</a>
+                                            </span>
                                         </p>
-                                    </li>
-                                    <li class="d-flex align-items-center gap-3">
-                                        <img src="/assets/images/news3.png" alt="" />
-                                        <p class="d-flex flex-column mb-0">
-                                            <span class="text-sm">John Deo Likes your Post</span>
-                                            <span class="text-xs">2 Minutes ago</span>
+                                    </li>   
+                                    
+                                    <li class="d-flex align-items-center gap-0">
+                                        <!-- <img src="/assets/images/newss1.png" alt="" /> -->
+                                        <p class="d-flex flex-column ">
+                                            <a class="trending_link" href="">
+                                                Green Skills Report
+                                            </a>
+                                            <span class="text-xs">10 min ago&nbsp;&nbsp;
+                                                <a class="watched" href=""><i class="fa fa-eye"></i>&nbsp;&nbsp; 4,532</a>
+                                            </span>
                                         </p>
-                                    </li>
-                                    <li class="d-flex align-items-center gap-3">
-                                        <img src="/assets/images/news4.png" alt="" />
-                                        <p class="d-flex flex-column mb-0">
-                                            <span class="text-sm">John Deo Likes your Post</span>
-                                            <span class="text-xs">2 Minutes ago</span>
+                                    </li>   
+                                    
+                                    <li class="d-flex align-items-center gap-0">
+                                        <!-- <img src="/assets/images/newss1.png" alt="" /> -->
+                                        <p class="d-flex flex-column ">
+                                            <a class="trending_link" href="">
+                                                Green Skills Report
+                                            </a>
+                                            <span class="text-xs">10 min ago&nbsp;&nbsp;
+                                                <a class="watched" href=""><i class="fa fa-eye"></i>&nbsp;&nbsp; 4,532</a>
+                                            </span>
                                         </p>
-                                    </li>
-                                    <li class="d-flex align-items-center gap-3">
-                                        <img src="/assets/images/news5.png" alt="" />
-                                        <p class="d-flex flex-column mb-0">
-                                            <span class="text-sm">John Deo Likes your Post</span>
-                                            <span class="text-xs">2 Minutes ago</span>
+                                    </li>   
+                                    
+                                    <li class="d-flex align-items-center gap-0">
+                                        <!-- <img src="/assets/images/newss1.png" alt="" /> -->
+                                        <p class="d-flex flex-column ">
+                                            <a class="trending_link" href="">
+                                                Green Skills Report
+                                            </a>
+                                            <span class="text-xs">10 min ago&nbsp;&nbsp;
+                                                <a class="watched" href=""><i class="fa fa-eye"></i>&nbsp;&nbsp; 4,532</a>
+                                            </span>
                                         </p>
-                                    </li>
+                                    </li>   
                                 </ul>
                             </div>
-                        @endif
-                        <div class="adds mt-4">
+                       
+                        <!-- <div class="adds mt-4">
                             <img src="/assets/images/offer2.png" class="w-100" alt="" />
-                        </div>
+                        </div> -->
                         <div class="mt-4">
                             <ul class="list-unstyled d-flex align-items-center justify-content-center flex-wrap footer_quick_links">
                                 <li class="list-group-item">
@@ -65,36 +99,37 @@
                                         About Us
                                     </a>
                                 </li>
-                                <li class="list-group-item">|</li>
+                                <!-- <li class="list-group-item">|</li> -->
                                 <li class="list-group-item">
                                     <a href="#" class="text-decoration-none inherit">FAQs</a>
                                 </li>
-                                <li class="list-group-item">|</li>
+                                <!-- <li class="list-group-item">|</li> -->
                                 <li class="list-group-item">
                                     <a href="#" class="text-decoration-none inherit">
                                         Help Center
                                     </a>
                                 </li>
-                                <li class="list-group-item">|</li>
+                                <!-- <li class="list-group-item">|</li> -->
                                 <li class="list-group-item">
                                     <a href="#" class="text-decoration-none inherit">
                                         Contact Us
                                     </a>
                                 </li>
-                                <li class="list-group-item">|</li>
+                                <!-- <li class="list-group-item">|</li> -->
                                 <li class="list-group-item">
                                     <a href="#" class="text-decoration-none inherit">Privacy & Terms</a>
                                 </li>                            
                             </ul>
                         </div>
-                        <div class="py-5 my-5"></div>
-                        <p class="mt-5 text-center">Manalot Corporation © 2021</p>
+                        <strong class="mt-2 text-center maple_footer_text">Maple Consulting & Services &copy; 2021</strong>
+                        <div class="py-5 my-5 d-md-block d-none"></div>
+                        
                     </aside>
                 </div>
                 
-                <div class="col-md-6 mt-4">
+                <div class="col-md-6 mt-4 order-md-2 order-1">
                     <main>
-                        @if(auth()->user()->role_id == 1)
+                        {{-- @if(auth()->user()->role_id == 1)
                             <form class="post_form">
                                 <div>
                                     <img src="/assets/images/s-logo.png" alt="" />
@@ -125,16 +160,23 @@
                                     </div>
                                 </div>
                             </form>
-                        @endif
+                        @endif --}}
+
+                        <div class="search_bar_new">
+                            <div class="input_search">
+                                <input type="text" class="ai_search_bar" placeholder="Start a post, Try writing with AI ">
+                                <button class="ai_search_btn" type="submit">Post</button>
+                            </div>
+                        </div>
 
                         <div class="post mt-4">
                             <div class="d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center gap-2">
-                                    <img src="/assets/images/s-logo.png" alt="" />
-                                    <div>
-                                        <p class="mb-0">Manalot</p>
-                                        <p class="text-xs" style="color: #b4b4b4">
-                                            12 Minutes ago
+                                    <img class="user_img" src="/assets/images/drishti_img.png" alt="user_img" />
+                                    <div class="user_name_post">
+                                        <strong class="mb-0 user_name">Drishti Jadhav</strong>
+                                        <p class="text-xs mb-0" style="color: #535353">
+                                            12 Minutes ago <i class="fa fa-globe"></i>
                                         </p>
                                     </div>
                                 </div>
@@ -146,14 +188,21 @@
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </div>
                             </div>
-                            <div>
+                            <div class="mt-md-3 post_description">
                                 <p class="post_content">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                                    do eiusmod tempor incididunt ut labore et dolore magna
-                                    aliqua.
+                                    In my years leading Manalot, I take particular pride in sharing that many of our most successful 
+                                    leadership placements have been professionals who navigated career transitions after layoffs. 
                                 </p>
-                                <img src="/assets/images/post.jpg" class="w-100" alt="" />
-                                <div class="d-flex align-items-center justify-content-between mt-3 like_comnts_n_events">
+                                <p class="post_content">
+                                    The current market realities mean business restructuring reflects organizational shifts, 
+                                    not individual capabilities. Therefore, to those who are in transition: focus on documenting your 
+                                    achievements with concrete metrics and invest time in meaningful professional relationships. 
+                                </p>
+                                <p class="post_content">
+                                    At Manalot, we've consist
+                                </p>
+                                <!-- <img src="/assets/images/post.jpg" class="w-100" alt="" /> -->
+                                <!-- <div class="d-flex align-items-center justify-content-between mt-3 like_comnts_n_events">
                                     <div class="d-flex align-items-center gap-3 like_n_comnts">
                                         <div class="d-flex align-items-center gap-1">
                                             <img src="/assets/images/heart.png" alt="" />
@@ -168,14 +217,142 @@
                                         <span class="pe-2">Events</span>
                                         <img src="/assets/images/event.png" alt="" />
                                     </div>
-                                </div>
-                                <div class="d-flex align-items-center gap-3 mt-4">
+                                </div> -->
+                                <!-- <div class="d-flex align-items-center gap-3 mt-4">
                                     <img src="/assets/images/s-logo.png" alt="" />
                                     <input type="text" class="comment_input" placeholder="Write your comment" />
-                                </div>
+                                </div> -->
+                            </div>
+                            <div class="like_comnt">
+                                <ul class="like_comnt_list">
+                                    <li class="like_comnt_list_item">
+                                        <a class="like_comnt_link" href="">
+                                            <span class="like_text">
+                                                <img class="like_img" src="/assets/images/like_icon.png">
+                                                Like
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="like_comnt_list_item">
+                                        <a class="like_comnt_link" href="">
+                                            <span class="comment_text">
+                                                <img class="comment_img" src="/assets/images/comnt_icon.png">
+                                                Comment
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="like_comnt_list_item">
+                                        <a class="like_comnt_link" href="">
+                                            <span class="share_text">
+                                                <img class="share_img" src="/assets/images/share_icon.png">
+                                                Share
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="like_comnt_list_item">
+                                        <a class="like_comnt_link" href="">
+                                            <span class="send_text">
+                                                <img class="send_img" src="/assets/images/send_icon.png">
+                                                Apply Now
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
+
                         <div class="post mt-4">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center gap-2">
+                                    <img class="user_img" src="/assets/images/drishti_img.png" alt="user_img" />
+                                    <div>
+                                        <strong class="mb-0 user_name">Drishti Jadhav</strong>
+                                        <p class="text-xs mb-0" style="color: #535353">
+                                            12 Minutes ago <i class="fa fa-globe"></i>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="action">
+                                    <div class="dropdown_wrapper">
+                                        <button>Edit</button>
+                                        <button>Delete</button>
+                                    </div>
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </div>
+                            </div>
+                            <div class="mt-md-3 post_description">
+                                <p class="post_content">
+                                    In my years leading Manalot, I take particular pride in sharing that many of our most successful 
+                                    leadership placements have been professionals who navigated career transitions after layoffs. 
+                                </p>
+                                <p class="post_content">
+                                    The current market realities mean business restructuring reflects organizational shifts, 
+                                    not individual capabilities. Therefore, to those who are in transition: focus on documenting your 
+                                    achievements with concrete metrics and invest time in meaningful professional relationships. 
+                                </p>
+                                <p class="post_content">
+                                    At Manalot, we've consist
+                                </p>
+                                <!-- <img src="/assets/images/post.jpg" class="w-100" alt="" /> -->
+                                <!-- <div class="d-flex align-items-center justify-content-between mt-3 like_comnts_n_events">
+                                    <div class="d-flex align-items-center gap-3 like_n_comnts">
+                                        <div class="d-flex align-items-center gap-1">
+                                            <img src="/assets/images/heart.png" alt="" />
+                                            <span>15k</span>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-1">
+                                            <img src="/assets/images/comment.png" alt="" />
+                                            <span>120</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-1 events">
+                                        <span class="pe-2">Events</span>
+                                        <img src="/assets/images/event.png" alt="" />
+                                    </div>
+                                </div> -->
+                                <!-- <div class="d-flex align-items-center gap-3 mt-4">
+                                    <img src="/assets/images/s-logo.png" alt="" />
+                                    <input type="text" class="comment_input" placeholder="Write your comment" />
+                                </div> -->
+                            </div>
+                            <div class="like_comnt">
+                                <ul class="like_comnt_list">
+                                    <li class="like_comnt_list_item">
+                                        <a class="like_comnt_link" href="">
+                                            <span class="like_text">
+                                                <img class="like_img" src="/assets/images/like_icon.png">
+                                                Like
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="like_comnt_list_item">
+                                        <a class="like_comnt_link" href="">
+                                            <span class="comment_text">
+                                                <img class="comment_img" src="/assets/images/comnt_icon.png">
+                                                Comment
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="like_comnt_list_item">
+                                        <a class="like_comnt_link" href="">
+                                            <span class="share_text">
+                                                <img class="share_img" src="/assets/images/share_icon.png">
+                                                Share
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="like_comnt_list_item">
+                                        <a class="like_comnt_link" href="">
+                                            <span class="send_text">
+                                                <img class="send_img" src="/assets/images/send_icon.png">
+                                                Apply Now
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- <div class="post mt-4">
                             <div class="d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center gap-2">
                                     <img src="/assets/images/s-logo.png" alt="" />
@@ -216,21 +393,89 @@
                                     <input type="text" class="comment_input" placeholder="Write your comment" />
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </main>
                 </div>
 
-                <div class="col-md-3 mt-4 pb-5">
+                <div class="col-md-3 mt-4 pb-md-5 px-lg-0 ps-xl-2 order-md-3 order-2">
                     <aside class="left_sidebar">
-                        <div class="profile">
+                        {{-- <div class="profile">
                             <img class="img-fluid" src="/assets/images/bg-avatar.jpg" alt="" />
                             <img src="/assets/images/avatar.jpg" alt="" class="avatar" />
                             <p class="username mb-0">Manalot</p>
                             <p class="role text-xs mb-5">Admin</p>
                             <a href="{{ route('user.edit-profile') }}"><button class="purple_btn">Edit Profile</button></a>
+                        </div> --}}
+
+                        <div class="activity">
+                            <div class="d-flex flex-column mb-md-3 mb-2">
+                                <strong class="text-lg">Trending Now</strong>
+                                <span class="curated text-sm">Curated by Manalot</span>
+                            </div>
+                            <ul class="list-unstyled d-flex flex-column gap-0">
+                                <li class="d-flex align-items-center gap-0">
+                                    <!-- <img src="/assets/images/newss1.png" alt="" /> -->
+                                    <p class="d-flex flex-column ">
+                                        <a class="trending_link" href="">
+                                            Green Skills Report
+                                        </a>
+                                        <span class="text-xs">10 min ago&nbsp;&nbsp;
+                                            <a class="watched" href=""><i class="fa fa-eye"></i>&nbsp;&nbsp; 4,532</a>
+                                        </span>
+                                    </p>
+                                </li>                                    
+                                
+                                <li class="d-flex align-items-center gap-0">
+                                    <!-- <img src="/assets/images/newss1.png" alt="" /> -->
+                                    <p class="d-flex flex-column ">
+                                        <a class="trending_link" href="">
+                                            Green Skills Report
+                                        </a>
+                                        <span class="text-xs">10 min ago&nbsp;&nbsp;
+                                            <a class="watched" href=""><i class="fa fa-eye"></i>&nbsp;&nbsp; 4,532</a>
+                                        </span>
+                                    </p>
+                                </li>   
+                                
+                                <li class="d-flex align-items-center gap-0">
+                                    <!-- <img src="/assets/images/newss1.png" alt="" /> -->
+                                    <p class="d-flex flex-column ">
+                                        <a class="trending_link" href="">
+                                            Green Skills Report
+                                        </a>
+                                        <span class="text-xs">10 min ago&nbsp;&nbsp;
+                                            <a class="watched" href=""><i class="fa fa-eye"></i>&nbsp;&nbsp; 4,532</a>
+                                        </span>
+                                    </p>
+                                </li>   
+                                
+                                <li class="d-flex align-items-center gap-0">
+                                    <!-- <img src="/assets/images/newss1.png" alt="" /> -->
+                                    <p class="d-flex flex-column ">
+                                        <a class="trending_link" href="">
+                                            Green Skills Report
+                                        </a>
+                                        <span class="text-xs">10 min ago&nbsp;&nbsp;
+                                            <a class="watched" href=""><i class="fa fa-eye"></i>&nbsp;&nbsp; 4,532</a>
+                                        </span>
+                                    </p>
+                                </li>   
+                                
+                                <li class="d-flex align-items-center gap-0">
+                                    <!-- <img src="/assets/images/newss1.png" alt="" /> -->
+                                    <p class="d-flex flex-column ">
+                                        <a class="trending_link" href="">
+                                            Green Skills Report
+                                        </a>
+                                        <span class="text-xs">10 min ago&nbsp;&nbsp;
+                                            <a class="watched" href=""><i class="fa fa-eye"></i>&nbsp;&nbsp; 4,532</a>
+                                        </span>
+                                    </p>
+                                </li>   
+                            </ul>
                         </div>
 
-                        @if(auth()->user()->role_id == 1)
+                        {{--@if(auth()->user()->role_id == 1)
                             <div class="candidates mt-4">
                                 <p class="text-lg">Candidates</p>
                                 <ul class="list-unstyled d-flex flex-column gap-3 mb-0">
@@ -256,11 +501,35 @@
                                 </ul>
                             </div>
                         @endif
+                        --}}
 
-                        <div class="text-center pt-3">
-                            <span class="home_copyight">Manalot Corporation © 2021</span>
+                        <div class="saved_items_main_div activity">
+                            <a href="" class="d-flex gap-3">
+                                <img src="/assets/images/saved_icon.png" alt="icon" class="icon">
+                                <strong class="text-sm">Saved items</strong>
+                            </a>
+
+                            <a href="" class="d-flex gap-3">
+                                <img src="/assets/images/group_icon.png" alt="icon" class="icon">
+                                <strong class="text-sm">Groups</strong>
+                            </a>
+
+                            <a href="" class="d-flex gap-3">
+                                <img src="/assets/images/letter_icon.png" alt="icon" class="icon">
+                                <strong class="text-sm">Newsletters</strong>
+                            </a>
+
+                            <a href="" class="d-flex gap-3">
+                                <img src="/assets/images/update_icon.png" alt="icon" class="icon">
+                                <strong class="text-sm">Updates</strong>
+                            </a>
+
                         </div>
-                        <div class="py-5 my-5"></div>
+
+                        <!-- <div class="text-center pt-3">
+                            <span class="home_copyight">Manalot Corporation © 2021</span>
+                        </div> -->
+                        <div class="py-5 my-5 d-md-block d-none"></div>
                     </aside>
                 </div>
             </div>
