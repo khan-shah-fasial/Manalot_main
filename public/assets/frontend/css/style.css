@@ -534,7 +534,7 @@ img.like_img {
 }
 
 .post .user_name_post p {
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .user_name {
@@ -564,18 +564,18 @@ img.user_img {
 }
 
 .footer_quick_links {
-    gap: 5px;
+    gap: 5px 11px;
     margin-bottom: 10px;
 }
 
 .activity span.text-xs {
     color: #535353;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 300;
 }
 
 .activity .text-sm {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 400;
     color: #545454;
 }
@@ -592,6 +592,10 @@ img.user_img {
 }
 
 .watched { 
+    color: #535353;
+}
+
+.watched:hover {
     color: #535353;
 }
 
@@ -651,12 +655,12 @@ img.user_img {
 }
 
 .right_sidebar .footer_quick_links a {
-    font-size: 12px;
+    font-size: 13px;
     color: #535353;
 }
 
 .maple_footer_text {
-    font-size: 12px;
+    font-size: 14px;
     width: 100%;
     display: block;
     margin-top: 0px !important;
