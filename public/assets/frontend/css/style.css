@@ -384,8 +384,8 @@ strong.text-lg {
 
 .post_content {
     color: #323232;
-    font-size: 14px;
-    line-height: 18px;
+    font-size: 16px;
+    line-height: 20px;
     width: 100%;
     margin-bottom: 20px;
     font-family: 'proxima_nova_rgregular', sans-serif;
@@ -2736,7 +2736,7 @@ div#social_media_div {
     }
 
     .image-profile.box_shadows {
-        margin-top: 40px;
+        margin-top: 80px !important;
     }
 
     .search_input input { 
@@ -3035,7 +3035,7 @@ div#social_media_div {
 }
 
 .user_header_right span {
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 400; 
     color: #535353;
 }
