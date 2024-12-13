@@ -12,7 +12,7 @@ body
 }
 .image-profile.box_shadows {
     border-radius: 50px 50px 50px 145px;
-    margin-top: 50px;
+    margin-top: 80px;
 }
 /* .container {
     max-width: 900px;
@@ -32,7 +32,7 @@ body
 }
 
 .profile-content span {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     color: #535353;
 }
@@ -78,8 +78,8 @@ body
 .profile-page p {
     font-weight: 400;
     color: #535353;
-    font-size: 14px;
-    line-height: 17px;
+    font-size: 16px;
+    line-height: 22px;
 }
 
 .profile-page strong {
@@ -161,8 +161,8 @@ object-fit: contain;
 
 .personal_info {
     color: #535353 !important;
-    font-size: 14px;
-    font-weight: 300;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .work_exp > div:not(:first-child):not(:last-child) {
@@ -188,7 +188,7 @@ a.visit_mln {
     margin-bottom: 20px;
     text-decoration: none;
     color: #535353;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .education_main_div .col-md-6 img {
