@@ -46,3 +46,26 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+
+document.addEventListener('DOMContentLoaded', function () {
+    const dropdownTrigger = document.getElementById('dropdownTrigger');
+    const dropdownContent = document.getElementById('dropdownContent');
+
+    // Show dropdown on image click
+    dropdownTrigger.addEventListener('click', function (event) {
+        dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        event.stopPropagation(); // Prevents the click event from bubbling to the document
+    });
+
+    // Hide dropdown when clicking anywhere outside
+    document.addEventListener('click', function () {
+        dropdownContent.style.display = 'none';
+    });
+
+    // Prevent hiding when clicking inside the dropdown
+    dropdownContent.addEventListener('click', function (event) {
+        event.stopPropagation();
+    });
+});
+
+

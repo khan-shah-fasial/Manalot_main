@@ -30,6 +30,14 @@ body::-webkit-scrollbar-track {
     /* Roundness of the track */
 }
 
+.proxima_nova_font {
+    font-family: 'Proxima Nove', sans-serif !important;
+}
+
+.helvetica_font {
+    font-family: Helvetica, Arial, sans-serif !important;
+}
+
 .rounded-sm {
     border-radius: 2px;
 }
@@ -295,8 +303,42 @@ strong.text-lg {
     color: #9da0a3;
 }
 
+.header_drishti {
+    position: relative; /* To position the dropdown */
+}
+
+.dropdown-content {
+    display: none; /* Hidden by default */    
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    background-color: #f8f8f8;
+    width: 360px;
+    box-shadow: 0px 8px 40px 0px #0000001A;
+    position: absolute;
+    right: 0px;
+    width: 170px;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+
 .header_drishti_img {
     width: 100px;
+}
+
+.header_drishti_img:hover {
+    cursor: pointer;
 }
 
 .user_header_right {
@@ -487,7 +529,6 @@ img.like_img {
 }
 
 .user_name_post strong, .user_name_post p {
-    font-family: 'proxima_nova_rgregular', sans-serif;
     font-weight: 700;
     font-size: 18px;
 }
@@ -683,7 +724,24 @@ img.user_img {
     backdrop-filter: blur(10px);
     background-color: #e7ecef;
     padding: 13px 0px 0px;
+    left: 0px;
 }
+
+.profile-page .header.user_header.d-md-block.d-none .user_header_right a img,
+.profile-page .header_drishti_img {
+    opacity: 0.5;
+}
+
+.profile-page .header .user_header_right a,
+.profile-page .header .search_input button,
+.profile-page .search_input input,
+.profile-page .header_drishti_img  {
+    touch-action: none ; /* Disable touch behavior */
+    pointer-events: none; /* Ensure click events work */
+    cursor: pointer; /* Show pointer cursor for interaction */
+}
+
+
 
 header {
     background: #fff;
@@ -761,6 +819,8 @@ header {
     background-color: #f8f8f8;
     width: 360px;
     box-shadow: 0px 8px 40px 0px #0000001A;
+    position: relative;
+    z-index: 999;
 }
 
 .profile_font {
@@ -1688,6 +1748,23 @@ div#thankyou-page {
     line-height: 24px;
     text-align: center;
     cursor: pointer;
+}
+
+.golden_btn a {
+    background: linear-gradient(180deg, #b1473f 10%, #EB8A20 100%);
+    border-radius: 40px;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 7px 23px 8px 23px;
+    line-height: 24px;
+    text-align: center;
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+}
+
+i.fa.fa-paperclip {
+    margin-right: 5px;
 }
 
 .purple_btn_close button {

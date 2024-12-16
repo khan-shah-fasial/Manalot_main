@@ -11,6 +11,35 @@
 }
 
 @font-face {
+	font-family: 'Proxima Nova Regular';
+	src: url(assets/frontend/fonts/ProximaNova-Regular.otf) format('opentype');
+	font-weight: normal;
+	font-style: normal;
+  }
+  
+  @font-face {
+	font-family: 'Proxima Nova';
+	src: url(assets/frontend/fonts/Proxima-Nova-Thin.otf) format('opentype');
+	font-weight: bold;
+	font-style: normal;
+  }
+
+  @font-face {
+	font-family: 'Proxima Nova';
+	src: url(assets/frontend/fonts/Fontspring-DEMO-proximanova-thin.otf) format('opentype');
+	font-weight: bold;
+	font-style: normal;
+  }
+  
+  @font-face {
+	font-family: 'Proxima Nova';
+	src: url(assets/frontend/fonts/Fontspring-DEMO-proximanova-black.otf) format('opentype');
+	font-weight: 900;
+	font-style: normal;
+  }
+  
+
+@font-face {
 	font-family: 'proxima_nova_rgregular';
 	src: url('https://litmus.com/fonts/Emails/proximanova-regular-webfont.eot');
 	src: url('https://litmus.com/fonts/Emails/proximanova-regular-webfont.eot?#iefix') format('embedded-opentype'),
