@@ -109,7 +109,14 @@
                             </div>
                         </div>
                     </div>
-                    <img class="header_drishti_img" src="/assets/images/drishti_img2.png" alt="user image">
+                    <div class="header_drishti">
+                        <img class="header_drishti_img" src="/assets/images/drishti_img2.png" alt="user image" id="dropdownTrigger">
+                        <div class="logout dropdown-content" id="dropdownContent">
+                            <a href="" class="view_profile">View Profile</a>
+                            <a href="{{ url(route('customer.logout')) }}" class="logout">Logout</a>
+                        </div>
+                    </div>
+
                 </div>
             </header>
         </div>
