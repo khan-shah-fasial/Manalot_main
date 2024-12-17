@@ -344,9 +344,9 @@ strong.text-lg {
     width: 100px;
 }
 
-.header_drishti_img:hover {
+/* .header_drishti_img:hover {
     cursor: pointer;
-}
+} */
 
 .user_header_right {
     gap: 40px;
