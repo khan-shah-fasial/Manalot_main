@@ -38,7 +38,7 @@
 </div> -->
 
 	<div class="header user_header d-md-block d-none helvetica_font">
-        <div class="container">
+        <div class="container-lg container-fluid">
             <header class="d-flex align-items-center justify-content-between">
                 <div class="d-flex gap-lg-4 gap-md-2">
 					<a href="/" style="pointer-events: none;">
