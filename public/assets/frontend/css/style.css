@@ -431,7 +431,6 @@ strong.text-lg {
     line-height: 20px;
     width: 100%;
     margin-bottom: 20px;
-    font-family: 'proxima_nova_rgregular', sans-serif;
     /* font-family: 'Proxima Nova Extra Condensed', sans-serif; */
 }
 
@@ -2818,7 +2817,7 @@ div#social_media_div {
     }
 
     .image-profile.box_shadows {
-        margin-top: 80px !important;
+        margin-top: 110px !important;
     }
 
     .search_input input { 

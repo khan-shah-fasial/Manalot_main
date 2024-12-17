@@ -275,7 +275,7 @@
 
 	<div class="image-profile box_shadows">
 		<div class="bg-profile-cover">
-		   <img class="img-fluid" src="/assets/images/user_profile_banner2.png"/>
+		   <img class="img-fluid" src="/assets/images/user_profile_banner.png"/>
 		</div>
 
 		<div class="bg-profile-content">
@@ -471,43 +471,47 @@
 						for dynamic organizations and senior leadership worldwide. With a steadfast commitment to 
 						building relationships based on trust and agility, <b class="bold_see_more"> …see more</b>
 					</p>
-					<div class="industry_main_div helvetica_font">
-						<strong class="industry_main_div_heading">Industry :</strong>
-						<div class="bg_verified_main">
-							<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
-							<p class="bg_verified_text helvetica_font">Analytics/KPO/Research</p>
-						</div>
-						<div class="bg_verified_main">
-							<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
-							<p class="bg_verified_text helvetica_font">Analytics/KPO/Research</p>
-						</div>
-						<div class="bg_verified_main">
-							<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
-							<p class="bg_verified_text helvetica_font">Analytics/KPO/Research</p>
-						</div>
-						<div class="bg_verified_main">
-							<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
-							<p class="bg_verified_text helvetica_font">Analytics/KPO/Research</p>
+					<div class="industry_main_div"> 
+						<strong class="industry_main_div_heading">Industry :</strong> 
+						<div class="industry_div_list">
+							<div class="bg_verified_main">
+								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<p class="bg_verified_text">Analytics/KPO/Research</p>
+							</div>
+							<div class="bg_verified_main">
+								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<p class="bg_verified_text">Analytics/KPO/Research</p>
+							</div>
+							<div class="bg_verified_main">
+								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<p class="bg_verified_text">Analytics/KPO/Research</p>
+							</div>
+							<div class="bg_verified_main">
+								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<p class="bg_verified_text">Analytics/KPO/Research</p>
+							</div>
 						</div>
 					</div>
 
 					<div class="skills_main_div">
 						<strong class="skills_main_div_heading">Skills :</strong>
-						<div class="bg_verified_main">
-							<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
-							<p class="bg_verified_text">Resourceful Professional</p>
-						</div>
-						<div class="bg_verified_main">
-							<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
-							<p class="bg_verified_text">Talent Management</p>
-						</div>
-						<div class="bg_verified_main">
-							<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
-							<p class="bg_verified_text">Talent Acquisition</p>
-						</div>
-						<div class="bg_verified_main">
-							<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
-							<p class="bg_verified_text">Expertise in HR Consulting</p>
+						<div class="industry_div_list">
+							<div class="bg_verified_main">
+								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<p class="bg_verified_text">Resourceful Professional</p>
+							</div>
+							<div class="bg_verified_main">
+								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<p class="bg_verified_text">Talent Management</p>
+							</div>
+							<div class="bg_verified_main">
+								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<p class="bg_verified_text">Talent Acquisition</p>
+							</div>
+							<div class="bg_verified_main">
+								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<p class="bg_verified_text">Expertise in HR Consulting</p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -528,21 +532,23 @@
 					
 					<div class="skills_main_div">
 						<strong class="skills_main_div_heading">Skills :</strong>
-						<div class="bg_verified_main">
-							<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
-							<p class="bg_verified_text">Resourceful Professional</p>
-						</div>
-						<div class="bg_verified_main">
-							<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
-							<p class="bg_verified_text">Talent Management</p>
-						</div>
-						<div class="bg_verified_main">
-							<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
-							<p class="bg_verified_text">Talent Acquisition</p>
-						</div>
-						<div class="bg_verified_main">
-							<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
-							<p class="bg_verified_text">Expertise in HR Consulting</p>
+						<div class="industry_div_list">
+							<div class="bg_verified_main">
+								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<p class="bg_verified_text">Resourceful Professional</p>
+							</div>
+							<div class="bg_verified_main">
+								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<p class="bg_verified_text">Talent Management</p>
+							</div>
+							<div class="bg_verified_main">
+								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<p class="bg_verified_text">Talent Acquisition</p>
+							</div>
+							<div class="bg_verified_main">
+								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<p class="bg_verified_text">Expertise in HR Consulting</p>
+							</div>
 						</div>
 					</div>
 				</div>
