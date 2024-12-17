@@ -8,9 +8,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 <link href="https://fonts.cdnfonts.com/css/helvetica-neue-5" rel="stylesheet">
-<link href="
-https://cdn.jsdelivr.net/npm/@dannymichel/proxima-nova@4.5.2/index.min.css
-" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@dannymichel/proxima-nova@4.5.2/index.min.css" rel="stylesheet">
 <link rel="stylesheet" href="/assets/frontend/css/font-styles.css" >
 <link rel="stylesheet" href="/assets/frontend/css/style.css?v=1.0.8" />
 <link rel="stylesheet" href="/assets/frontend/css/user_profile.css?v=1.0.3" />
