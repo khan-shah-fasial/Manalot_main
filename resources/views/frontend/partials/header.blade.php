@@ -1,5 +1,5 @@
 @if(auth()->user()) 
-    <div class="header user_header d-md-block d-none">
+    <div class="header user_header d-md-block d-none helvetica_font">
         <div class="container">
             <header class="d-flex align-items-center">
                 <div class="col-lg-6 d-flex gap-lg-4 gap-md-2">
@@ -122,7 +122,7 @@
         </div>
     </div> 
 
-    <div class="header user_header user_header_mobile d-md-none d-block">
+    <div class="header user_header user_header_mobile d-md-none d-block helvetica_font">
         <div class="container-fluid px-0">
             <header class="d-flex align-items-center">
                 <div class="col-md-6 col-4 d-flex gap-1 logo_search_div">
