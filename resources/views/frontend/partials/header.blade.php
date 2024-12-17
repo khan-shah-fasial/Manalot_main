@@ -1,8 +1,8 @@
 @if(auth()->user()) 
     <div class="header user_header d-md-block d-none helvetica_font">
-        <div class="container">
-            <header class="d-flex align-items-center">
-                <div class="col-lg-6 d-flex gap-lg-4 gap-md-2">
+        <div class="container-lg container-fluid">
+            <header class="d-flex align-items-center justify-content-between">
+                <div class="d-flex gap-lg-4 gap-md-2">
                     <a href="/">
                         <img class="user_header_logo" src="/assets/images/favicon2.png" alt="" />
                     </a>
@@ -13,12 +13,12 @@
                         <input type="text" placeholder="Search" />
                     </form>
                 </div>
-                <div class="col-lg-6 d-flex justify-content-end align-items-center user_header_right">
+                <div class="d-flex justify-content-end align-items-center user_header_right">
                     <a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
                             <img src="/assets/images/home_icon.png" alt="home icon" />
                         </div>
-                        <span>Home2</span>
+                        <span>Home</span>
                     </a>
                     <a href="{{ url(route('about-us')) }}" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
                         <div>
@@ -108,7 +108,13 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>                    
+					<a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
+                        <div>
+                            <img src="/assets/images/crown_icon.png" alt="Notification icon" />
+                        </div>
+                        <span>Manalotians</span>
+                    </a>
                     <div class="header_drishti">
                         <img class="header_drishti_img" src="/assets/images/drishti_img2.png" alt="user image" id="dropdownTrigger">
                         <div class="logout dropdown-content" id="dropdownContent">
@@ -168,6 +174,11 @@
                     <a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
                             <img src="/assets/images/notification_icon.png" alt="Notification icon" />
+                        </div>
+                    </a>
+					<a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
+                        <div>
+                            <img src="/assets/images/crown_icon.png" alt="Notification icon" />
                         </div>
                     </a>
                     <div class="notification_box" style="display:none">
