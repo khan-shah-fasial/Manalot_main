@@ -9,19 +9,16 @@
 @section('page.content')
 
 <style>
-    * {
-		font-family: 'Helvetica Neue', sans-serif;
-        color: #535353;
-	}
+    
 </style>
 
     <section class="pb-5 mt80" style="background-color: #e7ecef">
         <div class="container-lg container-fluid">
             <div class="row">
-                <div class="col-md-3 mt-4 pb-md-5 pb-3 px-lg-0 pe-xl-2 order-md-1 order-3 right_sidebar_parent_div">
+                <div class="col-md-3 mt-4 pb-md-5 pb-3 order-md-1 order-3 right_sidebar_parent_div">
                     <aside class="right_sidebar">
                         
-                            <div class="activity">
+                            <div class="activity helvetica_font">
                                 <div class="d-flex flex-column mb-md-3 mb-2">
                                     <strong class="text-lg">Trending Now</strong>
                                     <span class="curated text-sm">Curated by Manalot</span>
@@ -92,8 +89,9 @@
                         <!-- <div class="adds mt-4">
                             <img src="/assets/images/offer2.png" class="w-100" alt="" />
                         </div> -->
-                        <div class="mt-4">
-                            <ul class="list-unstyled d-flex align-items-center justify-content-center flex-wrap footer_quick_links">
+                        <div class="mt-4 sidebar_footer_div">
+                            <span class="side_footer_mln_text">Manalot Leadership Network</span>
+                            <ul class="list-unstyled d-flex align-items-center justify-content-center flex-wrap sidebar_footer_quick_links">
                                 <li class="list-group-item">
                                     <a href="#" class="text-decoration-none inherit">
                                         About Us
@@ -121,13 +119,17 @@
                                 </li>                            
                             </ul>
                         </div>
+                        <div class="language_translator">
+                            <img class="icon_language" src="/assets/images/footer_english_filter.png">
+                            <i class="fa fa-caret-down"></i>
+                        </div>
                         <strong class="mt-2 text-center maple_footer_text">Maple Consulting & Services &copy; 2021</strong>
                         <div class="py-5 my-5 d-md-block d-none"></div>
                         
                     </aside>
                 </div>
                 
-                <div class="col-md-6 mt-4 order-md-2 order-1">
+                <div class="col-md-6 mt-4 order-md-2 order-1 middle_post_parent_div">
                     <main>
                         {{-- @if(auth()->user()->role_id == 1)
                             <form class="post_form">
@@ -169,7 +171,7 @@
                             </div>
                         </div>
 
-                        <div class="post mt-4">
+                        <div class="post mt-4 proxima_nova_font">
                             <div class="d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center gap-2">
                                     <img class="user_img" src="/assets/images/drishti_img.png" alt="user_img" />
@@ -187,6 +189,9 @@
                                     </div>
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </div>
+                                <a class="saved_clip" href="">
+                                    <img class="saved_clip_img" src="/assets/images/grey_saved_icon.svg">
+                                </a>
                             </div>
                             <div class="mt-md-3 post_description">
                                 <p class="post_content">
@@ -261,11 +266,11 @@
                             </div>
                         </div>
 
-                        <div class="post mt-4">
+                        <div class="post mt-4 proxima_nova_font">
                             <div class="d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center gap-2">
                                     <img class="user_img" src="/assets/images/drishti_img.png" alt="user_img" />
-                                    <div>
+                                    <div class="user_name_post">
                                         <strong class="mb-0 user_name">Drishti Jadhav</strong>
                                         <p class="text-xs mb-0" style="color: #535353">
                                             12 Minutes ago <i class="fa fa-globe"></i>
@@ -397,7 +402,7 @@
                     </main>
                 </div>
 
-                <div class="col-md-3 mt-4 pb-md-5 px-lg-0 ps-xl-2 order-md-3 order-2">
+                <div class="col-md-3 mt-4 pb-md-5 order-md-3 order-2 left_sidebar_parent_div">
                     <aside class="left_sidebar">
                         {{-- <div class="profile">
                             <img class="img-fluid" src="/assets/images/bg-avatar.jpg" alt="" />
@@ -407,7 +412,7 @@
                             <a href="{{ route('user.edit-profile') }}"><button class="purple_btn">Edit Profile</button></a>
                         </div> --}}
 
-                        <div class="activity">
+                        <div class="activity helvetica_font">
                             <div class="d-flex flex-column mb-md-3 mb-2">
                                 <strong class="text-lg">Trending Now</strong>
                                 <span class="curated text-sm">Curated by Manalot</span>
@@ -503,7 +508,7 @@
                         @endif
                         --}}
 
-                        <div class="saved_items_main_div activity">
+                        <div class="saved_items_main_div activity helvetica_font">
                             <a href="" class="d-flex gap-3">
                                 <img src="/assets/images/saved_icon.png" alt="icon" class="icon">
                                 <strong class="text-sm">Saved items</strong>
