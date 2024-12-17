@@ -39,8 +39,8 @@
 
 	<div class="header user_header d-md-block d-none helvetica_font">
         <div class="container">
-            <header class="d-flex align-items-center">
-                <div class="col-lg-6 d-flex gap-lg-4 gap-md-2">
+            <header class="d-flex align-items-center justify-content-between">
+                <div class="d-flex gap-lg-4 gap-md-2">
 					<a href="/" style="pointer-events: none;">
                         <img class="user_header_logo" src="/assets/images/favicon2.png" alt="">
                     </a>
@@ -51,10 +51,10 @@
                         </button>
                     </form>
                 </div>
-                <div class="col-lg-6 d-flex justify-content-end align-items-center user_header_right">
+                <div class="d-flex justify-content-end align-items-center user_header_right">
                     <a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
-                            <img src="/assets/images/home_icon.png" alt="home icon" />
+                            <img src="/assets/images/home_icon2.png" alt="home icon" />
                         </div>
                         <span>Home</span>
                     </a>
@@ -147,7 +147,20 @@
                             </div>
                         </div>
                     </div>
-                    <img class="header_drishti_img" src="/assets/images/drishti_img2.png" alt="user image">
+					<a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
+                        <div>
+                            <img src="/assets/images/crown_icon.png" alt="Notification icon" />
+                        </div>
+                        <span>Manalotians</span>
+                    </a>
+                    <div class="header_drishti">
+						<img class="three_dots" src="/assets/images/three_dots.svg"  id="dropdownTrigger">
+                        <img class="header_drishti_img" src="/assets/images/drishti_img2.png" alt="user image">
+                        <div class="logout dropdown-content" id="dropdownContent">
+                            <a href="" class="view_profile">View Profile</a>
+                            <a href="{{ url(route('customer.logout')) }}" class="logout">Logout</a>
+                        </div>
+                    </div>
                 </div>
             </header>
         </div>
@@ -155,8 +168,8 @@
 
     <div class="header user_header user_header_mobile d-md-none d-block helvetica_font">
         <div class="container-fluid px-0">
-            <header class="d-flex align-items-center">
-                <div class="col-md-6 col-4 d-flex gap-1 logo_search_div">
+            <header class="d-flex align-items-center justify-content-between">
+                <div class="d-flex gap-1 logo_search_div">
                     <a href="/">
                         <img class="user_header_logo" src="/assets/images/favicon2.png" alt="" />
                     </a>
@@ -175,10 +188,10 @@
                         </button>
                     </form>
                 </div>
-                <div class="col-md-6 col-8 d-flex justify-content-end align-items-center user_header_right">
+                <div class="d-flex justify-content-end align-items-center user_header_right">
                     <a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
-                            <img src="/assets/images/home_icon.png" alt="home icon" />
+                            <img src="/assets/images/home_icon2.png" alt="home icon" />
                         </div>
                     </a>
                     <a href="{{ url(route('about-us')) }}" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
@@ -282,14 +295,14 @@
 			<img class="user_img" src="/assets/images/anil_rajkundra.png"/>
 			
 			<div class="profile_content_main_div">
-				<div class="profile-content col-lg-7">
-					<h3>Anil Raikundlia <img class="verified" src="/assets/images/verified.png"> </h3>
+				<div class="profile-content">
+					<h3>Anil Raikundlia <img class="verified" src="/assets/images/verified.svg"> </h3>
 					<p> Listed as Most Innovative Leadership Advisory Firm – APAC 2024 
 						I Featured as a Top 10 Influential Leader - 2019 
 						I Listed as a Path-breaking Brand - 2018
 					</p>
 					<span>Mumbai, Maharashtra, India.</span>
-					<div class="d-flex py-3 pt-4 mt-1 gap-2">
+					<div class="d-flex py-3 pt-4 mt-1 profile_view_btn">
 						<div class="purple_btn">
 							<a href="" class="profile_btn connect_btn ">
 								<i class="fa fa-plus"></i>
@@ -298,20 +311,20 @@
 						</div>
 						<div class="golden_btn">
 							<a href="" class="golden_btn message_btn">
-								<!-- <img class="telegram_icon" src="/assets/images/telegram_arrow.png"> -->
-								 <i class="fa fa-paperclip"></i>
+								<img class="telegram_icon" src="/assets/images/paper_clip_icon.svg">
+								 <!-- <i class="fa fa-paperclip"></i> -->
 								Share Profile
 							</a>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4 d-flex flex-column gap-lg-0 gap-lg-4 gap-2">
+				<div class="col-lg-4 d-flex flex-column gap-lg-0 gap-lg-4 gap-2 pe-md-3">
 					<div class="profile_manalot_div d-flex align-items-center gap-2 mb-lg-3 mb-1">
-						<img class="profile_manalot_logo" src="/assets/images/favicon.png">
+						<img class="profile_study_logo" src="/assets/images/favicon3.png">
 						<span>Manalot</span>
 					</div>
 					<div class="mngmnt_school d-flex align-items-center gap-2">
-						<img class="school_logo" src="/assets/images/welingkar_institute_logo.png">
+						<img class="profile_study_logo" src="/assets/images/welingkar_institute_logo2.png">
 						<span>Welingkar Institute of Management</span>
 					</div>
 				</div>
@@ -320,32 +333,32 @@
 
 		<div class="user-profile-social-links">
 			<div class="bg_verified_main">
-				<img class="bg_verified_img" src="/assets/images/verified.png">
+				<img class="bg_verified_img" src="/assets/images/verified.svg">
 				<p class="bg_verified_text">Background Verified with MLN</p>
 			</div>
 			<div class="bg_verified_main">
-				<img class="bg_verified_img" src="/assets/images/search_user.png">
+				<img class="bg_verified_img" src="/assets/images/search_user.svg">
 				<p class="bg_verified_text">Looking for : <span class="bg_verified_bold_text"> MD, CEO</span></p>
 			</div>
 			<div class="bg_verified_main">
-				<img class="bg_verified_img" src="/assets/images/desired.png">
+				<img class="bg_verified_img" src="/assets/images/desired.svg">
 				<p class="bg_verified_text">Desired Job Location : <span class="bg_verified_bold_text">Mumbai, India </span></p>
 			</div>
 			<div class="user-social-links">
                 <a href="#" class="linkedin">
-					<img class="user_social" src="/assets/images/linkedin_img.png">
+					<img class="user_social" src="/assets/images/linkedin_img.svg">
 				</a>
                 <a href="#" class="instagram">
-					<img class="user_social" src="/assets/images/instagram_img.png">
+					<img class="user_social" src="/assets/images/instagram_img.svg">
 				</a>
                 <a href="#" class="twitter">
-					<img class="user_social" src="/assets/images/x-twitter_img.png">
+					<img class="user_social" src="/assets/images/x-twitter_img.svg">
 				</a>
                 <a href="#" class="facebook">
-					<img class="user_social" src="/assets/images/facebook_img.png">
+					<img class="user_social" src="/assets/images/facebook_img.svg">
 				</a>
                 <a href="#" class="globe">
-					<img class="user_social" src="/assets/images/globe_img.png">
+					<img class="user_social" src="/assets/images/globe_img.svg">
 				</a>
             </div>
 		</div>
@@ -430,7 +443,7 @@
 
 	<div class="about_main_div profile-information box_shadows mt-35 padd-40">
 		<div class="about_heading_div">
-			<img class="user_icon" src="/assets/images/user_icon.png">
+			<img class="user_icon" src="/assets/images/user_icon.svg">
 			<h4 class="about_heading">About</h4>
 		</div>
 		<div class="about_para_div">
@@ -456,15 +469,15 @@
 
 	<div class="profile-information box_shadows mt-35 padd-40 work_exp">
 		<div class="about_heading_div">
-			<img class="user_icon" src="/assets/images/suitcase_icon.png">
+			<img class="user_icon" src="/assets/images/suitcase_icon.svg">
 			<h4 class="about_heading">Work Experience</h4>
 		</div>
 		<div class="col-12">
 			<div class="d-flex align-items-start">
-				<img src="/assets/images/favicon.png" alt="Manalot Logo">
+				<img src="/assets/images/favicon.svg" alt="Manalot Logo">
 				<div class="ms-3">
 					<h5 class="mb-1">Managing Director</h5>
-					<p class="text-muted">Manalot . Full time . Nov 2016 - Present . 8 yrs 1 mo | Mumbai, Maharashtra</p>
+					<p class="">Manalot . Full time . Nov 2016 - Present . 8 yrs 1 mo | Mumbai, Maharashtra</p>
 					<p class="work_exp_details_text">
 						As a distinguished leadership advisory and retained executive search firm, 
 						Manalot (formerly Maple Consulting & Services) collaborates as a trusted partner-in-change 
@@ -475,19 +488,19 @@
 						<strong class="industry_main_div_heading">Industry :</strong> 
 						<div class="industry_div_list">
 							<div class="bg_verified_main">
-								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<img class="bg_verified_img" src="/assets/images/right_mark.svg">
 								<p class="bg_verified_text">Analytics/KPO/Research</p>
 							</div>
 							<div class="bg_verified_main">
-								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<img class="bg_verified_img" src="/assets/images/right_mark.svg">
 								<p class="bg_verified_text">Analytics/KPO/Research</p>
 							</div>
 							<div class="bg_verified_main">
-								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<img class="bg_verified_img" src="/assets/images/right_mark.svg">
 								<p class="bg_verified_text">Analytics/KPO/Research</p>
 							</div>
 							<div class="bg_verified_main">
-								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<img class="bg_verified_img" src="/assets/images/right_mark.svg">
 								<p class="bg_verified_text">Analytics/KPO/Research</p>
 							</div>
 						</div>
@@ -497,19 +510,19 @@
 						<strong class="skills_main_div_heading">Skills :</strong>
 						<div class="industry_div_list">
 							<div class="bg_verified_main">
-								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<img class="bg_verified_img" src="/assets/images/right_mark.svg">
 								<p class="bg_verified_text">Resourceful Professional</p>
 							</div>
 							<div class="bg_verified_main">
-								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<img class="bg_verified_img" src="/assets/images/right_mark.svg">
 								<p class="bg_verified_text">Talent Management</p>
 							</div>
 							<div class="bg_verified_main">
-								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<img class="bg_verified_img" src="/assets/images/right_mark.svg">
 								<p class="bg_verified_text">Talent Acquisition</p>
 							</div>
 							<div class="bg_verified_main">
-								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<img class="bg_verified_img" src="/assets/images/right_mark.svg">
 								<p class="bg_verified_text">Expertise in HR Consulting</p>
 							</div>
 						</div>
@@ -522,7 +535,7 @@
 				<img src="/assets/images/talent_acquistion_img.png" alt="SITEL Logo">
 				<div class="ms-3">
 					<h5 class="mb-1">Director – Talent Acquisition</h5>
-					<p class="text-muted">SITEL | Jan 2011 - 2014 . 3 yrs 1 mo | Mumbai, Maharashtra</p>
+					<p class="">SITEL | Jan 2011 - 2014 . 3 yrs 1 mo | Mumbai, Maharashtra</p>
 					<p class="work_exp_details_text">
 						As a distinguished leadership advisory and retained executive search firm, 
 						Manalot (formerly Maple Consulting & Services) collaborates as a trusted partner-in-change 
@@ -534,19 +547,19 @@
 						<strong class="skills_main_div_heading">Skills :</strong>
 						<div class="industry_div_list">
 							<div class="bg_verified_main">
-								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<img class="bg_verified_img" src="/assets/images/right_mark.svg">
 								<p class="bg_verified_text">Resourceful Professional</p>
 							</div>
 							<div class="bg_verified_main">
-								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<img class="bg_verified_img" src="/assets/images/right_mark.svg">
 								<p class="bg_verified_text">Talent Management</p>
 							</div>
 							<div class="bg_verified_main">
-								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<img class="bg_verified_img" src="/assets/images/right_mark.svg">
 								<p class="bg_verified_text">Talent Acquisition</p>
 							</div>
 							<div class="bg_verified_main">
-								<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
+								<img class="bg_verified_img" src="/assets/images/right_mark.svg">
 								<p class="bg_verified_text">Expertise in HR Consulting</p>
 							</div>
 						</div>
@@ -559,7 +572,7 @@
 				<img src="/assets/images/tricom_img.png" alt="Tricom Logo">
 				<div class="ms-3">
 					<h5 class="mb-1">Vice-President - Human Resources</h5>
-					<p class="mb-0 text-muted">Tricom Document Management | Jan 2010 - 2011 · 1 yr 1 mo | Mumbai, Maharashtra</p>
+					<p class="mb-0 ">Tricom Document Management | Jan 2010 - 2011 · 1 yr 1 mo | Mumbai, Maharashtra</p>
 				</div>
 			</div>
 		</div>
@@ -568,7 +581,7 @@
 				<img src="/assets/images/fis_img.png" alt="FIS Logo">
 				<div class="ms-3">
 					<h5 class="mb-1">Head HR</h5>
-					<p class="mb-0 text-muted">FIS | Feb 2006 - 2010 · 4 yrs | Mumbai, Maharashtra</p>
+					<p class="mb-0 ">FIS | Feb 2006 - 2010 · 4 yrs | Mumbai, Maharashtra</p>
 				</div>
 			</div>
 		</div>
@@ -577,7 +590,7 @@
 				<img src="/assets/images/senior_manager.png" alt="FIS Logo">
 				<div class="ms-3">
 					<h5 class="mb-1">Senior Manager – HR</h5>
-					<p class="mb-0 text-muted">Respondez · Apr 2005 to 2006 · 10 mos | Mumbai Area, India</p>
+					<p class="mb-0 ">Respondez · Apr 2005 to 2006 · 10 mos | Mumbai Area, India</p>
 				</div>
 			</div>
 		</div>
@@ -586,34 +599,34 @@
     <div class="profile-information box_shadows mt-35 padd-40 education_main_div">
         <!-- Education Section -->
         <div class="about_heading_div">
-			<img class="user_icon" src="/assets/images/education_icon.png">
+			<img class="user_icon" src="/assets/images/education_icon.svg">
 			<h4 class="about_heading">Education</h4>
 		</div>
-		<div class="d-flex flex-md-row flex-row flex-column flex-wrap pb-md-5 pb-3">
+		<div class="d-flex flex-md-row flex-row flex-column flex-wrap pb-md-4 pb-3">
 			<div class="col-md-6 mb-3 pe-md-4">
-				<div class="d-flex pt-md-3">
+				<div class="d-flex pb-md-3 align-items-center">
 					<img src="/assets/images/logo-welingkar.png" alt="Welingkar Logo">
 					<div class="ms-3">
 						<h5 class="mb-1">Welingkar Institute of Management</h5>
-						<p class="mb-0 text-muted">PGDM - via Correspondence, Business Management - 1996-1998 Mumbai, Maharashtra </p>
+						<p class="mb-0 ">PGDM - via Correspondence, Business Management - 1996-1998 Mumbai, Maharashtra </p>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6 col-12 mb-3">
-				<div class="d-flex pt-md-3">
+				<div class="d-flex pb-md-3 align-items-center">
 					<img src="/assets/images/logo-hrcollege.png" alt="HR College Logo">
 					<div class="ms-3">
 						<h5 class="mb-1">HR College of Commerce & Economics</h5>
-						<p class="mb-0 text-muted">Bachelor of Commerce, Business / Commerce - 1991-1996 <br>Mumbai, Maharashtra </p>
+						<p class="mb-0 ">Bachelor of Commerce, Business / Commerce - 1991-1996 <br>Mumbai, Maharashtra </p>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6 col-12 mb-3">
-				<div class="d-flex pt-md-3">
+				<div class="d-flex pb-md-3 align-items-center">
 					<img src="/assets/images/greenlawns_logo.png" alt="HR College Logo">
 					<div class="ms-3">
 						<h5 class="mb-1">Greenlawns High School</h5>
-						<p class="mb-0 text-muted">
+						<p class="mb-0 ">
 							Bachelor of Commerce, Business / Commerce - 1991 - 1996 <br>
 							| Mumbai, Maharashtra</p>
 					</div>
@@ -622,25 +635,25 @@
 		</div>
         <!-- Certifications Section -->
         <div class="about_heading_div">
-			<img class="user_icon" src="/assets/images/certificate_icon.png">
+			<img class="user_icon" src="/assets/images/certificate_icon.svg">
 			<h4 class="about_heading">Certifications</h4>
 		</div>
 		<div class="d-flex flex-md-row flex-column">
 			<div class="col-md-6 mb-3 pe-md-4">
-				<div class="d-flex">
+				<div class="d-flex align-items-center">
 					<img src="/assets/images/logo-cert1.png" alt="Certification 1 Logo">
 					<div class="ms-3">
 						<h5 class="mb-1">Assessment Centre Design & Implementation</h5>
-						<p class="mb-0 text-muted">Ma Foi Management Consultants Limited Issued Jan 2008 </p>
+						<p class="mb-0 ">Ma Foi Management Consultants Limited Issued Jan 2008 </p>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6 mb-3">
-				<div class="d-flex">
+				<div class="d-flex align-items-center">
 					<img src="/assets/images/logo-cert1.png" alt="Certification 2 Logo">
 					<div class="ms-3">
 						<h5 class="mb-1">HR College of Commerce & Economics</h5>
-						<p class="mb-0 text-muted">NIS Sparta Limited Issued Jan 2007 </p>
+						<p class="mb-0 ">NIS Sparta Limited Issued Jan 2007 </p>
 					</div>
 				</div>
 			</div>
@@ -658,15 +671,15 @@
 		</div>
 		<div class="d-flex mb-lg-5 mb-4">
 			<div class="me-lg-5 mb-md-3 mb-2 d-flex gap-2 align-items-center">
-				<img class="right_mark_grey" src="/assets/images/right_mark_grey.png">
+				<img class="right_mark_grey" src="/assets/images/right_mark.svg">
 				<p>Legal Authorization to work status : <span class="user_yes">Yes</span></p>
 			</div>
 			<div class="me-lg-5 mb-md-3 mb-2 d-flex gap-2 align-items-center">
-				<img class="right_mark_grey" src="/assets/images/right_mark_grey.png">
+				<img class="right_mark_grey" src="/assets/images/right_mark.svg">
 				<p>Availability : <span class="user_yes">Yes</span></p>
 			</div>
 			<div class="me-lg-5 me-md-3 mb-md-3 mb-2 d-flex gap-2 align-items-center">
-				<img class="right_mark_grey" src="/assets/images/right_mark_grey.png">
+				<img class="right_mark_grey" src="/assets/images/right_mark.svg">
 				<p>Notice Period : <span class="user_yes">Yes</span></p>
 			</div>
 		</div> -->
@@ -677,25 +690,25 @@
 		</div>
 		<div class="d-flex">
 			<div class="me-lg-5 mb-md-3 mb-2 d-flex gap-2 align-items-center">
-				<img class="right_mark_grey" src="/assets/images/right_mark_grey.png">
+				<img class="right_mark_grey" src="/assets/images/right_mark.svg">
 				<p>Resourceful Professional</p>
 			</div>
 			<div class="me-lg-5 mb-md-3 mb-2 d-flex gap-2 align-items-center">
-				<img class="right_mark_grey" src="/assets/images/right_mark_grey.png">
+				<img class="right_mark_grey" src="/assets/images/right_mark.svg">
 				<p>Talent Management</p>
 			</div>
 			<div class="me-lg-5 mb-md-3 mb-2 d-flex gap-2 align-items-center">
-				<img class="right_mark_grey" src="/assets/images/right_mark_grey.png">
+				<img class="right_mark_grey" src="/assets/images/right_mark.svg">
 				<p>Talent Acquisition</p>
 			</div>
 			<div class="me-lg-5 mb-md-3 mb-2 d-flex gap-2 align-items-center">
-				<img class="right_mark_grey" src="/assets/images/right_mark_grey.png">
+				<img class="right_mark_grey" src="/assets/images/right_mark.svg">
 				<p>Expertise in HR Consulting</p>
 			</div>
         </div> -->
     <!-- </div> -->
 
-	<div class="maple_consulting_div mt-lg-5 mt-4">
+	<div class="maple_consulting_div">
 		<h5 class="maple_consluting text-center">
 			© Maple Consulting and Services 
 		</h5>

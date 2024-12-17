@@ -149,7 +149,7 @@
                             </div>
                         </div>
                     </div>
-                    <img class="header_drishti_img" src="/assets/images/drishti_img2.png" alt="user image">
+                    <img class="header_drishti_img" src="/assets/images/smita_raikundla.png" alt="user image">
                 </div>
             </header>
         </div>

@@ -308,6 +308,12 @@ strong.text-lg {
     position: relative; /* To position the dropdown */
 }
 
+.three_dots {
+    position: absolute;
+    left: -10px;
+    top: 37px;
+}
+
 .dropdown-content {
     display: none; /* Hidden by default */    
     border: 1px solid #ddd;

@@ -18,7 +18,7 @@
                         <div>
                             <img src="/assets/images/home_icon.png" alt="home icon" />
                         </div>
-                        <span>Home</span>
+                        <span>Home2</span>
                     </a>
                     <a href="{{ url(route('about-us')) }}" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
                         <div>
