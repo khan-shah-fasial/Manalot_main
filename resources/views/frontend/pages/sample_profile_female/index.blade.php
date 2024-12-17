@@ -473,7 +473,7 @@
 			<h4 class="about_heading">Work Experience</h4>
 		</div>
 		<div class="col-12">
-			<div class="d-flex align-items-start">
+			<div class="d-flex align-items-center">
 				<img src="/assets/images/favicon.svg" alt="Manalot Logo">
 				<div class="ms-3">
 					<h5 class="mb-1">Managing Director</h5>
@@ -531,7 +531,7 @@
 			</div>
 		</div>
 		<div class="col-12">
-			<div class="d-flex align-items-start">
+			<div class="d-flex align-items-center">
 				<img src="/assets/images/talent_acquistion_img.png" alt="SITEL Logo">
 				<div class="ms-3">
 					<h5 class="mb-1">Manager - HR</h5>

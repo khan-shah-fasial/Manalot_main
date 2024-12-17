@@ -7,10 +7,10 @@
                         <img class="user_header_logo" src="/assets/images/favicon2.png" alt="" />
                     </a>
                     <form class="search_input d-flex align-items-center mb-0">
-                        <input type="text" placeholder="Search" />
                         <button>
                             <i class="fa fa-search"></i>
                         </button>
+                        <input type="text" placeholder="Search" />
                     </form>
                 </div>
                 <div class="col-lg-6 d-flex justify-content-end align-items-center user_header_right">
@@ -130,6 +130,9 @@
                         <img class="user_header_logo" src="/assets/images/favicon2.png" alt="" />
                     </a>
                     <form class="search_input d-flex align-items-center mb-0">
+                        <button class="mobile_search_btn">
+                            <i class="fa fa-search"></i>
+                        </button>
                         <div class="mobile_search_input" style="display: none;">
                             <div class="d-flex">
                                 <button class="close">X</button>
@@ -139,9 +142,6 @@
                                 </button>
                             </div>
                         </div>
-                        <button class="mobile_search_btn">
-                            <i class="fa fa-search"></i>
-                        </button>
                     </form>
                 </div>
                 <div class="col-md-6 col-8 d-flex justify-content-end align-items-center user_header_right">
