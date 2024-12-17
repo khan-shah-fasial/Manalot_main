@@ -37,7 +37,7 @@
 	</div>
 </div> -->
 
-<div class="header user_header d-md-block d-none">
+	<div class="header user_header d-md-block d-none helvetica_font">
         <div class="container">
             <header class="d-flex align-items-center">
                 <div class="col-lg-6 d-flex gap-lg-4 gap-md-2">
@@ -153,7 +153,7 @@
         </div>
     </div> 
 
-    <div class="header user_header user_header_mobile d-md-none d-block">
+    <div class="header user_header user_header_mobile d-md-none d-block helvetica_font">
         <div class="container-fluid px-0">
             <header class="d-flex align-items-center">
                 <div class="col-md-6 col-4 d-flex gap-1 logo_search_div">
@@ -471,7 +471,7 @@
 						for dynamic organizations and senior leadership worldwide. With a steadfast commitment to 
 						building relationships based on trust and agility, <b class="bold_see_more"> …see more</b>
 					</p>
-					<div class="industry_main_div ">
+					<div class="industry_main_div helvetica_font">
 						<strong class="industry_main_div_heading">Industry :</strong>
 						<div class="bg_verified_main">
 							<img class="bg_verified_img" src="/assets/images/right_mark_grey.png">
