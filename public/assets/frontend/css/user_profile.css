@@ -12,7 +12,7 @@ body
 }
 .image-profile.box_shadows {
     border-radius: 50px 50px 50px 50px;
-    margin-top: 140px;
+    margin-top: 137px;
 }
 /* .container {
     max-width: 900px;
@@ -33,7 +33,7 @@ body
 }
 
 .profile-content span {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 400;
     color: #535353;
 }
@@ -62,7 +62,7 @@ body
 .bg-profile-content .user_img {
     width: 22%;
     padding-left: 40px;
-    margin-top: -40px;
+    margin-top: -50px;
 }
 
 .bg_verified_main {
@@ -125,6 +125,7 @@ p.bg_verified_text {
 
 .profile-content {
     padding-left: 20px;
+    width: 60%;
 }
 
 .profile_btn {
@@ -157,7 +158,7 @@ color: #535353;
 line-height: 18px;
 }
 
-img.profile_manalot_logo {
+img.profile_study_logo {
 width: 40px;
 }
 
@@ -174,13 +175,26 @@ color: #535353;
 color: #535353;
 }
 
+.profile_btn.connect_btn, .golden_btn.message_btn {
+    border-radius: 15px !important;
+    padding: 8px 24px 8px 24px !important;
+}
+
+.golden_btn.message_btn {
+    padding: 8px 17px 8px 17px !important;
+}
+
+.profile_view_btn {
+    gap: 40px;
+}
+
 .info-section {
 display: flex;
 }
 
 .personal_info_div {display: flex;flex-direction: column;flex-wrap: nowrap;gap: 5px;}
 
-.about_heading_div {display: flex;gap: 20px;align-items: center;margin-bottom: 35px;}
+.about_heading_div {display: flex;gap: 20px;align-items: center;margin-bottom: 25px;}
 
 img.user_icon {
 object-fit: contain;
@@ -219,7 +233,7 @@ object-fit: contain;
     display: flex;
     align-items: start;
     gap: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 11px;
     /* flex-wrap: wrap; */
 }
 
@@ -281,10 +295,18 @@ span.user_yes {
     font-weight: 400;
 }
 
+.maple_consulting_div {
+    margin-top: 25px;
+}
+
 .maple_consluting {
     font-weight: 800;
     color: #535353;
     font-size: 18px;
+}
+
+.education_main_div, .work_exp {
+    padding-right: 140px;
 }
 
 @media screen and (max-width:991px){
@@ -396,6 +418,10 @@ span.user_yes {
 
     .bg-profile-content {
         align-items: end;
+    }
+    
+    .industry_main_div_heading, .skills_main_div_heading {
+        width: 90px;
     }
 }
 
@@ -523,4 +549,10 @@ span.user_yes {
         height: 18px;
     }
 
+}
+
+@media screen and (min-width:1200px){
+    .work_exp .industry_main_div, .work_exp .skills_main_div {
+        gap: 0px !important;
+    }
 }
