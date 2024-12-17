@@ -286,6 +286,16 @@ a.visit_mln {
     height: 60px;
 }
 
+.education_div > div:nth-child(odd),
+.certification_div > div:nth-child(odd) {
+    padding-right: 20px;
+}
+
+.education_div > div:nth-child(even),
+.certification_div > div:nth-child(even) {
+    padding-left: 20px;
+}
+
 .author_main_div p{
     margin-bottom: 0px;
 }
@@ -419,7 +429,7 @@ span.user_yes {
     .bg-profile-content {
         align-items: end;
     }
-    
+
     .industry_main_div_heading, .skills_main_div_heading {
         width: 90px;
     }

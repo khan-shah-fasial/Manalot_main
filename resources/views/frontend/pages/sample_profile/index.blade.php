@@ -155,7 +155,7 @@
                     </a>
                     <div class="header_drishti">
 						<img class="three_dots" src="/assets/images/three_dots.svg"  id="dropdownTrigger">
-                        <img class="header_drishti_img" src="/assets/images/drishti_img2.png" alt="user image">
+                        <img class="header_drishti_img" src="/assets/images/anil_rajkundra.png" alt="user image">
                         <div class="logout dropdown-content" id="dropdownContent">
                             <a href="" class="view_profile">View Profile</a>
                             <a href="{{ url(route('customer.logout')) }}" class="logout">Logout</a>
@@ -602,8 +602,8 @@
 			<img class="user_icon" src="/assets/images/education_icon.svg">
 			<h4 class="about_heading">Education</h4>
 		</div>
-		<div class="d-flex flex-md-row flex-row flex-column flex-wrap pb-md-4 pb-3">
-			<div class="col-md-6 mb-3 pe-md-4">
+		<div class="d-flex flex-md-row flex-row flex-column flex-wrap pb-md-4 pb-3 education_div">
+			<div class="col-md-6 col-12 mb-3">
 				<div class="d-flex pb-md-3 align-items-center">
 					<img src="/assets/images/logo-welingkar.png" alt="Welingkar Logo">
 					<div class="ms-3">
@@ -638,8 +638,8 @@
 			<img class="user_icon" src="/assets/images/certificate_icon.svg">
 			<h4 class="about_heading">Certifications</h4>
 		</div>
-		<div class="d-flex flex-md-row flex-column">
-			<div class="col-md-6 mb-3 pe-md-4">
+		<div class="d-flex flex-md-row flex-column certification_div">
+			<div class="col-md-6 mb-3">
 				<div class="d-flex align-items-center">
 					<img src="/assets/images/logo-cert1.png" alt="Certification 1 Logo">
 					<div class="ms-3">
