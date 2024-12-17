@@ -741,7 +741,7 @@ img.user_img {
 .profile-page .header .user_header_right a,
 .profile-page .header .search_input button,
 .profile-page .search_input input,
-.profile-page .header_drishti_img  {
+.profile-page .three_dots  {
     touch-action: none ; /* Disable touch behavior */
     pointer-events: none; /* Ensure click events work */
     cursor: pointer; /* Show pointer cursor for interaction */
