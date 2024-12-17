@@ -45,10 +45,10 @@
                         <img class="user_header_logo" src="/assets/images/favicon2.png" alt="">
                     </a>
                     <form class="search_input d-flex align-items-center mb-0">
-                        <input type="text" placeholder="Search" />
                         <button>
                             <i class="fa fa-search"></i>
                         </button>
+                        <input type="text" placeholder="Search" />
                     </form>
                 </div>
                 <div class="d-flex justify-content-end align-items-center user_header_right">
@@ -155,7 +155,7 @@
                     </a>
                     <div class="header_drishti">
 						<img class="three_dots" src="/assets/images/three_dots.svg"  id="dropdownTrigger">
-                        <img class="header_drishti_img" src="/assets/images/smita_raikundla.png" alt="user image">
+                        <img class="header_drishti_img" src="/assets/images/anil_rajkundra.png" alt="user image">
                         <div class="logout dropdown-content" id="dropdownContent">
                             <a href="" class="view_profile">View Profile</a>
                             <a href="{{ url(route('customer.logout')) }}" class="logout">Logout</a>
@@ -177,10 +177,10 @@
                         <div class="mobile_search_input" style="display: none;">
                             <div class="d-flex">
                                 <button class="close">X</button>
-                                <input type="text" placeholder="Search" />
                                 <button type="submit" class="searched">
                                     <i class="fa fa-search"></i> 
                                 </button>
+                                <input type="text" placeholder="Search" />
                             </div>
                         </div>
                         <button class="mobile_search_btn">
