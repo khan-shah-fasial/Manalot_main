@@ -3537,7 +3537,7 @@ div#phone_otp_model .modal-footer {
 }
 
 @media screen and (min-width: 1400px) {
-    .user_header > div {
+    .user_header > div:not(.profile-page .user_header > div) {
         padding: 0px 50px;
     }
 }
