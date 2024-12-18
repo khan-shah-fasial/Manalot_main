@@ -119,17 +119,20 @@
 						<img class="three_dots" src="/assets/images/three_dots.svg"  id="dropdownTrigger">
                         <img class="header_drishti_img" src="/assets/images/drishti_img2.png" alt="user image">
                         <div class="logout dropdown-content" id="dropdownContent">
-							<div class="d-flex align-items-center gap-2">
-								<img class="user_img" src="/assets/images/drishti_img.png" alt="user_img">
-								<div class="user_name_post">
-									<strong class="mb-0 user_name">Drishti Jadhav</strong>
-									<p class="text-xs mb-0" style="color: #535353">
-                                        UI/UX Designer
-									</p>
-								</div>
-							</div>
-							<a class="view_profile_btn" href="">View Profile</a>
-                            <a href="{{ url(route('customer.logout')) }}" class="logout">Logout</a>
+                            <div class="view_profile_child_1">
+                                <div class="d-flex align-items-center gap-2">
+                                    <img class="user_img" src="/assets/images/drishti_img.png" alt="user_img">
+                                    <div class="user_name_post">
+                                        <strong class="mb-0 user_name proxima_nova_font">Drishti Jadhav</strong>
+                                        <p class="text-xs mb-0" style="color: #535353">
+                                            UI/UX Designer
+                                        </p>
+                                    </div>
+                                </div>
+                                <a class="view_profile_btn" href="">View Profile</a>
+                            </div>
+                            <hr>
+                            <a href="{{ url(route('customer.logout')) }}" class="logout">Sign Out</a>
                         </div>
                     </div>
                 </div>

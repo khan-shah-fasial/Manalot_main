@@ -343,7 +343,28 @@ strong.text-lg {
     border-radius: 50px;
     width: 200px;
     height: 311px;
+    padding: 0px;
+    background-color: #ffffff;
+    top: 90px;
+}
+
+
+.view_profile_child_1 {
     padding: 12px 17px;
+    height: 222px;
+}
+
+a.logout {
+    position: absolute;
+    bottom: 23px;
+    width: 100%;
+    padding: 10px 20px 10px !important;
+    font: 400 12px 'Lato' !important;
+    color: #545454 !important;
+}
+
+a.logout:hover {
+   background-color: #fff !important;
 }
 
 .dropdown-content .user_name {
@@ -356,8 +377,14 @@ strong.text-lg {
     border-radius: 15px;
     padding: 5px 12px !important;
     text-align: center;
-    font: 400 12px 'lato';
+    font: 400 12px 'Proxima Nova';
     margin-top: 15px;
+    color: #545454 !important;
+}
+
+.view_profile_btn:hover {
+    background-color: #E7ECEF !important;
+    color: #545454;
 }
 
 .three_dots {
@@ -807,10 +834,6 @@ img.icon_language {
     width: 50px !important;
 }
 
-a.logout {
-    position: absolute;
-    bottom: 30px; 
-}
 
 .maple_footer_text {
     font-size: 11px;
@@ -3590,6 +3613,11 @@ div#phone_otp_model .modal-footer {
 
 @media screen and (min-width: 1400px) {
     .user_header > div:not(.profile-page .user_header > div) {
-        padding: 0px 50px;
+        padding: 0px 0px;
+    }
+}
+@media screen and (min-width: 1690px) {
+    .right_sidebar, .left_sidebar { 
+        width: 14%;
     }
 }
