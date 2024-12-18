@@ -155,7 +155,7 @@
                     </a>
                     <div class="header_drishti">
 						<img class="three_dots" src="/assets/images/three_dots.svg"  id="dropdownTrigger">
-                        <img class="header_drishti_img" src="/assets/images/anil_rajkundra.png" alt="user image">
+                        <img class="header_drishti_img" src="/assets/images/smita_raikundla.png" alt="user image">
                         <div class="logout dropdown-content" id="dropdownContent">
                             <a href="" class="view_profile">View Profile</a>
                             <a href="{{ url(route('customer.logout')) }}" class="logout">Logout</a>
