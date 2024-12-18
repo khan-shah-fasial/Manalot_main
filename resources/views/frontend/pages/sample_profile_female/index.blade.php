@@ -52,33 +52,33 @@
                     </form>
                 </div>
                 <div class="d-flex justify-content-end align-items-center user_header_right">
-                    <a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
+					<a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
-                            <img src="/assets/images/home_icon2.png" alt="home icon" />
+                            <img src="/assets/images/home_icon2.svg" alt="home icon" />
                         </div>
                         <span>Home</span>
                     </a>
                     <a href="{{ url(route('about-us')) }}" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
                         <div>
-                            <img src="/assets/images/people_icon.png" alt="people icon" />
+                            <img src="/assets/images/people_icon.svg" alt="people icon" />
                         </div>
                         <span>My Network</span>
                     </a>
                     <a href="" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
                         <div>
-                            <img src="/assets/images/suitcase_icon2.png" alt="suitcase icon" />
+                            <img src="/assets/images/suitcase_icon2.svg" alt="suitcase icon" />
                         </div>
                         <span>Jobs</span>
                     </a>
                     <a href="{{ url(route('help-center')) }}" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
                         <div>
-                            <img src="/assets/images/chats_icon.png" alt="message icon" />
+                            <img src="/assets/images/chats_icon.svg" alt="message icon" />
                         </div>
                         <span>Messages</span>
                     </a>
                     <a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
-                            <img src="/assets/images/notification_icon.png" alt="Notification icon" />
+                            <img src="/assets/images/notification_icon.svg" alt="Notification icon" />
                         </div>
                         <span>Notification</span>
                     </a>
@@ -146,10 +146,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>                    
 					<a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
-                            <img src="/assets/images/crown_icon.png" alt="Notification icon" />
+                            <img src="/assets/images/crown_icon.svg" alt="Notification icon" />
                         </div>
                         <span>Manalotians</span>
                     </a>
@@ -157,7 +157,16 @@
 						<img class="three_dots" src="/assets/images/three_dots.svg"  id="dropdownTrigger">
                         <img class="header_drishti_img" src="/assets/images/smita_raikundla.png" alt="user image">
                         <div class="logout dropdown-content" id="dropdownContent">
-                            <a href="" class="view_profile">View Profile</a>
+							<div class="d-flex align-items-center gap-2">
+								<img class="user_img" src="/assets/images/drishti_img.png" alt="user_img">
+								<div class="user_name_post">
+									<strong class="mb-0 user_name">Drishti Jadhav</strong>
+									<p class="text-xs mb-0" style="color: #535353">
+										12 Minutes ago <i class="fa fa-globe" aria-hidden="true"></i>
+									</p>
+								</div>
+							</div>
+							<a class="view_profile_btn" href=""></a>
                             <a href="{{ url(route('customer.logout')) }}" class="logout">Logout</a>
                         </div>
                     </div>
@@ -474,7 +483,7 @@
 		</div>
 		<div class="col-12">
 			<div class="d-flex align-items-center">
-				<img src="/assets/images/favicon.svg" alt="Manalot Logo">
+				<img class="education_certification_logo" src="/assets/images/favicon.svg" alt="Manalot Logo">
 				<div class="ms-3">
 					<h5 class="mb-1">Managing Director</h5>
 					<p class="">Manalot . Full time | Nov 2016 - Present · 8 yrs 1 mo | Mumbai, Maharashtra</p>
@@ -532,7 +541,7 @@
 		</div>
 		<div class="col-12">
 			<div class="d-flex align-items-center">
-				<img src="/assets/images/talent_acquistion_img.png" alt="SITEL Logo">
+				<img class="education_certification_logo" src="/assets/images/busisol_logo.png" alt="SITEL Logo">
 				<div class="ms-3">
 					<h5 class="mb-1">Manager - HR</h5>
 					<p class="mb-0">Busisol Sourcing (I) Pvt.Ltd | Jan 2007 - Jan 2014 · 7 yrs 1 mo</p>
@@ -550,7 +559,7 @@
 		<div class="d-flex flex-md-row flex-row flex-column flex-wrap pb-md-4 pb-3">
 			<div class="col-md-6 mb-3 pe-md-4">
 				<div class="d-flex pb-md-3 align-items-center">
-					<img src="/assets/images/somaya_img.png" alt="somaya Logo">
+					<img class="education_certification_logo" src="/assets/images/somaya_img.png" alt="somaya Logo">
 					<div class="ms-3">
 						<h5 class="mb-1">K J Somaiya Institute of Management</h5>
 						<p class="mb-0">Master of Business Administration - MBA, Human Resources Management and Services</p>
@@ -566,7 +575,7 @@
 		<div class="d-flex flex-md-row flex-column">
 			<div class="col-md-6 mb-3 pe-md-4">
 				<div class="d-flex align-items-center">
-					<img src="/assets/images/logo-cert1.png" alt="Certification 1 Logo">
+					<img class="education_certification_logo" src="/assets/images/ma_foi.jpeg" alt="Certification 1 Logo">
 					<div class="ms-3">
 						<h5 class="mb-1">Assessment Centre Design & Implementation</h5>
 						<p class="mb-0 ">Ma Foi Management Consultants Limited Issued Jan 2008 </p>
@@ -575,7 +584,7 @@
 			</div>
 			<div class="col-md-6 mb-3">
 				<div class="d-flex align-items-center">
-					<img src="/assets/images/logo-cert1.png" alt="Certification 2 Logo">
+					<img class="education_certification_logo" src="/assets/images/nis_logo.jpeg" alt="Certification 2 Logo">
 					<div class="ms-3">
 						<h5 class="mb-1">HR College of Commerce & Economics</h5>
 						<p class="mb-0 ">NIS Sparta Limited Issued Jan 2007 </p>

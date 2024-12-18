@@ -52,33 +52,33 @@
                     </form>
                 </div>
                 <div class="d-flex justify-content-end align-items-center user_header_right">
-                    <a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
+					<a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
-                            <img src="/assets/images/home_icon2.png" alt="home icon" />
+                            <img src="/assets/images/home_icon2.svg" alt="home icon" />
                         </div>
                         <span>Home</span>
                     </a>
                     <a href="{{ url(route('about-us')) }}" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
                         <div>
-                            <img src="/assets/images/people_icon.png" alt="people icon" />
+                            <img src="/assets/images/people_icon.svg" alt="people icon" />
                         </div>
                         <span>My Network</span>
                     </a>
                     <a href="" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
                         <div>
-                            <img src="/assets/images/suitcase_icon2.png" alt="suitcase icon" />
+                            <img src="/assets/images/suitcase_icon2.svg" alt="suitcase icon" />
                         </div>
                         <span>Jobs</span>
                     </a>
                     <a href="{{ url(route('help-center')) }}" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
                         <div>
-                            <img src="/assets/images/chats_icon.png" alt="message icon" />
+                            <img src="/assets/images/chats_icon.svg" alt="message icon" />
                         </div>
                         <span>Messages</span>
                     </a>
                     <a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
-                            <img src="/assets/images/notification_icon.png" alt="Notification icon" />
+                            <img src="/assets/images/notification_icon.svg" alt="Notification icon" />
                         </div>
                         <span>Notification</span>
                     </a>
@@ -146,10 +146,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>                    
 					<a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
-                            <img src="/assets/images/crown_icon.png" alt="Notification icon" />
+                            <img src="/assets/images/crown_icon.svg" alt="Notification icon" />
                         </div>
                         <span>Manalotians</span>
                     </a>
@@ -473,8 +473,8 @@
 			<h4 class="about_heading">Work Experience</h4>
 		</div>
 		<div class="col-12">
-			<div class="d-flex align-items-center">
-				<img src="/assets/images/favicon.svg" alt="Manalot Logo">
+			<div class="d-flex align-items-start">
+				<img class="education_certification_logo" src="/assets/images/favicon.svg" alt="Manalot Logo">
 				<div class="ms-3">
 					<h5 class="mb-1">Managing Director</h5>
 					<p class="">Manalot . Full time . Nov 2016 - Present . 8 yrs 1 mo | Mumbai, Maharashtra</p>
@@ -531,8 +531,8 @@
 			</div>
 		</div>
 		<div class="col-12">
-			<div class="d-flex align-items-center">
-				<img src="/assets/images/talent_acquistion_img.png" alt="SITEL Logo">
+			<div class="d-flex align-items-start">
+				<img class="education_certification_logo" src="/assets/images/sitel_logo.jpg" alt="SITEL Logo">
 				<div class="ms-3">
 					<h5 class="mb-1">Director – Talent Acquisition</h5>
 					<p class="">SITEL | Jan 2011 - 2014 . 3 yrs 1 mo | Mumbai, Maharashtra</p>
@@ -568,8 +568,8 @@
 			</div>
 		</div>
 		<div class="col-12">
-			<div class="d-flex align-items-center">
-				<img src="/assets/images/tricom_img.png" alt="Tricom Logo">
+			<div class="d-flex align-items-start">
+				<img class="education_certification_logo" src="/assets/images/tricom_img.png" alt="Tricom Logo">
 				<div class="ms-3">
 					<h5 class="mb-1">Vice-President - Human Resources</h5>
 					<p class="mb-0 ">Tricom Document Management | Jan 2010 - 2011 · 1 yr 1 mo | Mumbai, Maharashtra</p>
@@ -577,8 +577,8 @@
 			</div>
 		</div>
 		<div class="col-12">
-			<div class="d-flex align-items-center">
-				<img src="/assets/images/fis_img.png" alt="FIS Logo">
+			<div class="d-flex align-items-start">
+				<img class="education_certification_logo" src="/assets/images/fis_img.png" alt="FIS Logo">
 				<div class="ms-3">
 					<h5 class="mb-1">Head HR</h5>
 					<p class="mb-0 ">FIS | Feb 2006 - 2010 · 4 yrs | Mumbai, Maharashtra</p>
@@ -586,8 +586,8 @@
 			</div>
 		</div>
 		<div class="col-12">
-			<div class="d-flex align-items-center">
-				<img src="/assets/images/senior_manager.png" alt="FIS Logo">
+			<div class="d-flex align-items-start">
+				<img class="education_certification_logo" src="/assets/images/senior_manager.png" alt="FIS Logo">
 				<div class="ms-3">
 					<h5 class="mb-1">Senior Manager – HR</h5>
 					<p class="mb-0 ">Respondez · Apr 2005 to 2006 · 10 mos | Mumbai Area, India</p>
@@ -605,7 +605,7 @@
 		<div class="d-flex flex-md-row flex-row flex-column flex-wrap pb-md-4 pb-3 education_div">
 			<div class="col-md-6 col-12 mb-3">
 				<div class="d-flex pb-md-3 align-items-center">
-					<img src="/assets/images/logo-welingkar.png" alt="Welingkar Logo">
+					<img class="education_certification_logo" src="/assets/images/logo-welingkar.png" alt="Welingkar Logo">
 					<div class="ms-3">
 						<h5 class="mb-1">Welingkar Institute of Management</h5>
 						<p class="mb-0 ">PGDM - via Correspondence, Business Management - 1996-1998 Mumbai, Maharashtra </p>
@@ -614,7 +614,7 @@
 			</div>
 			<div class="col-md-6 col-12 mb-3">
 				<div class="d-flex pb-md-3 align-items-center">
-					<img src="/assets/images/logo-hrcollege.png" alt="HR College Logo">
+					<img class="education_certification_logo" src="/assets/images/logo-hrcollege.png" alt="HR College Logo">
 					<div class="ms-3">
 						<h5 class="mb-1">HR College of Commerce & Economics</h5>
 						<p class="mb-0 ">Bachelor of Commerce, Business / Commerce - 1991-1996 <br>Mumbai, Maharashtra </p>
@@ -623,7 +623,7 @@
 			</div>
 			<div class="col-md-6 col-12 mb-3">
 				<div class="d-flex pb-md-3 align-items-center">
-					<img src="/assets/images/greenlawns_logo.png" alt="HR College Logo">
+					<img class="education_certification_logo" src="/assets/images/greenlawns_logo.png" alt="HR College Logo">
 					<div class="ms-3">
 						<h5 class="mb-1">Greenlawns High School</h5>
 						<p class="mb-0 ">
@@ -641,7 +641,7 @@
 		<div class="d-flex flex-md-row flex-column certification_div">
 			<div class="col-md-6 mb-3">
 				<div class="d-flex align-items-center">
-					<img src="/assets/images/logo-cert1.png" alt="Certification 1 Logo">
+					<img class="education_certification_logo" src="/assets/images/ma_foi.jpeg" alt="Certification 1 Logo">
 					<div class="ms-3">
 						<h5 class="mb-1">Assessment Centre Design & Implementation</h5>
 						<p class="mb-0 ">Ma Foi Management Consultants Limited Issued Jan 2008 </p>
@@ -650,7 +650,7 @@
 			</div>
 			<div class="col-md-6 mb-3">
 				<div class="d-flex align-items-center">
-					<img src="/assets/images/logo-cert1.png" alt="Certification 2 Logo">
+					<img class="education_certification_logo" src="/assets/images/nis_logo.jpeg" alt="Certification 2 Logo">
 					<div class="ms-3">
 						<h5 class="mb-1">HR College of Commerce & Economics</h5>
 						<p class="mb-0 ">NIS Sparta Limited Issued Jan 2007 </p>

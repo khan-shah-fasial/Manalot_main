@@ -285,10 +285,18 @@ strong.get_back_into_text {
 }
 
 strong.text-lg {
-    font-size: 17px;
+    font-size: 16px;
     color: #1B1919;
     line-height: 16px;
     font-weight: 500;
+}
+
+.width_20 {
+    width: 20% !important;
+}
+
+.width_60 {
+    width: 60% !important;
 }
 
 .search_input input {
@@ -328,6 +336,28 @@ strong.text-lg {
 
 .header_drishti {
     position: relative; /* To position the dropdown */
+    margin-left: 30px;
+}
+
+.header_drishti .dropdown-content {
+    border-radius: 50px;
+    width: 200px;
+    height: 311px;
+    padding: 12px 17px;
+}
+
+.dropdown-content .user_name {
+    font-size: 12px;
+    /* line-height: 10px; */
+}
+
+.view_profile_btn {
+    background-color: #E7ECEF;
+    border-radius: 15px;
+    padding: 5px 12px !important;
+    text-align: center;
+    font: 400 12px 'lato';
+    margin-top: 15px;
 }
 
 .three_dots {
@@ -372,7 +402,7 @@ strong.text-lg {
 } */
 
 .user_header_right {
-    gap: 40px;
+    gap: 30px;
 }
 
 .user_header_right a img {
@@ -456,7 +486,7 @@ strong.text-lg {
 
 .post_content {
     color: #323232;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 400;
     line-height: 18px;
     width: 100%;
@@ -560,7 +590,7 @@ img.like_img {
 
 .user_name_post strong {
     font-weight: 700;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .post .fa-ellipsis-vertical {
@@ -575,11 +605,12 @@ img.like_img {
 
 .ai_search_bar {
     border: none;
-    width: 72%;
+    width: 80%;
 }
 
 .ai_search_bar::placeholder {
     color: #999999;
+    opacity: 0.7;
     font-size: 18px;
     font-weight: 400;
     font-family: 'Lato' !important;
@@ -602,10 +633,9 @@ img.like_img {
     border-radius: 15px;
     color: #545454;
     background-color: #E7ECEF;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 400;
     font-family: 'Lato' !important;
-
 }
 
 .post .user_name_post p {
@@ -663,7 +693,7 @@ img.user_img {
 }
 
 .activity .trending_link {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     color: #1B1919;
     line-height: 18px;
@@ -697,7 +727,7 @@ img.user_img {
 }
 
 .saved_items_main_div a strong {
-    font-size: 14px !important;
+    font-size: 13px !important;
     font-weight: 500 !important;
     color: #1b1b1b !important;
 }
@@ -711,7 +741,7 @@ img.user_img {
 .left_sidebar {
     position: fixed;
     height: 100%;
-    width: 265px;
+    width: 17%;
     overflow-y: auto;
 }
 
@@ -727,7 +757,7 @@ img.user_img {
 .right_sidebar {
     position: fixed;
     height: 100%;
-    width: 265px;
+    width: 17%;
     overflow-y: auto;
 }
 
@@ -737,13 +767,13 @@ img.user_img {
 }
 
 .right_sidebar .sidebar_footer_quick_links a {
-    font-size: 13px;
+    font-size: 11px;
     color: #535353;
 }
 
 .side_footer_mln_text {
     font-family: 'Proxima Nova';
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
     line-height: 19px;
     color: #535353;
@@ -765,14 +795,31 @@ img.user_img {
     padding-left: 6px;
 }
 
+img.icon_language {
+    width: 78px;
+}
+
+.header_drishti .user_name_post p {
+    font-size: 10px;
+}
+
+.header_drishti .user_img {
+    width: 50px !important;
+}
+
+a.logout {
+    position: absolute;
+    bottom: 30px; 
+}
+
 .maple_footer_text {
     font-size: 11px;
-    font-weight: 400;
+    font-weight: 500;
     color: #535353;
     font-family: 'helvetica' !important;
     width: 100%;
     display: block;
-    margin-top: 0px !important;
+    margin-top: 15px !important;
 }
 
 .sidebar_footer_quick_links .list-group-item {
