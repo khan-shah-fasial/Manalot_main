@@ -9,13 +9,17 @@
 @section('page.content')
 
 <style>
-    
+    @media screen and (min-width: 1200px) {
+        .container, .container-lg, .container-md, .container-sm, .container-xl {
+            max-width: 1270px;
+        }
+    }
 </style>
 
     <section class="pb-5 mt80" style="background-color: #e7ecef">
         <div class="container-lg container-fluid">
             <div class="row">
-                <div class="col-md-3 mt-4 pb-md-5 pb-3 order-md-1 order-3 right_sidebar_parent_div">
+                <div class="col-md-3 mt-4 pb-md-5 pb-3 order-md-1 order-3 right_sidebar_parent_div width_20">
                     <aside class="right_sidebar">
                         
                             <div class="activity helvetica_font">
@@ -123,13 +127,13 @@
                             <img class="icon_language" src="/assets/images/footer_english_filter.png">
                             <i class="fa fa-caret-down"></i>
                         </div>
-                        <strong class="mt-2 text-center maple_footer_text">Maple Consulting & Services &copy; 2021</strong>
+                        <strong class="text-center maple_footer_text">Maple Consulting & Services &copy; 2021</strong>
                         <div class="py-5 my-5 d-md-block d-none"></div>
                         
                     </aside>
                 </div>
                 
-                <div class="col-md-6 mt-4 order-md-2 order-1 middle_post_parent_div">
+                <div class="col-md-6 mt-4 order-md-2 order-1 middle_post_parent_div width_60">
                     <main>
                         {{-- @if(auth()->user()->role_id == 1)
                             <form class="post_form">
@@ -284,6 +288,9 @@
                                     </div>
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </div>
+                                <a class="saved_clip" href="">
+                                    <img class="saved_clip_img" src="/assets/images/grey_saved_icon.svg">
+                                </a>
                             </div>
                             <div class="mt-md-3 post_description">
                                 <p class="post_content">
@@ -402,7 +409,7 @@
                     </main>
                 </div>
 
-                <div class="col-md-3 mt-4 pb-md-5 order-md-3 order-2 left_sidebar_parent_div">
+                <div class="col-md-3 mt-4 pb-md-5 order-md-3 order-2 left_sidebar_parent_div width_20">
                     <aside class="left_sidebar">
                         {{-- <div class="profile">
                             <img class="img-fluid" src="/assets/images/bg-avatar.jpg" alt="" />

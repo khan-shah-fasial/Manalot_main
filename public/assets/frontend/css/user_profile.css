@@ -14,14 +14,15 @@ body
     border-radius: 50px 50px 50px 50px;
     margin-top: 137px;
 }
-/* .container {
-    max-width: 900px;
-} */
+
+.profile-page .container, .profile-page .container-lg{
+    max-width: 1270px;
+}
 
 .profile-content h3 {
     padding-top: 45px;
-    font-weight: 700;
-    font-size: 32px;
+    font-weight: 600;
+    font-size: 28px;
     color: #1B1919;
 }
 
@@ -33,14 +34,14 @@ body
 }
 
 .profile-content span {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 400;
     color: #535353;
 }
 
 .profile-page .profile-content a {
-    font-weight: 700 !important;
-    font-size: 15px;
+    font-weight: 500 !important;
+    font-size: 14px;
     border-radius: 13px;
 }
 
@@ -88,8 +89,8 @@ p.bg_verified_text {
 }
 
 .bg_verified_bold_text {
-    font-size: 18px;
-    font-weight: 400; 
+    font-size: 16px;
+    font-weight: 400;
     color: #1B1919;
 }
 
@@ -115,7 +116,7 @@ p.bg_verified_text {
 .profile-page p {
     font-weight: 400;
     color: #535353;
-    font-size: 15px;
+    font-size: 13px;
     line-height: 18px;
 }
 
@@ -151,12 +152,7 @@ padding-right: 5px;
 /* width: 90%; */
 }
 
-.mngmnt_school span, .profile_manalot_div span {
-font-size: 15px;
-font-weight: 400;
-color: #535353;
-line-height: 18px;
-}
+.mngmnt_school span, .profile_manalot_div span {font-size: 13px;font-weight: 400;color: #535353;line-height: 18px;}
 
 img.profile_study_logo {
 width: 40px;
@@ -164,6 +160,7 @@ width: 40px;
 
 .telegram_icon {
     padding: 0px 5px 3px 0px;
+    width: 18px;
 }
 
 /* .profile_btn .fa.fa-telegram::before {
@@ -177,15 +174,15 @@ color: #535353;
 
 .profile_btn.connect_btn, .golden_btn.message_btn {
     border-radius: 15px !important;
-    padding: 8px 24px 8px 24px !important;
+    padding: 7px 14px 7px 14px !important;
 }
 
 .golden_btn.message_btn {
-    padding: 8px 17px 8px 17px !important;
+    padding: 7px 14px 7px 14px !important;
 }
 
 .profile_view_btn {
-    gap: 40px;
+    gap: 20px;
 }
 
 .info-section {
@@ -200,11 +197,11 @@ img.user_icon {
 object-fit: contain;
 }
 
-.about_heading {margin-bottom: 0px;color: #AE446A;font-size: 24px;font-weight: 600;}
+.about_heading {margin-bottom: 0px;color: #AE446A;font-size: 20px;font-weight: 600;}
 
 .profile-information h5 {
     font-weight: 600;
-    font-size: 20px;
+    font-size: 17px;
 }
 
 .personal_info .fa {
@@ -225,6 +222,11 @@ object-fit: contain;
     width: 60px;
 }
 
+.education_certification_logo {
+    border: 1px solid #cdd6db;
+    border-radius: 50px;
+}
+
 .bold_see_more {
     font-weight: 700;
 }
@@ -238,7 +240,7 @@ object-fit: contain;
 }
 
 .work_exp .skills_main_div_heading, .work_exp .industry_main_div {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 600;
     color: #535353;
 }
@@ -278,7 +280,7 @@ a.visit_mln {
     margin-bottom: 20px;
     text-decoration: none;
     color: #535353;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .education_main_div .col-md-6 img {
@@ -312,7 +314,7 @@ span.user_yes {
 .maple_consluting {
     font-weight: 800;
     color: #535353;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .education_main_div, .work_exp {
