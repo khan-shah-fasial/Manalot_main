@@ -10,7 +10,7 @@
 <link href="https://fonts.cdnfonts.com/css/helvetica-neue-5" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/@dannymichel/proxima-nova@4.5.2/index.min.css" rel="stylesheet">
 <link rel="stylesheet" href="/assets/frontend/css/font-styles.css" >
-<link rel="stylesheet" href="/assets/frontend/css/style.css?v=1.1.8" />
+<link rel="stylesheet" href="/assets/frontend/css/style.css?v=1.1.9" />
 <link rel="stylesheet" href="/assets/frontend/css/user_profile.css?v=1.0.6" />
 <!-- <link rel="stylesheet" href="/assets/frontend/css/aos.css" /> -->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
