@@ -149,7 +149,7 @@
                     </div>                    
 					<a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
-                            <img src="/assets/images/crown_icon.svg" alt="Notification icon" />
+                            <img src="/assets/images/crown_icon2.svg" alt="Notification icon" />
                         </div>
                         <span>Manalotians</span>
                     </a>

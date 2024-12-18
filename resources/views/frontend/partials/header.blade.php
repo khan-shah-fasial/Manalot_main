@@ -111,7 +111,7 @@
                     </div>                    
 					<a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
-                            <img src="/assets/images/crown_icon.svg" alt="Notification icon" />
+                            <img src="/assets/images/crown_icon2.svg" alt="Notification icon" />
                         </div>
                         <span>Manalotians</span>
                     </a>
@@ -165,32 +165,32 @@
                 <div class="col-md-6 col-8 d-flex justify-content-end align-items-center user_header_right">
                     <a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
-                            <img src="/assets/images/home_icon.png" alt="home icon" />
+                            <img src="/assets/images/home_icon2.svg" alt="home icon" />
                         </div>
                     </a>
                     <a href="{{ url(route('about-us')) }}" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
                         <div>
-                            <img src="/assets/images/people_icon.png" alt="people icon" />
+                            <img src="/assets/images/people_icon.svg" alt="people icon" />
                         </div>
                     </a>
                     <a href="" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
                         <div>
-                            <img src="/assets/images/suitcase_icon2.png" alt="suitcase icon" />
+                            <img src="/assets/images/suitcase_icon2.svg" alt="suitcase icon" />
                         </div>
                     </a>
                     <a href="{{ url(route('help-center')) }}" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
                         <div>
-                            <img src="/assets/images/chats_icon.png" alt="message icon" />
+                            <img src="/assets/images/chats_icon.svg" alt="message icon" />
                         </div>
                     </a>
                     <a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
-                            <img src="/assets/images/notification_icon.png" alt="Notification icon" />
+                            <img src="/assets/images/notification_icon.svg" alt="Notification icon" />
                         </div>
                     </a>
 					<a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
-                            <img src="/assets/images/crown_icon.png" alt="Notification icon" />
+                            <img src="/assets/images/crown_icon2.svg" alt="Notification icon" />
                         </div>
                     </a>
                     <div class="notification_box" style="display:none">

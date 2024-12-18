@@ -517,22 +517,22 @@
 
                         <div class="saved_items_main_div activity helvetica_font">
                             <a href="" class="d-flex gap-3">
-                                <img src="/assets/images/saved_icon.png" alt="icon" class="icon">
+                                <img src="/assets/images/saved_icon.svg" alt="icon" class="icon">
                                 <strong class="text-sm">Saved items</strong>
                             </a>
 
                             <a href="" class="d-flex gap-3">
-                                <img src="/assets/images/group_icon.png" alt="icon" class="icon">
+                                <img src="/assets/images/group_icon.svg" alt="icon" class="icon">
                                 <strong class="text-sm">Groups</strong>
                             </a>
 
                             <a href="" class="d-flex gap-3">
-                                <img src="/assets/images/letter_icon.png" alt="icon" class="icon">
+                                <img src="/assets/images/letter_icon.svg" alt="icon" class="icon">
                                 <strong class="text-sm">Newsletters</strong>
                             </a>
 
                             <a href="" class="d-flex gap-3">
-                                <img src="/assets/images/update_icon.png" alt="icon" class="icon">
+                                <img src="/assets/images/update_icon.svg" alt="icon" class="icon">
                                 <strong class="text-sm">Updates</strong>
                             </a>
 
