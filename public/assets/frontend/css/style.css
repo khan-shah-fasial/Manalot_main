@@ -364,7 +364,7 @@ a.logout {
 }
 
 a.logout:hover {
-   background-color: #fff;
+   background-color: #fff !important;
 }
 
 .dropdown-content .user_name {
@@ -379,6 +379,7 @@ a.logout:hover {
     text-align: center;
     font: 400 12px 'Proxima Nova';
     margin-top: 15px;
+    color: #545454 !important;
 }
 
 .view_profile_btn:hover {
