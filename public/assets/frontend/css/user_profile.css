@@ -34,7 +34,7 @@ body
 }
 
 .profile-content span {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 400;
     color: #535353;
 }
@@ -116,7 +116,7 @@ p.bg_verified_text {
 .profile-page p {
     font-weight: 400;
     color: #535353;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 18px;
 }
 
@@ -152,7 +152,7 @@ padding-right: 5px;
 /* width: 90%; */
 }
 
-.mngmnt_school span, .profile_manalot_div span {font-size: 13px;font-weight: 400;color: #535353;line-height: 18px;}
+.mngmnt_school span, .profile_manalot_div span {font-size: 14px;font-weight: 400;color: #535353;line-height: 18px;}
 
 img.profile_study_logo {
 width: 40px;
@@ -191,7 +191,7 @@ display: flex;
 
 .personal_info_div {display: flex;flex-direction: column;flex-wrap: nowrap;gap: 5px;}
 
-.about_heading_div {display: flex;gap: 20px;align-items: center;margin-bottom: 25px;}
+.about_heading_div {display: flex;gap: 22px;align-items: center;margin-bottom: 25px;}
 
 img.user_icon {
 object-fit: contain;

@@ -341,7 +341,7 @@ strong.text-lg {
 
 .header_drishti .dropdown-content {
     border-radius: 50px;
-    width: 200px;
+    width: 221px;
     height: 311px;
     padding: 0px;
     background-color: #ffffff;
@@ -350,7 +350,7 @@ strong.text-lg {
 
 
 .view_profile_child_1 {
-    padding: 12px 17px;
+    padding: 24px 17px 12px;
     height: 222px;
 }
 
@@ -720,7 +720,7 @@ img.user_img {
 }
 
 .activity .trending_link {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     color: #1B1919;
     line-height: 18px;
@@ -803,7 +803,7 @@ img.user_img {
     font-size: 14px;
     font-weight: 700;
     line-height: 19px;
-    color: #535353;
+    color: #505050;
 }
 
 .sidebar_footer_div {
