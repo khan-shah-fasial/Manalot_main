@@ -334,6 +334,7 @@ strong.text-lg {
     position: absolute;
     left: -10px;
     top: 37px;
+    cursor: pointer;
 }
 
 .dropdown-content {
