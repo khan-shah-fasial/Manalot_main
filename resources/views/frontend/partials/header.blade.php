@@ -130,6 +130,9 @@
                                     </div>
                                 </div>
                                 <a class="view_profile_btn" href="">View Profile</a>
+                                <a href="" class="view_profile_quick_menu">Setting & Privacy</a>
+                                <a href="" class="view_profile_quick_menu">Help</a>
+                                <a href="" class="view_profile_quick_menu">Language</a>
                             </div>
                             <hr>
                             <a href="{{ url(route('customer.logout')) }}" class="logout">Sign Out</a>
