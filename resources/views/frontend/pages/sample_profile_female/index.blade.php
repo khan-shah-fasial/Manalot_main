@@ -15,6 +15,14 @@
 	.profile-page a:hover {
 		color: #535353;
 	} 
+	
+	.profile-page .container {
+    width: 86%;
+	}
+
+	.header .container-lg {
+		width: 89.7% !important;
+	}
 </style>
 
 

@@ -292,11 +292,11 @@ strong.text-lg {
 }
 
 .width_20 {
-    width: 19% !important;
+    width: 22% !important;
 }
 
 .width_60 {
-    width: 62% !important;
+    width: 55% !important;
 }
 
 .search_input input {
@@ -340,12 +340,13 @@ strong.text-lg {
 }
 
 .header_drishti .dropdown-content {
-    border-radius: 50px;
-    width: 221px;
-    height: 311px;
+     border-radius: 50px;
+    width: 200px;
+    height: 283px;
     padding: 0px;
     background-color: #ffffff;
     top: 90px;
+    margin-right: 10px;
 }
 
 
@@ -526,106 +527,12 @@ a.logout:hover {
 
 .post_content {
     color: #323232;
-    font-size: 14px;
+    font-size: 14.2px;
     font-weight: 400;
     line-height: 18px;
     width: 100%;
     margin-bottom: 20px;
     /* font-family: 'Proxima Nova Extra Condensed', sans-serif; */
-}
-
-.post_modal {
-    /* border-radius: 50px !important; */
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
-}
-
-.post_modal .modal-dialog {
-    display: flex;
-    align-items: center;
-    height: 100vh;
-    margin: 0px auto;
-    width: 100%;
-    max-width: 52%;
-}
-
-.post_modal .modal-content {
-    border-radius: 50px;
-    padding: 26px 40px;
-}
-
-.post_modal .modal-header, .post_modal .modal-footer {
-    border: 0px;
-    padding: 0px;
-}
-
-.post_modal button.btn-close {
-    position: relative;
-    background-size: 50%;
-    margin-top: -5px;
-}
-
-.post_modal .modal-header {
-    align-items: start;
-    padding-top: 12px;
-}
-
-img.caret_down_img {
-    padding-left: 6px;
-    width: 17px;
-}
-
-.post_modal .modal-body {
-    padding: 16px 0px 0px 0px;
-}
-
-.post_modal textarea {
-    border-bottom: 0px !important;
-}
-
-.post_modal textarea::placeholder {
-    font: 400 18px 'Proxima Nova';
-    color: #535353;
-}
-
-.post_modal .action-icons {
-    width: 100%;
-    border-bottom: 1px solid #E7ECEF;
-    margin-bottom: 14px;
-    padding-bottom: 14px;
-}
-
-.post_modal .post_btn.ai_search_btn {
-    width: 85px !important;
-    padding: 3px 15px;
-}
-
-.post_modal .post_modal_img_btn {
-    border: 0px !important;
-    background: transparent;
-    margin: 0px 13px;
-    padding: 0px;
-}
-
-.post_modal button.post_modal_img_btn.ai_search_btn {
-    width: 140px; 
-    font: 600 11px 'Proxima Nova';
-    padding: 9px 15px 9px 20px !important;
-    text-align: left;
-    margin-right: 30px;
-    margin-left: 0px;
-    background: #E7ECEF url('/assets/images/ai_stars.png') no-repeat right 10px center;
-    background-size: 20px 20px;  
-}
-
-img.post_modal_icon_img {
-    width: 18px;
-}
-
-.post_modal .ai_search_btn.post_modal_btn {
-    width: 85px;
-    font-size: 13px;
 }
 
 .like_comnt_list_item {
@@ -739,7 +646,7 @@ img.like_img {
 
 .ai_search_bar {
     border: none;
-    width: 80%;
+    width: 78%;
 }
 
 .ai_search_bar::placeholder {
@@ -827,7 +734,7 @@ img.user_img {
 }
 
 .activity .trending_link {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
     color: #1B1919;
     line-height: 18px;
@@ -875,7 +782,7 @@ img.user_img {
 .left_sidebar {
     position: fixed;
     height: 100%;
-    width: 16%;
+    width: 18%;
     overflow-y: auto;
 }
 
@@ -891,7 +798,7 @@ img.user_img {
 .right_sidebar {
     position: fixed;
     height: 100%;
-    width: 16%;
+    width: 18%;
     overflow-y: auto;
 }
 
@@ -3727,4 +3634,14 @@ div#phone_otp_model .modal-footer {
     .right_sidebar, .left_sidebar { 
         width: 14%;
     }
+}
+
+header.d-flex.align-items-center.justify-content-between {
+    width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a.saved_clip img {
+    width: 20px;
 }
