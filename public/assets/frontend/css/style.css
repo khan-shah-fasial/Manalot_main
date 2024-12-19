@@ -534,6 +534,100 @@ a.logout:hover {
     /* font-family: 'Proxima Nova Extra Condensed', sans-serif; */
 }
 
+.post_modal {
+    /* border-radius: 50px !important; */
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+
+.post_modal .modal-dialog {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    margin: 0px auto;
+    width: 100%;
+    max-width: 52%;
+}
+
+.post_modal .modal-content {
+    border-radius: 50px;
+    padding: 26px 40px;
+}
+
+.post_modal .modal-header, .post_modal .modal-footer {
+    border: 0px;
+    padding: 0px;
+}
+
+.post_modal button.btn-close {
+    position: relative;
+    background-size: 50%;
+    margin-top: -5px;
+}
+
+.post_modal .modal-header {
+    align-items: start;
+    padding-top: 12px;
+}
+
+img.caret_down_img {
+    padding-left: 6px;
+    width: 17px;
+}
+
+.post_modal .modal-body {
+    padding: 16px 0px 0px 0px;
+}
+
+.post_modal textarea {
+    border-bottom: 0px !important;
+}
+
+.post_modal textarea::placeholder {
+    font: 400 18px 'Proxima Nova';
+    color: #535353;
+}
+
+.post_modal .action-icons {
+    width: 100%;
+    border-bottom: 1px solid #E7ECEF;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+}
+
+.post_modal .post_btn.ai_search_btn {
+    width: 85px !important;
+    padding: 3px 15px;
+}
+
+.post_modal .post_modal_img_btn {
+    border: 0px !important;
+    background: transparent;
+    margin: 0px 13px;
+    padding: 0px;
+}
+
+.post_modal button.post_modal_img_btn.ai_search_btn {
+    width: 140px; 
+    font: 600 11px 'Proxima Nova';
+    padding: 9px 15px 9px 20px !important;
+    text-align: left;
+    margin-right: 30px;
+    margin-left: 0px;
+    background: #E7ECEF url('/assets/images/ai_stars.png') no-repeat right 10px center;
+    background-size: 20px 20px;  
+}
+
+img.post_modal_icon_img {
+    width: 18px;
+}
+
+.post_modal .ai_search_btn.post_modal_btn {
+    width: 85px;
+    font-size: 13px;
+}
+
 .like_comnt_list_item {
     list-style: none;
 }
