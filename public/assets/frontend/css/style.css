@@ -15,7 +15,7 @@ body::-webkit-scrollbar {
 
 /* Style the scrollbar thumb */
 body::-webkit-scrollbar-thumb {
-    background: linear-gradient(34.89deg, #4B2779 8%, #BE2475 83.76%);
+    background: #999;
     /* Gradient color for the thumb */
     border-radius: 10px;
     /* Roundness of the scroll thumb */
@@ -319,13 +319,13 @@ strong.text-lg {
 }
 
 .search_input input {
-    background: #e7ecef url('/assets/images/search_santa.svg') no-repeat right 10px center;
-    background-size: 25px 25px; /* Adjust size of the image */
+    background: #e7ecef url('/assets/images/jingle_bell.svg') no-repeat right 0px center;
+    background-size: 65px 65px; /* Adjust size of the image */
 }
 
 .user_header .search_input button {
     background-color: #e7ecef;
-    padding: 9px 0px 10px 20px;
+    padding: 13px 0px 14px 20px;
     border-radius: 25px 0px 0px 25px;
 }
 
@@ -340,12 +340,12 @@ strong.text-lg {
 }
 
 .header_drishti .dropdown-content {
-     border-radius: 50px;
+    border-radius: 50px;
     width: 200px;
-    height: 283px;
+    height: 275px;
     padding: 0px;
     background-color: #ffffff;
-    top: 90px;
+    top: 96px;
     margin-right: 10px;
 }
 
@@ -362,10 +362,11 @@ a.logout {
     padding: 10px 20px 10px !important;
     font: 400 12px 'Lato' !important;
     color: #545454 !important;
+    border-top: 1px solid #e7ecef;
 }
 
 a.logout:hover {
-   background-color: #fff !important;
+   background-color: transparent !important;
 }
 
 .dropdown-content .user_name {
@@ -390,7 +391,7 @@ a.logout:hover {
 
 .view_profile_quick_menu {
     font: 400 12px 'Lato';
-    color: #545454;
+    color: #545454 !important;
     text-decoration: none;
     padding: 4px 5px !important; 
 }
@@ -447,8 +448,9 @@ a.logout:hover {
 }
 
 .user_header_right a img {
-    height: 25px;
+    height: auto;
     padding-bottom: 3px;
+    width: 35px;
 }
 
 .pt80 {
@@ -533,6 +535,94 @@ a.logout:hover {
     width: 100%;
     margin-bottom: 20px;
     /* font-family: 'Proxima Nova Extra Condensed', sans-serif; */
+}
+
+.post_modal .modal-dialog {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    margin: 0px auto;
+    width: 100%;
+    max-width: 52%;
+}
+
+.post_modal .modal-content {
+    border-radius: 50px;
+    padding: 26px 40px;
+}
+
+.post_modal .modal-header, .post_modal .modal-footer {
+    border: 0px;
+    padding: 0px;
+}
+
+.post_modal button.btn-close {
+    position: relative;
+    background-size: 50%;
+    margin-top: -5px;
+}
+
+.post_modal .modal-header {
+    align-items: start;
+    padding-top: 12px;
+}
+
+img.caret_down_img {
+    padding-left: 6px;
+    width: 17px;
+}
+
+.post_modal .modal-body {
+    padding: 16px 0px 0px 0px;
+}
+
+.post_modal textarea {
+    border-bottom: 0px !important;
+    font: 400 18px 'Proxima Nova';
+    height: 320px;
+}
+
+.post_modal textarea::placeholder {
+    font: 400 18px 'Proxima Nova';
+    color: #535353;
+}
+
+.post_modal .action-icons {
+    width: 100%;
+    border-bottom: 1px solid #E7ECEF;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+}
+
+.post_modal .post_btn.ai_search_btn {
+    width: 85px !important;
+    padding: 3px 15px;
+}
+
+.post_modal .post_modal_img_btn {
+    border: 0px !important;
+    background: transparent;
+    margin: 0px 13px;
+    padding: 0px;
+}
+
+.post_modal button.post_modal_img_btn.ai_search_btn {
+    width: 140px; 
+    font: 600 11px 'Proxima Nova';
+    padding: 9px 15px 9px 20px !important;
+    text-align: left;
+    margin-right: 30px;
+    margin-left: 0px;
+    background: #E7ECEF url('/assets/images/ai_stars.png') no-repeat right 10px center;
+    background-size: 20px 20px;  
+}
+img.post_modal_icon_img {
+    width: 18px;
+}
+
+.post_modal .ai_search_btn.post_modal_btn {
+    width: 85px;
+    font-size: 13px;
 }
 
 .like_comnt_list_item {
@@ -2977,7 +3067,11 @@ div#social_media_div {
     }
 
     .user_header .search_input button { 
-        padding: 8px 10px 9px 15px; 
+        padding: 14px 10px 14px 15px; 
+    }
+
+    .post_modal textarea {
+        height: 250px;
     }
 }
 
