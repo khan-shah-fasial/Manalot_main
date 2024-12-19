@@ -16,31 +16,31 @@
                 <div class="d-flex justify-content-end align-items-center user_header_right">
                     <a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
-                            <img src="/assets/images/home_icon2.svg" alt="home icon" />
+                            <img src="/assets/images/home_icon3.svg" alt="home icon" />
                         </div>
                         <span>Home</span>
                     </a>
                     <a href="{{ url(route('about-us')) }}" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
                         <div>
-                            <img src="/assets/images/people_icon.svg" alt="people icon" />
+                            <img src="/assets/images/people_icon3.svg" alt="people icon" />
                         </div>
                         <span>My Network</span>
                     </a>
                     <a href="" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
                         <div>
-                            <img src="/assets/images/suitcase_icon2.svg" alt="suitcase icon" />
+                            <img src="/assets/images/suitcase_icon3.svg" alt="suitcase icon" />
                         </div>
                         <span>Jobs</span>
                     </a>
                     <a href="{{ url(route('help-center')) }}" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
                         <div>
-                            <img src="/assets/images/chats_icon.svg" alt="message icon" />
+                            <img src="/assets/images/chats_icon3.svg" alt="message icon" />
                         </div>
                         <span>Messages</span>
                     </a>
                     <a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
-                            <img src="/assets/images/notification_icon.svg" alt="Notification icon" />
+                            <img src="/assets/images/notification_icon3.svg" alt="Notification icon" />
                         </div>
                         <span>Notification</span>
                     </a>
@@ -108,10 +108,75 @@
                                 </div>
                             </div>
                         </div>
-                    </div>                    
+                    </div>
+					<div class="notification_box" style="display:none">
+						<div class="notification_modal">
+							<div class="d-flex align-items-center justify-content-between">
+								<div class="d-flex gap-2 align-items-center">
+									<h3 class="mb-0 notifty_hed">Notification</h3>
+									<p class="mb-0 count_label">3</p>
+								</div>
+								<p class="mb-0 mark_read">Mark all as read</p>
+							</div>
+							<div class='mt-4 d-flex flex-column gap-2'>
+								<div class="item d-flex align-items-center justify-content-between">
+									<div class="d-flex align-items-center gap-2">
+										<img src="/assets/images/candinet1.png" alt="" />
+										<div>
+											<p class="mb-0">
+												<span class="username"> Manalot </span>
+												<span class="text-xs">Reacted on your Comment</span>
+											</p>
+											<p class="mb-0 text-xs">5m Ago</p>
+										</div>
+									</div>
+									<p class="dot"></p>
+								</div>
+								<div class="item d-flex align-items-center justify-content-between">
+									<div class="d-flex align-items-center gap-2">
+										<img src="/assets/images/candinet1.png" alt="" />
+										<div>
+											<p class="mb-0">
+												<span class="username"> Manalot </span>
+												<span class="text-xs">Reacted on your Comment</span>
+											</p>
+											<p class="mb-0 text-xs">5m Ago</p>
+										</div>
+									</div>
+									<p class="dot"></p>
+								</div>
+								<div class="item d-flex align-items-center justify-content-between">
+									<div class="d-flex align-items-center gap-2">
+										<img src="/assets/images/candinet1.png" alt="" />
+										<div>
+											<p class="mb-0">
+												<span class="username"> Manalot </span>
+												<span class="text-xs">Reacted on your Comment</span>
+											</p>
+											<p class="mb-0 text-xs">5m Ago</p>
+										</div>
+									</div>
+									<p class="dot"></p>
+								</div>
+								<div class="item d-flex align-items-center justify-content-between">
+									<div class="d-flex align-items-center gap-2">
+										<img src="/assets/images/candinet1.png" alt="" />
+										<div>
+											<p class="mb-0">
+												<span class="username"> Manalot </span>
+												<span class="text-xs">Reacted on your Comment</span>
+											</p>
+											<p class="mb-0 text-xs">5m Ago</p>
+										</div>
+									</div>
+									<p class="dot"></p>
+								</div>
+							</div>
+						</div>
+					</div> 						                    
 					<a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
-                            <img src="/assets/images/crown_icon2.svg" alt="Notification icon" />
+                            <img src="/assets/images/crown_icon3.svg" alt="Notification icon" />
                         </div>
                         <span>Manalotians</span>
                     </a>
@@ -129,12 +194,11 @@
                                         </p>
                                     </div>
                                 </div>
-                                <a class="view_profile_btn" href="">View Profile</a>
+                                <a class="view_profile_btn" href="/sample-profile">View Profile</a>
                                 <a href="" class="view_profile_quick_menu">Setting & Privacy</a>
                                 <a href="" class="view_profile_quick_menu">Help</a>
                                 <a href="" class="view_profile_quick_menu">Language</a>
-                            </div>
-                            <hr>
+                            </div> 
                             <a href="{{ url(route('customer.logout')) }}" class="logout">Sign Out</a>
                         </div>
                     </div>

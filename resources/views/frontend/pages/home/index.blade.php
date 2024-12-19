@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('page.title', 'Manolat')
+@section('page.title', 'Manalot')
 
 @section('page.description', '')
 
@@ -194,7 +194,7 @@
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </div>
                                 <a class="saved_clip" href="">
-                                    <img class="saved_clip_img" src="/assets/images/grey_saved_icon.svg">
+                                    <img class="saved_clip_img" src="/assets/images/saved_icon.svg">
                                 </a>
                             </div>
                             <div class="mt-md-3 post_description">
@@ -237,7 +237,7 @@
                                     <li class="like_comnt_list_item">
                                         <a class="like_comnt_link" href="">
                                             <span class="like_text">
-                                                <img class="like_img" src="/assets/images/like_icon.png">
+                                                <img class="like_img" src="/assets/images/like_icon.svg">
                                                 Like
                                             </span>
                                         </a>
@@ -245,7 +245,7 @@
                                     <li class="like_comnt_list_item">
                                         <a class="like_comnt_link" href="">
                                             <span class="comment_text">
-                                                <img class="comment_img" src="/assets/images/comnt_icon.png">
+                                                <img class="comment_img" src="/assets/images/comnt_icon.svg">
                                                 Comment
                                             </span>
                                         </a>
@@ -253,7 +253,7 @@
                                     <li class="like_comnt_list_item">
                                         <a class="like_comnt_link" href="">
                                             <span class="share_text">
-                                                <img class="share_img" src="/assets/images/share_icon.png">
+                                                <img class="share_img" src="/assets/images/share_icon.svg">
                                                 Share
                                             </span>
                                         </a>
@@ -261,7 +261,7 @@
                                     <li class="like_comnt_list_item">
                                         <a class="like_comnt_link" href="">
                                             <span class="send_text">
-                                                <img class="send_img" src="/assets/images/send_icon.png">
+                                                <img class="send_img" src="/assets/images/send_icon.svg">
                                                 Apply Now
                                             </span>
                                         </a>
@@ -332,7 +332,7 @@
                                     <li class="like_comnt_list_item">
                                         <a class="like_comnt_link" href="">
                                             <span class="like_text">
-                                                <img class="like_img" src="/assets/images/like_icon.png">
+                                                <img class="like_img" src="/assets/images/like_icon.svg">
                                                 Like
                                             </span>
                                         </a>
@@ -340,7 +340,7 @@
                                     <li class="like_comnt_list_item">
                                         <a class="like_comnt_link" href="">
                                             <span class="comment_text">
-                                                <img class="comment_img" src="/assets/images/comnt_icon.png">
+                                                <img class="comment_img" src="/assets/images/comnt_icon.svg">
                                                 Comment
                                             </span>
                                         </a>
@@ -348,7 +348,7 @@
                                     <li class="like_comnt_list_item">
                                         <a class="like_comnt_link" href="">
                                             <span class="share_text">
-                                                <img class="share_img" src="/assets/images/share_icon.png">
+                                                <img class="share_img" src="/assets/images/share_icon.svg">
                                                 Share
                                             </span>
                                         </a>
@@ -356,7 +356,7 @@
                                     <li class="like_comnt_list_item">
                                         <a class="like_comnt_link" href="">
                                             <span class="send_text">
-                                                <img class="send_img" src="/assets/images/send_icon.png">
+                                                <img class="send_img" src="/assets/images/send_icon.svg">
                                                 Apply Now
                                             </span>
                                         </a>
@@ -567,7 +567,7 @@
             </div>
             <!-- Modal Body -->
             <div class="modal-body">
-                <textarea class="form-control" rows="13" placeholder="What do you want to talk about?"></textarea>
+                <textarea class="form-control" rows="4" placeholder="What do you want to talk about?"></textarea>
             </div>
             <!-- Modal Footer -->
             <div class="modal-footer d-flex justify-content-end">

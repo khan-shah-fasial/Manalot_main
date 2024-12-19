@@ -15,7 +15,7 @@ body::-webkit-scrollbar {
 
 /* Style the scrollbar thumb */
 body::-webkit-scrollbar-thumb {
-    background: linear-gradient(34.89deg, #4B2779 8%, #BE2475 83.76%);
+    background: #999;
     /* Gradient color for the thumb */
     border-radius: 10px;
     /* Roundness of the scroll thumb */
@@ -292,11 +292,11 @@ strong.text-lg {
 }
 
 .width_20 {
-    width: 19% !important;
+    width: 22% !important;
 }
 
 .width_60 {
-    width: 62% !important;
+    width: 55% !important;
 }
 
 .search_input input {
@@ -319,13 +319,13 @@ strong.text-lg {
 }
 
 .search_input input {
-    background: #e7ecef url('/assets/images/search_santa.svg') no-repeat right 10px center;
-    background-size: 25px 25px; /* Adjust size of the image */
+    background: #e7ecef url('/assets/images/jingle_bell.svg') no-repeat right 0px center;
+    background-size: 65px 65px; /* Adjust size of the image */
 }
 
 .user_header .search_input button {
     background-color: #e7ecef;
-    padding: 9px 0px 10px 20px;
+    padding: 13px 0px 14px 20px;
     border-radius: 25px 0px 0px 25px;
 }
 
@@ -341,11 +341,12 @@ strong.text-lg {
 
 .header_drishti .dropdown-content {
     border-radius: 50px;
-    width: 221px;
-    height: 311px;
+    width: 200px;
+    height: 275px;
     padding: 0px;
     background-color: #ffffff;
-    top: 90px;
+    top: 96px;
+    margin-right: 10px;
 }
 
 
@@ -361,10 +362,11 @@ a.logout {
     padding: 10px 20px 10px !important;
     font: 400 12px 'Lato' !important;
     color: #545454 !important;
+    border-top: 1px solid #e7ecef;
 }
 
 a.logout:hover {
-   background-color: #fff !important;
+   background-color: transparent !important;
 }
 
 .dropdown-content .user_name {
@@ -389,7 +391,7 @@ a.logout:hover {
 
 .view_profile_quick_menu {
     font: 400 12px 'Lato';
-    color: #545454;
+    color: #545454 !important;
     text-decoration: none;
     padding: 4px 5px !important; 
 }
@@ -446,8 +448,9 @@ a.logout:hover {
 }
 
 .user_header_right a img {
-    height: 25px;
+    height: auto;
     padding-bottom: 3px;
+    width: 35px;
 }
 
 .pt80 {
@@ -526,19 +529,12 @@ a.logout:hover {
 
 .post_content {
     color: #323232;
-    font-size: 14px;
+    font-size: 14.2px;
     font-weight: 400;
     line-height: 18px;
     width: 100%;
     margin-bottom: 20px;
     /* font-family: 'Proxima Nova Extra Condensed', sans-serif; */
-}
-
-.post_modal {
-    /* border-radius: 50px !important; */
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
 }
 
 .post_modal .modal-dialog {
@@ -582,6 +578,8 @@ img.caret_down_img {
 
 .post_modal textarea {
     border-bottom: 0px !important;
+    font: 400 18px 'Proxima Nova';
+    height: 320px;
 }
 
 .post_modal textarea::placeholder {
@@ -618,7 +616,6 @@ img.caret_down_img {
     background: #E7ECEF url('/assets/images/ai_stars.png') no-repeat right 10px center;
     background-size: 20px 20px;  
 }
-
 img.post_modal_icon_img {
     width: 18px;
 }
@@ -739,7 +736,7 @@ img.like_img {
 
 .ai_search_bar {
     border: none;
-    width: 80%;
+    width: 78%;
 }
 
 .ai_search_bar::placeholder {
@@ -827,7 +824,7 @@ img.user_img {
 }
 
 .activity .trending_link {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
     color: #1B1919;
     line-height: 18px;
@@ -875,7 +872,7 @@ img.user_img {
 .left_sidebar {
     position: fixed;
     height: 100%;
-    width: 16%;
+    width: 18%;
     overflow-y: auto;
 }
 
@@ -891,7 +888,7 @@ img.user_img {
 .right_sidebar {
     position: fixed;
     height: 100%;
-    width: 16%;
+    width: 18%;
     overflow-y: auto;
 }
 
@@ -3070,7 +3067,11 @@ div#social_media_div {
     }
 
     .user_header .search_input button { 
-        padding: 8px 10px 9px 15px; 
+        padding: 14px 10px 14px 15px; 
+    }
+
+    .post_modal textarea {
+        height: 250px;
     }
 }
 
@@ -3727,4 +3728,14 @@ div#phone_otp_model .modal-footer {
     .right_sidebar, .left_sidebar { 
         width: 14%;
     }
+}
+
+header.d-flex.align-items-center.justify-content-between {
+    width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a.saved_clip img {
+    width: 20px;
 }
