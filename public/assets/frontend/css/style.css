@@ -1085,6 +1085,10 @@ img.user_img {
     text-align: center;
 }
 
+.sidebar_footer_div a:hover {
+    color: inherit !important;
+}
+
 .language_translator {
     text-align: center;
     width: 133px;
