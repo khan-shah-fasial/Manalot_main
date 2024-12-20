@@ -803,10 +803,11 @@ img.like_img {
 
 .personal_information aside.left_sidebar a.list-group-item {
     border: 0px;
-    padding: 12px 0px;
+    margin: 14px 0px;
     background: transparent;
     font: 600 12px 'Helvetica' !important;
     color: #545454;
+    padding: 0px;
 }
 
 .personal_information .left_sidebar a.list-group-item:hover,
