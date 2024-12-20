@@ -17,11 +17,15 @@
 	} 
 	
 	.profile-page .container {
-    width: 86%;
+    	width: 86%;
 	}
 
 	.header .container-lg {
 		width: 89.7% !important;
+	}
+
+	header.d-flex.align-items-center.justify-content-between {
+		width: 96%;
 	}
 </style>
 

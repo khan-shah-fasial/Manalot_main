@@ -53,6 +53,14 @@
     function openDatePicker() {
         document.getElementById('Date').click();
     }
+
+    function openDatePicker() {
+        document.getElementById('Date2').click();
+    }
+
+    function openDatePicker() {
+        document.getElementById('date_obtained').click();
+    }
 </script>
 
 <script>

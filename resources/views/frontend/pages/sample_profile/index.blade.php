@@ -23,6 +23,10 @@
 	.header .container-lg {
 		width: 89.7% !important;
 	}
+	
+	header.d-flex.align-items-center.justify-content-between {
+		width: 96%;
+	}
 </style>
 
 

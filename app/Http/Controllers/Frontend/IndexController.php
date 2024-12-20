@@ -208,6 +208,10 @@ class IndexController extends Controller
         return view('frontend.pages.sample_profile_female.index');
     }
 
+    public function personal_information(){
+        return view('frontend.pages.personal_information.index');
+    }
+
 
     public function refund_policy(){
         return view('frontend.pages.refund_policy.index');
