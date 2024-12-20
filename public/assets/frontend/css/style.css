@@ -296,7 +296,7 @@ strong.text-lg {
 }
 
 .width_60 {
-    width: 55% !important;
+    width: 56% !important;
 }
 
 .search_input input {
@@ -317,13 +317,17 @@ strong.text-lg {
 
 .search_input input {
     background: #e7ecef url('/assets/images/jingle_bell.svg') no-repeat right 0px center;
-    background-size: 65px 65px; /* Adjust size of the image */
+    background-size: 55px 55px; /* Adjust size of the image */
 }
 
 .user_header .search_input button {
     background-color: #e7ecef;
     padding: 12px 0px 12px 20px;
     border-radius: 25px 0px 0px 25px;
+}
+
+.profile-page .user_header .search_input button { 
+    padding: 8px 0px 8px 20px;
 }
 
 .user_header .search_input button i {
@@ -540,8 +544,8 @@ a.logout:hover {
     height: 100vh;
     margin: 0px auto;
     width: 100%;
-    max-width: 54%;
-    right: 9px;
+    max-width: 55%;
+    right: 3px;
     position: relative;
 }
 
@@ -777,6 +781,168 @@ img.like_img {
 .post .user_name_post p {
     font-size: 10px;
     font-weight: 600;
+}
+
+.manage_network {
+    font: 600 16px 'Helvetica';
+    color: #1B1919;
+    text-transform: capitalize;
+    margin-bottom: 15px;
+}
+
+.personal_information aside.left_sidebar .list-group {
+    border-radius: 50px;
+    padding: 30px 38px;
+    background: #fff;
+    height: 80vh;
+}
+
+.personal_information .nav-tabs {
+    border-bottom: 0px solid #dee2e6;
+}
+
+.personal_information aside.left_sidebar a.list-group-item {
+    border: 0px;
+    padding: 12px 0px;
+    background: transparent;
+    font: 600 12px 'Helvetica' !important;
+    color: #545454;
+}
+
+.personal_information .left_sidebar a.list-group-item:hover,
+.personal_information .left_sidebar a.list-group-item.active{
+    color: #901D56 !important;
+}
+
+.personal_info_left_list_icon {
+    padding-right: 8px;
+    filter: grayscale(0.9);
+}
+
+.personal_information .left_sidebar a.list-group-item:hover .personal_info_left_list_icon,
+.personal_information .left_sidebar a.list-group-item.active .personal_info_left_list_icon{
+    filter: grayscale(0);
+}
+
+.personal_information .left_sidebar {
+    width: 19%;
+}
+
+.personal_information .main_parent_div {
+    width: 78%;
+}
+
+.personal_information .main_parent_div main {
+    background: #fff;
+    border-radius: 50px;
+    padding: 48px 165px 48px 50px;
+}
+
+.prsnl_info_heading {
+    font: 400 22px 'Proxima nova';
+    color: #901D56;
+    margin-bottom: 40px;
+}
+
+.personal_information form label {
+    font: 400 14px 'Proxima nova';
+}
+
+.personal_information form input,
+.personal_information form textarea,
+.personal_information form select,
+.personal_information form input::placeholder,
+.personal_information form textarea::placeholder,
+.personal_information form select::placeholder {
+    font: 600 14px/19px 'Proxima nova' !important;
+    padding-left: 0px !important; 
+}
+
+.personal_information form textarea,
+.personal_information form select,
+.personal_information form textarea::placeholder,
+.personal_information form select::placeholder  {
+    font-weight: 400 !important;
+}
+
+/* .personal_information form input[type=file] {
+    padding-top: 12px !important;
+} */
+
+.personal_information input[type="date"] {
+    height: 32px;
+}
+
+.personal_information form select {
+    border: 0px !important;
+    border-bottom: 1px solid #ccc !important;
+    cursor: pointer;
+    border-radius: 0px;
+    font-weight: 600 !important;
+    color: #535353 !important;
+}
+
+/* .personal_information form input[type="date"]::before {
+    content: attr(placeholder);
+    position: absolute;
+    color: #535353;
+}
+
+.personal_information form input[type="date"] {
+    color: #fff !important;
+} */
+
+.personal_information form select:focus{
+    box-shadow: inherit !important;
+}
+
+.personal_information .main_parent_div form .col-md-4,
+.personal_information .main_parent_div form .col-md-6,
+.personal_information .main_parent_div form .col-md-12 {
+    margin-bottom: 30px;
+}
+
+.prsnl_inf_updt_btn {
+    width: 87px;
+    text-align: center;
+    padding: 6px 10px 7px 10px !important;
+    font: 600 14px 'Proxima Nova' !important;
+    letter-spacing: 0.6px;
+}
+
+.choose_img_file {
+    background-image: url('/assets/images/chooe_img_icon.svg') !important;
+}
+
+.add_more, .add_more:hover {
+    color: #901D56;
+    font: 600 13px 'Proxima Nova' !important;
+}
+
+.add_more_div {
+    margin-top: -10px !important;
+}
+
+#personal_info_facebook{
+    background: url('/assets/images/facebook_icon.svg');
+}
+
+#personal_info_instagram {
+    background: url('/assets/images/instagram_icon.svg');
+}
+
+#personal_info_twitter {
+    background: url('/assets/images/twitter_icon.svg');
+}
+
+#personal_info_linkdin {
+    background: url('/assets/images/linkedin_icon.svg');
+}
+
+.social_media input {
+    background-size: 25px 25px !important;  
+    background-repeat: no-repeat !important;
+    background-position: right bottom 6px!important;
 }
 
 .user_name {
@@ -1226,8 +1392,8 @@ ul.select2-results__options li.select2-results__option:hover {
     object-fit: cover;
 }
 
-.register_date_field {
-    background-image: url(/assets/images/calender_icon.png);
+.register_date_field, .choose_img_file {
+    background-image: url(/assets/images/calender_icon.svg);
     height: 38px;
     background-repeat: no-repeat;
     background-position: right;
@@ -3736,7 +3902,7 @@ div#phone_otp_model .modal-footer {
 }
 
 header.d-flex.align-items-center.justify-content-between {
-    width: 96%;
+    width: 99%;
     margin-left: auto;
     margin-right: auto;
 }
