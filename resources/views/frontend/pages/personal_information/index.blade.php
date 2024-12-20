@@ -22,6 +22,10 @@
     body#index {
         background-color: #e7ecef;
     }
+
+    .user_header .search_input button { 
+        padding: 8px 0px 8px 20px;
+    }
 </style>
 
 <section class="personal_information pb-5 mt80" style="background-color: #e7ecef">
