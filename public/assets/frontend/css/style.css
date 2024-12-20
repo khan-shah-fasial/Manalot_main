@@ -305,17 +305,14 @@ strong.text-lg {
     padding: 9px 10px 10px 10px;
     border-radius: 0px 25px 25px 0px;
     border: none;
-    font-size: 16px;
-    font-weight: 400;
+    font: 400 18px/21.6px 'Lato';
+    color: #999999;
 }
 
 .search_input input::placeholder {
-    font-family: 'Lato' !important;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 21.6px;
     letter-spacing: 0.005em; 
-
+    font: 400 18px/21.6px 'Lato';
+    color: #999999;
 }
 
 .search_input input {
@@ -325,7 +322,7 @@ strong.text-lg {
 
 .user_header .search_input button {
     background-color: #e7ecef;
-    padding: 13px 0px 14px 20px;
+    padding: 12px 0px 12px 20px;
     border-radius: 25px 0px 0px 25px;
 }
 
@@ -543,7 +540,9 @@ a.logout:hover {
     height: 100vh;
     margin: 0px auto;
     width: 100%;
-    max-width: 52%;
+    max-width: 54%;
+    right: 9px;
+    position: relative;
 }
 
 .post_modal .modal-content {
@@ -560,6 +559,10 @@ a.logout:hover {
     position: relative;
     background-size: 50%;
     margin-top: -5px;
+}
+
+.btn-close:focus{
+    box-shadow: inherit !important;
 }
 
 .post_modal .modal-header {
@@ -737,15 +740,17 @@ img.like_img {
 .ai_search_bar {
     border: none;
     width: 78%;
+    font: 400 18px 'Lato';
+    color: #999999;
 }
 
 .ai_search_bar::placeholder {
     color: #999999;
     opacity: 0.7;
-    font-size: 18px;
-    font-weight: 400;
-    font-family: 'Lato' !important;
+    font: 400 18px 'Lato' !important;
 }
+
+
 
 .ai_search_bar {
     background: url('/assets/images/ai_stars.png') no-repeat 14em center;

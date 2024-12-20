@@ -551,46 +551,48 @@
 @endsection
 
 <div class="post_modal modal" id="postmodal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <div class="d-flex align-items-center gap-2">
-                    <img class="user_img" src="/assets/images/drishti_img.png" alt="user_img" />
-                    <div class="user_name_post proxima_nova_font">
-                        <strong class="mb-0 user_name">Drishti Jadhav</strong> <img class="caret_down_img" src="/assets/images/caret_down.svg">
-                        <p class="text-xs mb-0" style="color: #535353;font-weight: 600;font-size: 11px;"> Post to All
-                        </p>
+    <div class="container">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <div class="d-flex align-items-center gap-2">
+                        <img class="user_img" src="/assets/images/drishti_img.png" alt="user_img" />
+                        <div class="user_name_post proxima_nova_font">
+                            <strong class="mb-0 user_name">Drishti Jadhav</strong> <img class="caret_down_img" src="/assets/images/caret_down.svg">
+                            <p class="text-xs mb-0" style="color: #535353;font-weight: 600;font-size: 11px;"> Post to All
+                            </p>
+                        </div>
                     </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <!-- Modal Body -->
-            <div class="modal-body">
-                <textarea class="form-control" rows="4" placeholder="What do you want to talk about?"></textarea>
-            </div>
-            <!-- Modal Footer -->
-            <div class="modal-footer d-flex justify-content-end">
-                <div class="action-icons">
-                    <button class="post_modal_img_btn ai_search_btn">
-                        Rewrite with AI
-                    <button class="post_modal_img_btn">
-                        <img class="post_modal_icon_img" src="/assets/images/image_gallery.svg">
-                    </button>
-                    <button class="post_modal_img_btn">
-                        <img class="post_modal_icon_img" src="/assets/images/post_calendar.svg">
-                    </button>
-                    <button class="post_modal_img_btn">
-                        <img class="post_modal_icon_img" src="/assets/images/square_pole.svg">
-                    </button>
-                    <button class="post_modal_img_btn">
-                        <img class="post_modal_icon_img" src="/assets/images/document.svg">
-                    </button>
-                    <button class="post_modal_img_btn">
-                        <img class="post_modal_icon_img" src="/assets/images/post_suitcase.svg">
-                    </button>
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <textarea class="form-control" rows="4" placeholder="What do you want to talk about?"></textarea>
                 </div>
-                <button type="button" class="ai_search_btn post_modal_btn">Post</button>
+                <!-- Modal Footer -->
+                <div class="modal-footer d-flex justify-content-end">
+                    <div class="action-icons">
+                        <button class="post_modal_img_btn ai_search_btn">
+                            Rewrite with AI
+                        <button class="post_modal_img_btn">
+                            <img class="post_modal_icon_img" src="/assets/images/image_gallery.svg">
+                        </button>
+                        <button class="post_modal_img_btn">
+                            <img class="post_modal_icon_img" src="/assets/images/post_calendar.svg">
+                        </button>
+                        <button class="post_modal_img_btn">
+                            <img class="post_modal_icon_img" src="/assets/images/square_pole.svg">
+                        </button>
+                        <button class="post_modal_img_btn">
+                            <img class="post_modal_icon_img" src="/assets/images/document.svg">
+                        </button>
+                        <button class="post_modal_img_btn">
+                            <img class="post_modal_icon_img" src="/assets/images/post_suitcase.svg">
+                        </button>
+                    </div>
+                    <button type="button" class="ai_search_btn post_modal_btn">Post</button>
+                </div>
             </div>
         </div>
     </div>
