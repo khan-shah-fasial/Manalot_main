@@ -785,7 +785,7 @@ img.like_img {
 }
 
 .manage_network {
-    font: 600 16px 'Helvetica';
+    font: 700 18px 'Helvetica';
     color: #1B1919;
     text-transform: capitalize;
     margin-bottom: 15px;
@@ -793,9 +793,10 @@ img.like_img {
 
 .personal_information aside.left_sidebar .list-group {
     border-radius: 50px;
-    padding: 30px 38px;
+    padding: 30px 29px;
     background: #fff;
-    height: 80vh;
+    height: 530px;
+    margin-bottom: 80px;
 }
 
 .personal_information .nav-tabs {
@@ -806,10 +807,19 @@ img.like_img {
     border: 0px;
     margin: 14px 0px;
     background: transparent;
-    font: 600 12px 'Helvetica' !important;
+    font: 700 14px 'Helvetica' !important;
     color: #545454;
     padding: 0px;
     width: 100%;
+}
+
+.personal_information .width_20 {
+    width: 25% !important;
+    position: relative;
+}
+
+.personal_information .right_sidebar_parent_div {
+    display: inherit;
 }
 
 .personal_information .left_sidebar a.list-group-item:hover,
@@ -828,11 +838,12 @@ img.like_img {
 }
 
 .personal_information .left_sidebar {
-    width: 19%;
+    width: 308px;
 }
 
 .personal_information .main_parent_div {
-    width: 78%;
+    width: 75%;
+    padding-left: 0px;
 }
 
 .personal_information .main_parent_div main {
@@ -842,7 +853,7 @@ img.like_img {
 }
 
 .prsnl_info_heading {
-    font: 400 22px 'Proxima nova';
+    font: 400 24px 'Proxima nova';
     color: #AE446A;
     margin-bottom: 34px;
 }
@@ -862,8 +873,8 @@ img.like_img {
 .personal_information form input::placeholder,
 .personal_information form textarea::placeholder,
 .personal_information form select::placeholder {
-    font: 600 14px/19px 'Proxima nova' !important;
-    padding-left: 0px !important; 
+    font: 600 16px/19px 'Proxima nova' !important;
+    padding-left: 0px !important;
 }
 
 .personal_information form select,
@@ -3940,11 +3951,6 @@ div#phone_otp_model .modal-footer {
 @media screen and (min-width: 1400px) {
     .user_header > div:not(.profile-page .user_header > div) {
         padding: 0px 0px;
-    }
-}
-@media screen and (min-width: 1690px) {
-    .right_sidebar, .left_sidebar { 
-        width: 14%;
     }
 }
 

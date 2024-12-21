@@ -110,27 +110,6 @@
         }
     }
 
-    @media screen and (min-width: 1600px) {
-        .personal_information .left_sidebar {
-            width: 17%;
-        }
-
-        .container, .container-lg, .container-xl {
-            max-width: 1400px;
-        }
-    }
-
-    @media screen and (min-width: 1500px) {
-        .personal_information .left_sidebar {
-            width: 17%;
-        }
-    }
-
-    @media screen and (min-width: 2000px) {
-        .personal_information .left_sidebar {
-            width: 14%;
-        }
-    }
 
     body#index {
         background-color: #e7ecef;
