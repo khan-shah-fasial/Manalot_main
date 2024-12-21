@@ -841,8 +841,13 @@ img.like_img {
 
 .prsnl_info_heading {
     font: 400 22px 'Proxima nova';
-    color: #901D56;
-    margin-bottom: 40px;
+    color: #AE446A;
+    margin-bottom: 34px;
+}
+
+.prsnl_info_heading2 {
+    margin-bottom: 20px;
+    margin-top: 20px !important;
 }
 
 .personal_information form label {
@@ -859,9 +864,7 @@ img.like_img {
     padding-left: 0px !important; 
 }
 
-.personal_information form textarea,
 .personal_information form select,
-.personal_information form textarea::placeholder,
 .personal_information form select::placeholder  {
     font-weight: 400 !important;
 }
@@ -916,35 +919,71 @@ img.like_img {
 }
 
 .add_more, .add_more:hover {
-    color: #901D56;
-    font: 600 13px 'Proxima Nova' !important;
+    color: #AE446A;
+    font: 600 12px 'Proxima Nova' !important;
+    border: 0px !important;
+    background: #fff;
+    text-decoration: underline;
+    padding: 0px;
 }
 
 .add_more_div {
     margin-top: -10px !important;
 }
 
-#personal_info_facebook{
-    background: url('/assets/images/facebook_icon.svg');
+.personal_information input[type="file"] {
+    height: 32px;
+    padding-top: 7px !important;
 }
 
-#personal_info_instagram {
-    background: url('/assets/images/instagram_icon.svg');
+.personal_information .intl-tel-input {
+    margin-top: 0px;
 }
 
-#personal_info_twitter {
-    background: url('/assets/images/twitter_icon.svg');
+.personal_information .input_icon { 
+    right: 0px;
+    margin-top: 34px;
 }
 
-#personal_info_linkdin {
-    background: url('/assets/images/linkedin_icon.svg');
+.personal_information .social_media .input_icon {
+    right: 0px;
+    margin-top: 20px;
 }
 
-.social_media input {
-    background-size: 25px 25px !important;  
-    background-repeat: no-repeat !important;
-    background-position: right bottom 6px!important;
+.personal_information .form-select {
+    background: url('/assets/images/arrow_dropdown.png') no-repeat right 5px center !important;
+    background-size: 5% !important;
 }
+
+.personal_information .wrk_auth .form-select {
+    background-size: 7% !important;
+}
+
+.work_exp_updt {
+    color: #f00;
+    font: 600 10px 'Proxima Nova' !important;
+    opacity: 1;
+    margin-left: 5px;
+    animation: updateBlink 2s ease-in infinite; /* Shorthand property */
+}
+
+@keyframes updateBlink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+#personal_info #Mobile {
+    padding-left: 40px !important;
+}
+
 
 .user_name {
     font-weight: 700;
