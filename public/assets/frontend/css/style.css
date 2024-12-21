@@ -809,6 +809,7 @@ img.like_img {
     font: 600 12px 'Helvetica' !important;
     color: #545454;
     padding: 0px;
+    width: 100%;
 }
 
 .personal_information .left_sidebar a.list-group-item:hover,
@@ -913,6 +914,7 @@ img.like_img {
     padding: 6px 10px 7px 10px !important;
     font: 600 14px 'Proxima Nova' !important;
     letter-spacing: 0.6px;
+    text-transform: capitalize;
 }
 
 .choose_img_file {
