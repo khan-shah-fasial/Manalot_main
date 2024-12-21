@@ -1024,7 +1024,7 @@
                     </div>
                 </div>
 
-                  <div class="col-md-6 mb-4">
+                <div class="col-md-6 mb-4">
                     <div class="position-relative form-group">
                         <label for="Employment Type*" class="form-label">Notice Period *</label>
                         <select class="select2 form-select form-control is-invalid input_select old-select2"
