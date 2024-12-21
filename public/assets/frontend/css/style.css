@@ -844,6 +844,7 @@ img.like_img {
 .personal_information .main_parent_div {
     width: 75%;
     padding-left: 12px;
+    padding-right: 3px;
 }
 
 .personal_information .main_parent_div main {
