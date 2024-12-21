@@ -576,16 +576,16 @@
                         <button class="post_modal_img_btn ai_search_btn">
                             Rewrite with AI
                         <button class="post_modal_img_btn">
-                            <img class="post_modal_icon_img" src="/assets/images/image_gallery.svg">
+                            <img class="post_modal_icon_img" src="/assets/images/post_image_gallery.svg">
                         </button>
                         <button class="post_modal_img_btn">
                             <img class="post_modal_icon_img" src="/assets/images/post_calendar.svg">
                         </button>
                         <button class="post_modal_img_btn">
-                            <img class="post_modal_icon_img" src="/assets/images/square_pole.svg">
+                            <img class="post_modal_icon_img" src="/assets/images/post_square_pole.svg">
                         </button>
                         <button class="post_modal_img_btn">
-                            <img class="post_modal_icon_img" src="/assets/images/document.svg">
+                            <img class="post_modal_icon_img" src="/assets/images/post_document2.svg">
                         </button>
                         <button class="post_modal_img_btn">
                             <img class="post_modal_icon_img" src="/assets/images/post_suitcase.svg">
