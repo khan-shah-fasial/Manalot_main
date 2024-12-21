@@ -625,6 +625,7 @@ img.caret_down_img {
 }
 img.post_modal_icon_img {
     width: 18px;
+    height: 18px;
 }
 
 .post_modal .ai_search_btn.post_modal_btn {
