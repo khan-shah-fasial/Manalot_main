@@ -886,7 +886,7 @@ img.like_img {
 .personal_information form input::placeholder,
 .personal_information form textarea::placeholder,
 .personal_information form select::placeholder {
-    font: 600 16px/19px 'Proxima nova' !important;
+    font: 500 16px/19px 'Proxima nova' !important;
     padding-left: 0px !important;
 }
 
@@ -935,7 +935,7 @@ img.like_img {
     width: 87px;
     text-align: center;
     padding: 6px 10px 7px 10px !important;
-    font: 600 14px 'Proxima Nova' !important;
+    font: 500 14px 'Proxima Nova' !important;
     letter-spacing: 0.6px;
     text-transform: capitalize;
 }
