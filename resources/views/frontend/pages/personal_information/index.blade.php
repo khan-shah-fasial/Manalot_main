@@ -121,6 +121,31 @@
     .header > .container-lg.container-fluid {
         padding: 0px;
     }
+
+    .education-row .col-md-6:nth-child(odd) {
+    padding-left: 12px;
+    padding-right: 12px !important;
+}
+
+.education-row .col-md-6:nth-child(even) {
+    padding-left: 12px !important;
+    padding-right: 0px;
+}
+
+.cirtificate_pdd .col-md-6:nth-child(even) {
+    padding-left: 15px !important;
+    padding-right: 12px;
+}
+.cirtificate_pdd .col-md-6:nth-child(odd) {
+    padding-left: 12px;
+    padding-right: 12px !important;
+}
+.reference-row .col-md-6:nth-child(even) {
+    padding-left: 25px;
+}
+.reference-row .col-md-6:nth-child(odd) {
+    padding-right: 0;
+}
 </style>
 
 <section class="personal_information pb-5 mt80" style="background-color: #e7ecef">
@@ -320,7 +345,7 @@
                                     <!-- Headline -->
                                     <div class="col-md-12">
                                         <label for="headline" class="form-label">Headline</label>
-                                        <textarea type="text" class="form-control" id="headline" rows="1">Listed as Most Innovative Leadership Advisory Firm – APAC 2024 I Featured as a Top 10 Influential Leader...</textarea>
+                                        <textarea type="text" class="form-control" id="headline" rows="1">Listed as Most Innovative Leadership Advisory Firm – APAC 2024 I Featured as a Top 10...</textarea>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="position-relative form-group">
@@ -687,6 +712,10 @@
                                                 placeholder="Message" required>{{ $wrk_exp_responsibilities }}Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat </textarea>
                                         </div>
                                     </div>
+
+                                     <div class="col-md-12 add_more_div">
+                                                <button class="add_more add-edu-row" href="">ADD MORE +</button>
+                                            </div>  
                                 </div>
                                 <div class="purple_btn text-start">
                                     <button type="submit" class="prsnl_inf_updt_btn">update</button>

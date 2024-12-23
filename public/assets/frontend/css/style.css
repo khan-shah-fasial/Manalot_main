@@ -40,7 +40,7 @@ body .helvetica_font {
 }
 
 body .lato_font {
-    font-family: 'Lato' !important; 
+    font-family: 'Lato' !important;
 }
 
 .rounded-sm {
@@ -153,7 +153,8 @@ button.purple_btn {
     text-align: center;
 }
 
-.login_width .purple_btn button, button.purple_btn {
+.login_width .purple_btn button,
+button.purple_btn {
     padding: 4px 6px 5px 6px;
 }
 
@@ -310,14 +311,15 @@ strong.text-lg {
 }
 
 .search_input input::placeholder {
-    letter-spacing: 0.005em; 
+    letter-spacing: 0.005em;
     font: 400 18px/21.6px 'Lato';
     color: #999999;
 }
 
 .search_input input {
     background: #e7ecef url('/assets/images/jingle_bell.svg') no-repeat right 0px center;
-    background-size: 55px 55px; /* Adjust size of the image */
+    background-size: 55px 55px;
+    /* Adjust size of the image */
 }
 
 .user_header .search_input button {
@@ -326,7 +328,7 @@ strong.text-lg {
     border-radius: 25px 0px 0px 25px;
 }
 
-.profile-page .user_header .search_input button { 
+.profile-page .user_header .search_input button {
     padding: 8px 0px 8px 20px;
 }
 
@@ -336,7 +338,8 @@ strong.text-lg {
 }
 
 .header_drishti {
-    position: relative; /* To position the dropdown */
+    position: relative;
+    /* To position the dropdown */
     margin-left: 30px;
 }
 
@@ -367,7 +370,7 @@ a.logout {
 }
 
 a.logout:hover {
-   background-color: transparent !important;
+    background-color: transparent !important;
 }
 
 .dropdown-content .user_name {
@@ -394,12 +397,12 @@ a.logout:hover {
     font: 400 12px 'Lato';
     color: #545454 !important;
     text-decoration: none;
-    padding: 4px 5px !important; 
+    padding: 4px 5px !important;
 }
 
 .view_profile_quick_menu:hover {
     color: #545454;
-    background-color: #fff !important; 
+    background-color: #fff !important;
     /* font-weight: 600; */
 }
 
@@ -411,7 +414,8 @@ a.logout:hover {
 }
 
 .dropdown-content {
-    display: none; /* Hidden by default */    
+    display: none;
+    /* Hidden by default */
     border: 1px solid #ddd;
     padding: 10px 15px;
     border-radius: 20px;
@@ -554,7 +558,8 @@ a.logout:hover {
     padding: 26px 40px;
 }
 
-.post_modal .modal-header, .post_modal .modal-footer {
+.post_modal .modal-header,
+.post_modal .modal-footer {
     border: 0px;
     padding: 0px;
 }
@@ -565,7 +570,7 @@ a.logout:hover {
     margin-top: -5px;
 }
 
-.btn-close:focus{
+.btn-close:focus {
     box-shadow: inherit !important;
 }
 
@@ -614,15 +619,16 @@ img.caret_down_img {
 }
 
 .post_modal button.post_modal_img_btn.ai_search_btn {
-    width: 140px; 
+    width: 140px;
     font: 600 11px 'Proxima Nova';
     padding: 9px 15px 9px 20px !important;
     text-align: left;
     margin-right: 30px;
     margin-left: 0px;
     background: #E7ECEF url('/assets/images/ai_stars.png') no-repeat right 10px center;
-    background-size: 20px 20px;  
+    background-size: 20px 20px;
 }
+
 img.post_modal_icon_img {
     width: 18px;
     height: 18px;
@@ -687,7 +693,7 @@ img.like_img {
 .search_input input::placeholder {
     font-size: 15px !important;
     font-weight: 400 !important;
-    color: #AEAEAE !important; 
+    color: #AEAEAE !important;
     font-family: "Lato", sans-serif !important;
 }
 
@@ -759,13 +765,14 @@ img.like_img {
 
 .ai_search_bar {
     background: url('/assets/images/ai_stars.png') no-repeat 14em center;
-    background-size: 20px 20px; /* Adjust size of the image */
+    background-size: 20px 20px;
+    /* Adjust size of the image */
 }
 
 .ai_search_bar:focus,
 .ai_search_bar:not(:placeholder-shown) {
     background: none;
-  }
+}
 
 .ai_search_btn {
     border: none;
@@ -823,7 +830,7 @@ img.like_img {
 }
 
 .personal_information .left_sidebar a.list-group-item:hover,
-.personal_information .left_sidebar a.list-group-item.active{
+.personal_information .left_sidebar a.list-group-item.active {
     color: #901D56 !important;
 }
 
@@ -833,12 +840,12 @@ img.like_img {
 }
 
 .personal_information .left_sidebar a.list-group-item:hover .personal_info_left_list_icon,
-.personal_information .left_sidebar a.list-group-item.active .personal_info_left_list_icon{
+.personal_information .left_sidebar a.list-group-item.active .personal_info_left_list_icon {
     filter: grayscale(0);
 }
 
 .personal_information .left_sidebar {
-    width: 308px;
+    width: 295px;
 }
 
 .personal_information .main_parent_div {
@@ -850,7 +857,7 @@ img.like_img {
 .personal_information .main_parent_div main {
     background: #fff;
     border-radius: 50px;
-    padding: 48px 165px 48px 50px;
+    padding: 48px 140px 48px 50px;
 }
 
 .prsnl_info_heading {
@@ -865,7 +872,12 @@ img.like_img {
 }
 
 .personal_information form label {
-    font: 400 14px 'Proxima nova';
+    font: 400 15px 'Proxima nova';
+    padding-bottom: 5px;
+}
+
+.personal_information form .form-control {
+    margin-bottom: 5px;
 }
 
 .personal_information form input,
@@ -878,10 +890,10 @@ img.like_img {
     padding-left: 0px !important;
 }
 
-.personal_information form select,
-.personal_information form select::placeholder  {
+/* .personal_information form select,
+.personal_information form select::placeholder {
     font-weight: 400 !important;
-}
+} */
 
 /* .personal_information form input[type=file] {
     padding-top: 12px !important;
@@ -896,7 +908,6 @@ img.like_img {
     border-bottom: 1px solid #ccc !important;
     cursor: pointer;
     border-radius: 0px;
-    font-weight: 600 !important;
     color: #535353 !important;
 }
 
@@ -910,7 +921,7 @@ img.like_img {
     color: #fff !important;
 } */
 
-.personal_information form select:focus{
+.personal_information form select:focus {
     box-shadow: inherit !important;
 }
 
@@ -933,7 +944,8 @@ img.like_img {
     background-image: url('/assets/images/chooe_img_icon.svg') !important;
 }
 
-.add_more, .add_more:hover {
+.add_more,
+.add_more:hover {
     color: #AE446A;
     font: 600 12px 'Proxima Nova' !important;
     border: 0px !important;
@@ -955,7 +967,7 @@ img.like_img {
     margin-top: 0px;
 }
 
-.personal_information .input_icon { 
+.personal_information .input_icon {
     right: 0px;
     margin-top: 34px;
 }
@@ -979,13 +991,15 @@ img.like_img {
     font: 600 10px 'Proxima Nova' !important;
     opacity: 1;
     margin-left: 5px;
-    animation: updateBlink 2s ease-in infinite; /* Shorthand property */
+    animation: updateBlink 2s ease-in infinite;
+    /* Shorthand property */
 }
 
 @keyframes updateBlink {
     0% {
         opacity: 1;
     }
+
     50% {
         opacity: 0;
     }
@@ -1056,11 +1070,12 @@ img.user_img {
     line-height: 18px;
 }
 
-.trending_link, .watched {
+.trending_link,
+.watched {
     text-decoration: none;
 }
 
-.watched { 
+.watched {
     color: #535353;
 }
 
@@ -1073,7 +1088,7 @@ img.user_img {
     color: #535353;
 }
 
-.saved_items_main_div > a {
+.saved_items_main_div>a {
     margin-bottom: 30px;
     text-decoration: none;
 }
@@ -1207,10 +1222,13 @@ img.icon_language {
 .profile-page .header .user_header_right a,
 .profile-page .header .search_input button,
 .profile-page .search_input input,
-.profile-page .three_dots  {
-    touch-action: none ; /* Disable touch behavior */
-    pointer-events: none; /* Ensure click events work */
-    cursor: pointer; /* Show pointer cursor for interaction */
+.profile-page .three_dots {
+    touch-action: none;
+    /* Disable touch behavior */
+    pointer-events: none;
+    /* Ensure click events work */
+    cursor: pointer;
+    /* Show pointer cursor for interaction */
 }
 
 
@@ -1451,7 +1469,8 @@ ul.select2-results__options li.select2-results__option:hover {
     object-fit: cover;
 }
 
-.register_date_field, .choose_img_file {
+.register_date_field,
+.choose_img_file {
     background-image: url(/assets/images/calender_icon.svg);
     height: 38px;
     background-repeat: no-repeat;
@@ -3152,29 +3171,30 @@ div#social_media_div {
         margin-top: 60px;
     }
 
-    .search_bar_new { 
-        padding: 10px 10px; 
+    .search_bar_new {
+        padding: 10px 10px;
     }
 
     .input_search {
         display: flex;
     }
 
-    .ai_search_bar { 
+    .ai_search_bar {
         width: 77%;
     }
-    
+
     .ai_search_btn {
         border: none;
         padding: 5px 10px;
         width: 70px;
     }
 
-    .post > div:nth-child(1) {
+    .post>div:nth-child(1) {
         padding-bottom: 10px;
     }
 
-    .left_sidebar, .right_sidebar {
+    .left_sidebar,
+    .right_sidebar {
         position: relative;
         height: auto;
         width: 100%;
@@ -3255,7 +3275,8 @@ div#social_media_div {
         padding-right: 15px !important;
     }
 
-    .right_sidebar, .left_sidebar { 
+    .right_sidebar,
+    .left_sidebar {
         width: 240px;
     }
 
@@ -3263,7 +3284,7 @@ div#social_media_div {
         display: flex;
     }
 
-    .search_bar_new { 
+    .search_bar_new {
         padding: 15px 25px;
     }
 
@@ -3271,11 +3292,11 @@ div#social_media_div {
         gap: 25px;
     }
 
-    .header { 
+    .header {
         height: 100px;
     }
 
-    header { 
+    header {
         padding: 0px 0px 0px 20px;
         height: 70px;
     }
@@ -3292,12 +3313,12 @@ div#social_media_div {
         margin-top: 110px !important;
     }
 
-    .search_input input { 
+    .search_input input {
         padding: 8px 20px 9px 20px;
     }
 
-    .user_header .search_input button { 
-        padding: 14px 10px 14px 15px; 
+    .user_header .search_input button {
+        padding: 14px 10px 14px 15px;
     }
 
     .post_modal textarea {
@@ -3552,7 +3573,7 @@ div#social_media_div {
     .ms-footer-copyright p {
         font-size: 14px;
     }
-    
+
     .register_main_button {
         padding-left: 0px !important;
     }
@@ -3561,7 +3582,7 @@ div#social_media_div {
         margin-top: 80px;
     }
 
-    .ai_search_btn { 
+    .ai_search_btn {
         padding: 5px 10px;
         width: 90px;
     }
@@ -3570,22 +3591,23 @@ div#social_media_div {
         display: flex;
     }
 
-    .search_bar_new { 
-        padding: 10px 10px; 
+    .search_bar_new {
+        padding: 10px 10px;
     }
 
-    .right_sidebar, .left_sidebar {
+    .right_sidebar,
+    .left_sidebar {
         position: fixed;
         height: 100%;
         width: 22%;
     }
 
-    .activity { 
+    .activity {
         padding: 20px 15px;
         border-radius: 30px;
     }
 
-    .post { 
+    .post {
         border-radius: 30px;
     }
 
@@ -3598,7 +3620,7 @@ div#social_media_div {
 
 .user_header_right span {
     font-size: 10px;
-    font-weight: 400; 
+    font-weight: 400;
     color: #535353;
 }
 
@@ -3950,7 +3972,7 @@ div#phone_otp_model .modal-footer {
 }
 
 @media screen and (min-width: 1400px) {
-    .user_header > div:not(.profile-page .user_header > div) {
+    .user_header>div:not(.profile-page .user_header > div) {
         padding: 0px 0px;
     }
 }

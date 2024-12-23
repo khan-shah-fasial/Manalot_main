@@ -14,6 +14,14 @@
             max-width: 1270px;
         }
     }
+
+    .right_sidebar {
+    width: 260px;
+}
+
+.left_sidebar {
+    width: 260px;
+}
 </style>
 
     <section class="pb-5 mt80" style="background-color: #e7ecef">
