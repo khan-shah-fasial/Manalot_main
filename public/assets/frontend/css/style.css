@@ -932,11 +932,11 @@ img.like_img {
 }
 
 .prsnl_inf_updt_btn {
-    width: 87px;
+    /* width: 87px;
     text-align: center;
     padding: 6px 10px 7px 10px !important;
     font: 500 14px 'Proxima Nova' !important;
-    letter-spacing: 0.6px;
+    letter-spacing: 0.6px; */
     text-transform: capitalize;
 }
 
