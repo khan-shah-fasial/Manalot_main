@@ -934,9 +934,10 @@ img.like_img {
 .prsnl_inf_updt_btn {
     /* width: 87px;
     text-align: center;
-    padding: 6px 10px 7px 10px !important;
+    
     font: 500 14px 'Proxima Nova' !important;
     letter-spacing: 0.6px; */
+    padding: 4px 25px 5px 25px !important;
     text-transform: capitalize;
 }
 
