@@ -212,8 +212,12 @@ class IndexController extends Controller
         return view('frontend.pages.personal_information.index');
     }
 
+    public function messaging_page(){
+        return view('frontend.pages.messaging.index');
+    }
 
-        public function notification(){
+
+    public function notification(){
         return view('frontend.pages.notification.index');
     }
 
