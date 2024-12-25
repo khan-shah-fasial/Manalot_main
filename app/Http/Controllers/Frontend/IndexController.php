@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserDetails;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Mail;
 
@@ -63,22 +64,22 @@ class IndexController extends Controller
             'cv' => 'nullable|mimetypes:application/pdf,application/msword',
             //'g-recaptcha-response' => 'required|captcha',
         ];
-    
+
         $validator = \Validator::make($request->all(), $rules); // Pass $request->all() as the first argument
-    
+
         if ($validator->fails()) {
             return response()->json([
                 'status' => false,
                 'notification' => $validator->errors(),
             ]);
         }
-    
+
         if ($request->hasFile('cv')) {
             $cvPath = $request->file('cv')->store('assets/image/pdf', 'public');
         } else {
             $cvPath = null; // Set to null if 'cv' is not provided
         }
-    
+
         // Create the contact record, including 'cv' if provided
         $contactData = $request->all();
         $contactData['cv'] = $cvPath;
@@ -106,7 +107,7 @@ class IndexController extends Controller
         $body .= "<tr><td style='width: 150px;'><strong>From :</strong></td><td>" . $name . ' ' . $email . "</td></tr></br>";
         $body .= "<tr><td style='width: 150px;'><strong>Form Name :</strong></td><td>" . $section . "</td></tr></br>";
         $body .= "<tr><td style='width: 150px;'><strong>Page URL :</strong></td><td>" . $url . "</td></tr></br><p></p>";
-        
+
         $body .= "<tr><td style='width: 150px;'><strong>Full Name :</strong></td><td>" . $name . "</td></tr></br>";
         $body .= "<tr><td style='width: 150px;'><strong>Email Address :</strong></td><td>" . $email . "</td></tr></br>";
         $body .= "<tr><td style='width: 150px;'><strong>Phone Number :</strong></td><td>" . $phone . "</td></tr></br>";
@@ -117,13 +118,13 @@ class IndexController extends Controller
         } else {
             $body .= "<tr><td style='width: 150px;'><strong>Description :</strong></td><td>" . ($description ?? 'Not provided') . "</td></tr></br><p></p>";
         }
-        
+
         /*
         $body .= "<tr><td style='width: 150px;'><strong>Ip :</strong></td><td>" . $ip . "</td></tr></br>";
-        $body .= "<tr><td style='width: 150px;'><strong>User Location :</strong></td><td>" . 
-                    ($user_data['city'] ?? 'null') . ' ' . 
-                    ($user_data['region'] ?? 'null') . ' ' . 
-                    ($user_data['country'] ?? 'null') . 
+        $body .= "<tr><td style='width: 150px;'><strong>User Location :</strong></td><td>" .
+                    ($user_data['city'] ?? 'null') . ' ' .
+                    ($user_data['region'] ?? 'null') . ' ' .
+                    ($user_data['country'] ?? 'null') .
                 "</td></tr></br>";
         */
         $body .= "<tr><td style='width: 150px;'><strong>Referrer URL :</strong></td><td>" . $ref_url . "</td></tr></br>";
@@ -148,16 +149,16 @@ class IndexController extends Controller
             sendEmail($recipient, $subject, $body);
         }
 
-    
+
         $response = [
             'status' => true,
             'notification' => 'Contact added successfully!',
         ];
-    
+
         return response()->json($response);
     }
    //--------------=============================== contact form save ===========================--------------------------
-   
+
 //--------------=============================== other feature ====================================---------------------
 
     // public function search(Request $request){
@@ -169,7 +170,7 @@ class IndexController extends Controller
     //             ->orWhere('short_description', 'like', "%$query%")
     //             ->orWhere('content', 'like', "%$query%");
     //     })->where('status', 1)->get();
-        
+
     //     $practiceAreas = PracticeArea::where(function ($queryBuilder) use ($query) {
     //         $queryBuilder->where('title', 'like', "%$query%")
     //             ->orWhere('short_description', 'like', "%$query%")
@@ -182,15 +183,15 @@ class IndexController extends Controller
     // public function comment_save(Request $request)
     // {
     //     $commentData = $request->all();
-    
+
     //     // Create the contact record
     //     BlogComment::create($commentData);
-    
+
     //     $response = [
     //         'status' => true,
     //         'notification' => 'Comment added successfully!',
     //     ];
-    
+
     //     return response()->json($response);
     // }
 
@@ -212,6 +213,33 @@ class IndexController extends Controller
         return view('frontend.pages.personal_information.index');
     }
 
+    public function edit_personal_information(){
+
+        // Retrieve the session user_id
+        $userId = session('user_id'); // Assuming 'user_id' is stored in session
+
+        if (!$userId) {
+            // Redirect to login if user_id is not set
+            return redirect()->route('index')->with('error', 'Please log in to access this page.');
+        }
+
+        // Fetch user and userdetails based on user_id
+        $user = User::find($userId); // Assuming User is your model
+        $user_detail = UserDetails::where('user_id', $userId)->first(); // Assuming UserDetails is your model
+
+    return view('frontend.pages.personal_information.edit_profile', compact('user', 'user_detail'));
+
+
+        // $response = [
+        //     'status' => true,
+        //     'notification' => 'Contact added successfully!',
+        // ];
+
+        // return response()->json($response);
+
+        // return view('frontend.pages.personal_information.edit_profile');
+    }
+
 
         public function notification(){
         return view('frontend.pages.notification.index');
@@ -226,9 +254,9 @@ class IndexController extends Controller
 
 // =====================--------------- dummy controller -------------====================
 
-    public function edit_profile(){
-        return view('frontend.pages.registration.edit_profile');
-    }
+    // public function edit_profile(){
+    //     return view('frontend.pages.registration.edit_profile');
+    // }
 
     // public function admin(){
     //     return view('frontend.pages.registration.admin');
@@ -237,7 +265,7 @@ class IndexController extends Controller
     public function testing_code(){
         return get_access_token_od();
     }
-    
+
 
     // =====================--------------- dummy controller -------------====================
 
