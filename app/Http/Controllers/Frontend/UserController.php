@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\UserDetails;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -300,33 +302,13 @@ class UserController extends Controller
 
             $rsp_msg = $this->create_user_detail($request);
 
-        }elseif($param == "email-verify"){
-
-            $rsp_msg = $this->email_verification($request);
-
         }elseif($param == "change-password"){
 
             $rsp_msg = $this->change_password($request);
 
-        }elseif($param == "resend-otp"){
-
-            $rsp_msg = $this->resendOtp($request);
-
-        }elseif($param == "phone-verify"){
-
-            $rsp_msg = $this->phone_verification($request);
-
-        }elseif($param == "resend-otp-phone"){
-
-            $rsp_msg = $this->resendOtp_phone($request);
-
         }elseif($param == "personal-info"){
 
             $rsp_msg = $this->create_personal_info($request);
-
-        }elseif($param == "login-info"){
-
-            $rsp_msg = $this->create_login_info($request);
 
         }elseif($param == "personal-work-info"){
 
@@ -336,19 +318,20 @@ class UserController extends Controller
 
             $rsp_msg = $this->create_education_info($request);
 
-        }elseif($param == "skills-info"){
-
-            $rsp_msg = $this->create_skills_info($request);
-
         }elseif($param == "certifications-info"){
 
             $rsp_msg = $this->create_certifications_info($request);
+
+        }elseif($param == "work-authorization"){
+
+            $rsp_msg = $this->create_work_authorization($request);
 
         }elseif($param == "preferences-info"){
 
             $rsp_msg = $this->create_preferences_info($request);
 
-        }elseif($param == "work-authorization-info"){
+        }
+        elseif($param == "work-authorization-info"){
 
             $rsp_msg = $this->create_work_authorization_info($request);
 
@@ -687,10 +670,19 @@ class UserController extends Controller
         }
     }
 
-    public function email_verification($request){
+    public function create_education_info($request){
 
         $validator = Validator::make($request->all(), [
-            'otp' => 'required|digits:6',
+            'edu_degree.*' => 'required',
+            'edu_clg_name.*' => 'required',
+            'edu_graduation_year.*' => 'required',
+            'edu_field.*' => 'required',
+
+        ], [
+            'edu_degree.*.required' => 'The Degree field is required.',
+            'edu_clg_name.*.required' => 'The School/University Name field is required.',
+            'edu_graduation_year.*.required' => 'The Graduation Year field is required.',
+            'edu_field.*.required' => 'The Major/Field of Study field is required.',
         ]);
 
         if ($validator->fails()) {
@@ -700,163 +692,52 @@ class UserController extends Controller
             return $rsp_msg;
         }
 
-        $otp = Session::get('otp');
-        $timestamp = Session::get('otp_timestamp');
 
-        // Check if OTP expired (2 minutes)
-        if (Carbon::parse($timestamp)->diffInMinutes(Carbon::now()) > 2) {
-            $rsp_msg['response'] = 'error';
-            $rsp_msg['message']  = "OTP has expired. Please request a new one";
+        //---- education -------
+        $edu_data = [];
+        $edu_clg_name = $request->input('edu_clg_name');
+        $edu_degree = $request->input('edu_degree');
+        $edu_graduation_year = $request->input('edu_graduation_year');
+        $edu_field = $request->input('edu_field');
 
-            return $rsp_msg;
-        }
-
-        if ($request->otp == $otp) {
-
-            $user_info = Session::get('user_info');
-
-            // $users_email_temp = DB::table('users')->where('email', $user_info['email'])->get()->first();
-
-            // if($users_email_temp){
-
-            //     DB::table('users')->where('id',$users_email_temp->id)->update([
-            //         'username' => $user_info['username'],
-            //         'email' => $user_info['email'],
-            //         'password' => $user_info['password'],
-            //         'approval' => '0',
-            //         'status' => '0',
-            //         'completed_status' => '0',
-            //         'step' => 1,
-            //         'role_id'  => '2',
-            //         'created_at' => now(),
-            //         'updated_at' => now(),
-            //     ]);
-
-            //     $result = file_upload_od($user_info['newFileName'], $user_info['resume_cv']);
-            //     if($result != 'error on uploding'){
-            //         if (Storage::disk('public')->exists($user_info['resume_cv'])) {
-            //             // Storage::disk('public')->delete($user_info['resume_cv']);
-            //         }
-            //         $path = $result;
-            //     } else{
-            //         $path = $user_info['resume_cv'];
-            //     }
-
-            //     DB::table('userdetails')->where('user_id',$users_email_temp->id)->update([
-            //         'phone_number' => $user_info['phone_number'],
-            //         'resume_cv' => $path,
-            //         'created_at' => now(),
-            //         'updated_at' => now(),
-            //     ]);
-
-            //     Session::put('temp_user_id', $users_email_temp->id);
-
-            // } else {
-
-            //     $userId = DB::table('users')->insertGetId([
-            //         'username' => $user_info['username'],
-            //         'email' => $user_info['email'],
-            //         'password' => $user_info['password'],
-            //         'approval' => '0',
-            //         'role_id'  => '2',
-            //         'completed_status' => '0',
-            //         'status' => '0',
-            //         'step' => 1,
-            //         'created_at' => now(),
-            //         'updated_at' => now(),
-            //     ]);
-
-            //     $result = file_upload_od($user_info['newFileName'], $user_info['resume_cv']);
-            //     if($result != 'error on uploding'){
-            //         if (Storage::disk('public')->exists($user_info['resume_cv'])) {
-            //             // Storage::disk('public')->delete($user_info['resume_cv']);
-            //         }
-            //         $path = $result;
-            //     } else{
-            //         $path = $user_info['resume_cv'];
-            //     }
-
-            //     DB::table('userdetails')->insert([
-            //         'user_id' => $userId,
-            //         'phone_number' => $user_info['phone_number'],
-            //         'skill' => '[]',
-            //         'edu_data' => '[]',
-            //         'references' => '[]',
-            //         'resume_cv' => $path,
-            //         'created_at' => now(),
-            //         'updated_at' => now(),
-            //     ]);
-
-            //     Session::put('temp_user_id', $userId);
-            // }
-
-            // Session::put('step', 2);
-            // session()->forget('user_info');
-
-            $otp = mt_rand(1000, 9999);
-            $otp = 1234;
-            $timestamp = Carbon::now();
-            Session::put('otp', $otp);
-            Session::put('otp_timestamp', $timestamp);
-
-            $data['template']    = 'MobileVerification';
-            $data['use']          = 'otp_sms';
-            $data['phone']        = str_replace(['+', ' '], '', $user_info['phone_number']);
-            $data['otp']          = $otp;
-
-            // send_sms_through_2factor($data);
-
-            $rsp_msg['response'] = 'success';
-            $rsp_msg['message']  = "Email Verified Successfully";
-
-        } else {
-            $rsp_msg['response'] = 'error';
-            $rsp_msg['message']  = "Invalid OTP";
+        for ($i = 0; $i < count($edu_clg_name); $i++) {
+            $edu_data[] = [
+                'edu_clg_name' => $edu_clg_name[$i],
+                'edu_degree' => $edu_degree[$i],
+                'edu_graduation_year' => $edu_graduation_year[$i],
+                'edu_field' => $edu_field[$i],
+            ];
         }
 
 
-        return $rsp_msg;
-    }
-
-
-
-    public function resendOtp($request)
-    {
-        $otp = mt_rand(100000, 999999);
-        Session::put('otp', $otp);
-
-        $timestamp = Carbon::now();
-        Session::put('otp_timestamp', $timestamp);
-
-        $user_info = Session::get('user_info');
-
-        $to = $user_info['email'];
-        $subject = "$otp is your Manalot Leadership Network Reset Verification Code.";
-        $body = "Hello, <br> <br>
-        For security purposes, please enter the code below to verify your account.<br> <br>
-        Resend Verification Code: <b>$otp</b> <br><br>
-        The code is valid for 2 minutes.  <br><br>
-        Having problems with the code? <br><br>
-        The code will not work if timed out. <br><br>
-        Please request for a new code.";
-
-
-        sendEmail($to, $subject, $body);
+        UserDetails::where('user_id', Session::get('user_id'))->update([
+            'edu_data' => json_encode($edu_data),
+        ]);
 
         $rsp_msg['response'] = 'success';
-        $rsp_msg['message']  = "OTP has been Resend no this Email : " . $user_info['email'];
+        $rsp_msg['message']  = "User Education Detail Updated successfully.";
 
         return $rsp_msg;
     }
 
 
-    //---------------------- Phone verification ----------------------------------------//
-
-    public function phone_verification($request){
+    public function create_certifications_info($request){
 
         $validator = Validator::make($request->all(), [
-            'otp' => 'required|digits:4',
+            'certificate_name.*' => ['required', 'min:1', 'max:100'], // Adjust length rules
+            'certificate_obtn_date.*' => ['required', 'date', 'before_or_equal:' . now()->toDateString()],
+            'certificate_issuing.*' => ['required', 'min:1', 'max:50'],
+        ], [
+            'certificate_name.*.required' => 'The Certificate Name is required.',
+            'certificate_name.*.min' => 'The Certificate Name must be at least 1 character.',
+            'certificate_name.*.max' => 'The Certificate Name may not be greater than 100 characters.',
+            'certificate_obtn_date.*.required' => 'The Certificate Obtain Date is required.',
+            'certificate_obtn_date.*.before_or_equal' => 'The Certificate Obtain Date cannot be a future date.',
+            'certificate_issuing.*.required' => 'The Issuing Organization is required.',
+            'certificate_issuing.*.min' => 'The Issuing Organization must be at least 1 character.',
+            'certificate_issuing.*.max' => 'The Issuing Organization may not be greater than 50 characters.',
         ]);
+
 
         if ($validator->fails()) {
             $rsp_msg['response'] = 'error';
@@ -865,154 +746,30 @@ class UserController extends Controller
             return $rsp_msg;
         }
 
-        $otp = Session::get('otp');
-        $timestamp = Session::get('otp_timestamp');
+        // Combine the form data into an array
+        $certificate_data = [];
+        $certificate_names = $request->input('certificate_name');
+        $certificate_dates = $request->input('certificate_obtn_date');
+        $certificate_issuings = $request->input('certificate_issuing');
 
-        // Check if OTP expired (2 minutes)
-        if (Carbon::parse($timestamp)->diffInMinutes(Carbon::now()) > 2) {
-            $rsp_msg['response'] = 'error';
-            $rsp_msg['message']  = "OTP has expired. Please request a new one";
-
-            return $rsp_msg;
+        for ($i = 0; $i < count($certificate_names); $i++) {
+            $certificate_data[] = [
+                'certificate_name' => $certificate_names[$i],
+                'certificate_obtn_date' => $certificate_dates[$i],
+                'certificate_issuing' => $certificate_issuings[$i],
+            ];
         }
 
-        if ($request->otp == $otp) {
-
-            $user_info = Session::get('user_info');
-
-            $users_email_temp = DB::table('users')->where('email', $user_info['email'])->get()->first();
-
-            if($users_email_temp){
-
-                DB::table('users')->where('id',$users_email_temp->id)->update([
-                    'username' => $user_info['username'],
-                    'email' => $user_info['email'],
-                    'password' => $user_info['password'],
-                    'approval' => '0',
-                    'status' => '0',
-                    'completed_status' => '0',
-                    'step' => 1,
-                    'role_id'  => '2',
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-
-                $result = file_upload_od($user_info['newFileName'], $user_info['resume_cv']);
-                if($result != 'error on uploding'){
-                    if (Storage::disk('public')->exists($user_info['resume_cv'])) {
-                        // Storage::disk('public')->delete($user_info['resume_cv']);
-                    }
-                    $path = $result;
-                } else{
-                    $path = $user_info['resume_cv'];
-                }
-
-                DB::table('userdetails')->where('user_id',$users_email_temp->id)->update([
-                    'phone_number' => $user_info['phone_number'],
-                    'resume_cv' => $path,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-
-                Session::put('temp_user_id', $users_email_temp->id);
-
-            } else {
-
-                $userId = DB::table('users')->insertGetId([
-                    'username' => $user_info['username'],
-                    'email' => $user_info['email'],
-                    'password' => $user_info['password'],
-                    'approval' => '0',
-                    'role_id'  => '2',
-                    'completed_status' => '0',
-                    'status' => '0',
-                    'step' => 1,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-
-                $result = file_upload_od($user_info['newFileName'], $user_info['resume_cv']);
-                if($result != 'error on uploding'){
-                    if (Storage::disk('public')->exists($user_info['resume_cv'])) {
-                        // Storage::disk('public')->delete($user_info['resume_cv']);
-                    }
-                    $path = $result;
-                } else{
-                    $path = $user_info['resume_cv'];
-                }
-
-                DB::table('userdetails')->insert([
-                    'user_id' => $userId,
-                    'phone_number' => $user_info['phone_number'],
-                    'skill' => '[]',
-                    'edu_data' => '[]',
-                    'references' => '[]',
-                    'resume_cv' => $path,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-
-                Session::put('temp_user_id', $userId);
-            }
-
-            Session::put('step', 2);
-            session()->forget('user_info');
-
-            $rsp_msg['response'] = 'success';
-            $rsp_msg['message']  = "Phone Number Verified Successfully";
-
-        } else {
-            $rsp_msg['response'] = 'error';
-            $rsp_msg['message']  = "Invalid OTP";
-        }
-
-
-        return $rsp_msg;
-    }
-
-
-
-    public function resendOtp_phone($request)
-    {
-        $otp = mt_rand(1000, 9999);
-        $otp = 1234;
-        Session::put('otp', $otp);
-
-        $timestamp = Carbon::now();
-        Session::put('otp_timestamp', $timestamp);
-
-        $user_info = Session::get('user_info');
-
-        $student_name = 'Admin';
-
-
-        $data['template']    = 'MobileVerifications';
-        $data['use']          = 'otp_sms';
-        $data['phone']        = str_replace(['+', ' '], '', $user_info['phone_number']);
-        $data['otp']          = $otp;
-
-        // send_sms_through_2factor($data);
-
-        // $to = $user_info['email'];
-        // $subject = "$otp is your Manalot Leadership Network Reset Verification Code.";
-        // $body = "Hello, <br>
-        // For security purposes, please enter the code below to verify your account.<br>
-        // Resend Verification Code: <b>$otp</b> <br>
-        // The code is valid for 2 minutes.  <br>
-        // Having problems with the code? <br>
-        // The code will not work if timed out. <br>
-        // Please request for a new code.";
-
+        Userdetails::where('user_id', Session::get('user_id'))->update([
+            'certificate_data' => json_encode($certificate_data),
+        ]);
 
         $rsp_msg['response'] = 'success';
-        $rsp_msg['message']  = "OTP has been Resend no this Number : " . $user_info['phone_number'];
+        $rsp_msg['message']  = "User Skills Detail Added successfully. Please Proceed";
 
         return $rsp_msg;
+
     }
-
-    //----------------------- phone verification ---------------------------------------//
-
-
 
     public function create_personal_info($request){
 
@@ -1084,7 +841,6 @@ class UserController extends Controller
         return $rsp_msg;
 
     }
-
 
     public function create_personal_work_info($request){
 
@@ -1189,119 +945,18 @@ class UserController extends Controller
 
     }
 
-
-
-
-    public function create_certifications_info($request){
-
-        $validator = Validator::make($request->all(), [
-            // 'certificate_name' => ['required', 'string', 'regex:/^[A-Za-z0-9\s,.\/\'&]+$/i', 'min:3', 'max:50'],
-            'certificate_name' => 'required',
-            // 'certificate_issuing' => ['required', 'string', 'regex:/^[A-Za-z0-9\s,.\/\'&]+$/i', 'min:3', 'max:50'],
-            'certificate_issuing' => ['required', 'min:1', 'max:50'],
-            'certificate_obtn_date' => 'required',
-
-            'edu_degree.*' => 'required',
-            'edu_clg_name.*' => 'required',
-            'edu_graduation_year.*' => 'required',
-
-        ], [
-            'certificate_name.required' => 'The Certificate Name is required.',
-            'certificate_name.min' => 'The Certificate Name must be at least 1 character.',
-            'certificate_name.max' => 'The Certificate Name may not be greater than 100 characters.',
-
-            'certificate_issuing.required' => 'The Certificate Issuing field is required.',
-            'certificate_issuing.min' => 'The Certificate Issuing must be at least 1 character.',
-            'certificate_issuing.max' => 'The Certificate Issuing may not be greater than 50 characters.',
-
-            'certificate_obtn_date.required' => 'The Certificate Obtain Date is required.',
-
-            'edu_degree.*.required' => 'The Degree field is required.',
-            'edu_clg_name.*.required' => 'The School/University Name field is required.',
-            'edu_graduation_year.*.required' => 'The Graduation Year field is required.',
-            'edu_field.*.required' => 'The Major/Field of Study field is required.',
-        ]);
-
-        if ($validator->fails()) {
-            $rsp_msg['response'] = 'error';
-            $rsp_msg['message']  = $validator->errors()->all();
-
-            return $rsp_msg;
-        }
-
-        //---- education -------
-        $edu_data = [];
-        $edu_clg_name = $request->input('edu_clg_name');
-        $edu_degree = $request->input('edu_degree');
-        $edu_graduation_year = $request->input('edu_graduation_year');
-        $edu_field = $request->input('edu_field');
-
-        for ($i = 0; $i < count($edu_clg_name); $i++) {
-            $edu_data[] = [
-                'edu_clg_name' => $edu_clg_name[$i],
-                'edu_degree' => $edu_degree[$i],
-                'edu_graduation_year' => $edu_graduation_year[$i],
-                'edu_field' => $edu_field[$i],
-            ];
-        }
-
-        //------ education -----------
-
-        // Combine the form data into an array
-        $certificate_data = [];
-        $certificate_names = $request->input('certificate_name');
-        $certificate_dates = $request->input('certificate_obtn_date');
-        $certificate_issuings = $request->input('certificate_issuing');
-
-        for ($i = 0; $i < count($certificate_names); $i++) {
-            $certificate_data[] = [
-                'certificate_name' => $certificate_names[$i],
-                'certificate_obtn_date' => $certificate_dates[$i],
-                'certificate_issuing' => $certificate_issuings[$i],
-            ];
-        }
-
-
-
-        $result = DB::table('userdetails')->where('user_id', Session::get('temp_user_id'))->update([
-
-            'certificate_data' => json_encode($certificate_data),
-            // 'edu_degree' => $request->input('edu_degree'),
-            // 'edu_clg_name' => $request->input('edu_clg_name'),
-            // 'edu_graduation_year' => $request->input('edu_graduation_year'),
-            // 'edu_field' => $request->input('edu_field'),
-            'edu_data' => json_encode($edu_data),
-
-        ]);
-
-        DB::table('users')->where('id', Session::get('temp_user_id'))->update([
-            'step' =>  4,
-        ]);
-
-        Session::put('step', 5);
-
-        $rsp_msg['response'] = 'success';
-        $rsp_msg['message']  = "User Skills Detail Added successfully. Please Proceed";
-
-        return $rsp_msg;
+    public function create_work_authorization($request){
 
     }
 
     public function create_preferences_info($request){
 
         $validator = Validator::make($request->all(), [
-            // 'pref_title' => ['required', 'string', 'regex:/^[A-Za-z\s,.\/\'&]+$/i', 'min:1', 'max:50'],
-            // 'pref_emp_type' => ['required', 'string', 'regex:/^[A-Za-z\s,.\/\'&]+$/i', 'min:1', 'max:50'],
-            // 'pref_industry' => ['required', 'string', 'regex:/^[A-Za-z\s,.\/\'&]+$/i', 'min:1', 'max:50'],
-            // 'pref_location' => ['required', 'string', 'regex:/^[A-Za-z\s,.\/\'&]+$/i', 'min:1', 'max:50'],
-            // 'pref_salary' => ['required', 'string', 'regex:/^[A-Za-z0-9\s,.\/\'&]+$/i', 'min:1', 'max:50'],
             'pref_title' => ['required', 'min:1', 'max:50'],
             'pref_emp_type' => ['required', 'min:1', 'max:50'],
             'pref_industry.*' => 'required',
             'pref_location' => ['required', 'min:1', 'max:50'],
             'pref_salary' => ['required', 'string', 'regex:/^[A-Za-z0-9\s,.\/\'&]+$/i', 'min:1', 'max:100'],
-            'current_salary' => ['nullable', 'string', 'regex:/^[A-Za-z0-9\s,.\/\'&]+$/i', 'min:1', 'max:100'],
-            'notice_period_duration' => 'required',
             'reference_name' => [
                 'required',
                 function ($attribute, $value, $fail) {
@@ -1330,11 +985,7 @@ class UserController extends Controller
                     }
                 }
             ],
-            'work_authorization_status' => 'required',
-            'availability' => 'required',
-            // 'notice_period' => 'required',
             'pref_salary_currency' => 'required',
-            'current_salary_currency' => 'required',
         ], [
             'pref_title.required' => 'The Preferred Title is required.',
             'pref_title.min' => 'The Preferred Title must be at least 1 character.',
@@ -1344,17 +995,11 @@ class UserController extends Controller
             'pref_emp_type.min' => 'The Preferred Employment Type must be at least 1 character.',
             'pref_emp_type.max' => 'The Preferred Employment Type may not be greater than 50 characters.',
 
-            'notice_period_duration.required' => 'The Notice Period Duration is required.',
-
             'pref_industry.*.required' => 'The Preferred Industry field is required.',
 
             'pref_location.required' => 'The Preferred Location is required.',
             'pref_location.min' => 'The Preferred Location must be at least 1 character.',
             'pref_location.max' => 'The Preferred Location may not be greater than 50 characters.',
-
-            'current_salary.min' => 'The Current Salary must be at least 1 character.',
-            'current_salary.max' => 'The Current Salary may not be greater than 100 characters.',
-            'current_salary.regex' => 'The Current Salary format is invalid.',
 
             'pref_salary.required' => 'The Preferred Salary is required.',
             'pref_salary.min' => 'The Preferred Salary must be at least 1 character.',
@@ -1366,13 +1011,6 @@ class UserController extends Controller
             'reference_phone.required' => 'The Reference Phone Number is required.',
             'reference_phone.numeric' => 'The Reference Phone Number must contain only numeric values.',
 
-            'work_authorization_status.required' => 'The Work Authorization Status is required.',
-
-            'availability.required' => 'The Availability field is required.',
-
-            // 'notice_period.required' => 'The Notice Period is required.',
-
-            'current_salary_currency.required' => 'The Currency is required.',
             'pref_salary_currency.required' => 'The Currency is required.',
         ]);
 
@@ -1399,44 +1037,23 @@ class UserController extends Controller
 
         $pref_industry_elements = explode(',', $pref_industry[0]);
 
-        // Trim spaces from each element
         $pref_industry_elements = array_map('trim', $pref_industry_elements);
 
-
-
-        $result =  DB::table('userdetails')->where('user_id', Session::get('temp_user_id'))->update([
+       Userdetails::where('user_id', Session::get('user_id'))->update([
             'pref_title' => $request->input('pref_title'),
             'pref_emp_type' => $request->input('pref_emp_type'),
             'pref_industry' => json_encode($pref_industry_elements),
             'pref_location' => $request->input('pref_location'),
-            'current_salary' => $request->input('current_salary'),
             'pref_salary' => $request->input('pref_salary'),
-            'current_salary_currency' => $request->input('current_salary_currency'),
             'pref_salary_currency' => $request->input('pref_salary_currency'),
             'references' => json_encode($references_data),
-
-            'work_authorization_status' => $request->input('work_authorization_status'),
-            'availability' => $request->input('availability'),
-            // 'notice_period' => $request->input('notice_period'),
-            'notice_period_duration' => $request->input('notice_period_duration'),
         ]);
-
-
-        DB::table('users')->where('id', Session::get('temp_user_id'))->update([
-            'step' =>  5,
-        ]);
-
-        Session::put('step', 6);
 
         $rsp_msg['response'] = 'success';
         $rsp_msg['message']  = "User Preferences Detail Added successfully. Please Proceed";
 
-
         return $rsp_msg;
-
     }
-
-
 
     public function create_social_media_info($request){
 

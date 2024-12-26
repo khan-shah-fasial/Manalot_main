@@ -1,4 +1,4 @@
-@if(auth()->user()) 
+@if(auth()->user())
     <div class="header user_header d-md-block d-none helvetica_font">
         <div class="container-lg container-fluid">
             <header class="d-flex align-items-center justify-content-between">
@@ -173,7 +173,7 @@
 								</div>
 							</div>
 						</div>
-					</div> 						                    
+					</div>
 					<a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
                             <img src="/assets/images/crown_icon3.svg" alt="Notification icon" />
@@ -194,18 +194,19 @@
                                         </p>
                                     </div>
                                 </div>
-                                <a class="view_profile_btn" href="/sample-profile">View Profile</a>
+                                <a class="view_profile_btn" href="{{route('user.edit-profile')}}">Edit Profile</a>
+                                <a class="view_profile_btn" href="{{route('sample_profile')}}">View Profile</a>
                                 <a href="" class="view_profile_quick_menu">Setting & Privacy</a>
                                 <a href="" class="view_profile_quick_menu">Help</a>
                                 <a href="" class="view_profile_quick_menu">Language</a>
-                            </div> 
+                            </div>
                             <a href="{{ url(route('customer.logout')) }}" class="logout">Sign Out</a>
                         </div>
                     </div>
                 </div>
             </header>
         </div>
-    </div> 
+    </div>
 
     <div class="header user_header user_header_mobile d-md-none d-block helvetica_font">
         <div class="container-fluid px-0">
@@ -223,7 +224,7 @@
                                 <button class="close">X</button>
                                 <input type="text" placeholder="Search" />
                                 <button type="submit" class="searched">
-                                    <i class="fa fa-search"></i> 
+                                    <i class="fa fa-search"></i>
                                 </button>
                             </div>
                         </div>
@@ -328,5 +329,5 @@
                 </div>
             </header>
         </div>
-    </div> 
+    </div>
 @endif

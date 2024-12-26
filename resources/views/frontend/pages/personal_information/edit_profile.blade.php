@@ -263,8 +263,7 @@
                                         <div class="position-relative form-group">
                                             <label for="formFile" class="form-label" id="profile_photo">Profile Photo {{--<span class="leble_size">(png, jpg)</span>--}}</label>
                                             @if (!empty($profile_photo) && $profile_photo != null)
-                                                <a class="pdf_view" target="_blank"
-                                                    href="{{ asset('storage/' . $profile_photo) }}">
+                                                <a class="pdf_view" target="_blank" href="{{ asset('storage/' . $profile_photo) }}">
                                                     View
                                                 </a>
                                             @endif
@@ -543,124 +542,20 @@
                         <div class="edu tab-pane fade" id="edu" role="tabpanel" aria-labelledby="edu_tab">
                             <h3 class="prsnl_info_heading">Education</h3>
 
-                            <!-- <form class="proxima_nova_font">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="school_university" class="form-label">School/University Name*</label>
-                                        <input type="text" class="form-control" id="school_university">
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="degree" class="form-label">Degree*</label>
-                                        <input type="text" class="form-control" id="degree">
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="graduation_year" class="form-label">Graduation Year*</label>
-                                        <select class="form-select" id="graduation_year">
-                                            <option>Select Year</option>
-                                            <option>2010</option>
-                                            <option>2011</option>
-                                            <option>2012</option>
-                                            <option>2013</option>
-                                            <option>2014</option>
-                                            <option>2015</option>
-                                            <option>2016</option>
-                                            <option>2017</option>
-                                            <option>2018</option>
-                                            <option>2019</option>
-                                            <option>2020</option>
-                                            <option>2021</option>
-                                            <option>2022</option>
-                                            <option>2023</option>
-                                            <option>2024</option>
-                                            <option>2025</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="major_field" class="form-label">Major/Field of Study*</label>
-                                        <input type="text" class="form-control" id="major_field">
-                                    </div>
-
-                                    <div class="col-md-6 add_more_div">
-                                        <button class="add_more" href="">ADD MORE +</button>
-                                    </div>
-
-                                    <div class="col-md-12 purple_btn">
-                                        <button type="submit" class="prsnl_inf_updt_btn">update</button>
-                                    </div>
-                                </div>
-                            </form> -->
-
-                            <form id="skills-info" action="{{ url(route('user.save-profile', ['param' => 'certifications-info'])) }}"
+                            <form id="education-info" action="{{ url(route('user.save-profile', ['param' => 'education-info'])) }}"
                                 method="post" enctype="multipart/form-data" class="d-flex flex-column">
                                 @csrf
 
                                 @if (!empty($edu_data))
                                     @foreach ($edu_data as $index => $education)
-                                            <div class="row education-row cirtificate_pdd">
-                                                <div class="col-md-6 mb-4">
-                                                    <div class="position-relative form-group">
-                                                        <label for="School" class="form-label">School/University Name*</label>
-                                                        <input type="text" class="form-control is-invalid input_text certificate_name"
-                                                            name="edu_clg_name[]" placeholder="Enter Your School/University Name"
-                                                            pattern="[A-Za-z]+" minlength="1" maxlength="100"
-                                                            value="{{ $education['edu_clg_name'] }}" required/>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6 mb-4">
-                                                    <div class="position-relative form-group">
-                                                        <label for="Degree" class="form-label">Degree*</label>
-                                                        <input type="text" class="form-control is-invalid input_text certificate_name"
-                                                            name="edu_degree[]" placeholder="Enter your Degree"
-                                                            pattern="[A-Za-z]+" minlength="1" maxlength="100"
-                                                            value="{{ $education['edu_degree'] }}" required/>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6 mb-4">
-                                                    <div class="position-relative form-group">
-                                                        <label for="Certificate" class="form-label">Graduation Year*</label>
-                                                        <input type="text" class="form-control is-invalid input_text certificate_name"
-                                                            name="edu_graduation_year[]" placeholder="Enter Your Graduation Year"
-                                                            pattern="[0-9A-Za-z]+" minlength="1" maxlength="100"
-                                                            value="{{ $education['edu_graduation_year'] }}" required/>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="col-md-6 mb-4">
-                                                    <div class="position-relative form-group">
-                                                        <label for="Certificate" class="form-label">Major/Field of Study*</label>
-                                                        <input type="text" class="form-control is-invalid input_text certificate_name"
-                                                            name="edu_field[]" placeholder="Enter your Major Field of Study"
-                                                            pattern="[A-Za-z]+" minlength="1" maxlength="100"
-                                                            value="{{ $education['edu_field'] }}" required/>
-                                                    </div>
-                                                </div>
-
-                                                @if ($index === 0)
-                                                    <div class="col-md-12">
-                                                        <button type="button" class="btn btn-success add-edu-row">Add More +</button>
-                                                    </div>
-                                                @else
-                                                    <div class="col-md-12">
-                                                        <button type="button" class="btn btn-danger remove-edu-row">Remove -</button>
-                                                    </div>
-                                                @endif
-                                            </div>
-                                    @endforeach
-                                @else
                                         <div class="row education-row cirtificate_pdd">
                                             <div class="col-md-6 mb-4">
                                                 <div class="position-relative form-group">
                                                     <label for="School" class="form-label">School/University Name*</label>
                                                     <input type="text" class="form-control is-invalid input_text certificate_name"
                                                         name="edu_clg_name[]" placeholder="Enter Your School/University Name"
-                                                        pattern="[A-Za-z]+" minlength="1" maxlength="100" value="Don Bosco" required
-                                                    />
+                                                        pattern="[A-Za-z]+" minlength="1" maxlength="100"
+                                                        value="{{ $education['edu_clg_name'] }}" required/>
                                                 </div>
                                             </div>
 
@@ -669,37 +564,18 @@
                                                     <label for="Degree" class="form-label">Degree*</label>
                                                     <input type="text" class="form-control is-invalid input_text certificate_name"
                                                         name="edu_degree[]" placeholder="Enter your Degree"
-                                                        pattern="[A-Za-z]+" minlength="1" maxlength="100" value="BSc in Design" required
-                                                    />
+                                                        pattern="[A-Za-z]+" minlength="1" maxlength="100"
+                                                        value="{{ $education['edu_degree'] }}" required/>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6 mb-4">
                                                 <div class="position-relative form-group">
                                                     <label for="Certificate" class="form-label">Graduation Year*</label>
-                                                    {{-- <input type="text" class="form-control is-invalid input_text certificate_name"
+                                                    <input type="text" class="form-control is-invalid input_text certificate_name"
                                                         name="edu_graduation_year[]" placeholder="Enter Your Graduation Year"
-                                                        pattern="[0-9A-Za-z]+" minlength="1" maxlength="100" required
-                                                    /> --}}
-                                                    <select class="form-select" id="graduation_year">
-                                                        <option>Select Year</option>
-                                                        <option>2010</option>
-                                                        <option>2011</option>
-                                                        <option>2012</option>
-                                                        <option>2013</option>
-                                                        <option>2014</option>
-                                                        <option>2015</option>
-                                                        <option>2016</option>
-                                                        <option>2017</option>
-                                                        <option>2018</option>
-                                                        <option>2019</option>
-                                                        <option>2020</option>
-                                                        <option>2021</option>
-                                                        <option>2022</option>
-                                                        <option>2023</option>
-                                                        <option>2024</option>
-                                                        <option>2025</option>
-                                                    </select>
+                                                        pattern="[0-9A-Za-z]+" minlength="1" maxlength="100"
+                                                        value="{{ $education['edu_graduation_year'] }}" required/>
                                                 </div>
                                             </div>
 
@@ -709,16 +585,63 @@
                                                     <label for="Certificate" class="form-label">Major/Field of Study*</label>
                                                     <input type="text" class="form-control is-invalid input_text certificate_name"
                                                         name="edu_field[]" placeholder="Enter your Major Field of Study"
-                                                        pattern="[A-Za-z]+" minlength="1" maxlength="100" value="Arts"
-                                                    />
+                                                        pattern="[A-Za-z]+" minlength="1" maxlength="100"
+                                                        value="{{ $education['edu_field'] }}" required/>
                                                 </div>
                                             </div>
 
-
-                                            <div class="col-md-6 add_more_div">
-                                                <button class="add_more add-edu-row" href="">ADD MORE +</button>
+                                            <div class="col-md-12 d-flex gap-3 add_more_div">
+                                                <button type="button" class="add_more add-edu-row">Add More +</button>
+                                                <button type="button" class="remove_more remove-edu-row">Remove -</button>
                                             </div>
                                         </div>
+                                    @endforeach
+                                @else
+                                    <div class="row education-row cirtificate_pdd">
+                                        <div class="col-md-6 mb-4">
+                                            <div class="position-relative form-group">
+                                                <label for="School" class="form-label">School/University Name*</label>
+                                                <input type="text" class="form-control is-invalid input_text certificate_name"
+                                                    name="edu_clg_name[]" placeholder="Enter Your School/University Name"
+                                                    pattern="[A-Za-z]+" minlength="1" maxlength="100" value="Don Bosco" required
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 mb-4">
+                                            <div class="position-relative form-group">
+                                                <label for="Degree" class="form-label">Degree*</label>
+                                                <input type="text" class="form-control is-invalid input_text certificate_name"
+                                                    name="edu_degree[]" placeholder="Enter your Degree"
+                                                    pattern="[A-Za-z]+" minlength="1" maxlength="100" value="BSc in Design" required
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 mb-4">
+                                            <div class="position-relative form-group">
+                                                <label for="Certificate" class="form-label">Graduation Year*</label>
+                                                <input type="text" class="form-control is-invalid input_text certificate_name"
+                                                    name="edu_graduation_year[]" placeholder="Enter Your Graduation Year"
+                                                    pattern="[0-9A-Za-z]+" minlength="1" maxlength="100" required
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 mb-4">
+                                            <div class="position-relative form-group">
+                                                <label for="Certificate" class="form-label">Major/Field of Study*</label>
+                                                <input type="text" class="form-control is-invalid input_text certificate_name"
+                                                    name="edu_field[]" placeholder="Enter your Major Field of Study"
+                                                    pattern="[A-Za-z]+" minlength="1" maxlength="100" value="Arts"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 add_more_div">
+                                            <button class="add_more add-edu-row" href="">ADD MORE +</button>
+                                        </div>
+                                    </div>
                                 @endif
 
                                 <div class="purple_btn text-start">
@@ -734,30 +657,8 @@
 
                         <div class="cert_flag tab-pane fade" id="cert_flag" role="tabpanel" aria-labelledby="cert_flag_tab">
                             <h3 class="prsnl_info_heading">Certifications</h3>
-                            <!-- <form class="proxima_nova_font">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label for="certificate_name" class="form-label">Certificate Name</label>
-                                        <input type="text" class="form-control" id="certificate_name">
-                                    </div>
 
-                                    <div class="col-md-6">
-                                        <label for="date_obtained" class="form-label">Date Obtained</label>
-                                        <input type="date" class="form-control is-invalid input_text register_date_field" id="date_obtained" name="dob" placeholder="Date" required="">
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="issuing_organization" class="form-label">Issuing Organization</label>
-                                        <input type="text" class="form-control" id="issuing_organization">
-                                    </div>
-
-                                    <div class="col-md-12 purple_btn">
-                                        <button type="submit" class="prsnl_inf_updt_btn">update</button>
-                                    </div>
-                                </div>
-                            </form> -->
-
-                            <form id="skills-info" action="{{ url(route('user.save-profile', ['param' => 'certifications-info'])) }}"
+                            <form id="certifications-info" action="{{ url(route('user.save-profile', ['param' => 'certifications-info'])) }}"
                                 method="post" enctype="multipart/form-data" class="d-flex flex-column">
                                 @csrf
                                 @if (!empty($certificate_data))
@@ -766,18 +667,17 @@
                                             <div class="col-md-12 mb-4">
                                                 <div class="position-relative form-group">
                                                     <label for="Certificate" class="form-label">Certificate Name</label>
-                                                    <input type="text" class="form-control is-invalid input_text certificate_name"
+                                                    <input required type="text" class="form-control is-invalid input_text certificate_name"
                                                         name="certificate_name[]" placeholder="Enter Your Certificate Name"
                                                         pattern="[0-9A-Za-z]+" minlength="1" maxlength="100"
-                                                        value="{{ $certificate['certificate_name'] }} Completion of Figma Mega Course " />
+                                                        value="{{ $certificate['certificate_name'] }}" />
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6 mb-4">
                                                 <div class="position-relative form-group">
                                                     <label for="Date Obtained*" class="form-label">Date Obtained</label>
-
-                                                    <input type="date" class="form-control is-invalid input_text certificate_obtn_date register_date_field" max="{{ date('Y-m-d') }}"
+                                                    <input required type="date" class="form-control is-invalid input_text certificate_obtn_date register_date_field" max="{{ date('Y-m-d') }}"
                                                         name="certificate_obtn_date[]" placeholder="Date"
                                                         value="{{ $certificate['certificate_obtn_date'] }}" />
                                                 </div>
@@ -786,22 +686,17 @@
                                             <div class="col-md-6 mb-4">
                                                 <div class="position-relative form-group">
                                                     <label for="Issuing Registration*" class="form-label">Issuing Organization</label>
-                                                    <input type="text" class="form-control is-invalid input_text certificate_issuing"
+                                                    <input required type="text" class="form-control is-invalid input_text certificate_issuing"
                                                         name="certificate_issuing[]" placeholder="Enter your Issuing Registration"
                                                         pattern="[0-9A-Za-z]+" minlength="1" maxlength="50"
-                                                        value="{{ $certificate['certificate_issuing'] }} Lorem Ipsum" />
+                                                        value="{{ $certificate['certificate_issuing'] }}" />
                                                 </div>
                                             </div>
 
-                                            @if ($index === 0)
-                                                <div class="col-md-6 add_more_div">
-                                                    <button class="add_more" href="">ADD MORE +</button>
-                                                </div>
-                                            @else
-                                                <div class="col-md-12">
-                                                    <button type="button" class="btn btn-danger remove-row">Remove -</button>
-                                                </div>
-                                            @endif
+                                            <div class="col-md-6 d-flex gap-3 add_more_div">
+                                                <button type="button" class="add_more add-row-certificate">ADD MORE +</button>
+                                                <button type="button" class="remove_more remove-row-certificate">REMOVE -</button>
+                                            </div>
                                         </div>
                                     @endforeach
                                 @else
@@ -811,7 +706,7 @@
                                                 <label for="Certificate" class="form-label">Certificate Name</label>
                                                 <input type="text" class="form-control is-invalid input_text certificate_name"
                                                     name="certificate_name[]" placeholder="Enter Your Certificate Name"
-                                                    pattern="[0-9A-Za-z]+" minlength="1" maxlength="50" value="Completion of Figma Mega Course "/>
+                                                    pattern="[0-9A-Za-z]+" minlength="1" maxlength="50"/>
                                             </div>
                                         </div>
 
@@ -828,12 +723,12 @@
                                                 <label for="Issuing Registration*" class="form-label">Issuing Organization</label>
                                                 <input type="text" class="form-control is-invalid input_text certificate_issuing"
                                                     name="certificate_issuing[]" placeholder="Enter your Issuing Registration"
-                                                    pattern="[0-9A-Za-z]+" minlength="1" maxlength="50" value="Lorem Ipsum"/>
+                                                    pattern="[0-9A-Za-z]+" minlength="1" maxlength="50" />
                                             </div>
                                         </div>
 
                                         <div class="col-md-6 add_more_div">
-                                            <button class="add_more" href="">ADD MORE +</button>
+                                            <button type="button" class="add_more add-row-certificate">ADD MORE +</button>
                                         </div>
                                     </div>
                                 @endif
@@ -851,38 +746,82 @@
                         <div class="avail_ref tab-pane fade" id="avail_ref" role="tabpanel" aria-labelledby="avail_ref_tab">
                             <h3 class="prsnl_info_heading">Availability </h3>
 
-                            <form id="preferences-info proxima_nova_font" action="{{ url(route('user.save-profile', ['param' => 'preferences-info'])) }}"
+                            <form id="preferences-info" class="proxima_nova_font" action="{{ url(route('user.save-profile', ['param' => 'preferences-info'])) }}"
                                 method="post" enctype="multipart/form-data" class="d-flex flex-column">
-                                @csrf
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
                                         <div class="position-relative form-group">
                                             <label for="Preferred Title/Role*" class="form-label">Preferred Title/Role*</label>
                                             <input type="text" class="form-control is-invalid input_text" id="Preferred Designation / Title / Role*"
                                                 name="pref_title" placeholder="Enter Your Preferred Des / Title / Role" pattern="[0-9A-Za-z]+"
-                                                minlength="1" maxlength="50" value="{{ $pref_title }} UI/UX Designer" required />
+                                                minlength="1" maxlength="50" value="{{ $pref_title }}" required />
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="position-relative form-group">
                                             <label for="Employment Type*" class="form-label">Employment Type*</label>
-                                             <input type="text" class="form-control is-invalid input_text" id="Employment Type*"
-                                                name="pref_emp_type" placeholder="Enter your Employment Type" pattern="[A-Za-z]+"
-                                                minlength="1" maxlength="50" value="{{ $pref_emp_type }} Full Time" required />
+                                            <select class="select2 form-select form-control is-invalid input_select old-select2"
+                                                aria-label="Default select example" id="pref_emp_type" name="pref_emp_type" required>
+                                                <option value="">Select Employment Type</option>
+                                                @foreach ($employ_types as $row)
+                                                    <option value="{{ $row->id }}" @if ($pref_emp_type == $row->id) selected @endif>
+                                                        {{ ucfirst($row->name) }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
 
-
-
-
-
                                     <div class="col-md-6 mb-4">
                                         <div class="position-relative form-group">
-                                            <label for="Desired Job Location*" class="form-label">Preferred Industry*</label>
-                                            <input type="text" class="form-control is-invalid input_text" id="Preferred Industry"
-                                                name="pref_location" pattern="[A-Za-z]+" minlength="1" maxlength="50"
-                                                value="{{-- {{ $pref_location }} --}} IT" placeholder="Enter your Preferred Industry"
-                                                required />
+
+                                            <label for="preferred-industry" class="form-label-new form-label">Preferred Industries*</label>
+                                            <div id="list-preferred-industry" class=" industry_cls d-none-new"></div>
+
+                                            <div id="dropdown-container-new">
+                                                <input type="hidden" id="selected-values-ids-new" name="pref_industry[]" value="">
+
+                                                <div class="dropdown-new industry_option_dropdown">
+                                                    <a class="dropdown-toggle-new dropdown-toggle industry_option">Select Preferred Industries Served</a>
+                                                    <div class="dropdown-menu-new industry-check-box industry_option_dropdown_box">
+                                                        @foreach ($groupedIndustries as $mainIndustry)
+                                                            <div class="title-new" style="background: #d5d5d563; padding: 10px; font-weight: 600">
+                                                                {{ $mainIndustry->name }}
+                                                            </div>
+
+                                                            @php
+                                                                $sub_Catg = $industry->where('main_partent_id', $mainIndustry->id);
+                                                            @endphp
+
+                                                            @if (count($sub_Catg) != 0)
+                                                                @foreach ($sub_Catg as $subIndustry)
+                                                                    <div class="option-new custom-languages pt-1">
+                                                                        <input type="checkbox" id="sub-industry-{{ $subIndustry->id }}"
+                                                                        data-id="{{ $subIndustry->id }}" @if (in_array($subIndustry->id, json_decode($pref_industry_check, true))) checked @endif>
+                                                                        <label for="sub-industry-{{ $subIndustry->id }}">{{ $subIndustry->name }}</label>
+
+                                                                        @php
+                                                                            $child_Catg = $industry->where('sub_parent_id', $subIndustry->id);
+                                                                        @endphp
+
+                                                                        @if (count($child_Catg) != 0)
+                                                                            <div class="child-options-new">
+                                                                                @foreach ($child_Catg as $childIndustry)
+                                                                                <div class="field_option pt-1">
+                                                                                    <input type="checkbox" id="child-industry-{{ $childIndustry->id }}" data-id="{{ $childIndustry->id }}" @if (in_array($childIndustry->id, json_decode($pref_industry_check, true))) checked @endif>
+                                                                                    <label for="child-industry-{{ $childIndustry->id }}">{{ $childIndustry->name }}</label>
+                                                                                </div>
+                                                                                @endforeach
+                                                                            </div>
+                                                                        @endif
+                                                                    </div>
+                                                                @endforeach
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
 
@@ -891,81 +830,83 @@
                                             <label for="Employment Type*" class="form-label">Desired Job Location*</label>
                                             <input type="text" class="form-control is-invalid input_text" id="Desired Job Location*"
                                                 name="pref_location" pattern="[A-Za-z]+" minlength="1" maxlength="50"
-                                                value="{{ $pref_location }} Mumbai" placeholder="Enter your Desired Job Location"
+                                                value="{{ $pref_location }}" placeholder="Enter your Desired Job Location"
                                                 required />
                                         </div>
                                     </div>
-
                                     <div class="col-md-6 mb-4">
                                         <div class="position-relative form-group">
-                                            <label for="State" class="form-label d-block">Expected Salary*</label>
+                                            <label for="State" class="form-label d-block">Expected Salary (Per Annum) *</label>
+                                            <div class="sallery_width1">
+                                                <select class="select2 form-select form-control is-invalid input_select old-select2"
+                                                    aria-label="Default select example" id="pref_salary_currency" name="pref_salary_currency" required>
+
+                                                    @foreach ($currencies as $row)
+                                                        <option value="{{ $row->id }}" @if ($pref_salary_currency == $row->id || ($row->id == '28' && $pref_salary_currency == null)) selected @endif>
+                                                            <b>{{ $row->symbol }}</b>
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                             <div class="sallery_width2">
                                                 <input type="text" class="form-control is-invalid input_text" id="Expected-Salary"
-                                                    name="pref_salary" placeholder="Enter Your Expected Salary" pattern="[A-Za-z]+"
-                                                    minlength="1" maxlength="50" value="{{ $pref_salary }} 5LPA" required />
+                                                    name="pref_salary" placeholder="Enter Your Expected Salary" pattern="[0-9]+"
+                                                    minlength="1" maxlength="50" value="{{ $pref_salary }}" required />
                                             </div>
                                         </div>
                                     </div>
 
-
                                     <h3 class="prsnl_info_heading prsnl_info_heading2">References</h3>
                                     @if (!empty($references_data))
                                         @foreach ($references_data as $index => $reference)
-                                            <div class="row reference-row">
+                                            <div class="row reference-row mt-4">
                                                 <div class="col-md-6 mb-3">
                                                     <div class="position-relative form-group">
-                                                        <label for="name" class="form-label">Name</label>
+                                                        <label for="name" class="form-label">Name *</label>
                                                         <input type="text" class="form-control is-invalid input_text reference_name"
                                                             name="reference_name[]" placeholder="Enter Your Name" pattern="[A-Za-z]+"
-                                                            minlength="1" maxlength="20" value="{{ $reference['reference_name'] }} Lorem Ipsum"
+                                                            minlength="1" maxlength="20" value="{{ $reference['reference_name'] }}"
                                                             required />
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6 mb-3">
                                                     <div class="position-relative form-group">
-                                                        <label for="Phone{{ $index + 1 }}" class="form-label">Mobile No</label>
+                                                        <label for="Phone" class="form-label">Phone *</label>
                                                         <input type="text" class="form-control is-invalid input_text reference_phone"
-                                                            name="reference_phone[]" id="Phone{{ $index + 1 }}"
-                                                            placeholder="Enter your Phone Number" title="This Field is required" pattern="[0-9]+" minlength="5"
-                                                            maxlength="16" value="{{ $reference['reference_phone'] }} 9865121545" required />
+                                                            name="reference_phone[]" id="Phone{{ $index + 1 }}" placeholder="Enter your Phone Number" title="This Field is required" pattern="[\+]?[0-9\s]{5,16}" minlength="5"
+                                                            maxlength="16" value="{{ $reference['reference_phone'] }}" required />
                                                     </div>
                                                 </div>
 
-                                                @if ($index === 0)
-                                                <div class="col-md-6 add_more_div">
-                                                    <button class="add_more" href="">ADD MORE +</button>
+                                                <div class="col-md-12 add_more_div d-flex gap-3">
+                                                    <button type="button" class="add_more add-reference-row">ADD MORE +</button>
+                                                    <button type="button" class="remove_more remove-reference-row">REMOVE -</button>
                                                 </div>
-                                                @else
-                                                    <div class="col-md-12">
-                                                        <button type="button" class="btn btn-danger remove-reference-row">Remove
-                                                            -</button>
-                                                    </div>
-                                                @endif
                                             </div>
                                         @endforeach
                                     @else
-                                        <div class="row reference-row">
+                                        <div class="row reference-row mt-4">
                                             <div class="col-md-6 mb-3">
                                                 <div class="position-relative form-group">
-                                                    <label for="name" class="form-label">Name</label>
+                                                    <label for="name" class="form-label">Name *</label>
                                                     <input type="text" class="form-control is-invalid input_text" id="name"
                                                         name="reference_name[]" placeholder="Enter Your Name" pattern="[A-Za-z]+"
-                                                        minlength="1" maxlength="20" value="Lorem Ipsum" required />
+                                                        minlength="1" maxlength="20" required />
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6 mb-3">
                                                 <div class="position-relative form-group">
-                                                    <label for="Phone1" class="form-label">Mobile No</label>
+                                                    <label for="Phone1" class="form-label">Phone *</label>
                                                     <input type="text" class="form-control is-invalid input_text reference_phone"
                                                         id="Phone1" name="reference_phone[]" placeholder="Enter your Phone Number"
-                                                        pattern="[0-9]+" minlength="10" maxlength="16" value="9865121545" required />
+                                                        pattern="[0-9]+" minlength="10" maxlength="16" required />
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 add_more_div">
-                                                <button class="add_more" href="">ADD MORE +</button>
+                                            <div class="col-md-12">
+                                                <button type="button" class="add_more add-reference-row">Add More +</button>
                                             </div>
                                         </div>
                                     @endif
@@ -983,7 +924,9 @@
 
                         <div class="wrk_auth tab-pane fade" id="wrk_auth" role="tabpanel" aria-labelledby="wrk_auth_tab">
                             <h3 class="prsnl_info_heading">Work Authorization</h3>
-                            <form class="proxima_nova_font">
+                            <form id="work-authorization" class="proxima_nova_font" action="{{ url(route('user.save-profile', ['param' => 'work-authorization'])) }}"
+                                method="post" enctype="multipart/form-data" class="d-flex flex-column">
+
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="position-relative form-group">
@@ -1113,10 +1056,41 @@
 @endsection
 @section('component.scripts')
 <script>
+/*--------------------- Forms ------------------*/
 
-    /*--------------------- API forms ------------------*/
+    // initValidate('#personal-info');
+    // initValidate('#change-password');
+    // initValidate('#personal-work-info');
+    // initValidate('#education-info');
+    // initValidate('#certifications-info');
+
+    function bindFormSubmit(selector, handler) {
+        initValidate(selector);
+        $(selector).on('submit', function(e) {
+            var form = $(this);
+            ajax_form_submit(e, form, handler);
+        });
+    }
+
+    var responseHandler = function (response) {
+        setTimeout(function () {
+            location.reload();
+        }, 100);
+    };
+
+    // Bind forms with the corresponding response handlers
+    bindFormSubmit('#personal-info', responseHandler);
+    bindFormSubmit('#change-password', responseHandler);
+    bindFormSubmit('#personal-work-info', responseHandler);
+    bindFormSubmit('#education-info', responseHandler);
+    bindFormSubmit('#certifications-info', responseHandler);
+    bindFormSubmit('#preferences-info', responseHandler);
+
+/*---------------------  Forms ------------------*/
 
     $(document).ready(function () {
+
+/*--------------------- API forms ------------------*/
         var typingTimer;
         var typingDelay = 1200; // 1.2 seconds delay
 
@@ -1164,18 +1138,26 @@
                 }, typingDelay);
             }
         });
+/*--------------------- API forms ------------------*/
 
         // Add row functionality
-        $(document).on('click', '.add-row', function () {
+        $(document).on('click', '.add-row-certificate', function (e) {
+            e.preventDefault(); // Prevent form submission
             var newRow = $('.certificate-row').first().clone(); // Clone the first row
-            newRow.find('input').val(''); // Clear input values in the cloned row
-            newRow.find('.add-row').remove(); // Remove add button from the cloned row
-            newRow.append('<div class="col-md-12 d-flex gap-3 mb-2"><button type="button" class="btn btn-success add-row">Add More +</button><button type="button" class="btn btn-danger remove-row">Remove</button></div>'); // Add new add and remove buttons
+            // Clear input values in the cloned row
+            newRow.find('input').each(function () {
+                $(this).val('');
+            });
+            newRow.find('.add_more_div').remove(); // Remove add button from the cloned row
+            // newRow.find('.add-row-certificate').remove(); // Remove add button from the cloned row
+            // newRow.find('.remove-row-certificate').remove(); // Remove add button from the cloned row
+            newRow.append('<div class="col-md-6 d-flex gap-3 add_more_div"><button type="button" class="add_more add-row-certificate">ADD MORE +</button><button type="button" class="remove_more remove-row-certificate">REMOVE -</button></div>'); // Add new add and remove buttons
             $('.certificate-row').last().after(newRow); // Append the cloned row at the end
         });
 
         // Remove row functionality
-        $(document).on('click', '.remove-row', function () {
+        $(document).on('click', '.remove-row-certificate', function (e) {
+            e.preventDefault(); // Prevent form submission
             if ($('.certificate-row').length > 1) {
                 $(this).closest('.certificate-row').remove(); // Remove the closest row
             } else {
@@ -1187,9 +1169,13 @@
         // Add row for Education
         $(document).on('click', '.add-edu-row', function () {
             var newRow = $('.education-row').first().clone(); // Clone the first row
-            newRow.find('input').val(''); // Clear input values in the cloned row
-            newRow.find('.add-edu-row').remove(); // Remove add button from the cloned row
-            newRow.append('<div class="col-md-12 d-flex gap-3 mb-2"><button type="button" class="btn btn-success add-edu-row">Add More +</button><button type="button" class="btn btn-danger remove-edu-row">Remove</button></div>'); // Add new add and remove buttons
+            // Clear input values in the cloned row
+            newRow.find('input').each(function () {
+                $(this).val('');
+            });
+            newRow.find('.add_more_div').remove(); // Remove|add button removing from the cloned row
+            // newRow.find('.add-edu-row').remove(); // Remove add button from the cloned row
+            newRow.append('<div class="col-md-12 d-flex gap-3 add_more_div"><button type="button" class="add_more add-edu-row">ADD MORE +</button><button type="button" class="remove_more remove-edu-row">REMOVE -</button></div>'); // Add new add and remove buttons
             $('.education-row').last().after(newRow); // Append the cloned row at the end
         });
 
@@ -1227,8 +1213,9 @@
         $(document).on('click', '.add-reference-row', function () {
             var newRow = $('.reference-row').first().clone(); // Clone the first row
             newRow.find('input').val(''); // Clear input values in the cloned row
-            newRow.find('.add-reference-row').remove(); // Remove add button from the cloned row
-            newRow.append('<div class="col-md-12 d-flex gap-3 mb-2"><button type="button" class="btn btn-success add-reference-row">Add More +</button><button type="button" class="btn btn-danger remove-reference-row">Remove -</button></div>'); // Add new add and remove buttons
+            newRow.find('.add_more_div').remove(); // Remove add button from the cloned row
+            // newRow.find('.add-reference-row').remove(); // Remove add button from the cloned row
+            newRow.append('<div class="col-md-12 add_more_div d-flex gap-3"><button type="button" class="add_more add-reference-row">ADD MORE +</button><button type="button" class="remove_more remove-reference-row">REMOVE -</button></div>');
             $('.reference-row').last().after(newRow); // Append the cloned row at the end
             rowIndex++; // Increment row index
             updateIDsAndInitialize(); // Update IDs and initialize intlTelInput
@@ -1349,41 +1336,7 @@
         }
     });
 
-    /*--------------------- personal info ------------------*/
-
-    initValidate('#personal-info');
-    initValidate('#change-password');
-    initValidate('#personal-work-info');
-
-    $('#personal-info').on('submit', function(e){
-        var form = $(this);
-        ajax_form_submit(e, form, responseHandler);
-    });
-
-    $('#change-password').on('submit', function(e){
-        var form = $(this);
-        ajax_form_submit(e, form, responseHandler);
-    });
-
-
-    $('#personal-work-info').on('submit', function(e){
-        var form = $(this);
-        ajax_form_submit(e, form, responseHandler);
-    });
-
-    var responseHandler = function (response) {
-
-        setTimeout(function () {
-            location.reload();
-        }, 100);
-
-    };
-
-
-/*---------------------  personal info ------------------*/
-
 </script>
-
 
 <script>
 
@@ -1479,5 +1432,80 @@
     });
 
 </script>
+<script>
+    const preferredIndustryList = document.getElementById('list-preferred-industry');
 
+    function processPreferredIndustries(input) {
+        preferredIndustryList.innerHTML = '';
+
+        if (!input.trim()) {
+            preferredIndustryList.classList.add('d-none-new');
+            return;
+        }
+
+        const industries = input.split(',').map(industry => industry.trim());
+
+        industries.forEach(industry => {
+            const li = document.createElement('li');
+            li.textContent = industry;
+            preferredIndustryList.appendChild(li);
+        });
+
+        preferredIndustryList.classList.remove('d-none-new');
+    }
+
+    $(document).ready(function () {
+        $('.dropdown-toggle-new').click(function () {
+            $('.dropdown-menu-new').toggle();
+        });
+
+        function updateMainCheckbox(mainCheckbox) {
+            var anyChildChecked = false;
+
+            $(mainCheckbox).siblings('.child-options-new').find('input[type="checkbox"]').each(function () {
+                if ($(this).prop('checked')) {
+                    anyChildChecked = true;
+                }
+            });
+
+            $(mainCheckbox).prop('checked', anyChildChecked);
+        }
+
+        function updateSelectedValues() {
+            var selectedLabels = [];
+            var selectedIds = [];
+            $('#dropdown-container-new').find('input[type="checkbox"]:checked').each(function () {
+                selectedLabels.push($(this).next('label').text());
+                selectedIds.push($(this).data('id'));
+            });
+            $('#selected-values-ids-new').val(selectedIds.join(', '));
+
+            processPreferredIndustries(selectedLabels.join(', '));
+
+            if (selectedLabels.length <= 0) {
+                preferredIndustryList.classList.add('d-none-new');
+            }
+        }
+
+        $('#dropdown-container-new').on('change', '.child-options-new input[type="checkbox"]', function () {
+            var mainCheckbox = $(this).closest('.option-new').find('input[type="checkbox"]').first();
+            updateMainCheckbox(mainCheckbox);
+            updateSelectedValues();
+        });
+
+        $('#dropdown-container-new').on('change', '.option-new > input[type="checkbox"]', function () {
+            var isChecked = $(this).prop('checked');
+            $(this).siblings('.child-options-new').find('input[type="checkbox"]').prop('checked', isChecked);
+            updateSelectedValues();
+        });
+
+        $(document).click(function(event) {
+            if (!$(event.target).closest('.dropdown-new').length) {
+                $('.dropdown-menu-new').hide();
+            }
+        });
+
+        updateSelectedValues();
+    });
+</script>
 @endsection

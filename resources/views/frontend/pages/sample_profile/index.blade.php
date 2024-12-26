@@ -15,7 +15,7 @@
 	.profile-page a:hover {
 		color: #535353;
 	}
-	
+
 	.profile-page .container {
     width: 86%;
 	}
@@ -23,7 +23,7 @@
 	.header .container-lg {
 		width: 89.7% !important;
 	}
-	
+
 	header.d-flex.align-items-center.justify-content-between {
 		width: 96%;
 	}
@@ -223,7 +223,7 @@
 								</div>
 							</div>
 						</div>
-					</div> 						                    
+					</div>
 					<a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
                             <img src="/assets/images/crown_icon3.svg" alt="Notification icon" />
@@ -244,18 +244,19 @@
                                         </p>
                                     </div>
                                 </div>
-                                <a class="view_profile_btn" href="/sample-profile">View Profile</a>
+                                <a class="view_profile_btn" href="{{route('user.edit-profile')}}">Edit Profile</a>
+                                <a class="view_profile_btn" href="{{route('sample_profile')}}">View Profile</a>
                                 <a href="" class="view_profile_quick_menu">Setting & Privacy</a>
                                 <a href="" class="view_profile_quick_menu">Help</a>
                                 <a href="" class="view_profile_quick_menu">Language</a>
-                            </div> 
+                            </div>
                             <a href="{{ url(route('customer.logout')) }}" class="logout">Sign Out</a>
                         </div>
                     </div>
                 </div>
             </header>
         </div>
-    </div> 
+    </div>
 
     <div class="header user_header user_header_mobile d-md-none d-block helvetica_font">
         <div class="container-fluid px-0">
@@ -269,7 +270,7 @@
                             <div class="d-flex">
                                 <button class="close">X</button>
                                 <button type="submit" class="searched">
-                                    <i class="fa fa-search"></i> 
+                                    <i class="fa fa-search"></i>
                                 </button>
                                 <input type="text" placeholder="Search" />
                             </div>
@@ -373,7 +374,7 @@
                 </div>
             </header>
         </div>
-    </div> 
+    </div>
 
 
 
@@ -384,12 +385,12 @@
 
 		<div class="bg-profile-content">
 			<img class="user_img" src="/assets/images/anil_rajkundra.png"/>
-			
+
 			<div class="profile_content_main_div">
 				<div class="profile-content">
 					<h3>Anil Raikundlia <img class="verified" src="/assets/images/verified.svg"> </h3>
-					<p> Listed as Most Innovative Leadership Advisory Firm – APAC 2024 
-						I Featured as a Top 10 Influential Leader - 2019 
+					<p> Listed as Most Innovative Leadership Advisory Firm – APAC 2024
+						I Featured as a Top 10 Influential Leader - 2019
 						I Listed as a Path-breaking Brand - 2018
 					</p>
 					<span>Mumbai, Maharashtra, India.</span>
@@ -460,7 +461,7 @@
 		<div class="row">
 		<div class="col-md-6"><h4 class="profile_heds">Personal Information</h4></div>
 		<div class="col-md-6"></div>
-		
+
 			<div class="col-md-4">
 				<p><strong>Date of Birth: </strong> 04/07/1996</p>
 			</div>
@@ -504,21 +505,21 @@
 			<div class="about_heading_div">
 				<img class="user_icon" src="/assets/images/user_icon.png">
 				<h4 class="about_heading">Personal Information</h4>
-			</div> 
+			</div>
 			<div class="personal_info_div">
 				<span class="personal_info"> <i class="fa fa-cake-candles"></i>4th July 1996 </span>
 				<div class="d-flex flex-md-row flex-column gap-md-5">
-					<span class="personal_info"> 
+					<span class="personal_info">
 						<i class="fa fa-phone icon pe-1"></i>
 						<a href="tel:+91-9892334709" class="user_number"> +91 9892334709 </a>
 					</span>
-					<span class="personal_info"> 
+					<span class="personal_info">
 						<i class="fa fa-envelope icon"></i>
 						<a href="mailto:graphics@nexgeno.in" class="user_email">graphics@nexgeno.in </a>
 					</span>
 				</div>
-				<span class="personal_info"> 
-					<i class="fa fa-location-dot icon"></i>407, Avighna Park, Malad West, Mumbai, Maharashtra, India 
+				<span class="personal_info">
+					<i class="fa fa-location-dot icon"></i>407, Avighna Park, Malad West, Mumbai, Maharashtra, India
 				</span>
             </div>
 		</div>
@@ -527,7 +528,7 @@
 				<img class="user_icon" src="/assets/images/speaker.png">
 				<h4 class="about_heading">Social Media Links</h4>
 			</div>
-            
+
         </div>
     </div> -->
 
@@ -539,19 +540,19 @@
 		</div>
 		<div class="about_para_div">
 			<p class="about_para">
-				As a versatile and dedicated human resource professional, I bring a wealth of experience as a seasoned 
-				consultant in providing global leadership advisory services. With a keen understanding of the 
-				intricate dynamics of leading multinational teams, I have guided organizations of all sizes in 
+				As a versatile and dedicated human resource professional, I bring a wealth of experience as a seasoned
+				consultant in providing global leadership advisory services. With a keen understanding of the
+				intricate dynamics of leading multinational teams, I have guided organizations of all sizes in
 				navigating the challenges of today's rapidly evolving business landscape.
 			</p>
 			<p class="about_para">
-				Whether working with a small start-up or a large corporation, my expertise in organizational development, 
-				change management, and cross-cultural communication has positioned me as a trusted advisor for companies 
+				Whether working with a small start-up or a large corporation, my expertise in organizational development,
+				change management, and cross-cultural communication has positioned me as a trusted advisor for companies
 				striving to achieve their global objectives.
 			</p>
 			<p class="about_para">
-				Sought out for high intuitiveness and passion for solving complex HR situations, my ability to 
-				understand the unique needs of each client and develop tailored solutions, has helped me make Manalot 
+				Sought out for high intuitiveness and passion for solving complex HR situations, my ability to
+				understand the unique needs of each client and develop tailored solutions, has helped me make Manalot
 				(formerly Maple Consulting & Services) a trusted partner for organizations around the world.
 			</p>
 			<a class="visit_mln" href=""> Visit us at www.manalot.com</a>
@@ -570,13 +571,13 @@
 					<h5 class="mb-1">Managing Director</h5>
 					<p class="">Manalot . Full time . Nov 2016 - Present . 8 yrs 1 mo | Mumbai, Maharashtra</p>
 					<p class="work_exp_details_text">
-						As a distinguished leadership advisory and retained executive search firm, 
-						Manalot (formerly Maple Consulting & Services) collaborates as a trusted partner-in-change 
-						for dynamic organizations and senior leadership worldwide. With a steadfast commitment to 
+						As a distinguished leadership advisory and retained executive search firm,
+						Manalot (formerly Maple Consulting & Services) collaborates as a trusted partner-in-change
+						for dynamic organizations and senior leadership worldwide. With a steadfast commitment to
 						building relationships based on trust and agility, <b class="bold_see_more"> …see more</b>
 					</p>
-					<div class="industry_main_div"> 
-						<strong class="industry_main_div_heading">Industry :</strong> 
+					<div class="industry_main_div">
+						<strong class="industry_main_div_heading">Industry :</strong>
 						<div class="industry_div_list">
 							<div class="bg_verified_main">
 								<img class="bg_verified_img" src="/assets/images/right_mark.svg">
@@ -628,12 +629,12 @@
 					<h5 class="mb-1">Director – Talent Acquisition</h5>
 					<p class="">SITEL | Jan 2011 - 2014 . 3 yrs 1 mo | Mumbai, Maharashtra</p>
 					<p class="work_exp_details_text">
-						As a distinguished leadership advisory and retained executive search firm, 
-						Manalot (formerly Maple Consulting & Services) collaborates as a trusted partner-in-change 
-						for dynamic organizations and senior leadership worldwide. With a steadfast commitment to 
+						As a distinguished leadership advisory and retained executive search firm,
+						Manalot (formerly Maple Consulting & Services) collaborates as a trusted partner-in-change
+						for dynamic organizations and senior leadership worldwide. With a steadfast commitment to
 						building relationships based on trust and agility, <b class="bold_see_more"> …see more</b>
 					</p>
-					
+
 					<div class="skills_main_div">
 						<strong class="skills_main_div_heading">Skills :</strong>
 						<div class="industry_div_list">
@@ -750,7 +751,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 
 
 
@@ -801,7 +802,7 @@
 
 	<div class="maple_consulting_div">
 		<h5 class="maple_consluting text-center">
-			© Maple Consulting and Services 
+			© Maple Consulting and Services
 		</h5>
 	</div>
 
@@ -809,11 +810,11 @@
 
 
 
-<!-- 
+<!--
 	 <div class="profile-information box_shadows mt-35 padd-40">
 		<div class="row"><div class="col-md-6"><h4 class="profile_heds">Work Experience</h4></div>
 		<div class="col-md-6"></div>
-		
+
 			<div class="col-md-4"><p><strong>Professional Title: </strong> UI/UX Designer</p>
 			</div>
 
@@ -843,7 +844,7 @@
 		<div class="row">
 		<div class="col-md-6"><h4 class="profile_heds">Education</h4></div>
 		<div class="col-md-6"></div>
-		
+
 			<div class="col-md-12">
 				<p><strong>School/University Name: </strong> Don Bosco</p>
 			</div>
@@ -867,7 +868,7 @@
 		<div class="row">
 		<div class="col-md-6"><h4 class="profile_heds">Certifications</h4></div>
 		<div class="col-md-6"></div>
-		
+
 			<div class="col-md-12">
 				<p><strong>Certificate Name: </strong> Completion of Figma Mega Course </p>
 			</div>
@@ -888,7 +889,7 @@
 		<div class="row">
 		<div class="col-md-6"><h4 class="profile_heds">Availability </h4></div>
 		<div class="col-md-6"></div>
-		
+
 			<div class="col-md-6">
 				<p><strong>Preferred Title/Role: </strong> UI/UX Designer</p>
 			</div>
@@ -906,7 +907,7 @@
 				<p><strong>Preferred Industry: </strong> IT</p>
 			</div>
 
-			
+
 
 			<div class="col-md-4">
 				<p><strong>Expected Salary: </strong> 5LPA</p>
@@ -919,7 +920,7 @@
 		<div class="row">
 		<div class="col-md-6"><h4 class="profile_heds">References </h4></div>
 		<div class="col-md-6"></div>
-		
+
 			<div class="col-md-6">
 				<p><strong>Name: </strong> Lorem Ipsum </p>
 			</div>
@@ -935,7 +936,7 @@
 		<div class="row">
 		<div class="col-md-6"><h4 class="profile_heds">Work Authorization </h4></div>
 		<div class="col-md-6"></div>
-		
+
 			<div class="col-md-6">
 				<p><strong>Legal Authorization to work status: </strong> Yes </p>
 			</div>
@@ -954,7 +955,7 @@
 		<div class="row">
 		<div class="col-md-6"><h4 class="profile_heds">Social Media Links</h4></div>
 		<div class="col-md-6"></div>
-		
+
 			<div class="col-md-6">
 				<p><strong>Linkdin: </strong> https://www.linkdin.com/Mahtab </p>
 			</div>
