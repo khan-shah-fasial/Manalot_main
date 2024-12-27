@@ -213,10 +213,13 @@ class IndexController extends Controller
     }
 
 
-        public function notification(){
+   public function notification(){
         return view('frontend.pages.notification.index');
     }
 
+   public function messaging(){
+        return view('frontend.pages.messaging.index');
+    }
 
     public function refund_policy(){
         return view('frontend.pages.refund_policy.index');

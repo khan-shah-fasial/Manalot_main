@@ -22,6 +22,10 @@
 .left_sidebar {
     width: 260px;
 }
+body
+{
+        background-color: #e7ecef;
+}
 </style>
 
     <section class="pb-5 mt80" style="background-color: #e7ecef">
@@ -132,8 +136,8 @@
                             </ul>
                         </div>
                         <div class="language_translator">
-                            <img class="icon_language" src="/assets/images/footer_english_filter.png">
-                            <i class="fa fa-caret-down"></i>
+                            <img class="icon_language" src="/assets/images/footer_english_filter.svg">
+                           
                         </div>
                         <strong class="text-center maple_footer_text">Maple Consulting & Services &copy; 2021</strong>
                         <div class="py-5 my-5 d-md-block d-none"></div>
@@ -556,9 +560,9 @@
         </div>
     </section>
 
-@endsection
+    
 
-<div class="post_modal modal" id="postmodal">
+    <div class="post_modal modal" id="postmodal">
     <div class="container">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -583,19 +587,239 @@
                     <div class="action-icons">
                         <button class="post_modal_img_btn ai_search_btn">
                             Rewrite with AI
-                        <button class="post_modal_img_btn">
+                        <button class="post_modal_img_btn" title="Image" data-bs-toggle="modal" data-bs-target="#imageGalleryModal">
                             <img class="post_modal_icon_img" src="/assets/images/post_image_gallery.svg">
                         </button>
-                        <button class="post_modal_img_btn">
+                        <button class="post_modal_img_btn" title="Event" data-bs-toggle="modal" data-bs-target="#calendarModal">
                             <img class="post_modal_icon_img" src="/assets/images/post_calendar.svg">
                         </button>
-                        <button class="post_modal_img_btn">
+                        <!-- <button class="post_modal_img_btn" title="Poll" data-bs-toggle="modal" data-bs-target="#squarePoleModal">
                             <img class="post_modal_icon_img" src="/assets/images/post_square_pole.svg">
                         </button>
-                        <button class="post_modal_img_btn">
+                        <button class="post_modal_img_btn" title="Document" data-bs-toggle="modal" data-bs-target="#documentModal">
                             <img class="post_modal_icon_img" src="/assets/images/post_document2.svg">
                         </button>
-                        <button class="post_modal_img_btn">
+                        <button class="post_modal_img_btn" title="Message" data-bs-toggle="modal" data-bs-target="#suitcaseModal">
+                            <img class="post_modal_icon_img" src="/assets/images/post_suitcase.svg">
+                        </button> -->
+                    </div>
+                    <button type="button" class="ai_search_btn post_modal_btn">Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal for Image Gallery -->
+<div class="post_modal modal" id="imageGalleryModal">
+    <div class="container">
+      <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal Body -->
+                <div class="modal-body modal_content_center">
+                    <div class="upload-container text-center">
+                       <img src="/assets/images/gallery_photos1.png" alt="" class="avatar" />
+                        <h3 class="fs-5 fw-bold mb-1">Select files to begin</h3>
+                        <p class="small">Share image or video in your post</p>
+                        <div class="file-upload">
+                            <label for="file-input" class="upload-btn">Upload from computer</label>
+                            <input type="file" id="file-input" class="file-input">
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal Footer -->
+                <div class="modal-footer d-flex justify-content-end">
+                    <div class="action-icons"></div>
+                    <button type="button" class="ai_search_btn post_modal_btn backs_btn" data-bs-dismiss="modal">Back</button>
+                    <button type="button" class="ai_search_btn post_modal_btn">Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Calendar -->
+<div class="post_modal modal" id="calendarModal">
+    <div class="container">
+       <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <div class="d-flex align-items-center gap-2">
+                        <h4 class="fs-5 fw-bold">Create an Event</h4>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    
+                </div>
+                <!-- Modal Footer -->
+                  <div class="modal-footer d-flex justify-content-end">
+                    <div class="action-icons"></div>
+                    <button type="button" class="ai_search_btn post_modal_btn backs_btn" data-bs-dismiss="modal">Back</button>
+                    <button type="button" class="ai_search_btn post_modal_btn">Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Square Pole -->
+<!-- <div class="post_modal modal" id="squarePoleModal">
+    <div class="container">
+        <div class="modal-dialog">
+            <div class="modal-content">
+              
+                <div class="modal-header">
+                    <div class="d-flex align-items-center gap-2">
+                        <h4 class="fs-5 fw-bold">Create a Poll</h4>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                 <div class="action-icons"></div>
+         
+                <div class="modal-body">
+                   <form id="poll_form" action=""
+                                method="post" class="d-flex flex-column">
+                             
+                                            <div class="row">
+                                                <div class="col-md-12 mb-4">
+                                                    <div class="position-relative form-group">
+                                                        <label for="your_question" class="form-label">Your Question*</label>
+                                                        <textarea type="text" class="form-control"
+                                                            name="your_question" placeholder="E.g. How do you commute to work?"
+                                                            required ></textarea>
+                                                    </div>
+                                                </div>
+
+                                           
+                                                <div class="col-md-12 mb-4">
+                                                    <div class="position-relative form-group">
+                                                        <label for="question1" class="form-label">Option 1*</label>
+                                                        <input type="text" class="form-control"
+                                                            name="question1" placeholder="E.g. Public Transportation"
+                                                            required/>
+                                                    </div>
+                                                </div>
+
+                                                 <div class="col-md-12 mb-4">
+                                                    <div class="position-relative form-group">
+                                                        <label for="question1" class="form-label">Option 2*</label>
+                                                        <input type="text" class="form-control"
+                                                            name="question1" placeholder="E.g. Public Transportation"
+                                                            required/>
+                                                    </div>
+                                                </div>
+
+                                            
+                                                <div class="col-md-12">
+                                                    <button type="button" class="btn btn-success add-edu-row">Add More +</button>
+                                                </div>
+                                               
+
+                                                 <div class="col-md-12 mb-4 mt-4">
+                                                    <div class="position-relative form-group">
+                                                        <label for="question1" class="form-label">Poll Duration</label>
+                                                       <select class="form-select" id="graduation_year">
+                                                        <option>Select Duration</option>
+                                                        <option>1 Week</option>
+                                                        <option>2 Week</option>
+                                                        <option>3 Week</option>
+                                                        <option>1 Month</option>
+                                                    </select>
+                                                    </div>
+                                                </div>
+
+                                          <div class="col-md-12">
+                                                <p>We don't allow requests for political opinions, medical information or other sensitive data. </p>
+                                            </div>
+                                            </div>
+                            </form>
+                </div>
+             
+                <div class="modal-footer d-flex justify-content-end">
+                   <button type="button" class="ai_search_btn post_modal_btn backs_btn" data-bs-dismiss="modal">Back</button>
+                    <button type="button" class="ai_search_btn post_modal_btn">Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- Modal for Document -->
+<!-- <div class="post_modal modal" id="documentModal">
+    <div class="container">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+              
+                <div class="modal-body modal_content_center">
+                    <div class="upload-container text-center">
+                       <img src="/assets/images/gallery_photos1.png" alt="" class="avatar" />
+                        <h3 class="fs-5 fw-bold mb-1">Select files to begin</h3>
+                        <p class="small">Share image or video in your post</p>
+                        <div class="file-upload">
+                            <label for="file-input" class="upload-btn">Upload from computer</label>
+                            <input type="file" id="file-input" class="file-input">
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="modal-footer d-flex justify-content-end">
+                    <div class="action-icons"></div>
+                    <button type="button" class="ai_search_btn post_modal_btn backs_btn" data-bs-dismiss="modal">Back</button>
+                    <button type="button" class="ai_search_btn post_modal_btn">Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- Modal for Suitcase -->
+<!-- <div class="post_modal modal" id="suitcaseModal">
+    <div class="container">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="d-flex align-items-center gap-2">
+                        <img class="user_img" src="/assets/images/drishti_img.png" alt="user_img" />
+                        <div class="user_name_post proxima_nova_font">
+                            <strong class="mb-0 user_name">Drishti Jadhav</strong> <img class="caret_down_img" src="/assets/images/caret_down.svg">
+                            <p class="text-xs mb-0" style="color: #535353;font-weight: 600;font-size: 11px;"> Post to All
+                            </p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" rows="4" placeholder="What do you want to talk about?"></textarea>
+                </div>
+              
+                <div class="modal-footer d-flex justify-content-end">
+                    <div class="action-icons">
+                        <button class="post_modal_img_btn ai_search_btn">
+                            Rewrite with AI
+                        <button class="post_modal_img_btn" data-bs-toggle="modal" data-bs-target="#imageGalleryModal">
+                            <img class="post_modal_icon_img" src="/assets/images/post_image_gallery.svg">
+                        </button>
+                        <button class="post_modal_img_btn" data-bs-toggle="modal" data-bs-target="#calendarModal">
+                            <img class="post_modal_icon_img" src="/assets/images/post_calendar.svg">
+                        </button>
+                        <button class="post_modal_img_btn" data-bs-toggle="modal" data-bs-target="#squarePoleModal">
+                            <img class="post_modal_icon_img" src="/assets/images/post_square_pole.svg">
+                        </button>
+                        <button class="post_modal_img_btn" data-bs-toggle="modal" data-bs-target="#documentModal">
+                            <img class="post_modal_icon_img" src="/assets/images/post_document2.svg">
+                        </button>
+                        <button class="post_modal_img_btn" data-bs-toggle="modal" data-bs-target="#suitcaseModal">
                             <img class="post_modal_icon_img" src="/assets/images/post_suitcase.svg">
                         </button>
                     </div>
@@ -604,4 +828,8 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
+
+
+
+@endsection
