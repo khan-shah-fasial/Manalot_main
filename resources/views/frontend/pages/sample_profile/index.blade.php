@@ -16,16 +16,13 @@
 		color: #535353;
 	}
 	
-	.profile-page .container {
-    width: 86%;
-	}
-
-	.header .container-lg {
-		width: 89.7% !important;
-	}
+	    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 1230px;
+    }
 	
 	header.d-flex.align-items-center.justify-content-between {
 		width:100%;
+		    pointer-events: none;
 	}
 </style>
 
@@ -33,28 +30,12 @@
 <div class="profile-page pb-5 proxima_nova_font ">
 <div class="container">
 
-<!-- <div class="top-section">
-	<div class="row align-items-center">
-		<div class="col-md-6">
-			<a href="/login"><img src="http://127.0.0.1:8000/assets/images/namalot_logo.png"></a>
-		</div>
-
-		<div class="col-md-6">
-			<div class="blue_btn text-end">
-			<a  href="/login" class="text-decoration-none text-white">Continue to Login</a>
-			</div>
-		</div>
-
-
-	</div>
-</div> -->
-
-	<div class="header user_header d-md-block d-none helvetica_font">
+ <div class="header user_header d-md-block d-none helvetica_font">
         <div class="container-lg container-fluid">
             <header class="d-flex align-items-center justify-content-between">
                 <div class="d-flex gap-lg-4 gap-md-2">
-					<a href="/" style="pointer-events: none;">
-                        <img class="user_header_logo" src="/assets/images/favicon2.png" alt="">
+                    <a href="/">
+                        <img class="user_header_logo" src="/assets/images/favicon2.png" alt="" />
                     </a>
                     <form class="search_input d-flex align-items-center mb-0">
                         <button>
@@ -64,167 +45,39 @@
                     </form>
                 </div>
                 <div class="d-flex justify-content-end align-items-center user_header_right">
-				<a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
+                    <a href="/" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
                             <img src="/assets/images/home_icon3.svg" alt="home icon" />
                         </div>
                         <span>Home</span>
                     </a>
-                    <a href="{{ url(route('about-us')) }}" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
+                    <a href="/" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
                         <div>
                             <img src="/assets/images/people_icon3.svg" alt="people icon" />
                         </div>
                         <span>My Network</span>
                     </a>
-                    <a href="" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
+                    <a href="/" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
                         <div>
                             <img src="/assets/images/suitcase_icon3.svg" alt="suitcase icon" />
                         </div>
                         <span>Jobs</span>
                     </a>
-                    <a href="{{ url(route('help-center')) }}" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
+                    <a href="/" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
                         <div>
                             <img src="/assets/images/chats_icon3.svg" alt="message icon" />
                         </div>
                         <span>Messages</span>
                     </a>
-                    <a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
+                    <a href="/notification" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
                             <img src="/assets/images/notification_icon3.svg" alt="Notification icon" />
                         </div>
                         <span>Notification</span>
                     </a>
-                    <div class="notification_box" style="display:none">
-                        <div class="notification_modal">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div class="d-flex gap-2 align-items-center">
-                                    <h3 class="mb-0 notifty_hed">Notification</h3>
-                                    <p class="mb-0 count_label">3</p>
-                                </div>
-                                <p class="mb-0 mark_read">Mark all as read</p>
-                            </div>
-                            <div class='mt-4 d-flex flex-column gap-2'>
-                                <div class="item d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img src="/assets/images/candinet1.png" alt="" />
-                                        <div>
-                                            <p class="mb-0">
-                                                <span class="username"> Manalot </span>
-                                                <span class="text-xs">Reacted on your Comment</span>
-                                            </p>
-                                            <p class="mb-0 text-xs">5m Ago</p>
-                                        </div>
-                                    </div>
-                                    <p class="dot"></p>
-                                </div>
-                                <div class="item d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img src="/assets/images/candinet1.png" alt="" />
-                                        <div>
-                                            <p class="mb-0">
-                                                <span class="username"> Manalot </span>
-                                                <span class="text-xs">Reacted on your Comment</span>
-                                            </p>
-                                            <p class="mb-0 text-xs">5m Ago</p>
-                                        </div>
-                                    </div>
-                                    <p class="dot"></p>
-                                </div>
-                                <div class="item d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img src="/assets/images/candinet1.png" alt="" />
-                                        <div>
-                                            <p class="mb-0">
-                                                <span class="username"> Manalot </span>
-                                                <span class="text-xs">Reacted on your Comment</span>
-                                            </p>
-                                            <p class="mb-0 text-xs">5m Ago</p>
-                                        </div>
-                                    </div>
-                                    <p class="dot"></p>
-                                </div>
-                                <div class="item d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img src="/assets/images/candinet1.png" alt="" />
-                                        <div>
-                                            <p class="mb-0">
-                                                <span class="username"> Manalot </span>
-                                                <span class="text-xs">Reacted on your Comment</span>
-                                            </p>
-                                            <p class="mb-0 text-xs">5m Ago</p>
-                                        </div>
-                                    </div>
-                                    <p class="dot"></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-					<div class="notification_box" style="display:none">
-						<div class="notification_modal">
-							<div class="d-flex align-items-center justify-content-between">
-								<div class="d-flex gap-2 align-items-center">
-									<h3 class="mb-0 notifty_hed">Notification</h3>
-									<p class="mb-0 count_label">3</p>
-								</div>
-								<p class="mb-0 mark_read">Mark all as read</p>
-							</div>
-							<div class='mt-4 d-flex flex-column gap-2'>
-								<div class="item d-flex align-items-center justify-content-between">
-									<div class="d-flex align-items-center gap-2">
-										<img src="/assets/images/candinet1.png" alt="" />
-										<div>
-											<p class="mb-0">
-												<span class="username"> Manalot </span>
-												<span class="text-xs">Reacted on your Comment</span>
-											</p>
-											<p class="mb-0 text-xs">5m Ago</p>
-										</div>
-									</div>
-									<p class="dot"></p>
-								</div>
-								<div class="item d-flex align-items-center justify-content-between">
-									<div class="d-flex align-items-center gap-2">
-										<img src="/assets/images/candinet1.png" alt="" />
-										<div>
-											<p class="mb-0">
-												<span class="username"> Manalot </span>
-												<span class="text-xs">Reacted on your Comment</span>
-											</p>
-											<p class="mb-0 text-xs">5m Ago</p>
-										</div>
-									</div>
-									<p class="dot"></p>
-								</div>
-								<div class="item d-flex align-items-center justify-content-between">
-									<div class="d-flex align-items-center gap-2">
-										<img src="/assets/images/candinet1.png" alt="" />
-										<div>
-											<p class="mb-0">
-												<span class="username"> Manalot </span>
-												<span class="text-xs">Reacted on your Comment</span>
-											</p>
-											<p class="mb-0 text-xs">5m Ago</p>
-										</div>
-									</div>
-									<p class="dot"></p>
-								</div>
-								<div class="item d-flex align-items-center justify-content-between">
-									<div class="d-flex align-items-center gap-2">
-										<img src="/assets/images/candinet1.png" alt="" />
-										<div>
-											<p class="mb-0">
-												<span class="username"> Manalot </span>
-												<span class="text-xs">Reacted on your Comment</span>
-											</p>
-											<p class="mb-0 text-xs">5m Ago</p>
-										</div>
-									</div>
-									<p class="dot"></p>
-								</div>
-							</div>
-						</div>
-					</div> 						                    
-					<a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
+                    
+									                    
+					<a href="#" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
                             <img src="/assets/images/crown_icon3.svg" alt="Notification icon" />
                         </div>
@@ -259,50 +112,55 @@
 
     <div class="header user_header user_header_mobile d-md-none d-block helvetica_font">
         <div class="container-fluid px-0">
-            <header class="d-flex align-items-center justify-content-between">
-                <div class="d-flex gap-1 logo_search_div">
+            <header class="d-flex align-items-center">
+                <div class="col-md-6 col-4 d-flex gap-1 logo_search_div">
                     <a href="/">
                         <img class="user_header_logo" src="/assets/images/favicon2.png" alt="" />
                     </a>
                     <form class="search_input d-flex align-items-center mb-0">
-                        <div class="mobile_search_input" style="display: none;">
-                            <div class="d-flex">
-                                <button class="close">X</button>
-                                <button type="submit" class="searched">
-                                    <i class="fa fa-search"></i> 
-                                </button>
-                                <input type="text" placeholder="Search" />
-                            </div>
-                        </div>
                         <button class="mobile_search_btn">
                             <i class="fa fa-search"></i>
                         </button>
+                        <div class="mobile_search_input" style="display: none;">
+                            <div class="d-flex">
+                                <button class="close">X</button>
+                                <input type="text" placeholder="Search" />
+                                <button type="submit" class="searched">
+                                    <i class="fa fa-search"></i> 
+                                </button>
+                            </div>
+                        </div>
                     </form>
                 </div>
-                <div class="d-flex justify-content-end align-items-center user_header_right">
+                <div class="col-md-6 col-8 d-flex justify-content-end align-items-center user_header_right">
                     <a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
-                            <img src="/assets/images/home_icon2.png" alt="home icon" />
+                            <img src="/assets/images/home_icon2.svg" alt="home icon" />
                         </div>
                     </a>
                     <a href="{{ url(route('about-us')) }}" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
                         <div>
-                            <img src="/assets/images/people_icon.png" alt="people icon" />
+                            <img src="/assets/images/people_icon.svg" alt="people icon" />
                         </div>
                     </a>
                     <a href="" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
                         <div>
-                            <img src="/assets/images/suitcase_icon2.png" alt="suitcase icon" />
+                            <img src="/assets/images/suitcase_icon2.svg" alt="suitcase icon" />
                         </div>
                     </a>
                     <a href="{{ url(route('help-center')) }}" class="d-flex flex-column gap-1 align-items-center text-decoration-none text-dark text-xs">
                         <div>
-                            <img src="/assets/images/chats_icon.png" alt="message icon" />
+                            <img src="/assets/images/chats_icon.svg" alt="message icon" />
                         </div>
                     </a>
                     <a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
-                            <img src="/assets/images/notification_icon.png" alt="Notification icon" />
+                            <img src="/assets/images/notification_icon.svg" alt="Notification icon" />
+                        </div>
+                    </a>
+					<a href="#" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column gap-1 align-items-center text-decoration-none inherit text-dark text-xs notification_button">
+                        <div>
+                            <img src="/assets/images/crown_icon2.svg" alt="Notification icon" />
                         </div>
                     </a>
                     <div class="notification_box" style="display:none">
@@ -374,9 +232,6 @@
             </header>
         </div>
     </div> 
-
-
-
 	<div class="image-profile box_shadows">
 		<div class="bg-profile-cover">
 		   <img class="img-fluid" src="/assets/images/user_profile_banner.png"/>

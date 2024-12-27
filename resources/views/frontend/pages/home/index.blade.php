@@ -16,11 +16,11 @@
     }
 
     .right_sidebar {
-    width: 260px;
+    width: 257px;
 }
 
 .left_sidebar {
-    width: 260px;
+    width: 257px;
 }
 body
 {

@@ -101,15 +101,14 @@
 @endphp
 <style>
     @media screen and (min-width: 1200px) {
-        .container, .container-lg, .container-md, .container-sm, .container-xl {
-            max-width: 1230px;
-        }
-
+      
         header.d-flex.align-items-center.justify-content-between {
             width: 100%;
         }
     }
-
+  .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 1270px;
+    }
 
     body#index {
         background-color: #e7ecef;
@@ -118,10 +117,7 @@
     .user_header .search_input button { 
         padding: 8px 0px 8px 20px;
     }
-    .header > .container-lg.container-fluid {
-        padding: 0px;
-    }
-
+    
     .education-row .col-md-6:nth-child(odd) {
     padding-left: 12px;
     padding-right: 12px !important;
