@@ -25,7 +25,7 @@
 	}
 
 	header.d-flex.align-items-center.justify-content-between {
-		width: 96%;
+		width: 100%;
 	}
 </style>
 
