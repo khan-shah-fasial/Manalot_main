@@ -88,7 +88,7 @@
     $references_data = isset($user_detail->references) ? $user_detail->references : '[]';
     $references_data = json_decode($references_data, true);
 
-    $linkdin = isset($user_detail->linkdin) ? $user_detail->linkdin : null;
+    $linkedin = isset($user_detail->linkdin) ? $user_detail->linkdin : null;
     $twitter = isset($user_detail->twitter) ? $user_detail->twitter : null;
     $instagram = isset($user_detail->instagram) ? $user_detail->instagram : null;
     $facebook = isset($user_detail->facebook) ? $user_detail->facebook : null;
@@ -409,7 +409,7 @@
                                             <label for="job_title" class="form-label">Professional Title*</label>
                                             <input type="text" class="form-control is-invalid input_text" id="job_title"
                                                 name="wrk_exp__title" placeholder="Enter your Job Title" pattern="[A-Za-z]+"
-                                                minlength="2" maxlength="100" value="{{ $wrk_exp__title }} UI/UX Designer" required />
+                                                minlength="2" maxlength="100" value="{{ $wrk_exp__title }}" required />
                                         </div>
                                     </div>
 
@@ -418,7 +418,7 @@
                                             <label for="company" class="form-label">Company Name*</label>
                                             <input type="text" class="form-control is-invalid input_text" id="company"
                                                 name="wrk_exp_company_name" placeholder="Enter your Company Name" pattern="[A-Za-z]+"
-                                                minlength="1" maxlength="100" value="{{ $wrk_exp_company_name }} Nexgeno Technology Pvt Ltd"
+                                                minlength="1" maxlength="100" value="{{ $wrk_exp_company_name }}"
                                                 required>
                                         </div>
                                     </div>
@@ -983,18 +983,15 @@
 
                         <div class="social_media tab-pane fade" id="social_media" role="tabpanel" aria-labelledby="social_media_tab">
                             <h3 class="prsnl_info_heading">Social Media Links</h3>
-
-                            <form id="social-media-info proxima_nova_font" action="{{ url(route('user.save-profile', ['param' => 'social-media-info'])) }}"
+                            <form id="social-media-info" class="proxima_nova_font" action="{{ url(route('user.save-profile', ['param' => 'social-media-info'])) }}"
                                 method="post" enctype="multipart/form-data" class="d-flex flex-column">
-                                @csrf
+
                                 <div class="row">
                                     <div class="col-md-6 col-12 mb-4">
                                         <div class="position-relative form-group">
-                                            <label for="Linkdin" class="form-label">Linkdin</label>
+                                            <label for="linkedin" class="form-label">linkedin</label>
                                             <img src="/assets/images/linkedin_icon.svg" alt="" class="input_icon linkedin_icon">
-                                            <input type="text" class="form-control is-invalid input_text" id="Linkdin"
-                                                name="linkdin" placeholder="Enter Your Linkedin URL" value="{{ $linkdin }} www.linkdin.com/Johndeo"
-                                                name="linkdin" pattern="https://www.linkedin.com/[a-zA-Z0-9_.]+"/>
+                                            <input type="text" class="form-control is-invalid input_text" id="Linkdin" name="linkdin" placeholder="Enter Your Linkedin URL" value="{{ $linkedin }}" pattern="https://www.linkedin.com/[a-zA-Z0-9_.]+"/>
                                             <!-- {{-- <img src="images/linkedin.png" alt="" class="input_icon" /> --}} -->
                                         </div>
                                     </div>
@@ -1003,8 +1000,7 @@
                                             <label for="Twitter" class="form-label">Twitter</label>
                                             <img src="/assets/images/twitter_icon.svg" alt="" class="input_icon twitter_icon">
                                             <input type="text" class="form-control is-invalid input_text" id="Twitter"
-                                                name="twitter" placeholder="Enter Your X URL" value="{{ $twitter }} www.twitter.com/Johndeo"
-                                                name="twitter" pattern="https://twitter.com/[a-zA-Z0-9_]+"/>
+                                                name="twitter" placeholder="Enter Your X URL" value="{{ $twitter }}" pattern="https://twitter.com/[a-zA-Z0-9_]+"/>
                                             <!-- {{-- <img src="images/x.png" alt="" class="input_icon" /> --}} -->
                                         </div>
                                     </div>
@@ -1013,8 +1009,7 @@
                                             <label for="Instagram" class="form-label">Instagram</label>
                                             <img src="/assets/images/instagram_icon.svg" alt="" class="input_icon insta_icon">
                                             <input type="text" class="form-control is-invalid input_text" id="Instagram"
-                                                placeholder="Enter Your Instagram URL" value="{{ $instagram }} www.instagram.com/Johndeo"
-                                                name="instagram" pattern="https://www.instagram.com/[a-zA-Z0-9_.]+">
+                                                placeholder="Enter Your Instagram URL" value="{{ $instagram }}" name="instagram" pattern="https://www.instagram.com/[a-zA-Z0-9_.]+">
                                             {{-- <img src="images/instagram.png" alt="" class="input_icon" /> --}}
                                         </div>
                                     </div>
@@ -1023,17 +1018,14 @@
                                             <label for="Facebook" class="form-label">Facebook</label>
                                             <img src="/assets/images/facebook_icon.svg" alt="" class="input_icon facebook_icon">
                                             <input type="text" class="form-control is-invalid input_text" id="Facebook"
-                                                placeholder="Enter Your Facebook URL" value="{{ $facebook }} www.facebook.com/Johndeo"
-                                                name="facebook" pattern="https://www.facebook.com/[a-zA-Z0-9.]+"/>
+                                                placeholder="Enter Your Facebook URL" value="{{ $facebook }}" name="facebook" pattern="https://www.facebook.com/[a-zA-Z0-9.]+"/>
                                             {{-- <img src="images/facebook.png" alt="" class="input_icon" /> --}}
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="position-relative form-group">
                                             <label for="others" class="form-label">Others</label>
-                                            <input type="text" class="form-control is-invalid input_text" id="others"
-                                                placeholder="Enter Your Other URL" value="{{ $other }} www.telegram/Johndeo"
-                                                name="other" />
+                                            <input type="text" class="form-control is-invalid input_text" id="others" placeholder="Enter Your Other URL" value="{{ $other }}" name="other" />
                                         </div>
                                     </div>
                                 </div>
@@ -1056,26 +1048,47 @@
 @endsection
 @section('component.scripts')
 <script>
-/*--------------------- Forms ------------------*/
-
-    // initValidate('#personal-info');
-    // initValidate('#change-password');
-    // initValidate('#personal-work-info');
-    // initValidate('#education-info');
-    // initValidate('#certifications-info');
+/*--------------------- Forms Ajax ------------------*/
 
     function bindFormSubmit(selector, handler) {
         initValidate(selector);
         $(selector).on('submit', function(e) {
             var form = $(this);
+
+            // Special check for #social-media-info
+            if (selector === '#social-media-info') {
+                // Check if all non-required fields are empty
+                var allEmpty = true;
+                form.find('input, textarea, select').each(function () {
+                    var field = $(this);
+                    if (!field.prop('required') && field.val().trim() !== '') {
+                        allEmpty = false; // At least one non-required field is filled
+                        return false; // Break loop
+                    }
+                });
+
+                if (allEmpty) {
+                    e.preventDefault(); // Prevent submission if all non-required fields are empty
+                    alert('Please fill out at least one field before submitting.');
+                    return;
+                }
+            }
+
+            // Log the form data to console
+            // console.log('Form Data:');
+            // form.find('input, textarea, select').each(function () {
+            //     var field = $(this);
+            //     console.log(`${field.attr('name') || 'Unnamed field'}: ${field.val()}`);
+            // });
+
             ajax_form_submit(e, form, handler);
         });
     }
 
     var responseHandler = function (response) {
-        setTimeout(function () {
-            location.reload();
-        }, 100);
+        // setTimeout(function () {
+        //     location.reload();
+        // }, 100);
     };
 
     // Bind forms with the corresponding response handlers
@@ -1085,6 +1098,8 @@
     bindFormSubmit('#education-info', responseHandler);
     bindFormSubmit('#certifications-info', responseHandler);
     bindFormSubmit('#preferences-info', responseHandler);
+    bindFormSubmit('#work-authorization', responseHandler);
+    bindFormSubmit('#social-media-info', responseHandler);
 
 /*---------------------  Forms ------------------*/
 
@@ -1189,8 +1204,6 @@
         });
 
         // Add row for Education
-
-
         var rowIndex = $('.reference-row').length; // Initialize with the number of existing rows
 
         // Function to update IDs and initialize intlTelInput
@@ -1337,175 +1350,113 @@
     });
 
 </script>
-
 <script>
+    function setupDropdown({
+        dropdownContainerId,
+        toggleClass,
+        menuClass,
+        hiddenInputId,
+        listId,
+        hiddenListClass,
+        childOptionClass,
+        mainOptionClass
+    }) {
+        const listElement = document.getElementById(listId);
+        const hiddenInput = document.getElementById(hiddenInputId);
 
-    const industrialList = document.getElementById('list-industry');
+        function processList(input) {
+            listElement.innerHTML = ''; // Clear the list
 
-    function processIndustries(input) {
+            if (!input.trim()) {
+                listElement.classList.add(hiddenListClass);
+                return;
+            }
 
-        // Clear the container
-        industrialList.innerHTML = '';
+            const items = input.split(',').map(item => item.trim());
 
-        // Check if the input is empty or blank
-        if (!input.trim()) {
-            industrialList.classList.add('d-none');
-            return;
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                listElement.appendChild(li);
+            });
+
+            listElement.classList.remove(hiddenListClass);
         }
 
-        // Split and trim the input
-        const industries = input.split(',').map(industry => industry.trim());
+        $(document).ready(function () {
+            // Show/hide dropdown menu
+            $(toggleClass).click(function () {
+                $(menuClass).toggle();
+            });
 
-        // Create and append div elements
-        industries.forEach(industry => {
-            const div = document.createElement('li');
-            div.textContent = industry;
-            industrialList.appendChild(div);
-        });
+            function updateMainCheckbox(mainCheckbox) {
+                const hasCheckedChild = $(mainCheckbox)
+                    .siblings(childOptionClass)
+                    .find('input[type="checkbox"]:checked').length > 0;
 
-        // Remove d-none class
-        industrialList.classList.remove('d-none');
-    }
+                $(mainCheckbox).prop('checked', hasCheckedChild);
+            }
 
+            function updateList() {
+                const selectedLabels = [];
+                const selectedIds = [];
 
-    $(document).ready(function () {
-        // Toggle dropdown visibility
-        $('.dropdown-toggle').click(function () {
-            $('.dropdown-menu').toggle();
-        });
+                $(`${dropdownContainerId} input[type="checkbox"]:checked`).each(function () {
+                    selectedLabels.push($(this).next('label').text());
+                    selectedIds.push($(this).data('id'));
+                });
 
-        // Function to check/uncheck main option based on child options
-        function updateMainCheckbox(mainCheckbox) {
-            var anyChildChecked = false;
+                hiddenInput.value = selectedIds.join(', '); // Update hidden input
+                processList(selectedLabels.join(', ')); // Update the list
+            }
 
-            // Check if any child checkboxes are checked
-            $(mainCheckbox).siblings('.child-options').find('input[type="checkbox"]').each(function () {
-                if ($(this).prop('checked')) {
-                    anyChildChecked = true;
+            // Handle child checkbox changes
+            $(`${dropdownContainerId}`).on('change', `${childOptionClass} input[type="checkbox"]`, function () {
+                const mainCheckbox = $(this).closest(mainOptionClass).find('input[type="checkbox"]').first();
+                updateMainCheckbox(mainCheckbox);
+                updateList();
+            });
+
+            // Handle main checkbox changes
+            $(`${dropdownContainerId}`).on('change', `${mainOptionClass} > input[type="checkbox"]`, function () {
+                const isChecked = $(this).prop('checked');
+                $(this).siblings(childOptionClass).find('input[type="checkbox"]').prop('checked', isChecked);
+                updateList();
+            });
+
+            // Close dropdown when clicking outside
+            $(document).click(function (event) {
+                if (!$(event.target).closest(menuClass).length && !$(event.target).closest(toggleClass).length) {
+                    $(menuClass).hide();
                 }
             });
 
-            // Update the main checkbox based on child checkboxes
-            $(mainCheckbox).prop('checked', anyChildChecked);
-        }
-
-        // Function to update selected values
-        function updateSelectedValues() {
-            var selectedLabels = [];
-            var selectedIds = [];
-            $('#dropdown-container').find('input[type="checkbox"]:checked').each(function () {
-                selectedLabels.push($(this).next('label').text());
-                selectedIds.push($(this).data('id'));
-            });
-            // $('#selected-values').text('Selected values: ' + selectedLabels.join(', '));
-            $('#selected-values-ids').val(selectedIds.join(', '));
-
-            processIndustries(selectedLabels.join(', '));
-
-            if (selectedLabels.length <= 0) {
-                industrialList.classList.add('d-none');
-            }
-        }
-
-        // Event listener for child checkboxes
-        $('#dropdown-container').on('change', '.child-options input[type="checkbox"]', function () {
-            var mainCheckbox = $(this).closest('.option').find('input[type="checkbox"]').first();
-            updateMainCheckbox(mainCheckbox);
-            updateSelectedValues();
+            updateList(); // Initial list update
         });
-
-        // Event listener for main checkboxes
-        $('#dropdown-container').on('change', '.option > input[type="checkbox"]', function () {
-            var isChecked = $(this).prop('checked');
-            $(this).siblings('.child-options').find('input[type="checkbox"]').prop('checked', isChecked);
-            updateSelectedValues();
-        });
-
-        // Close dropdown when clicking outside
-        $(document).click(function(event) {
-            if (!$(event.target).closest('.dropdown').length) {
-                $('.dropdown-menu').hide();
-            }
-        });
-
-        updateSelectedValues();
-    });
-
-</script>
-<script>
-    const preferredIndustryList = document.getElementById('list-preferred-industry');
-
-    function processPreferredIndustries(input) {
-        preferredIndustryList.innerHTML = '';
-
-        if (!input.trim()) {
-            preferredIndustryList.classList.add('d-none-new');
-            return;
-        }
-
-        const industries = input.split(',').map(industry => industry.trim());
-
-        industries.forEach(industry => {
-            const li = document.createElement('li');
-            li.textContent = industry;
-            preferredIndustryList.appendChild(li);
-        });
-
-        preferredIndustryList.classList.remove('d-none-new');
     }
 
-    $(document).ready(function () {
-        $('.dropdown-toggle-new').click(function () {
-            $('.dropdown-menu-new').toggle();
-        });
+    // Initialize the dropdowns
+    setupDropdown({
+        dropdownContainerId: '#dropdown-container',
+        toggleClass: '.dropdown-toggle',
+        menuClass: '.dropdown-menu',
+        hiddenInputId: 'selected-values-ids',
+        listId: 'list-industry',
+        hiddenListClass: 'd-none',
+        childOptionClass: '.child-options',
+        mainOptionClass: '.option'
+    });
 
-        function updateMainCheckbox(mainCheckbox) {
-            var anyChildChecked = false;
-
-            $(mainCheckbox).siblings('.child-options-new').find('input[type="checkbox"]').each(function () {
-                if ($(this).prop('checked')) {
-                    anyChildChecked = true;
-                }
-            });
-
-            $(mainCheckbox).prop('checked', anyChildChecked);
-        }
-
-        function updateSelectedValues() {
-            var selectedLabels = [];
-            var selectedIds = [];
-            $('#dropdown-container-new').find('input[type="checkbox"]:checked').each(function () {
-                selectedLabels.push($(this).next('label').text());
-                selectedIds.push($(this).data('id'));
-            });
-            $('#selected-values-ids-new').val(selectedIds.join(', '));
-
-            processPreferredIndustries(selectedLabels.join(', '));
-
-            if (selectedLabels.length <= 0) {
-                preferredIndustryList.classList.add('d-none-new');
-            }
-        }
-
-        $('#dropdown-container-new').on('change', '.child-options-new input[type="checkbox"]', function () {
-            var mainCheckbox = $(this).closest('.option-new').find('input[type="checkbox"]').first();
-            updateMainCheckbox(mainCheckbox);
-            updateSelectedValues();
-        });
-
-        $('#dropdown-container-new').on('change', '.option-new > input[type="checkbox"]', function () {
-            var isChecked = $(this).prop('checked');
-            $(this).siblings('.child-options-new').find('input[type="checkbox"]').prop('checked', isChecked);
-            updateSelectedValues();
-        });
-
-        $(document).click(function(event) {
-            if (!$(event.target).closest('.dropdown-new').length) {
-                $('.dropdown-menu-new').hide();
-            }
-        });
-
-        updateSelectedValues();
+    setupDropdown({
+        dropdownContainerId: '#dropdown-container-new',
+        toggleClass: '.dropdown-toggle-new',
+        menuClass: '.dropdown-menu-new',
+        hiddenInputId: 'selected-values-ids-new',
+        listId: 'list-preferred-industry',
+        hiddenListClass: 'd-none-new',
+        childOptionClass: '.child-options-new',
+        mainOptionClass: '.option-new'
     });
 </script>
+
 @endsection

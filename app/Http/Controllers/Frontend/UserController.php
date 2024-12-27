@@ -3,306 +3,20 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\UserDetails;
-
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function registration_page(){
-        return view('frontend.pages.registration.index');
-    }
-
-
-    //---------- login and loag out---------------------
-
-    public function login(){
-        return view('frontend.pages.registration.login');
-    }
-
-    public function customer_login(Request $request){
-
-        // Validating the request data
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        // Checking if validation fails
-        if ($validator->fails()) {
-            $rsp_msg['response'] = 'error';
-            $rsp_msg['message']  = $validator->errors()->all();
-
-            return response()->json(array('response_message' => $rsp_msg));
-        }
-
-        Session()->flush();
-
-        $authenticated = Auth::guard('web')->attempt($request->only(['email', 'password']));
-        if($authenticated)
-        {
-
-            $user = DB::table('users')->where('email', $request->input('email'))->get()->first();
-
-            if($user){
-
-                if ($user->completed_status == '0'){
-
-                    Session()->flush();
-
-                    Session::put('temp_user_id', $user->id);
-                    Session::put('step', $user->step + 1);
-
-                    $rsp_msg['response'] = 'error';
-                    $rsp_msg['status'] = 'incomplete';
-                    $rsp_msg['message']  = 'Please Fill ALL Forms';
-
-                    return response()->json(array('response_message' => $rsp_msg));
-                }
-
-                if ($user->approval != 1 && $user->status != 1){
-
-                    Session()->flush();
-
-                    $rsp_msg['response'] = 'error';
-                    $rsp_msg['status'] = 'completed';
-                    $rsp_msg['message']  = 'Application Status Under Review';
-
-                    return response()->json(array('response_message' => $rsp_msg));
-                }
-
-                if ($user->status != 1){
-
-                    Session()->flush();
-
-                    $rsp_msg['response'] = 'error';
-                    $rsp_msg['message']  = 'Your ID is Not Active!';
-
-                    return response()->json(array('response_message' => $rsp_msg));
-                }
-
-                if ($user->approval != 1){
-
-                    Session()->flush();
-
-                    $rsp_msg['response'] = 'error';
-                    $rsp_msg['message']  = 'ID is Not Approve!';
-
-                    return response()->json(array('response_message' => $rsp_msg));
-                }
-
-
-
-            } else {
-
-                Session()->flush();
-
-                $rsp_msg['response'] = 'error';
-                $rsp_msg['message']  = 'User Not Exiest!, Please Register';
-
-                return response()->json(array('response_message' => $rsp_msg));
-            }
-
-            Session::put('user_id', auth()->user()->id);
-
-            $rsp_msg['response'] = 'success';
-            $rsp_msg['message']  = "Successfully logged in";
-
-        }
-        else
-        {
-            $rsp_msg['response'] = 'error';
-            $rsp_msg['message']  = "invalid credentials!, Please Try Again";
-        }
-
-        return response()->json(array('response_message' => $rsp_msg));
-    }
-
-    public function customer_logout(){
-        Auth::guard('web')->logout();
-        Session()->flush();
-        return redirect()->route('login');
-    }
-
-    //------------------------ login and log out-----------------------------------------
-
-    /*------------------------------ Forgot password Function --------------------------------------------*/
-
-    public function forgot_password($param, Request $request){
-
-
-        if($param == "verify-number-send-otp"){
-
-            $validator = Validator::make($request->all(), [
-                'email' => 'required|email',
-            ]);
-
-            if ($validator->fails()) {
-                $errors = $validator->errors()->all();
-
-                return response()->json([
-                    'status' => 'error',
-                    'message' => $errors
-                ], 200);
-            }
-
-            $user = DB::table('users')->where('email', $request->email)->where('step', '!=', '1')->first(['id']);
-
-            if($user){
-
-                Session()->flush();
-
-                $otp = mt_rand(100000, 999999);
-                $timestamp = Carbon::now();
-                Session::put('otp', $otp);
-                Session::put('otp_timestamp', $timestamp);
-                Session::put('user_forget_id', $user->id);
-
-                $email = $request->email;
-
-                $to = $email;
-                $subject = "$otp is your Manalot Leadership Network Forgot Password Verification Code.";
-                $body = "Hello, <br> <br>
-        For security purposes, please enter the code below to verify your account.<br> <br>
-        Forgot Password Verification Code: <b>$otp</b> <br><br>
-        The code is valid for 2 minutes.  <br><br>
-        Having problems with the code? <br><br>
-        The code will not work if timed out. <br><br>
-        Please request for a new code.";
-
-
-                sendEmail($to, $subject, $body);
-
-                return response()->json([
-                    'status' => 'success',
-                    'message' => 'OTP has been Share on this Email Id : '.$email.''
-                ], 200);
-
-            } else {
-
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'User Not exist Please Provide Valid Email Id',
-                ], 200);
-
-            }
-
-
-        }elseif($param == "verify-forgot-otp"){
-
-            $validator = Validator::make($request->all(), [
-                'otp' => 'required|digits:6',
-            ]);
-
-            if ($validator->fails()) {
-                $errors = $validator->errors()->all();
-
-                return response()->json([
-                    'status' => 'error',
-                    'message' => $errors
-                ], 200);
-            }
-
-            $otp = Session::get('otp');
-            $timestamp = Session::get('otp_timestamp');
-
-            // Check if OTP expired (2 minutes)
-            if (Carbon::parse($timestamp)->diffInMinutes(Carbon::now()) > 2) {
-
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'OTP has expired. Please request a new one',
-                ], 200);
-
-            }
-
-            if ($request->otp == $otp) {
-
-                return response()->json([
-                    'status' => 'success',
-                    'message' => 'OTP has been Verify successfully'
-                ], 200);
-
-            } else {
-
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Invalid OTP',
-                ], 200);
-
-
-            }
-
-
-        }elseif($param == "reset-password"){
-
-
-            $validator = Validator::make($request->all(), [
-                'password' => 'required|min:6|same:confirm_password',
-                'confirm_password' => 'required|min:6',
-            ]);
-
-            if ($validator->fails()) {
-                $errors = $validator->errors()->all();
-
-                return response()->json([
-                    'status' => 'error',
-                    'message' => $errors
-                ], 200);
-            }
-
-            $user = DB::table('users')->where('id', Session::get('user_id'))->get(['id'])->first();
-
-            if($user){
-                DB::table('users')->where('id', Session::get('user_id'))->update([
-                    'password' => bcrypt($request->input('password')),
-                ]);
-
-                return response()->json([
-                    'status' => 'success',
-                    'message' => 'New Password Update Successfully',
-                ], 200);
-
-            } else {
-
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Something Went Wrong'
-                ], 200);
-
-            }
-
-
-
-        } else {
-
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Something Went Wrong or Invalid parameter: '.$param.''
-            ], 200);
-
-        }
-
-    }
-
-
-    /*------------------------------ Forgot password Function -------------------------------------------*/
-
-
     public function create_account($param, Request $request){
 
-        if($param == "user-info"){
-
-            $rsp_msg = $this->create_user_detail($request);
-
-        }elseif($param == "change-password"){
+        if($param == "change-password"){
 
             $rsp_msg = $this->change_password($request);
 
@@ -330,24 +44,14 @@ class UserController extends Controller
 
             $rsp_msg = $this->create_preferences_info($request);
 
-        }
-        elseif($param == "work-authorization-info"){
-
-            $rsp_msg = $this->create_work_authorization_info($request);
-
         }elseif($param == "social-media-info"){
 
             $rsp_msg = $this->create_social_media_info($request);
-
-        }elseif($param == "proceeding-info"){
-
-            $rsp_msg = $this->create_proceeding_info($request);
 
         } else {
             $rsp_msg['response'] = 'error';
             $rsp_msg['message'] = "Invalid parameter: $param";
         }
-
 
         return response()->json(array('response_message' => $rsp_msg));
     }
@@ -387,236 +91,6 @@ class UserController extends Controller
         return response()->json($relatedSkills);
     }
 
-    public function create_user_detail($request){
-
-        $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'regex:/^[A-Za-z0-9_.]+$/', 'min:1', 'max:50'],
-            'email' => 'required|email',
-            'password' => 'required',
-            'confirm_password' => 'required|same:password',
-            //'experience_Status' => 'required',
-            'phone_number' => 'required|regex:/^[\d\s\-\+]+$/|min:5',
-            'resume_cv' => 'required|mimes:pdf,doc,docx|max:5120',
-        ], [
-            'name.required' => 'The Username field is required.',
-            'name.string' => 'The Username must be a string.',
-            'name.regex' => 'The Username format is invalid. Only letters, numbers, dots, underscores are allowed, and spacing is not allowed.',
-            'name.min' => 'The Username must be at least 1 character.',
-            'name.max' => 'The Username may not be greater than 50 characters.',
-
-            'email.required' => 'The Email field is required.',
-            'email.email' => 'The Email must be a valid email address.',
-
-            'password.required' => 'The Password field is required.',
-
-            'confirm_password.required' => 'The Confirm Password field is required.',
-            'confirm_password.same' => 'The Confirm Password must match the Password.',
-
-            'phone_number.required' => 'The Phone Number field is required.',
-            'phone_number.regex' => 'The Phone Number format is invalid.',
-            'phone_number.min' => 'The Phone Number must be at least 5 characters.',
-
-            'resume_cv.required' => 'The Resume file is required.',
-            'resume_cv.mimes' => 'The Resume must be a PDF, DOC, or DOCX file.',
-            'resume_cv.max' => 'The Resume may not be larger than 5MB.',
-        ]);
-
-
-        if ($validator->fails()) {
-            $rsp_msg['response'] = 'error';
-            $rsp_msg['message']  = $validator->errors()->all();
-
-            return $rsp_msg;
-        }
-
-
-        $users_email = DB::table('users')->where('email', $request->input('email'))->where('status', 1)->get();
-
-        if(count($users_email) != 0){
-            $rsp_msg['response'] = 'error';
-            $rsp_msg['message']  = 'Email Already Exists';
-
-            return $rsp_msg;
-        }
-
-        $users_username = DB::table('users')->where('username', $request->input('name'))->get();
-
-        if(count($users_username) != 0){
-            $rsp_msg['response'] = 'error';
-            $rsp_msg['message']  = 'Username Already Exists';
-
-            return $rsp_msg;
-        }
-
-        $users_email_temp = DB::table('users')->where('email', $request->input('email'))->get()->first();
-
-        if($request->has('resume_cv')){
-
-            $users_email_temp_email = str_replace(['@', '.'], '_', $request->input('email'));
-            $newFileName = 'resume_' . $users_email_temp_email . '_' . now()->format('YmdHis') . '.' . $request->file('resume_cv')->getClientOriginalExtension();
-            $path = $request->file('resume_cv')->storeAs('user_data/resume_cv', $newFileName, 'public');
-
-            // $result = file_upload_od($newFileName, $path);
-            // if($result != 'error'){
-            //     $path = $result;
-            // }
-
-            // $path = $request->file('resume_cv')->store('user_data/resume_cv', 'public');
-
-        } else {
-            $path = null;
-        }
-
-
-
-        if($users_email_temp){
-
-            $resume_path = DB::table('userdetails')->where('user_id', $users_email_temp->id)->value('resume_cv');
-
-            if ($resume_path) {
-                if (Storage::disk('public')->exists($resume_path)) {
-                    Storage::disk('public')->delete($resume_path);
-                }
-            }
-
-
-            if(Session::has('google_email') && Session::get('google_login') == 1){
-
-                DB::table('users')->where('id',$users_email_temp->id)->update([
-                    'username' => $request->input('name'),
-                    'email' => strtolower($request->input('email')),
-                    'password' => bcrypt($request->input('password')),
-                    'approval' => '0',
-                    'status' => '0',
-                    'completed_status' => '0',
-                    'step' => 1,
-                    'role_id'  => '2',
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-
-                $result = file_upload_od($newFileName, $path);
-                if($result != 'error on uploding'){
-                    if (Storage::disk('public')->exists($path)) {
-                        // Storage::disk('public')->delete($path);
-                    }
-                    $path = $result;
-                }
-
-                DB::table('userdetails')->where('user_id',$users_email_temp->id)->update([
-                    'phone_number' => $request->input('phone_number'),
-                    'resume_cv' => $path,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-
-                Session::put('temp_user_id', $users_email_temp->id);
-
-                Session::put('step', 2);
-
-
-                $rsp_msg['response'] = 'success';
-                $rsp_msg['message'] = "User Detail Added successfully. Please Proceed";
-
-                // session()->flash('success', 'User Detail Added successfully. Please Proceed');
-
-                return $rsp_msg;
-
-            }
-
-
-        } else {
-
-            if(Session::has('google_email') && Session::get('google_login') == 1){
-
-                $userId = DB::table('users')->insertGetId([
-                    'username' => $request->input('name'),
-                    'email' => strtolower($request->input('email')),
-                    'password' => bcrypt($request->input('password')),
-                    'approval' => '0',
-                    'role_id'  => '2',
-                    'completed_status' => '0',
-                    'status' => '0',
-                    'step' => 1,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-
-                $result = file_upload_od($newFileName, $path);
-                if($result != 'error on uploding'){
-                    if (Storage::disk('public')->exists($path)) {
-                        // Storage::disk('public')->delete($path);
-                    }
-                    $path = $result;
-                }
-
-                DB::table('userdetails')->insert([
-                    'user_id' => $userId,
-                    'phone_number' => $request->input('phone_number'),
-                    //'experience_Status' => $request->input('experience_Status'),
-                    'skill' => '[]',
-                    'references' => '[]',
-                    'resume_cv' => $path,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-
-                Session::put('temp_user_id', $userId);
-
-                Session::put('step', 2);
-
-                $rsp_msg['response'] = 'success';
-                $rsp_msg['message'] = "User Detail Added successfully. Please Proceed";
-
-                // session()->flash('success', 'User Detail Added successfully. Please Proceed');
-
-                return $rsp_msg;
-
-            }
-        }
-
-        // Session::put('password', $request->input('password'));
-        // Session::put('step', 2);
-
-
-        $user_info = [
-            'username' => strtolower($request->input('name')),
-            'email' => strtolower($request->input('email')),
-            'password' => bcrypt($request->input('password')),
-            'phone_number' => $request->input('phone_number'),
-            'resume_cv' => $path,
-            'newFileName' => $newFileName,
-        ];
-
-
-        $otp = mt_rand(100000, 999999);
-        $timestamp = Carbon::now();
-        Session::put('otp', $otp);
-        Session::put('otp_timestamp', $timestamp);
-
-        $to = $user_info['email'];
-        $subject = "$otp is your Manalot Leadership Network Verification Code.";
-        $body = "Hello, <br> <br>
-        For security purposes, please enter the code below to verify your account.<br> <br>
-        Account Verification Code: <b>$otp</b> <br><br>
-        The code is valid for 2 minutes.  <br><br>
-        Having problems with the code? <br><br>
-        The code will not work if timed out. <br><br>
-        Please request for a new code.";
-
-        sendEmail($to, $subject, $body);
-
-        Session::put('user_info', $user_info);
-
-        $rsp_msg['response'] = 'success';
-        $rsp_msg['message'] = "Please Enter your Verification Code Sent To " . $user_info['email'];
-
-        // session()->flash('success', 'User Detail Added successfully. Please Proceed');
-
-        return $rsp_msg;
-
-    }
-
     public function change_password($request)
     {
         // Validate the request data
@@ -647,11 +121,11 @@ class UserController extends Controller
         }
 
         // Retrieve the user from the database
-        $user = DB::table('users')->where('id', $user_id)->first();
+        $user = User::where('id', $user_id)->first();
 
         if ($user) {
             // Update the password in the database
-            DB::table('users')->where('id', $user_id)->update([
+            User::where('id', $user_id)->update([
                 'password' => Hash::make($request->input('password')), // Use Hash::make for better security
             ]);
 
@@ -692,7 +166,6 @@ class UserController extends Controller
             return $rsp_msg;
         }
 
-
         //---- education -------
         $edu_data = [];
         $edu_clg_name = $request->input('edu_clg_name');
@@ -709,13 +182,12 @@ class UserController extends Controller
             ];
         }
 
-
         UserDetails::where('user_id', Session::get('user_id'))->update([
             'edu_data' => json_encode($edu_data),
         ]);
 
         $rsp_msg['response'] = 'success';
-        $rsp_msg['message']  = "User Education Detail Updated successfully.";
+        $rsp_msg['message']  = "User Education Detail Updated successfully!";
 
         return $rsp_msg;
     }
@@ -765,7 +237,7 @@ class UserController extends Controller
         ]);
 
         $rsp_msg['response'] = 'success';
-        $rsp_msg['message']  = "User Skills Detail Added successfully. Please Proceed";
+        $rsp_msg['message']  = "User Certificate Detail Added successfully!";
 
         return $rsp_msg;
 
@@ -803,7 +275,7 @@ class UserController extends Controller
         }
 
         // Retrieve existing profile photo path
-        $profile_img_path = DB::table('userdetails')->where('user_id', $user_id)->value('profile_photo');
+        $profile_img_path = UserDetails::where('user_id', $user_id)->value('profile_photo');
 
         // Handle profile photo upload if there's a new one
         if ($request->hasFile('profile_photo')) {
@@ -820,7 +292,7 @@ class UserController extends Controller
         }
 
         // Update the user details
-        DB::table('userdetails')->updateOrInsert(
+        UserDetails::updateOrInsert(
             ['user_id' => $user_id],
             [
                 'fullname' => $request->input('fullname'),
@@ -836,7 +308,7 @@ class UserController extends Controller
         );
 
         $rsp_msg['response'] = 'success';
-        $rsp_msg['message']  = "User Personal Detail Added successfully. Please Proceed";
+        $rsp_msg['message']  = "User Personal Detail Added successfully!";
 
         return $rsp_msg;
 
@@ -900,12 +372,12 @@ class UserController extends Controller
 
         // Get the user_id from session
         $user_id = Session::get('user_id'); // Using user_id from session
-        $userDetail = DB::table('userdetails')->where('user_id', $user_id)->first();
+        $userDetail = UserDetails::where('user_id', $user_id)->first();
 
         // Handle file upload for experience letter
         if ($request->hasFile('experience_letter') && $request->file('experience_letter')->isValid()) {
 
-            $users_email_temp = DB::table('users')->where('id', $user_id)->value('email');
+            $users_email_temp = User::where('id', $user_id)->value('email');
 
             $users_email_temp = str_replace(['@', '.'], '_', $users_email_temp);
 
@@ -925,28 +397,53 @@ class UserController extends Controller
             $path = $userDetail ? $userDetail->experience_letter : null;
         }
 
-        DB::table('userdetails')->where('user_id', $user_id)->update([
+        Userdetails::where('user_id', $user_id)->update([
             'wrk_exp_company_name' => $request->input('wrk_exp_company_name'),
             'wrk_exp_years' => $request->input('wrk_exp_years'),
             'industry' => json_encode($industry_elements),
             'wrk_exp__title' => $request->input('wrk_exp__title'),
             'skill' => json_encode($skill),
             'wrk_exp_responsibilities' => $request->input('wrk_exp_responsibilities'),
-
             'employed' => $request->input('Employed'),
             'experience_letter' => $path,
-
         ]);
 
         $rsp_msg['response'] = 'success';
-        $rsp_msg['message']  = "User Personal and Work Detail Added successfully. Please Proceed";
+        $rsp_msg['message']  = "User Personal and Work Detail Updated successfully!";
 
         return $rsp_msg;
 
     }
 
     public function create_work_authorization($request){
+        $validator = Validator::make($request->all(), [
+            'work_authorization_status' => 'required',
+            'availability' => 'required',
+            'notice_period_duration' => 'required',
+        ], [
+            'work_authorization_status.required' => 'The Work Authorization Status is required.',
+            'availability.required' => 'The Availability field is required.',
+            'notice_period_duration.required' => 'The Notice Period is required.',
+        ]);
 
+        if ($validator->fails()) {
+            $rsp_msg['response'] = 'error';
+            $rsp_msg['message']  = $validator->errors()->all();
+
+            return $rsp_msg;
+        }
+        // Get the user_id from session
+        $user_id = Session::get('user_id'); // Using user_id from session
+        Userdetails::where('user_id', $user_id)->update([
+            'work_authorization_status' => $request->input('work_authorization_status'),
+            'availability' => $request->input('availability'),
+            'notice_period_duration' => $request->input('notice_period_duration'),
+        ]);
+
+        $rsp_msg['response'] = 'success';
+        $rsp_msg['message']  = "User Work Authorization Updated successfully!";
+
+        return $rsp_msg;
     }
 
     public function create_preferences_info($request){
@@ -1050,7 +547,7 @@ class UserController extends Controller
         ]);
 
         $rsp_msg['response'] = 'success';
-        $rsp_msg['message']  = "User Preferences Detail Added successfully. Please Proceed";
+        $rsp_msg['message']  = "User Preferences Detail Added successfully!";
 
         return $rsp_msg;
     }
@@ -1058,18 +555,13 @@ class UserController extends Controller
     public function create_social_media_info($request){
 
         $validator = Validator::make($request->all(), [
-            // 'linkdin' => 'required',
-            // 'twitter' => 'required',
-            // 'instagram' => 'required',
-            // 'facebook' => 'required',
-            // 'other' => 'required',
-            'linkdin' => ['nullable', 'regex:/^https?:\/\/(www\.)?linkedin\.com\/.*$/i'],
+            'linkedin' => ['nullable', 'regex:/^https?:\/\/(www\.)?linkedin\.com\/.*$/i'],
             'twitter' => ['nullable', 'regex:/^https?:\/\/(www\.)?(x|twitter)\.com\/.*$/i'],
             'instagram' => ['nullable', 'regex:/^https?:\/\/(www\.)?instagram\.com\/.*$/i'],
             'facebook' => ['nullable', 'regex:/^https?:\/\/(www\.)?facebook\.com\/.*$/i'],
             'other' => 'nullable|url',
         ], [
-            'linkdin.regex' => 'The LinkedIn URL must be a valid LinkedIn profile link. Use URL this format https://www.linkedin.com/',
+            'linkedin.regex' => 'The LinkedIn URL must be a valid LinkedIn profile link. Use URL this format https://www.linkedin.com/',
             'twitter.regex' => 'The Twitter URL must be a valid X profile link. Use URL this format https://x.com/',
             'instagram.regex' => 'The Instagram URL must be a valid Instagram profile link. Use URL this format https://www.instagram.com/',
             'facebook.regex' => 'The Facebook URL must be a valid Facebook profile link. Use URL this format https://www.facebook.com/',
@@ -1083,7 +575,7 @@ class UserController extends Controller
             return $rsp_msg;
         }
 
-        DB::table('userdetails')->where('user_id', Session::get('temp_user_id'))->update([
+        Userdetails::where('user_id', Session::get('user_id'))->update([
             'linkdin' => $request->input('linkdin'),
             'twitter' => $request->input('twitter'),
             'instagram' => $request->input('instagram'),
@@ -1091,39 +583,11 @@ class UserController extends Controller
             'other' => $request->input('other'),
         ]);
 
-        DB::table('users')->where('id', Session::get('temp_user_id'))->update([
-            'step' =>  6,
-        ]);
-
-        Session::put('step', 7);
-
         $rsp_msg['response'] = 'success';
-        $rsp_msg['message']  = "User Social Media Detail Added successfully. Please Proceed";
+        $rsp_msg['message']  = "User Social Media Detail Updated successfully!";
 
         return $rsp_msg;
 
     }
-
-    public function create_proceeding_info($request){
-
-        DB::table('users')->where('id', Session::get('temp_user_id'))->update([
-            'completed_status' => 1,
-        ]);
-
-        DB::table('users')->where('id', Session::get('temp_user_id'))->update([
-            'step' =>  7,
-        ]);
-
-        Session::put('step', 8);
-
-        $rsp_msg['response'] = 'success';
-        $rsp_msg['message']  = "Your Application is Now Under Review. Please wait";
-
-        return $rsp_msg;
-
-    }
-
-
-
 
 }
