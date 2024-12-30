@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MediaCoverage extends Model
+class Like extends Model
 {
     use HasFactory;
 
-    protected $table = 'media_coverage';
-
+    protected $table = 'post_likes';
     protected $fillable = [
-        'title',
-        'url',
-        'image',
-        'status',
+        'user_id',
+        'post_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

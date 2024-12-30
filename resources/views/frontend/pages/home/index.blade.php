@@ -22,6 +22,25 @@
 .left_sidebar {
     width: 260px;
 }
+
+#loading img {
+    width: 50px;
+    height: auto;
+}
+
+#loading p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.no-posts-message {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #888;
+    text-align: center;
+}
+
 </style>
 
     <section class="pb-5 mt80" style="background-color: #e7ecef">
@@ -176,202 +195,23 @@
                             </form>
                         @endif --}}
 
-                        <div class="search_bar_new">
-                            <div class="input_search">
-                                <input type="text" class="ai_search_bar" placeholder="Start a post, Try writing with AI ">
-                                <button type="button" class="ai_search_btn " data-bs-toggle="modal" data-bs-target="#postmodal">Post</button>
+                        @if(auth()->user()->role_id == 1)
+                            <div class="search_bar_new">
+                                <div class="input_search">
+                                    <input type="text" class="ai_search_bar" placeholder="Start a post, Try writing with AI ">
+                                    <button type="button" class="ai_search_btn " data-bs-toggle="modal" data-bs-target="#postmodal">Post</button>
+                                </div>
                             </div>
+                        @endif
+
+                        <div id="postContainer">
+                            @include('frontend.component.post_list')
                         </div>
 
-                        <div class="post mt-4 proxima_nova_font">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center gap-2">
-                                    <img class="user_img" src="/assets/images/drishti_img.png" alt="user_img" />
-                                    <div class="user_name_post">
-                                        <strong class="mb-0 user_name">Drishti Jadhav</strong>
-                                        <p class="text-xs mb-0" style="color: #535353">
-                                            12 Minutes ago <i class="fa fa-globe"></i>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="action">
-                                    <div class="dropdown_wrapper">
-                                        <button>Edit</button>
-                                        <button>Delete</button>
-                                    </div>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                </div>
-                                <a class="saved_clip" href="">
-                                    <img class="saved_clip_img" src="/assets/images/saved_icon.svg">
-                                </a>
-                            </div>
-                            <div class="mt-md-3 post_description">
-                                <p class="post_content">
-                                    In my years leading Manalot, I take particular pride in sharing that many of our most successful 
-                                    leadership placements have been professionals who navigated career transitions after layoffs. 
-                                </p>
-                                <p class="post_content">
-                                    The current market realities mean business restructuring reflects organizational shifts, 
-                                    not individual capabilities. Therefore, to those who are in transition: focus on documenting your 
-                                    achievements with concrete metrics and invest time in meaningful professional relationships. 
-                                </p>
-                                <p class="post_content">
-                                    At Manalot, we've consist
-                                </p>
-                                <!-- <img src="/assets/images/post.jpg" class="w-100" alt="" /> -->
-                                <!-- <div class="d-flex align-items-center justify-content-between mt-3 like_comnts_n_events">
-                                    <div class="d-flex align-items-center gap-3 like_n_comnts">
-                                        <div class="d-flex align-items-center gap-1">
-                                            <img src="/assets/images/heart.png" alt="" />
-                                            <span>15k</span>
-                                        </div>
-                                        <div class="d-flex align-items-center gap-1">
-                                            <img src="/assets/images/comment.png" alt="" />
-                                            <span>120</span>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center gap-1 events">
-                                        <span class="pe-2">Events</span>
-                                        <img src="/assets/images/event.png" alt="" />
-                                    </div>
-                                </div> -->
-                                <!-- <div class="d-flex align-items-center gap-3 mt-4">
-                                    <img src="/assets/images/s-logo.png" alt="" />
-                                    <input type="text" class="comment_input" placeholder="Write your comment" />
-                                </div> -->
-                            </div>
-                            <div class="like_comnt">
-                                <ul class="like_comnt_list">
-                                    <li class="like_comnt_list_item">
-                                        <a class="like_comnt_link" href="">
-                                            <span class="like_text">
-                                                <img class="like_img" src="/assets/images/like_icon.svg">
-                                                Like
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="like_comnt_list_item">
-                                        <a class="like_comnt_link" href="">
-                                            <span class="comment_text">
-                                                <img class="comment_img" src="/assets/images/comnt_icon.svg">
-                                                Comment
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="like_comnt_list_item">
-                                        <a class="like_comnt_link" href="">
-                                            <span class="share_text">
-                                                <img class="share_img" src="/assets/images/share_icon.svg">
-                                                Share
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="like_comnt_list_item">
-                                        <a class="like_comnt_link" href="">
-                                            <span class="send_text">
-                                                <img class="send_img" src="/assets/images/send_icon.svg">
-                                                Apply Now
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                        <div id="loading" style="display: none; text-align: center;">
+                            <img src="/assets/images/loading.gif" alt="Loading...">
                         </div>
-
-                        <div class="post mt-4 proxima_nova_font">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center gap-2">
-                                    <img class="user_img" src="/assets/images/drishti_img.png" alt="user_img" />
-                                    <div class="user_name_post">
-                                        <strong class="mb-0 user_name">Drishti Jadhav</strong>
-                                        <p class="text-xs mb-0" style="color: #535353">
-                                            12 Minutes ago <i class="fa fa-globe"></i>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="action">
-                                    <div class="dropdown_wrapper">
-                                        <button>Edit</button>
-                                        <button>Delete</button>
-                                    </div>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                </div>
-                                <a class="saved_clip" href="">
-                                    <img class="saved_clip_img" src="/assets/images/grey_saved_icon.svg">
-                                </a>
-                            </div>
-                            <div class="mt-md-3 post_description">
-                                <p class="post_content">
-                                    In my years leading Manalot, I take particular pride in sharing that many of our most successful 
-                                    leadership placements have been professionals who navigated career transitions after layoffs. 
-                                </p>
-                                <p class="post_content">
-                                    The current market realities mean business restructuring reflects organizational shifts, 
-                                    not individual capabilities. Therefore, to those who are in transition: focus on documenting your 
-                                    achievements with concrete metrics and invest time in meaningful professional relationships. 
-                                </p>
-                                <p class="post_content">
-                                    At Manalot, we've consist
-                                </p>
-                                <!-- <img src="/assets/images/post.jpg" class="w-100" alt="" /> -->
-                                <!-- <div class="d-flex align-items-center justify-content-between mt-3 like_comnts_n_events">
-                                    <div class="d-flex align-items-center gap-3 like_n_comnts">
-                                        <div class="d-flex align-items-center gap-1">
-                                            <img src="/assets/images/heart.png" alt="" />
-                                            <span>15k</span>
-                                        </div>
-                                        <div class="d-flex align-items-center gap-1">
-                                            <img src="/assets/images/comment.png" alt="" />
-                                            <span>120</span>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center gap-1 events">
-                                        <span class="pe-2">Events</span>
-                                        <img src="/assets/images/event.png" alt="" />
-                                    </div>
-                                </div> -->
-                                <!-- <div class="d-flex align-items-center gap-3 mt-4">
-                                    <img src="/assets/images/s-logo.png" alt="" />
-                                    <input type="text" class="comment_input" placeholder="Write your comment" />
-                                </div> -->
-                            </div>
-                            <div class="like_comnt">
-                                <ul class="like_comnt_list">
-                                    <li class="like_comnt_list_item">
-                                        <a class="like_comnt_link" href="">
-                                            <span class="like_text">
-                                                <img class="like_img" src="/assets/images/like_icon.svg">
-                                                Like
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="like_comnt_list_item">
-                                        <a class="like_comnt_link" href="">
-                                            <span class="comment_text">
-                                                <img class="comment_img" src="/assets/images/comnt_icon.svg">
-                                                Comment
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="like_comnt_list_item">
-                                        <a class="like_comnt_link" href="">
-                                            <span class="share_text">
-                                                <img class="share_img" src="/assets/images/share_icon.svg">
-                                                Share
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="like_comnt_list_item">
-                                        <a class="like_comnt_link" href="">
-                                            <span class="send_text">
-                                                <img class="send_img" src="/assets/images/send_icon.svg">
-                                                Apply Now
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        
                         <!-- <div class="post mt-4">
                             <div class="d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center gap-2">
@@ -556,52 +396,64 @@
         </div>
     </section>
 
+@include('frontend.component.post_modal_popup')
+
 @endsection
 
-<div class="post_modal modal" id="postmodal">
-    <div class="container">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <div class="d-flex align-items-center gap-2">
-                        <img class="user_img" src="/assets/images/drishti_img.png" alt="user_img" />
-                        <div class="user_name_post proxima_nova_font">
-                            <strong class="mb-0 user_name">Drishti Jadhav</strong> <img class="caret_down_img" src="/assets/images/caret_down.svg">
-                            <p class="text-xs mb-0" style="color: #535353;font-weight: 600;font-size: 11px;"> Post to All
-                            </p>
-                        </div>
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <!-- Modal Body -->
-                <div class="modal-body">
-                    <textarea class="form-control" rows="4" placeholder="What do you want to talk about?"></textarea>
-                </div>
-                <!-- Modal Footer -->
-                <div class="modal-footer d-flex justify-content-end">
-                    <div class="action-icons">
-                        <button class="post_modal_img_btn ai_search_btn">
-                            Rewrite with AI
-                        <button class="post_modal_img_btn">
-                            <img class="post_modal_icon_img" src="/assets/images/post_image_gallery.svg">
-                        </button>
-                        <button class="post_modal_img_btn">
-                            <img class="post_modal_icon_img" src="/assets/images/post_calendar.svg">
-                        </button>
-                        <button class="post_modal_img_btn">
-                            <img class="post_modal_icon_img" src="/assets/images/post_square_pole.svg">
-                        </button>
-                        <button class="post_modal_img_btn">
-                            <img class="post_modal_icon_img" src="/assets/images/post_document2.svg">
-                        </button>
-                        <button class="post_modal_img_btn">
-                            <img class="post_modal_icon_img" src="/assets/images/post_suitcase.svg">
-                        </button>
-                    </div>
-                    <button type="button" class="ai_search_btn post_modal_btn">Post</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@section("page.scripts")
+
+<script>
+    let page = 1;
+    let loading = false; // Prevent multiple AJAX calls
+    let allPostsLoaded = false; // Flag to check if all posts are loaded
+
+    window.onscroll = function () {
+        if (
+            !loading &&
+            !allPostsLoaded &&
+            window.innerHeight + window.scrollY >= document.body.offsetHeight
+        ) {
+            loadMorePosts();
+        }
+    };
+
+    function loadMorePosts() {
+        loading = true; // Prevent concurrent requests
+        page++;
+        const url = `{{ url(route('posts.fetch')) }}?page=${page}`;
+        const loadingIndicator = document.getElementById('loading');
+        loadingIndicator.style.display = 'block';
+
+        setTimeout(() => {
+            fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+            })
+                .then((response) => {
+                    if (response.status === 204) {
+                        // No more posts
+                        allPostsLoaded = true;
+                        loadingIndicator.innerHTML = '<p>No more posts available.</p>';
+                        return '';
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    if (data.html) {
+                        document.getElementById('postContainer').innerHTML += data.html;
+                    }
+                    loading = false; // Allow further requests
+                    loadingIndicator.style.display = 'none';
+                })
+                .catch((error) => {
+                    console.error('Error loading posts:', error);
+                    loading = false;
+                    loadingIndicator.style.display = 'none';
+                });
+        }, 1000); // Delay of 5 seconds
+    }
+</script>
+
+@endsection
+

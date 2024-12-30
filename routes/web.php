@@ -23,6 +23,15 @@ Route::middleware('auth.frontend')->group(function () {
     Route::get('/', [IndexController::class, 'index'])->name('index');
     Route::get('/logout', [AccountController::class, 'customer_logout'])->name('customer.logout');
     Route::get('/edit-profile', [IndexController::class, 'edit_profile'])->name('user.edit-profile');
+
+    Route::get('/posts', [IndexController::class, 'fetchPosts'])->name('posts.fetch');
+    Route::post('/like-toggle', [IndexController::class, 'toggleLike'])->name('posts.like');
+
+    Route::get('/posts/{postId}/comments', [IndexController::class, 'fetchComments'])->name('posts.comment.fetch');
+    Route::post('/comments', [IndexController::class, 'storeComment'])->name('posts.comment.save');
+    Route::delete('/comments/{id}', [IndexController::class, 'destroy'])->name('comments.destroy');
+
+    Route::get('/posts/{post}/likes', [IndexController::class, 'getPostLikes']);
 });
 
 Route::middleware('guest')->group(function () {

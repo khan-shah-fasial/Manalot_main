@@ -1,0 +1,530 @@
+
+@php
+// Get user IDs from the posts
+$userIds = $posts->pluck('author_id')->unique();
+
+// Cache user details for these IDs
+$userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray()), 10 * 60, function () use ($userIds) {
+    return DB::table('users')
+        ->join('userdetails', 'users.id', '=', 'userdetails.user_id')
+        ->whereIn('users.id', $userIds)
+        ->select('users.id', 'users.username', 'userdetails.profile_photo')
+        ->get()
+        ->keyBy('id'); // Key the result by user ID for easy access
+});
+@endphp
+
+
+@foreach ($posts as $post)
+
+    @php
+        // Get the user details for the current post's user_id
+        $user = $userDetails->get($post->author_id);
+    @endphp
+
+
+    <div class="post mt-4 proxima_nova_font">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-2">
+                <img class="user_img" src="{{ $user->profile_photo ? asset('storage/' . $user->profile_photo) : '/assets/images/drishti_img.png' }}" alt="user_img" />
+                <div class="user_name_post">
+                    <strong class="mb-0 user_name">{{ ucfirst($user->username) }}</strong>
+                    <p class="text-xs mb-0" style="color: #535353">
+                        {{ timeAgo($post->created_at) }} <i class="fa fa-globe"></i>
+                    </p>
+                </div>
+            </div>
+            <div class="action">
+                <div class="dropdown_wrapper">
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </div>
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+            <a class="saved_clip" href="">
+                <img class="saved_clip_img" src="/assets/images/saved_icon.svg">
+            </a>
+        </div>
+        <div class="mt-md-3 post_description">
+            <div>
+                @php echo nl2br($post->content) @endphp
+            </div>
+
+            @if($post->media_type != null && $post->media_type == 'media')
+                @php $media = json_decode($post->image_url) @endphp
+                @foreach($media as $row)
+                    @if($row->type == 'image')
+                        <img width="320" height="240" src="{{ asset('storage/' . $row->path) }}" />
+                    @elseif($row->type == 'video')
+                        <video width="320" height="240" controls>
+                            <source src="{{ asset('storage/' . $row->path) }}" type="video/mp4">
+                        </video>
+                    @endif
+                @endforeach
+            @endif
+
+        </div>
+        <div class="like_comnt">
+            <a href="javascript:void(0);" class="upper-like-count" id="like-count-{{$post->id}}" onclick="openLikeModal({{ $post->id }}, {{ $post->likes->count() }})">{{ $post->likes->count() }}</a>
+            <ul class="like_comnt_list">
+                <li class="like_comnt_list_item">
+                    <a id="like_comnt_link_like" class="like_comnt_link {{ auth()->user()->likes->contains('post_id', $post->id) ? 'add-like' : '' }}" 
+                       href="#" 
+                       data-post-id="{{ $post->id }}">
+                        <span class="like_text">
+                            <img class="like_img" src="/assets/images/like_icon.svg">
+                            Like <span class="like-count">{{ $post->likes->count() }}</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="like_comnt_list_item">
+                    <a id="add-comment-{{ $post->id }}" 
+                       class="like_comnt_link show-comment-form"
+                       onclick="show_comment_form(event, '{{ $post->id }}')"
+                       href="#" 
+                       data-post-id="{{ $post->id }}">
+                        <span class="comment_text">
+                            <img class="comment_img" src="/assets/images/comnt_icon.svg">
+                            Comment <span class="comment-count">{{ $post->comments->count() }}</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="like_comnt_list_item">
+                    <a class="like_comnt_link" href="">
+                        <span class="share_text">
+                            <img class="share_img" src="/assets/images/share_icon.svg">
+                            Share
+                        </span>
+                    </a>
+                </li>
+                <li class="like_comnt_list_item">
+                    <a class="like_comnt_link" href="">
+                        <span class="send_text">
+                            <img class="send_img" src="/assets/images/send_icon.svg">
+                            Apply Now
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+        <!-- Comments Section -->
+        <div class="comments-section" id="comments-section-{{ $post->id }}" style="display: none;">
+            <!-- Comment Form -->
+            <form class="comment-form" data-post-id="{{ $post->id }}">
+                <textarea name="comment" class="comment-input" placeholder="Write a comment..."></textarea>
+                <input type="hidden" name="parent_id" class="parent-id" value="">
+                <button type="submit" class="btn btn-primary btn-sm">Post</button>
+            </form>
+            <div class="comments-list"></div>
+        </div>
+
+    </div>
+@endforeach
+
+<!-- Modal for showing likes -->
+<div class="modal fade" id="likeModal" tabindex="-1" aria-labelledby="likeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="likeModalLabel">Post Likes</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul id="likeList" class="list-group">
+                    <!-- User list will be appended here -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- <div class="post mt-4 proxima_nova_font">
+    <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-2">
+            <img class="user_img" src="/assets/images/drishti_img.png" alt="user_img" />
+            <div class="user_name_post">
+                <strong class="mb-0 user_name">Drishti Jadhav</strong>
+                <p class="text-xs mb-0" style="color: #535353">
+                    12 Minutes ago <i class="fa fa-globe"></i>
+                </p>
+            </div>
+        </div>
+        <div class="action">
+            <div class="dropdown_wrapper">
+                <button>Edit</button>
+                <button>Delete</button>
+            </div>
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+        </div>
+        <a class="saved_clip" href="">
+            <img class="saved_clip_img" src="/assets/images/grey_saved_icon.svg">
+        </a>
+    </div>
+    <div class="mt-md-3 post_description">
+        <p class="post_content">
+            In my years leading Manalot, I take particular pride in sharing that many of our most successful 
+            leadership placements have been professionals who navigated career transitions after layoffs. 
+        </p>
+        <p class="post_content">
+            The current market realities mean business restructuring reflects organizational shifts, 
+            not individual capabilities. Therefore, to those who are in transition: focus on documenting your 
+            achievements with concrete metrics and invest time in meaningful professional relationships. 
+        </p>
+        <p class="post_content">
+            At Manalot, we've consist
+        </p>
+        <!-- <img src="/assets/images/post.jpg" class="w-100" alt="" /> -->
+        <!-- <div class="d-flex align-items-center justify-content-between mt-3 like_comnts_n_events">
+            <div class="d-flex align-items-center gap-3 like_n_comnts">
+                <div class="d-flex align-items-center gap-1">
+                    <img src="/assets/images/heart.png" alt="" />
+                    <span>15k</span>
+                </div>
+                <div class="d-flex align-items-center gap-1">
+                    <img src="/assets/images/comment.png" alt="" />
+                    <span>120</span>
+                </div>
+            </div>
+            <div class="d-flex align-items-center gap-1 events">
+                <span class="pe-2">Events</span>
+                <img src="/assets/images/event.png" alt="" />
+            </div>
+        </div> -->
+        <!-- <div class="d-flex align-items-center gap-3 mt-4">
+            <img src="/assets/images/s-logo.png" alt="" />
+            <input type="text" class="comment_input" placeholder="Write your comment" />
+        </div> -->
+    </div>
+    <div class="like_comnt">
+        <ul class="like_comnt_list">
+            <li class="like_comnt_list_item">
+                <a class="like_comnt_link" href="">
+                    <span class="like_text">
+                        <img class="like_img" src="/assets/images/like_icon.svg">
+                        Like
+                    </span>
+                </a>
+            </li>
+            <li class="like_comnt_list_item">
+                <a class="like_comnt_link" href="">
+                    <span class="comment_text">
+                        <img class="comment_img" src="/assets/images/comnt_icon.svg">
+                        Comment
+                    </span>
+                </a>
+            </li>
+            <li class="like_comnt_list_item">
+                <a class="like_comnt_link" href="">
+                    <span class="share_text">
+                        <img class="share_img" src="/assets/images/share_icon.svg">
+                        Share
+                    </span>
+                </a>
+            </li>
+            <li class="like_comnt_list_item">
+                <a class="like_comnt_link" href="">
+                    <span class="send_text">
+                        <img class="send_img" src="/assets/images/send_icon.svg">
+                        Apply Now
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div> --}}
+
+
+@section('component.scripts')
+<script>
+    $(document).on('click', '#like_comnt_link_like', function (e) {
+        e.preventDefault();
+
+        const likeButton = $(this);
+        const postId = likeButton.data('post-id'); // Ensure the `post_id` is stored in `data-post-id`
+        const likeCountElement = likeButton.find('.like-count'); // Assuming you have a span for the count
+
+        $.get('/csrf-token', function (data) {
+            const csrfToken = data.token;
+
+            // Perform the AJAX request
+            $.ajax({
+                url: `{{ url(route('posts.like')) }}`,
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken // Set the token in the header
+                },
+                data: {
+                    post_id: postId
+                },
+                success: function (response) {
+                    if (response.status === 'liked') {
+                        likeButton.addClass('add-like');
+                    } else {
+                        likeButton.removeClass('add-like');
+                    }
+
+                    // Update the like count
+                    likeCountElement.text(response.likeCount);
+
+                    // Locate the parent comment div
+                    const parentLikeDiv = $(`#like-count-${postId}`);
+                    parentLikeDiv.text(response.likeCount);
+                },
+                error: function (xhr) {
+                    console.error('Something went wrong:', xhr.responseText);
+                },
+            });
+        });
+    });
+
+
+
+
+    // Show/Hide Comment Form and Fetch Comments
+    function show_comment_form(e, postId) {
+        e.preventDefault();
+        // const postId = $(this).data('post-id');
+        const commentsSection = $(`#comments-section-${postId}`);
+
+        // Close all other comment sections
+        $('.comments-section').not(commentsSection).hide();
+
+        // Toggle the current comment section
+        commentsSection.toggle();
+
+        if (commentsSection.is(':visible')) {
+            fetchComments(postId);
+        }
+    };
+
+    // Fetch Comments for a Post
+    function fetchComments(postId) {
+        $.ajax({
+            url: `/posts/${postId}/comments`,
+            type: 'GET',
+            success: function (response) {
+                if (response.comments && Array.isArray(response.comments)) {
+                    // Generate and update comments list
+                    const commentsHTML = response.comments.map(comment => generateCommentHTML(comment)).join('');
+                    $(`#comments-section-${postId} .comments-list`).html(commentsHTML);
+
+                    // Update the comment count
+                    $(`#add-comment-${postId} .comment-count`).text(response.commentCount);
+                } else {
+                    console.error('Unexpected response format:', response);
+                }
+            },
+            error: function (xhr) {
+                console.error('Error fetching comments:', xhr.responseText);
+            }
+        });
+    }
+
+    // Generate Comment HTML
+    function generateCommentHTML(comment) {
+        let repliesHTML = '';
+        if (Array.isArray(comment.replies) && comment.replies.length > 0) {
+            repliesHTML = comment.replies.map(reply => `
+                <div class="reply mx-5" id="comment-${reply.id}">
+                    <strong>${reply.user.username}:</strong> ${reply.content}
+                    <a href="#" class="reply-link" onclick="reply_form(${reply.parent_id},${reply.post_id},'${reply.user.username}');">Reply</a>
+                    <a href="javascript:void(0);" class="delete-link" data-comment-id="${reply.id}" onclick="deleteComment(${reply.id}, ${comment.post_id}, this)">Delete</a>
+                </div>
+            `).join('');
+        }
+
+        return `
+            <div class="comment" id="comment-${comment.id}">
+                <strong>${comment.user.username}:</strong> ${comment.content}
+                <a href="#" class="reply-link" data-parent-id="${comment.id}" data-post-id="${comment.post_id}" data-user-name="${comment.user.username}">Reply</a>
+                <a href="javascript:void(0);" class="delete-link" data-comment-id="${comment.id}" onclick="deleteComment(${comment.id}, ${comment.post_id}, this)">Delete</a>
+                <div class="replies">${repliesHTML}</div>
+            </div>
+        `;
+    }
+
+
+    function generateReplyCommentHTML(comment) {
+        let repliesHTML = '';
+        return `
+            <div class="reply mx-5" id="comment-${comment.id}">
+                <strong>${comment.user.username}:</strong> ${comment.content}
+                <a href="javascript:void(0);" class="delete-link" data-comment-id="${comment.id}" onclick="deleteComment(${comment.id}, ${comment.post_id}, this)">Delete</a>
+            </div>
+        `;
+    }
+
+    // Submit Comment or Reply
+    $(document).on('submit', '.comment-form, .comment-form-reply', function (e) {
+        e.preventDefault();
+
+        const form = $(this);
+        const postId = form.data('post-id');
+        const comment = form.find('.comment-input').val();
+        const parentId = form.find('.parent-id').val();
+
+
+        $.get('/csrf-token', function (data) {
+            const csrfToken = data.token;
+            $.ajax({
+                url: '/comments',
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken // Set the token in the header
+                },
+                data: {
+                    post_id: postId,
+                    comment: comment,
+                    parent_id: parentId
+                },
+                success: function (response) {
+                    if (response.success) {
+                        form.find('.comment-input').val(''); // Clear input
+                        form.find('.parent-id').val('');    // Reset parent ID
+
+                        // Remove any existing .comment-form-reply forms
+                        if ($('.comment-form-reply').length > 0) {
+                            $('.comment-form-reply').remove();
+
+                                                // Add the new comment or reply to the DOM
+                            const newCommentHTML = generateReplyCommentHTML(response.comment);
+
+                            if (parentId) {
+                                // If it's a reply, append it to the appropriate reply section
+                                $(`#comment-${parentId} .replies`).append(newCommentHTML);
+                            } else {
+                                // If it's a new comment, append it to the main comments list
+                                $(`#comments-section-${postId} .comments-list`).append(newCommentHTML);
+                            }
+
+
+                        }
+
+                        fetchComments(postId);              // Refresh comments
+
+
+                    }
+                },
+                error: function (xhr) {
+                    console.error('Error submitting comment:', xhr.responseText);
+                }
+            });
+        });
+    });
+
+    // Handle Reply Link
+    $(document).on('click', '.reply-link', function (e) {
+        e.preventDefault();
+
+        const parentId = $(this).data('parent-id');
+        const post_id = $(this).data('post-id');
+        const repliesDiv = $(this).siblings('.replies');
+        const user_name = $(this).data('user-name');
+
+        // Check if a reply form already exists
+        const existingForm = repliesDiv.find('.comment-form-reply');
+
+        if (existingForm.length > 0) {
+            // If the form exists, remove it
+            existingForm.remove();
+        } else {
+            // If the form doesn't exist, create and append it
+            const replyFormHTML = `
+                <form class="comment-form-reply mt-2" data-post-id="${post_id}">
+                    <textarea name="comment" class="comment-input form-control" placeholder="Write a comment...">${user_name} </textarea>
+                    <input type="hidden" name="parent_id" class="parent-id" value="${parentId}">
+                    <input type="hidden" name="parent_id" class="post_id" value="${post_id}">
+                    <button type="submit" class="btn btn-primary btn-sm mt-2">Post</button>
+                </form>
+            `;
+            repliesDiv.append(replyFormHTML);
+        }
+    });
+
+    function reply_form(parentId, postId, userName) {
+        // Remove any existing reply form
+        $('.comment-form-reply').remove();
+
+        // Locate the parent comment div
+        const parentDiv = $(`#comment-${parentId}`);
+
+        // Check if the form is already appended
+        if (parentDiv.find('.comment-form-reply').length === 0) {
+            // Create the reply form
+            const replyFormHTML = `
+                <form class="comment-form-reply mt-2" data-post-id="${postId}">
+                    <textarea name="comment" class="comment-input form-control" placeholder="Write a comment...">${userName}</textarea>
+                    <input type="hidden" name="parent_id" class="parent-id" value="${parentId}">
+                    <input type="hidden" name="post_id" class="post-id" value="${postId}">
+                    <button type="submit" class="btn btn-primary btn-sm mt-2">Post</button>
+                </form>
+            `;
+
+            // Append the form immediately after the parent div
+            parentDiv.after(replyFormHTML);
+        }
+    }
+    
+    function deleteComment(commentId, postId, element) {
+        // if (!confirm("Are you sure you want to delete this comment?")) {
+        //     return; // User cancelled the action
+        // }
+
+        $.get('/csrf-token', function (data) {
+            const csrfToken = data.token;
+
+            $.ajax({
+                url: `/comments/${commentId}`, // Adjust the URL to match your Laravel route
+                type: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                success: function(response) {
+                    if (response.success) {
+                        // Remove the comment div
+                        $(element).closest('.comment').remove();
+
+                        fetchComments(postId)
+
+                    } else {
+                        alert(response.message || 'Failed to delete the comment.');
+                    }
+                },
+                error: function(xhr) {
+                    alert('An error occurred. Please try again.');
+                }
+            });
+        });
+    }
+
+    function openLikeModal(postId, likeCount) {
+        // Only open the modal if there are likes
+        // if (likeCount > 0) {
+            // Make an AJAX request to fetch the list of users who liked the post
+            $.ajax({
+                url: `/posts/${postId}/likes`, // Define the route in your backend
+                type: 'GET',
+                success: function (response) {
+                    // Populate the modal with the list of users
+                    const likeList = $('#likeList');
+                    likeList.empty(); // Clear any existing content
+                    response.likes.forEach(user => {
+                        likeList.append(`<li class="list-group-item">${user.username}</li>`);
+                    });
+
+                    // Show the modal
+                    $('#likeModal').modal('show');
+                },
+                error: function (error) {
+                    console.error('Error fetching likes:', error);
+                }
+            });
+        // }
+    }
+
+
+</script>
+
+@endsection

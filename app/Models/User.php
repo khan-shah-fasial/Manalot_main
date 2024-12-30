@@ -47,4 +47,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Define the relationship between User and Likes.
+     */
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 }

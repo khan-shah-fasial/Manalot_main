@@ -5,14 +5,132 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Post;
+use App\Models\Like;
 use App\Models\Contact;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Cache;
 
 
 class IndexController extends Controller
 {
     public function index(){
-        return view('frontend.pages.home.index');
+        $posts = Post::latest()->paginate(3); // Fetch 3 posts per request
+        return view('frontend.pages.home.index', compact('posts'));
+    }
+
+    public function fetchPosts(Request $request)
+    {
+        // $posts = Post::latest()->paginate(3); // Fetch 3 posts per request
+        // if ($request->ajax()) {
+        //     return view('frontend.component.post_list', compact('posts'))->render();
+        // }
+
+        // Define a cache key to uniquely identify cached data
+        $cacheKey = 'posts_page_' . $request->get('page', 1);
+
+        // Check if cached data exists
+        $posts = Cache::remember($cacheKey, now()->addMinutes(10), function () {
+            return Post::latest()->paginate(3); // Fetch 3 posts per request
+        });
+
+
+        if ($request->ajax()) {
+            // If no more posts, return a message indicating that
+            if ($posts->isEmpty()) {
+                return response()->json(['message' => 'No more posts available.'], 204); // 204 No Content
+            }
+            return response()->json([
+                'html' => view('frontend.component.post_list', compact('posts'))->render()
+            ]);
+        }
+        return view('frontend.pages.home.index', compact('posts'));
+    }
+
+
+    public function toggleLike(Request $request)
+    {
+        $postId = $request->post_id;
+        $userId = auth()->user()->id;
+
+        // Check if the user has already liked the post
+        $like = Like::where('user_id', $userId)->where('post_id', $postId)->first();
+
+        if ($like) {
+            // Unlike the post
+            $like->delete();
+            $status = 'unliked';
+        } else {
+            // Like the post
+            Like::create([
+                'user_id' => $userId,
+                'post_id' => $postId,
+            ]);
+            $status = 'liked';
+        }
+
+        // Return the updated like count
+        $likeCount = Like::where('post_id', $postId)->count();
+
+        return response()->json(['status' => $status, 'likeCount' => $likeCount]);
+    }
+
+
+    public function fetchComments($postId)
+    {
+        $comments = Comment::where('post_id', $postId)
+            // ->whereNull('parent_id')
+            ->with('replies.user', 'user')
+            ->latest()
+            ->get();
+
+        // Return the updated Comment count
+        $commentCount = Comment::where('post_id', $postId)->count();
+
+        return response()->json([
+            'comments' => $comments,
+            'commentCount' => $commentCount,
+        ]);
+    }
+
+    public function storeComment(Request $request)
+    {
+        $request->validate([
+            'post_id' => 'required|exists:posts,id',
+            'comment' => 'required|string',
+            'parent_id' => 'nullable|exists:comments,id',
+        ]);
+
+        $comment = Comment::create([
+            'user_id' => auth()->user()->id,
+            'post_id' => $request->post_id,
+            'parent_id' => $request->parent_id,
+            'content' => $request->comment,
+        ]);
+
+        return response()->json(['success' => true, 'comment' => $comment->load('user')]);
+    }
+
+
+    public function destroy($id)
+    {
+        try {
+            $comment = Comment::findOrFail($id);
+            $comment->delete();
+
+            return response()->json(['success' => true, 'message' => 'Comment deleted successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Failed to delete the comment']);
+        }
+    }
+
+    public function getPostLikes(Post $post)
+    {
+        // Fetch the users who liked the post
+        $likes = $post->likes()->with('user:id,username')->get()->pluck('user');
+
+        return response()->json(['likes' => $likes]);
     }
 
 //--------------=============================== other ================================------------------------------
