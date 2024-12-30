@@ -117,6 +117,13 @@ class IndexController extends Controller
     {
         try {
             $comment = Comment::findOrFail($id);
+
+            // If the comment is a parent comment, delete all its replies
+            if ($comment->parent_id === null) {
+                Comment::where('parent_id', $comment->id)->delete();
+            }
+
+            // Delete the current comment
             $comment->delete();
 
             return response()->json(['success' => true, 'message' => 'Comment deleted successfully']);

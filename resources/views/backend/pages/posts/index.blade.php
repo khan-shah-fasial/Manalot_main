@@ -67,10 +67,10 @@
                         </td>
                         <td>{{ $row->created_at->format('d M, Y h:iA') }}</td>
                         <td>
-                            <a href="javascript:void(0);" class="btn btn-info text-white action-icon"
+                            {{-- <a href="javascript:void(0);" class="btn btn-info text-white action-icon"
                                 onclick="largeModal('{{ url(route('post.edit_post',['id' => $row->id])) }}', 'Edit Post ID :{{$row->id}} - {!! \Illuminate\Support\Str::words($row->content, $words = 3, $end = '...') !!}')">
                                 <i class="mdi mdi-square-edit-outline" title="Edit"></i>
-                            </a>
+                            </a> --}}
                             <a href="javascript:void(0);" class="btn btn-warning text-white action-icon"
                                 onclick="largeModal('{{ url(route('post.view_post',['id' => $row->id])) }}', 'View Post ID :{{$row->id}} - {!! \Illuminate\Support\Str::words($row->content, $words = 3, $end = '...') !!}')">
                                 <i class="mdi mdi-eye" title="View"></i>
