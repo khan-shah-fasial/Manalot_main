@@ -241,6 +241,28 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
 
     const loggedInUserId = {{ auth()->user()->id }};
 
+    function timeAgo(date) {
+        const now = new Date();
+        const seconds = Math.floor((now - date) / 1000);
+        const intervals = {
+            year: 31536000,
+            month: 2592000,
+            day: 86400,
+            hour: 3600,
+            minute: 60,
+            second: 1
+        };
+        for (let key in intervals) {
+            const interval = Math.floor(seconds / intervals[key]);
+            if (interval >= 1) {
+                return `${interval} ${key}${interval > 1 ? 's' : ''} ago`;
+            }
+        }
+        return 'just now';
+    }
+
+
+
     $(document).on('click', '#like_comnt_link_like', function (e) {
         e.preventDefault();
 
@@ -329,9 +351,11 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
     function generateCommentHTML(comment) {
         let repliesHTML = '';
         if (Array.isArray(comment.replies) && comment.replies.length > 0) {
+            // Use the `created_at` value from the comment object
+            const commenttime_reply = timeAgo(new Date(comment.created_at));
             repliesHTML = comment.replies.map(reply => `
-                <div class="reply mx-5" id="comment-${reply.id}">
-                    <strong>${reply.user.username}:</strong> ${reply.content}
+                <div class="reply mx-5" id="comment-${reply.id}"> 
+                    <strong>${reply.user.username}:</strong> ${reply.content} <b>${commenttime_reply}</b>
                     <a href="#" class="reply-link" onclick="reply_form(${reply.parent_id},${reply.post_id},'${reply.user.username}');">Reply</a>
                     ${
                         comment.user_id === loggedInUserId
@@ -343,9 +367,11 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
         }
 
         if(comment.parent_id === null){
+            // Use the `created_at` value from the comment object
+            const commenttime = timeAgo(new Date(comment.created_at));
             return `
                 <div class="comment" id="comment-${comment.id}">
-                    <strong>${comment.user.username}:</strong> ${comment.content}
+                    <strong>${comment.user.username}:</strong> ${comment.content} <b>${commenttime}</b>
                     <a href="#" class="reply-link" data-parent-id="${comment.id}" data-post-id="${comment.post_id}" data-user-name="${comment.user.username}">Reply</a>
                     ${
                     comment.user_id === loggedInUserId
@@ -362,9 +388,10 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
 
     function generateReplyCommentHTML(comment) {
         let repliesHTML = '';
+        const commentjust = timeAgo(new Date(comment.created_at));
         return `
             <div class="reply mx-5" id="comment-${comment.id}">
-                <strong>${comment.user.username}:</strong> ${comment.content}
+                <strong>${comment.user.username}:</strong> ${comment.content} <b>${commentjust}</b>
                 ${
                     comment.user_id === loggedInUserId
                     ? `<a href="javascript:void(0);" class="delete-link" data-comment-id="${comment.id}" onclick="deleteComment(${comment.id}, ${comment.post_id}, this)">Delete</a>`
