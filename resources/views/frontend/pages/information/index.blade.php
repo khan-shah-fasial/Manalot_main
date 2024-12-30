@@ -8,7 +8,12 @@
 
 @section('page.content')
 
-
+<style>
+  body
+{
+        background-color: #e7ecef;
+}
+</style>
 
 <!-- -------------------- career banner start ---------------- -->
 

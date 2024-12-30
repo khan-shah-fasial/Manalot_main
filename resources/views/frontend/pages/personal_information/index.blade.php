@@ -101,15 +101,14 @@
 @endphp
 <style>
     @media screen and (min-width: 1200px) {
-        .container, .container-lg, .container-md, .container-sm, .container-xl {
-            max-width: 1230px;
-        }
-
+      
         header.d-flex.align-items-center.justify-content-between {
             width: 100%;
         }
     }
-
+  .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 1270px;
+    }
 
     body#index {
         background-color: #e7ecef;
@@ -118,10 +117,7 @@
     .user_header .search_input button { 
         padding: 8px 0px 8px 20px;
     }
-    .header > .container-lg.container-fluid {
-        padding: 0px;
-    }
-
+    
     .education-row .col-md-6:nth-child(odd) {
     padding-left: 12px;
     padding-right: 12px !important;
@@ -222,8 +218,8 @@
                         </ul>
                     </div>
                     <div class="language_translator">
-                        <img class="icon_language" src="/assets/images/footer_english_filter.png">
-                        <i class="fa fa-caret-down"></i>
+                        <img class="icon_language" src="/assets/images/footer_english_filter.svg">
+                        
                     </div>
                     <strong class="text-center maple_footer_text">Maple Consulting & Services &copy; 2021</strong>
                     <div class="py-5 my-5 d-md-block d-none"></div>

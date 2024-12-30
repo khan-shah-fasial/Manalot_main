@@ -16,11 +16,15 @@
     }
 
     .right_sidebar {
-    width: 260px;
+    width: 257px;
 }
 
 .left_sidebar {
-    width: 260px;
+    width: 257px;
+}
+body
+{
+        background-color: #e7ecef;
 }
 
 #loading img {
@@ -151,8 +155,8 @@
                             </ul>
                         </div>
                         <div class="language_translator">
-                            <img class="icon_language" src="/assets/images/footer_english_filter.png">
-                            <i class="fa fa-caret-down"></i>
+                            <img class="icon_language" src="/assets/images/footer_english_filter.svg">
+                           
                         </div>
                         <strong class="text-center maple_footer_text">Maple Consulting & Services &copy; 2021</strong>
                         <div class="py-5 my-5 d-md-block d-none"></div>

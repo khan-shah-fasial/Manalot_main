@@ -60,6 +60,7 @@ Route::get('/sample-profile', [IndexController::class, 'sample_profile'])->name(
 Route::get('/sample-profile-female', [IndexController::class, 'sample_profile_female'])->name('sample_profile_female');
 Route::get('/personal-information', [IndexController::class, 'personal_information'])->name('personal_information');
 Route::get('/notification', [IndexController::class, 'notification'])->name('notification');
+Route::get('/messaging', [IndexController::class, 'messaging'])->name('messaging');
 Route::get('/refund-policy', [IndexController::class, 'refund_policy'])->name('refund-policy');
 // not allocated route
 
