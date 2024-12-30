@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\UserDetails;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 
 class IndexController extends Controller
@@ -65,7 +66,7 @@ class IndexController extends Controller
             //'g-recaptcha-response' => 'required|captcha',
         ];
 
-        $validator = \Validator::make($request->all(), $rules); // Pass $request->all() as the first argument
+        $validator = Validator::make($request->all(), $rules); // Pass $request->all() as the first argument
 
         if ($validator->fails()) {
             return response()->json([
@@ -226,8 +227,10 @@ class IndexController extends Controller
         // Fetch user and userdetails based on user_id
         $user = User::find($userId); // Assuming User is your model
         $user_detail = UserDetails::where('user_id', $userId)->first(); // Assuming UserDetails is your model
+        // Get country data
+        $countries = $this->getCountries();
 
-    return view('frontend.pages.personal_information.edit_profile', compact('user', 'user_detail'));
+        return view('frontend.pages.personal_information.edit_profile', compact('countries','user', 'user_detail'));
 
 
         // $response = [
@@ -240,6 +243,40 @@ class IndexController extends Controller
         // return view('frontend.pages.personal_information.edit_profile');
     }
 
+    public function view_personal_information(){
+        // Retrieve the session user_id
+        $userId = session('user_id');
+
+        if (!$userId) {
+            // Redirect to login if user_id is not set
+            return redirect()->route('index')->with('error', 'Please log in to access this page.');
+        }
+
+        // Fetch user and userdetails based on user_id
+        $user = User::find($userId);
+        $user_detail = UserDetails::where('user_id', $userId)->first();
+
+        return view('frontend.pages.personal_information.view_profile', compact('user', 'user_detail'));
+    }
+
+    private function getCountries()
+    {
+        // Initialize cURL session
+        $ch = curl_init();
+
+        // Set cURL options
+        curl_setopt($ch, CURLOPT_URL, "https://api.first.org/data/v1/countries");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        // Execute cURL and get the response
+        $response = curl_exec($ch);
+
+        // Close cURL session
+        curl_close($ch);
+
+        // Return the response as JSON foreach and send only countrycode and country
+        return response()->json(json_decode($response));
+    }
 
         public function notification(){
         return view('frontend.pages.notification.index');

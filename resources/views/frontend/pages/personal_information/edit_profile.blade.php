@@ -1047,6 +1047,10 @@
 </section>
 @endsection
 @section('component.scripts')
+<!-- Pass the countries data to JavaScript -->
+<script type="text/javascript">
+    var countries = @json($countries); // Pass the countries data to a JS variable
+</script>
 <script>
 /*--------------------- Forms Ajax ------------------*/
 
@@ -1131,8 +1135,17 @@
                             username: 'umair.makent'
                         },
                         success: function (data) {
+                        console.log(countries[data]);
                             if (data.postalCodes.length > 0) {
-                                $('#country_name').val(data.postalCodes[0].countryCode).focus();
+                                // Get the country code from the response
+                                var countryCode = data.postalCodes[0].countryCode;
+
+                                // Find the full country name from the countries data passed from the backend
+                                var countryName = countries[countryCode] ? countries[countryCode].country : 'Unknown Country';
+
+                                $('#country_name').val(countryName).focus();
+
+                                // $('#country_name').val(data.postalCodes[0].countryCode).focus();
                                 $('#city').val(data.postalCodes[0].adminName2).focus();
                                 $('#state').val(data.postalCodes[0].adminName1).focus();
                                 $('#pincode').focus();

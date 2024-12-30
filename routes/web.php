@@ -25,6 +25,7 @@ Route::middleware('auth.frontend')->group(function () {
     Route::get('/logout', [AccountController::class, 'customer_logout'])->name('customer.logout');
     // Route::get('/edit-profile', [IndexController::class, 'edit_profile'])->name('user.edit-profile');
     Route::get('/edit-profile', [IndexController::class, 'edit_personal_information'])->name('user.edit-profile');
+    Route::get('/view-profile', [IndexController::class, 'view_personal_information'])->name('user.view-profile');
     Route::any('/update-account/{param}', [UserController::class, 'create_account'])->name('user.save-profile');
 });
 

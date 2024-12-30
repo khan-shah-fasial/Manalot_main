@@ -195,7 +195,8 @@
                                     </div>
                                 </div>
                                 <a class="view_profile_btn" href="{{route('user.edit-profile')}}">Edit Profile</a>
-                                <a class="view_profile_btn" href="{{route('sample_profile')}}">View Profile</a>
+                                <a class="view_profile_btn" href="{{route('user.view-profile')}}">View Profile</a>
+                                {{-- <a class="view_profile_btn" href="{{route('sample_profile')}}">View Profile</a> --}}
                                 <a href="" class="view_profile_quick_menu">Setting & Privacy</a>
                                 <a href="" class="view_profile_quick_menu">Help</a>
                                 <a href="" class="view_profile_quick_menu">Language</a>
