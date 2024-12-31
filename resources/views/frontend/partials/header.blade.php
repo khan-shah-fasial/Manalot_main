@@ -6,11 +6,11 @@
                     <a href="/">
                         <img class="user_header_logo" src="/assets/images/favicon2.png" alt="" />
                     </a>
-                    <form class="search_input d-flex align-items-center mb-0">
+                    <form class="search_input d-flex align-items-center mb-0" id="searchForm">
                         <button>
                             <i class="fa fa-search"></i>
                         </button>
-                        <input type="text" placeholder="Search" />
+                        <input type="text" id="searchInput" placeholder="Search" />
                     </form>
                 </div>
                 <div class="d-flex justify-content-end align-items-center user_header_right">
@@ -93,10 +93,12 @@
                         <div class="mobile_search_input" style="display: none;">
                             <div class="d-flex">
                                 <button class="close">X</button>
-                                <input type="text" placeholder="Search" />
-                                <button type="submit" class="searched">
-                                    <i class="fa fa-search"></i> 
-                                </button>
+                                {{-- <form id="searchForm">
+                                    <input type="text" id="searchInput" placeholder="Search" />
+                                    <button type="submit" class="searched">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </form> --}}
                             </div>
                         </div>
                     </form>
@@ -201,4 +203,36 @@
             </header>
         </div>
     </div> 
+
+
+
+    @section("search.scripts")
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const urlParams = new URLSearchParams(window.location.search);
+                const searchValue = urlParams.get('search');
+        
+                if (searchValue) {
+                    const searchInput = document.getElementById('searchInput');
+                    if (searchInput) {
+                        searchInput.value = searchValue;
+                    }
+                }
+            });
+        
+            document.getElementById('searchForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+        
+                const searchInput = document.getElementById('searchInput').value.trim();
+                if (searchInput) {
+                    const currentUrl = new URL(window.location.href);
+                    currentUrl.searchParams.set('search', searchInput);
+                    window.location.href = currentUrl.toString();
+                }
+            });
+        </script>
+
+    @endsection
+
 @endif

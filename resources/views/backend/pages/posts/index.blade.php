@@ -22,7 +22,7 @@
                 <thead>
                     <tr>
                         <th>Sr No</th>
-                        <th>Image</th>
+                        {{-- <th>Image</th> --}}
                         <th>Likes</th>
                         <th>Comments</th>
                         <th>Shares</th>
@@ -41,7 +41,7 @@
                             {!! \Illuminate\Support\Str::words($row->content, $words = 1, $end = '...') !!}
                         </td>
                         <td>{{ $row->event }}</td>--}}
-                        <td>
+                        {{-- <td>
                             @if ($row->image_url)
                                 <img src="{{ asset('storage/' . $row->image_url) }}" alt="Thumbnail" class="thumbnail" onclick="viewMedia('{{ asset('storage/' . $row->image_url) }}', 'image', 'View Image')" style="width: 70px; cursor: pointer;">
                             @endif
@@ -51,7 +51,7 @@
                             @if (!$row->image_url)
                                 N/A
                             @endif
-                        </td>
+                        </td> --}}
                         {{--<td>{{ $row->MediaType }}</td>--}}
                         <td onclick="smallModal('{{ url(route('post.likes_post',['id' => $row->id])) }}', 'Liked By')" style="cursor: pointer;">
                             {{ $row->likes_count }}

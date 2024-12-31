@@ -32,6 +32,7 @@ Route::middleware('auth.frontend')->group(function () {
     Route::delete('/comments/{id}', [IndexController::class, 'destroy'])->name('comments.destroy');
 
     Route::get('/posts/{post}/likes', [IndexController::class, 'getPostLikes']);
+    Route::post('/toggle-save-post', [IndexController::class, 'toggleSavePost'])->name('toggle-save-post');
 });
 
 Route::middleware('guest')->group(function () {

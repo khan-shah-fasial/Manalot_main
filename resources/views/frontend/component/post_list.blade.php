@@ -41,13 +41,31 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
                 </div>
                 <i class="fa-solid fa-ellipsis-vertical"></i>
             </div>
-            <a class="saved_clip" href="">
-                <img class="saved_clip_img" src="/assets/images/saved_icon.svg">
+            <a class="saved_clip" onclick="saved_post({{ $post->id }}, this);" href="javascript:void(0);" data-post-id="{{ $post->id }}">
+                <img class="saved_clip_img" 
+                     src="{{ auth()->user()->savedPosts->contains('post_id', $post->id) ? '/assets/images/saved_icon.svg' : '/assets/images/grey_saved_icon.svg' }}">
             </a>
         </div>
         <div class="mt-md-3 post_description">
             <div>
-                @php echo nl2br($post->content) @endphp
+                @php
+                    // Define the content
+                    $content = $post->content;
+            
+                    // Use a regular expression to find hashtags and replace them with hyperlinks
+                    $contentWithLinks = preg_replace_callback(
+                        '/#(\w+)/', // Regex to find hashtags (e.g., #something)
+                        function ($matches) {
+                            $tag = $matches[1];
+                            $url = route('index', ['tag' => $tag]);
+                            return "<a href=\"$url\">#{$tag}</a>";
+                        },
+                        $content
+                    );
+            
+                    // Convert line breaks to <br> and output the result
+                    echo nl2br($contentWithLinks);
+                @endphp
             </div>
 
             @if($post->media_type != null && $post->media_type == 'media')
@@ -539,6 +557,71 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
                 },
                 error: function(xhr) {
                     alert('An error occurred. Please try again.');
+                }
+            });
+        });
+    }
+
+
+    // function saved_post(postId, element) {
+    //     const icon = $(this).find('.saved_clip_img');
+    //     console.log('working tt 2');
+
+    //     $.get('/csrf-token', function (data) {
+    //         const csrfToken = data.token;
+
+    //         $.ajax({
+    //             url: `{{ url(route('toggle-save-post')) }}`;,
+    //             method: 'POST',
+    //             headers: {
+    //                 'X-CSRF-TOKEN': csrfToken // Set the token in the header
+    //             },
+    //             data: {
+    //                 post_id: postId
+    //             },
+    //             success: function (response) {
+    //                 if (response.success) {
+    //                     if (response.saved) {
+    //                         $icon.attr('src', '/assets/images/saved_icon.svg');
+    //                     } else {
+    //                         $icon.attr('src', '/assets/images/grey_saved_icon.svg');
+    //                     }
+    //                 }
+    //             },
+    //             error: function () {
+    //                 alert('Failed to toggle save status. Please try again.');
+    //             }
+    //         });
+    //     });
+    // };
+
+    function saved_post(postId, element) {
+        const $icon = $(element).find('.saved_clip_img'); // Find the image element within the clicked element
+
+        $.get('/csrf-token', function (data) {
+            const csrfToken = data.token;
+
+            $.ajax({
+                url: `{{ url(route('toggle-save-post')) }}`, // Correct syntax
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken // Set the CSRF token in the header
+                },
+                data: {
+                    post_id: postId
+                },
+                success: function (response) {
+                    if (response.success) {
+                        // Update the image source based on the response
+                        if (response.saved) {
+                            $icon.attr('src', '/assets/images/saved_icon.svg');
+                        } else {
+                            $icon.attr('src', '/assets/images/grey_saved_icon.svg');
+                        }
+                    }
+                },
+                error: function () {
+                    alert('Failed to toggle save status. Please try again.');
                 }
             });
         });
