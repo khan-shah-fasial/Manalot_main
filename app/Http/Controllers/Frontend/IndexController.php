@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserDetails;
 use App\Models\Contact;
+use App\Models\Country;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
@@ -225,22 +226,14 @@ class IndexController extends Controller
         }
 
         // Fetch user and userdetails based on user_id
-        $user = User::find($userId); // Assuming User is your model
+        // $user = User::find($userId); // Assuming User is your model
+
+        $user = User::with('workExperiences')->find($userId); // Load user with work experiences
         $user_detail = UserDetails::where('user_id', $userId)->first(); // Assuming UserDetails is your model
         // Get country data
         $countries = $this->getCountries();
 
         return view('frontend.pages.personal_information.edit_profile', compact('countries','user', 'user_detail'));
-
-
-        // $response = [
-        //     'status' => true,
-        //     'notification' => 'Contact added successfully!',
-        // ];
-
-        // return response()->json($response);
-
-        // return view('frontend.pages.personal_information.edit_profile');
     }
 
     public function view_personal_information(){
@@ -261,6 +254,17 @@ class IndexController extends Controller
 
     private function getCountries()
     {
+        /*Database-model Method*/
+
+        // Fetch countries from the database and return as a key-value pair
+        return Country::all()
+            ->pluck('name', 'code') // Returns an associative array: ['US' => 'United States']
+            ->toArray();
+
+
+        /*API Method*/
+
+        /*
         // Initialize cURL session
         $ch = curl_init();
 
@@ -274,11 +278,23 @@ class IndexController extends Controller
         // Close cURL session
         curl_close($ch);
 
-        // Return the response as JSON foreach and send only countrycode and country
-        return response()->json(json_decode($response));
+        // Decode the JSON response
+        $data = json_decode($response, true);
+
+        // Extract country code and country name
+        $countries = [];
+        if (isset($data['data'])) {
+            foreach ($data['data'] as $code => $info) {
+                $countries[$code] = $info['country'];
+            }
+        }
+
+        // Return the structured array
+        return $countries;
+        */
     }
 
-        public function notification(){
+    public function notification(){
         return view('frontend.pages.notification.index');
     }
 

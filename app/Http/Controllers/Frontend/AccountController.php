@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\UserWorkExperience;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -52,61 +53,61 @@ class AccountController extends Controller
             $user = DB::table('users')->where('email', $request->input('email'))->get()->first();
 
             if($user){
-    
+
                 if ($user->completed_status == '0'){
 
                     Session()->flush();
-    
+
                     Session::put('temp_user_id', $user->id);
                     Session::put('step', $user->step + 1);
-    
+
                     $rsp_msg['response'] = 'error';
                     $rsp_msg['status'] = 'incomplete';
                     $rsp_msg['message']  = 'Please Fill ALL Forms';
-        
+
                     return response()->json(array('response_message' => $rsp_msg));
                 }
-    
+
                 if ($user->approval != 1 && $user->status != 1){
 
                     Session()->flush();
-    
+
                     $rsp_msg['response'] = 'error';
                     $rsp_msg['status'] = 'completed';
                     $rsp_msg['message']  = 'Application Status Under Review';
-        
+
                     return response()->json(array('response_message' => $rsp_msg));
                 }
-    
+
                 if ($user->status != 1){
 
                     Session()->flush();
-    
+
                     $rsp_msg['response'] = 'error';
                     $rsp_msg['message']  = 'Your ID is Not Active!';
-        
+
                     return response()->json(array('response_message' => $rsp_msg));
                 }
-    
+
                 if ($user->approval != 1){
 
                     Session()->flush();
-    
+
                     $rsp_msg['response'] = 'error';
                     $rsp_msg['message']  = 'ID is Not Approve!';
-        
+
                     return response()->json(array('response_message' => $rsp_msg));
                 }
 
 
-    
+
             } else {
 
                 Session()->flush();
-    
+
                 $rsp_msg['response'] = 'error';
                 $rsp_msg['message']  = 'User Not Exiest!, Please Register';
-    
+
                 return response()->json(array('response_message' => $rsp_msg));
             }
 
@@ -143,18 +144,18 @@ class AccountController extends Controller
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email',
             ]);
-    
+
             if ($validator->fails()) {
                 $errors = $validator->errors()->all();
-        
+
                 return response()->json([
                     'status' => 'error',
                     'message' => $errors
                 ], 200);
-            } 
-    
+            }
+
             $user = DB::table('users')->where('email', $request->email)->where('step', '!=', '1')->first(['id']);
-    
+
             if($user){
 
                 Session()->flush();
@@ -166,11 +167,11 @@ class AccountController extends Controller
                 Session::put('user_forget_id', $user->id);
 
                 $email = $request->email;
-                
+
                 $to = $email;
                 $subject = "$otp is your Manalot Leadership Network Forgot Password Verification Code.";
-                $body = "Hello, <br> <br> 
-        For security purposes, please enter the code below to verify your account.<br> <br> 
+                $body = "Hello, <br> <br>
+        For security purposes, please enter the code below to verify your account.<br> <br>
         Forgot Password Verification Code: <b>$otp</b> <br><br>
         The code is valid for 2 minutes.  <br><br>
         Having problems with the code? <br><br>
@@ -193,26 +194,26 @@ class AccountController extends Controller
                 ], 200);
 
             }
-    
+
 
         }elseif($param == "verify-forgot-otp"){
 
             $validator = Validator::make($request->all(), [
                 'otp' => 'required|digits:6',
             ]);
-    
+
             if ($validator->fails()) {
                 $errors = $validator->errors()->all();
-        
+
                 return response()->json([
                     'status' => 'error',
                     'message' => $errors
                 ], 200);
-            } 
-    
+            }
+
             $otp = Session::get('otp');
             $timestamp = Session::get('otp_timestamp');
-    
+
             // Check if OTP expired (2 minutes)
             if (Carbon::parse($timestamp)->diffInMinutes(Carbon::now()) > 2) {
 
@@ -222,7 +223,7 @@ class AccountController extends Controller
                 ], 200);
 
             }
-    
+
             if ($request->otp == $otp) {
 
                 return response()->json([
@@ -239,8 +240,8 @@ class AccountController extends Controller
 
 
             }
-    
-        
+
+
         }elseif($param == "reset-password"){
 
 
@@ -248,23 +249,23 @@ class AccountController extends Controller
                 'password' => 'required|min:6|same:password_conform',
                 'password_conform' => 'required|min:6',
             ]);
-    
+
             if ($validator->fails()) {
                 $errors = $validator->errors()->all();
-        
+
                 return response()->json([
                     'status' => 'error',
                     'message' => $errors
                 ], 200);
             }
-    
+
             $user = DB::table('users')->where('id', Session::get('user_forget_id'))->get(['id'])->first();
 
             if($user){
                 DB::table('users')->where('id', Session::get('user_forget_id'))->update([
                     'password' => bcrypt($request->input('password')),
                 ]);
-    
+
                 return response()->json([
                     'status' => 'success',
                     'message' => 'New Password Update Successfully',
@@ -305,7 +306,7 @@ class AccountController extends Controller
         }elseif($param == "email-verify"){
 
             $rsp_msg = $this->email_verification($request);
-        
+
         }elseif($param == "resend-otp"){
 
             $rsp_msg = $this->resendOtp($request);
@@ -313,7 +314,7 @@ class AccountController extends Controller
         }elseif($param == "phone-verify"){
 
             $rsp_msg = $this->phone_verification($request);
-        
+
         }elseif($param == "resend-otp-phone"){
 
             $rsp_msg = $this->resendOtp_phone($request);
@@ -325,7 +326,7 @@ class AccountController extends Controller
         }elseif($param == "login-info"){
 
             $rsp_msg = $this->create_login_info($request);
-        
+
         }elseif($param == "personal-work-info"){
 
             $rsp_msg = $this->creaste_personal_work_info($request);
@@ -362,7 +363,7 @@ class AccountController extends Controller
             $rsp_msg['response'] = 'error';
             $rsp_msg['message'] = "Invalid parameter: $param";
         }
-        
+
 
         return response()->json(array('response_message' => $rsp_msg));
     }
@@ -371,7 +372,7 @@ class AccountController extends Controller
     {
         $search = $request->input('q');
         $searchTerms = explode(' ', $search);
-        
+
         $skills = DB::table('skills')
             ->where(function($query) use ($searchTerms) {
                 foreach ($searchTerms as $term) {
@@ -380,7 +381,7 @@ class AccountController extends Controller
             })
             ->groupBy('name')
             ->get(['name']);
-        
+
         return response()->json($skills);
     }
 
@@ -388,7 +389,7 @@ class AccountController extends Controller
     {
         $skill = $request->input('skill');
         $searchTerms = explode(' ', $skill);
-        
+
         $relatedSkills = DB::table('skills')
             ->where(function($query) use ($searchTerms) {
                 foreach ($searchTerms as $term) {
@@ -398,7 +399,7 @@ class AccountController extends Controller
             ->wherenot('name',$skill)
             ->limit('10')
             ->get();
-        
+
         return response()->json($relatedSkills);
     }
 
@@ -418,24 +419,24 @@ class AccountController extends Controller
             'name.regex' => 'The Username format is invalid. Only letters, numbers, dots, underscores are allowed, and spacing is not allowed.',
             'name.min' => 'The Username must be at least 1 character.',
             'name.max' => 'The Username may not be greater than 50 characters.',
-            
+
             'email.required' => 'The Email field is required.',
             'email.email' => 'The Email must be a valid email address.',
-            
+
             'password.required' => 'The Password field is required.',
-            
+
             'confirm_password.required' => 'The Confirm Password field is required.',
             'confirm_password.same' => 'The Confirm Password must match the Password.',
-        
+
             'phone_number.required' => 'The Phone Number field is required.',
             'phone_number.regex' => 'The Phone Number format is invalid.',
             'phone_number.min' => 'The Phone Number must be at least 5 characters.',
-            
+
             'resume_cv.required' => 'The Resume file is required.',
             'resume_cv.mimes' => 'The Resume must be a PDF, DOC, or DOCX file.',
             'resume_cv.max' => 'The Resume may not be larger than 5MB.',
         ]);
-        
+
 
         if ($validator->fails()) {
             $rsp_msg['response'] = 'error';
@@ -466,11 +467,11 @@ class AccountController extends Controller
         $users_email_temp = DB::table('users')->where('email', $request->input('email'))->get()->first();
 
         if($request->has('resume_cv')){
-               
+
             $users_email_temp_email = str_replace(['@', '.'], '_', $request->input('email'));
             $newFileName = 'resume_' . $users_email_temp_email . '_' . now()->format('YmdHis') . '.' . $request->file('resume_cv')->getClientOriginalExtension();
             $path = $request->file('resume_cv')->storeAs('user_data/resume_cv', $newFileName, 'public');
-            
+
             // $result = file_upload_od($newFileName, $path);
             // if($result != 'error'){
             //     $path = $result;
@@ -492,7 +493,7 @@ class AccountController extends Controller
                 if (Storage::disk('public')->exists($resume_path)) {
                     Storage::disk('public')->delete($resume_path);
                 }
-            } 
+            }
 
 
             if(Session::has('google_email') && Session::get('google_login') == 1){
@@ -529,7 +530,7 @@ class AccountController extends Controller
 
                 Session::put('step', 2);
 
-                
+
                 $rsp_msg['response'] = 'success';
                 $rsp_msg['message'] = "User Detail Added successfully. Please Proceed";
 
@@ -611,12 +612,12 @@ class AccountController extends Controller
 
         $to = $user_info['email'];
         $subject = "$otp is your Manalot Leadership Network Verification Code.";
-        $body = "Hello, <br> <br> 
-        For security purposes, please enter the code below to verify your account.<br> <br> 
-        Account Verification Code: <b>$otp</b> <br><br> 
-        The code is valid for 2 minutes.  <br><br> 
-        Having problems with the code? <br><br> 
-        The code will not work if timed out. <br><br> 
+        $body = "Hello, <br> <br>
+        For security purposes, please enter the code below to verify your account.<br> <br>
+        Account Verification Code: <b>$otp</b> <br><br>
+        The code is valid for 2 minutes.  <br><br>
+        Having problems with the code? <br><br>
+        The code will not work if timed out. <br><br>
         Please request for a new code.";
 
         sendEmail($to, $subject, $body);
@@ -633,7 +634,7 @@ class AccountController extends Controller
     }
 
     public function email_verification($request){
-        
+
         $validator = Validator::make($request->all(), [
             'otp' => 'required|digits:6',
         ]);
@@ -642,8 +643,8 @@ class AccountController extends Controller
             $rsp_msg['response'] = 'error';
             $rsp_msg['message']  = $validator->errors()->all();
 
-            return $rsp_msg; 
-        } 
+            return $rsp_msg;
+        }
 
         $otp = Session::get('otp');
         $timestamp = Session::get('otp_timestamp');
@@ -686,18 +687,18 @@ class AccountController extends Controller
             //     } else{
             //         $path = $user_info['resume_cv'];
             //     }
-    
+
             //     DB::table('userdetails')->where('user_id',$users_email_temp->id)->update([
             //         'phone_number' => $user_info['phone_number'],
             //         'resume_cv' => $path,
             //         'created_at' => now(),
             //         'updated_at' => now(),
             //     ]);
-    
+
             //     Session::put('temp_user_id', $users_email_temp->id);
-    
+
             // } else {
-    
+
             //     $userId = DB::table('users')->insertGetId([
             //         'username' => $user_info['username'],
             //         'email' => $user_info['email'],
@@ -720,7 +721,7 @@ class AccountController extends Controller
             //     } else{
             //         $path = $user_info['resume_cv'];
             //     }
-    
+
             //     DB::table('userdetails')->insert([
             //         'user_id' => $userId,
             //         'phone_number' => $user_info['phone_number'],
@@ -731,7 +732,7 @@ class AccountController extends Controller
             //         'created_at' => now(),
             //         'updated_at' => now(),
             //     ]);
-    
+
             //     Session::put('temp_user_id', $userId);
             // }
 
@@ -758,7 +759,7 @@ class AccountController extends Controller
             $rsp_msg['response'] = 'error';
             $rsp_msg['message']  = "Invalid OTP";
         }
-        
+
 
         return $rsp_msg;
     }
@@ -772,17 +773,17 @@ class AccountController extends Controller
 
         $timestamp = Carbon::now();
         Session::put('otp_timestamp', $timestamp);
-        
+
         $user_info = Session::get('user_info');
 
         $to = $user_info['email'];
         $subject = "$otp is your Manalot Leadership Network Reset Verification Code.";
-        $body = "Hello, <br> <br> 
-        For security purposes, please enter the code below to verify your account.<br> <br> 
-        Resend Verification Code: <b>$otp</b> <br><br> 
-        The code is valid for 2 minutes.  <br><br> 
-        Having problems with the code? <br><br> 
-        The code will not work if timed out. <br><br> 
+        $body = "Hello, <br> <br>
+        For security purposes, please enter the code below to verify your account.<br> <br>
+        Resend Verification Code: <b>$otp</b> <br><br>
+        The code is valid for 2 minutes.  <br><br>
+        Having problems with the code? <br><br>
+        The code will not work if timed out. <br><br>
         Please request for a new code.";
 
 
@@ -798,7 +799,7 @@ class AccountController extends Controller
     //---------------------- Phone verification ----------------------------------------//
 
     public function phone_verification($request){
-        
+
         $validator = Validator::make($request->all(), [
             'otp' => 'required|digits:4',
         ]);
@@ -807,8 +808,8 @@ class AccountController extends Controller
             $rsp_msg['response'] = 'error';
             $rsp_msg['message']  = $validator->errors()->all();
 
-            return $rsp_msg; 
-        } 
+            return $rsp_msg;
+        }
 
         $otp = Session::get('otp');
         $timestamp = Session::get('otp_timestamp');
@@ -851,18 +852,18 @@ class AccountController extends Controller
                 } else{
                     $path = $user_info['resume_cv'];
                 }
-    
+
                 DB::table('userdetails')->where('user_id',$users_email_temp->id)->update([
                     'phone_number' => $user_info['phone_number'],
                     'resume_cv' => $path,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
-    
+
                 Session::put('temp_user_id', $users_email_temp->id);
-    
+
             } else {
-    
+
                 $userId = DB::table('users')->insertGetId([
                     'username' => $user_info['username'],
                     'email' => $user_info['email'],
@@ -885,7 +886,7 @@ class AccountController extends Controller
                 } else{
                     $path = $user_info['resume_cv'];
                 }
-    
+
                 DB::table('userdetails')->insert([
                     'user_id' => $userId,
                     'phone_number' => $user_info['phone_number'],
@@ -896,7 +897,7 @@ class AccountController extends Controller
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
-    
+
                 Session::put('temp_user_id', $userId);
             }
 
@@ -910,7 +911,7 @@ class AccountController extends Controller
             $rsp_msg['response'] = 'error';
             $rsp_msg['message']  = "Invalid OTP";
         }
-        
+
 
         return $rsp_msg;
     }
@@ -925,7 +926,7 @@ class AccountController extends Controller
 
         $timestamp = Carbon::now();
         Session::put('otp_timestamp', $timestamp);
-        
+
         $user_info = Session::get('user_info');
 
         $student_name = 'Admin';
@@ -940,8 +941,8 @@ class AccountController extends Controller
 
         // $to = $user_info['email'];
         // $subject = "$otp is your Manalot Leadership Network Reset Verification Code.";
-        // $body = "Hello, <br> 
-        // For security purposes, please enter the code below to verify your account.<br> 
+        // $body = "Hello, <br>
+        // For security purposes, please enter the code below to verify your account.<br>
         // Resend Verification Code: <b>$otp</b> <br>
         // The code is valid for 2 minutes.  <br>
         // Having problems with the code? <br>
@@ -1030,40 +1031,45 @@ class AccountController extends Controller
     public function creaste_personal_work_info($request){
 
         $validator = Validator::make($request->all(), [
-            'wrk_exp_company_name' => 'required|regex:/^[A-Za-z\s,.\'\/&]+$/|min:3',
+            // 'wrk_exp_company_name' => 'required|regex:/^[A-Za-z\s,.\'\/&]+$/|min:3',
+            // 'wrk_exp__title' => 'required|regex:/^[A-Za-z0-9\s,.\/\'&]+$/i|min:2|max:100',
+            // 'wrk_exp_years' => 'required',
+            // 'wrk_exp_responsibilities' => ['required', 'min:2'],
+
             // 'wrk_exp__title' => ['required', 'regex:/^[A-Za-z0-9\s,.\/\'&]+$/i', 'min:2', 'max:100'],
-            'wrk_exp__title' => 'required|regex:/^[A-Za-z0-9\s,.\/\'&]+$/i|min:2|max:100',
             // 'wrk_exp__title' => ['required', 'min:1', 'max:100'],
             'industry.*' => 'required',
             // 'job_title' => 'required',
-            'wrk_exp_years' => 'required',
             // 'wrk_exp_responsibilities' => ['required', 'string','regex:/^[A-Za-z0-9\s,.\/\'&\-\(\)\[\]_?+]+$/i', 'min:2'],
-            'wrk_exp_responsibilities' => ['required', 'min:2'],
             // 'resume_cv' => 'nullable|mimes:pdf|max:5120',
             'skill' => 'required',
             'Employed' => 'required', // Assuming 'Employed' is nullable string
             'experience_letter' => 'nullable|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120',
         ], [
-            'wrk_exp_company_name.required' => 'The Company Name is required.',
-            'wrk_exp_company_name.regex' => 'The Company Name format is invalid.',
-            'wrk_exp_company_name.min' => 'The Company Name must be at least 2 characters.',
-            
-            'wrk_exp__title.required' => 'The Professional Title is required.',
+            // 'wrk_exp_company_name.required' => 'The Company Name is required.',
+            // 'wrk_exp_company_name.regex' => 'The Company Name format is invalid.',
+            // 'wrk_exp_company_name.min' => 'The Company Name must be at least 2 characters.',
+
+            // 'wrk_exp__title.required' => 'The Professional Title is required.',
+
             // 'wrk_exp__title.string' => 'The Professional Title must be a string.',
-            'wrk_exp__title.regex' => 'The Professional Title format is invalid.',
-            'wrk_exp__title.min' => 'The Professional Title must be at least 1 character.',
-            'wrk_exp__title.max' => 'The Professional Title may not be greater than 100 characters.',
-            
+
+            // 'wrk_exp__title.regex' => 'The Professional Title format is invalid.',
+            // 'wrk_exp__title.min' => 'The Professional Title must be at least 1 character.',
+            // 'wrk_exp__title.max' => 'The Professional Title may not be greater than 100 characters.',
+
             'industry.*.required' => 'The Industry field is required.',
             'Employed.required' => 'The Employed Status is required.',
-            
-            'wrk_exp_years.required' => 'The Years of Experience field is required.',
-            
-            'wrk_exp_responsibilities.required' => 'The Responsibilities field is required.',
+
+            // 'wrk_exp_years.required' => 'The Years of Experience field is required.',
+
+            // 'wrk_exp_responsibilities.required' => 'The Responsibilities field is required.',
+
             // 'wrk_exp_responsibilities.string' => 'The Responsibilities must be a string.',
             // 'wrk_exp_responsibilities.regex' => 'The Responsibilities format is invalid.',
-            'wrk_exp_responsibilities.min' => 'The Responsibilities must be at least 2 characters.',
-            
+
+            // 'wrk_exp_responsibilities.min' => 'The Responsibilities must be at least 2 characters.',
+
             'skill.required' => 'The Skill field is required.',
         ]);
 
@@ -1085,7 +1091,7 @@ class AccountController extends Controller
                     'name' => $row,
                     'status' => 1,
                 ]);
-            } 
+            }
         }
 
         $industry = $request->input('industry');
@@ -1106,7 +1112,7 @@ class AccountController extends Controller
         //             'name' => $row,
         //             'status' => 1,
         //         ]);
-        //     } 
+        //     }
         // }
 
 
@@ -1122,7 +1128,7 @@ class AccountController extends Controller
             $newFileName = 'experience_letter_' . $users_email_temp . '_' . now()->format('YmdHis') . '.' . $request->file('experience_letter')->getClientOriginalExtension();
             $path = $request->file('experience_letter')->storeAs('user_data/experience_letters', $newFileName, 'public');
 
-            
+
 
             // $path = $request->file('experience_letter')->store('user_data/experience_letters', 'public');
 
@@ -1140,17 +1146,20 @@ class AccountController extends Controller
         }
 
         DB::table('userdetails')->where('user_id', Session::get('temp_user_id'))->update([
-            'wrk_exp_company_name' => $request->input('wrk_exp_company_name'),
-            'wrk_exp_years' => $request->input('wrk_exp_years'),
+            // 'wrk_exp_company_name' => $request->input('wrk_exp_company_name'),
+            // 'wrk_exp_years' => $request->input('wrk_exp_years'),
             'industry' => json_encode($industry_elements),
-            'wrk_exp__title' => $request->input('wrk_exp__title'),
+            // 'wrk_exp__title' => $request->input('wrk_exp__title'),
             'skill' => json_encode($skill),
-            'wrk_exp_responsibilities' => $request->input('wrk_exp_responsibilities'),
-            
+            // 'wrk_exp_responsibilities' => $request->input('wrk_exp_responsibilities'),
+
             'employed' => $request->input('Employed'),
             'experience_letter' => $path,
 
         ]);
+
+        // Update work experience entries
+        $this->updateUserWorkExperienceData($request, Session::get('temp_user_id'));
 
         DB::table('users')->where('id', Session::get('temp_user_id'))->update([
             'step' =>  3,
@@ -1165,6 +1174,36 @@ class AccountController extends Controller
 
     }
 
+    private function updateUserWorkExperienceData(Request $request, $user_id)
+    {
+        // Validate the incoming request
+        $request->validate([
+            'wrk_exp__title.*' => 'required|string|max:100',
+            'wrk_exp_company_name.*' => 'required|string|max:100',
+            'wrk_exp_years.*' => 'required|integer',
+            'wrk_exp_responsibilities.*' => 'required|string',
+        ]);
+
+        // Prepare the data for insertion
+        $workExperiences = [];
+        foreach ($request->input('wrk_exp__title') as $key => $title) {
+            $workExperiences[] = [
+                'user_id' => $user_id,
+                'wrk_exp_title' => $title,
+                'wrk_exp_company_name' => $request->input('wrk_exp_company_name')[$key],
+                'wrk_exp_years' => $request->input('wrk_exp_years')[$key],
+                'wrk_exp_responsibilities' => $request->input('wrk_exp_responsibilities')[$key],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        }
+
+        // Delete old entries for the user
+        UserWorkExperience::where('user_id', $user_id)->delete();
+
+        // Insert the new entries
+        UserWorkExperience::insert($workExperiences);
+    }
 
 
 
@@ -1185,13 +1224,13 @@ class AccountController extends Controller
             'certificate_name.required' => 'The Certificate Name is required.',
             'certificate_name.min' => 'The Certificate Name must be at least 1 character.',
             'certificate_name.max' => 'The Certificate Name may not be greater than 100 characters.',
-            
+
             'certificate_issuing.required' => 'The Certificate Issuing field is required.',
             'certificate_issuing.min' => 'The Certificate Issuing must be at least 1 character.',
             'certificate_issuing.max' => 'The Certificate Issuing may not be greater than 50 characters.',
-            
+
             'certificate_obtn_date.required' => 'The Certificate Obtain Date is required.',
-        
+
             'edu_degree.*.required' => 'The Degree field is required.',
             'edu_clg_name.*.required' => 'The School/University Name field is required.',
             'edu_graduation_year.*.required' => 'The Graduation Year field is required.',
@@ -1315,19 +1354,19 @@ class AccountController extends Controller
             'pref_title.required' => 'The Preferred Title is required.',
             'pref_title.min' => 'The Preferred Title must be at least 1 character.',
             'pref_title.max' => 'The Preferred Title may not be greater than 50 characters.',
-        
+
             'pref_emp_type.required' => 'The Preferred Employment Type is required.',
             'pref_emp_type.min' => 'The Preferred Employment Type must be at least 1 character.',
             'pref_emp_type.max' => 'The Preferred Employment Type may not be greater than 50 characters.',
 
             'notice_period_duration.required' => 'The Notice Period Duration is required.',
-        
+
             'pref_industry.*.required' => 'The Preferred Industry field is required.',
-        
+
             'pref_location.required' => 'The Preferred Location is required.',
             'pref_location.min' => 'The Preferred Location must be at least 1 character.',
             'pref_location.max' => 'The Preferred Location may not be greater than 50 characters.',
-        
+
             'current_salary.min' => 'The Current Salary must be at least 1 character.',
             'current_salary.max' => 'The Current Salary may not be greater than 100 characters.',
             'current_salary.regex' => 'The Current Salary format is invalid.',
@@ -1336,16 +1375,16 @@ class AccountController extends Controller
             'pref_salary.min' => 'The Preferred Salary must be at least 1 character.',
             'pref_salary.max' => 'The Preferred Salary may not be greater than 100 characters.',
             'pref_salary.regex' => 'The Preferred Salary format is invalid.',
-        
+
             'reference_name.required' => 'The Reference Name is required.',
-        
+
             'reference_phone.required' => 'The Reference Phone Number is required.',
             'reference_phone.numeric' => 'The Reference Phone Number must contain only numeric values.',
-        
+
             'work_authorization_status.required' => 'The Work Authorization Status is required.',
-            
+
             'availability.required' => 'The Availability field is required.',
-        
+
             // 'notice_period.required' => 'The Notice Period is required.',
 
             'current_salary_currency.required' => 'The Currency is required.',

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\UserWorkExperience;
 use App\Models\UserDetails;
 use App\Models\User;
 use App\Http\Controllers\Controller;
@@ -317,26 +318,26 @@ class UserController extends Controller
     public function create_personal_work_info($request){
 
         $validator = Validator::make($request->all(), [
-            'wrk_exp_company_name' => 'required|regex:/^[A-Za-z\s,.\'\/&]+$/|min:3',
-            'wrk_exp__title' => 'required|regex:/^[A-Za-z0-9\s,.\/\'&]+$/i|min:2|max:100',
+            // 'wrk_exp_company_name' => 'required|regex:/^[A-Za-z\s,.\'\/&]+$/|min:3',
+            // 'wrk_exp__title' => 'required|regex:/^[A-Za-z0-9\s,.\/\'&]+$/i|min:2|max:100',
             'industry.*' => 'required', // If it's an array of industries
-            'wrk_exp_responsibilities' => 'required|string|min:2',
+            // 'wrk_exp_responsibilities' => 'required|string|min:2',
             'skill' => 'required|array|min:1', // Assuming 'skill' is an array
         ], [
-            'wrk_exp_company_name.required' => 'The Company Name is required.',
-            'wrk_exp_company_name.regex' => 'The Company Name format is invalid.',
-            'wrk_exp_company_name.min' => 'The Company Name must be at least 3 characters.',
+            // 'wrk_exp_company_name.required' => 'The Company Name is required.',
+            // 'wrk_exp_company_name.regex' => 'The Company Name format is invalid.',
+            // 'wrk_exp_company_name.min' => 'The Company Name must be at least 3 characters.',
 
-            'wrk_exp__title.required' => 'The Professional Title is required.',
-            'wrk_exp__title.regex' => 'The Professional Title format is invalid.',
-            'wrk_exp__title.min' => 'The Professional Title must be at least 2 characters.',
-            'wrk_exp__title.max' => 'The Professional Title may not be greater than 100 characters.',
+            // 'wrk_exp__title.required' => 'The Professional Title is required.',
+            // 'wrk_exp__title.regex' => 'The Professional Title format is invalid.',
+            // 'wrk_exp__title.min' => 'The Professional Title must be at least 2 characters.',
+            // 'wrk_exp__title.max' => 'The Professional Title may not be greater than 100 characters.',
 
             'industry.*.required' => 'The Industry field is required.',
 
-            'wrk_exp_responsibilities.required' => 'The Responsibilities field is required.',
-            'wrk_exp_responsibilities.string' => 'The Responsibilities must be a string.',
-            'wrk_exp_responsibilities.min' => 'The Responsibilities must be at least 2 characters.',
+            // 'wrk_exp_responsibilities.required' => 'The Responsibilities field is required.',
+            // 'wrk_exp_responsibilities.string' => 'The Responsibilities must be a string.',
+            // 'wrk_exp_responsibilities.min' => 'The Responsibilities must be at least 2 characters.',
 
             'skill.required' => 'The Skill field is required.',
             'skill.array' => 'The Skills must be an array.',
@@ -398,15 +399,18 @@ class UserController extends Controller
         }
 
         Userdetails::where('user_id', $user_id)->update([
-            'wrk_exp_company_name' => $request->input('wrk_exp_company_name'),
-            'wrk_exp_years' => $request->input('wrk_exp_years'),
+            // 'wrk_exp__title' => $request->input('wrk_exp__title'),
+            // 'wrk_exp_company_name' => $request->input('wrk_exp_company_name'),
+            // 'wrk_exp_years' => $request->input('wrk_exp_years'),
+            // 'wrk_exp_responsibilities' => $request->input('wrk_exp_responsibilities'),
             'industry' => json_encode($industry_elements),
-            'wrk_exp__title' => $request->input('wrk_exp__title'),
             'skill' => json_encode($skill),
-            'wrk_exp_responsibilities' => $request->input('wrk_exp_responsibilities'),
             'employed' => $request->input('Employed'),
             'experience_letter' => $path,
         ]);
+
+        // Update work experience entries
+        $this->updateUserWorkExperienceData($request, $user_id);
 
         $rsp_msg['response'] = 'success';
         $rsp_msg['message']  = "User Personal and Work Detail Updated successfully!";
@@ -414,6 +418,38 @@ class UserController extends Controller
         return $rsp_msg;
 
     }
+
+    private function updateUserWorkExperienceData(Request $request, $user_id)
+    {
+        // Validate the incoming request
+        $request->validate([
+            'wrk_exp__title.*' => 'required|string|max:100',
+            'wrk_exp_company_name.*' => 'required|string|max:100',
+            'wrk_exp_years.*' => 'required|integer',
+            'wrk_exp_responsibilities.*' => 'required|string',
+        ]);
+
+        // Prepare the data for insertion
+        $workExperiences = [];
+        foreach ($request->input('wrk_exp__title') as $key => $title) {
+            $workExperiences[] = [
+                'user_id' => $user_id,
+                'wrk_exp_title' => $title,
+                'wrk_exp_company_name' => $request->input('wrk_exp_company_name')[$key],
+                'wrk_exp_years' => $request->input('wrk_exp_years')[$key],
+                'wrk_exp_responsibilities' => $request->input('wrk_exp_responsibilities')[$key],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        }
+
+        // Delete old entries for the user
+        UserWorkExperience::where('user_id', $user_id)->delete();
+
+        // Insert the new entries
+        UserWorkExperience::insert($workExperiences);
+    }
+
 
     public function create_work_authorization($request){
         $validator = Validator::make($request->all(), [

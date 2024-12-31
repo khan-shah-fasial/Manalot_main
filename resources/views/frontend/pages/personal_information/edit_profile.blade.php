@@ -12,6 +12,7 @@
 // var_dump($user);
 
 // var_dump($user_detail);
+// var_dump($countries);
 
     // $experience_status = DB::table('experience_status')->where('status', 1)->get();
 
@@ -345,10 +346,7 @@
                                     <!-- About -->
                                     <div class="col-md-12">
                                         <label for="about" class="form-label">About*</label>
-                                        <textarea class="form-control" id="about" rows="3">As a versatile and dedicated human resource professional,
-                                             I bring a wealth of experience as a seasoned consultant in
-                                              providing global leadership advisory services. With a keen
-                                              understanding of the intricate dynamics of leading...</textarea>
+                                        <textarea class="form-control" id="about" rows="3">---</textarea>
                                     </div>
 
 
@@ -404,43 +402,102 @@
 
                             <form id="personal-work-info" action="{{ url(route('user.save-profile', ['param' => 'personal-work-info'])) }}" method="post" enctype="multipart/form-data" class="d-flex flex-column">
                                 <div class="row">
-                                    <div class="col-md-6 mb-4">
-                                        <div class="position-relative form-group">
-                                            <label for="job_title" class="form-label">Professional Title*</label>
-                                            <input type="text" class="form-control is-invalid input_text" id="job_title"
-                                                name="wrk_exp__title" placeholder="Enter your Job Title" pattern="[A-Za-z]+"
-                                                minlength="2" maxlength="100" value="{{ $wrk_exp__title }}" required />
-                                        </div>
-                                    </div>
 
-                                    <div class="col-md-6 mb-4">
-                                        <div class="position-relative form-group">
-                                            <label for="company" class="form-label">Company Name*</label>
-                                            <input type="text" class="form-control is-invalid input_text" id="company"
-                                                name="wrk_exp_company_name" placeholder="Enter your Company Name" pattern="[A-Za-z]+"
-                                                minlength="1" maxlength="100" value="{{ $wrk_exp_company_name }}"
-                                                required>
+                                    @if ($user->workExperiences->isNotEmpty())
+                                        @foreach ($user->workExperiences as $workExp)
+                                            <div class="work-exp-row cirtificate_pdd">
+                                                <div class="col-md-6 mb-4">
+                                                    <div class="position-relative form-group">
+                                                        <label for="job_title" class="form-label">Professional Title*</label>
+                                                        <input type="text" class="form-control is-invalid input_text" id="job_title"
+                                                            name="wrk_exp__title[]" placeholder="Enter your Job Title" pattern="[A-Za-z]+"
+                                                            minlength="2" maxlength="100" value="{{ $workExp->wrk_exp_title }}" required />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 mb-4">
+                                                    <div class="position-relative form-group">
+                                                        <label for="company" class="form-label">Company Name*</label>
+                                                        <input type="text" class="form-control is-invalid input_text" id="company"
+                                                            name="wrk_exp_company_name[]" placeholder="Enter your Company Name" pattern="[A-Za-z]+"
+                                                            minlength="1" maxlength="100" value="{{ $workExp->wrk_exp_company_name }}" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 mb-4">
+                                                    <div class="position-relative form-group">
+                                                        <label for="State" class="form-label">Total Years of Experience *</label>
+                                                        <select class="select2 form-select form-control is-invalid input_select old-select2"
+                                                            aria-label="Default select example" id="wrk_exp_years" name="wrk_exp_years[]" required>
+                                                            <option value="">Select Experience</option>
+                                                            @foreach ($years_of_exp as $row)
+                                                                <option value="{{ $row->id }}" @if ($workExp->wrk_exp_years == $row->id) selected @endif>
+                                                                    {{ ucfirst($row->year_range) }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 pt-4">
+                                                    <div class="form-group">
+                                                        <label for="Responsibilities" class="form-label">Responsibilities/Achievements*</label>
+                                                        <textarea class="form-control is-invalid" rows="4" cols="45" name="wrk_exp_responsibilities[]"
+                                                            placeholder="Message" required>{{ $workExp->wrk_exp_responsibilities }}</textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 d-flex gap-3 add_more_div">
+                                                    <button type="button" class="add_more add-row-work-exp">ADD MORE +</button>
+                                                    <button type="button" class="remove_more remove-row-work-exp">REMOVE -</button>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        {{-- Render an empty row as fallback --}}
+                                        <div class="work-exp-row cirtificate_pdd">
+                                            <div class="col-md-6 mb-4">
+                                                <div class="position-relative form-group">
+                                                    <label for="job_title" class="form-label">Professional Title*</label>
+                                                    <input type="text" class="form-control is-invalid input_text" id="job_title"
+                                                        name="wrk_exp__title[]" placeholder="Enter your Job Title" pattern="[A-Za-z]+"
+                                                        minlength="2" maxlength="100" value="" required />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <div class="position-relative form-group">
+                                                    <label for="company" class="form-label">Company Name*</label>
+                                                    <input type="text" class="form-control is-invalid input_text" id="company"
+                                                        name="wrk_exp_company_name[]" placeholder="Enter your Company Name" pattern="[A-Za-z]+"
+                                                        minlength="1" maxlength="100" value="" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 d-flex gap-3 add_more_div">
+                                                <button type="button" class="add_more add-row-work-exp">ADD MORE +</button>
+                                                <button type="button" class="remove_more remove-row-work-exp">REMOVE -</button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
 
                                     <div class="col-md-6">
-                                        <label for="start_date" class="form-label">Start Date*</label>
-                                        <input type="text" class="form-control" id="start_date" placeholder="Month">
+                                        <label for="start_date" class="form-label">Start Date* ----</label>
+                                        <input type="text" class="form-control" id="start_date" placeholder="-">
                                     </div>
 
                                     <div class="col-md-6">
                                     <label for="start_date2" class="form-label"> </label>
-                                        <input type="number" class="form-control" id="start_date2"  placeholder="Year">
+                                        <input type="number" class="form-control" id="start_date2"  placeholder="-">
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label for="end_date" class="form-label">End Date*</label>
-                                        <input type="text" class="form-control" id="end_date" placeholder="Month">
+                                        <label for="end_date" class="form-label">End Date* ----</label>
+                                        <input type="text" class="form-control" id="end_date" placeholder="-">
                                     </div>
 
                                     <div class="col-md-6">
                                     <label for="end_date2" class="form-label"> </label>
-                                        <input type="number" class="form-control" id="end_date2" placeholder="Year">
+                                        <input type="number" class="form-control" id="end_date2" placeholder="-">
                                     </div>
 
 
@@ -519,13 +576,7 @@
 
                                     <div class="d-none" id="option-skills"></div>
 
-                                    <div class="col-md-12 pt-4">
-                                        <div class="form-group">
-                                            <label for="Responsibilities" class="form-label">Responsibilities/Achievements*</label>
-                                            <textarea class="form-control is-invalid" rows="4" cols="45" name="wrk_exp_responsibilities"
-                                                placeholder="Message" required>{{ $wrk_exp_responsibilities }}</textarea>
-                                        </div>
-                                    </div>
+
 
                                 </div>
                                 <div class="purple_btn text-start">
@@ -1135,13 +1186,12 @@
                             username: 'umair.makent'
                         },
                         success: function (data) {
-                        console.log(countries[data]);
                             if (data.postalCodes.length > 0) {
                                 // Get the country code from the response
                                 var countryCode = data.postalCodes[0].countryCode;
 
-                                // Find the full country name from the countries data passed from the backend
-                                var countryName = countries[countryCode] ? countries[countryCode].country : 'Unknown Country';
+                                // Get the country name from the countries object
+                                var countryName = countries[countryCode] || '';
 
                                 $('#country_name').val(countryName).focus();
 
@@ -1188,6 +1238,32 @@
             e.preventDefault(); // Prevent form submission
             if ($('.certificate-row').length > 1) {
                 $(this).closest('.certificate-row').remove(); // Remove the closest row
+            } else {
+                alert('At least one row is required.'); // Alert if only one row is left
+            }
+        });
+
+
+        // Add row functionality
+        $(document).on('click', '.add-row-work-exp', function (e) {
+            e.preventDefault(); // Prevent form submission
+            var newRow = $('.work-exp-row').first().clone(); // Clone the first row
+            // Clear input values in the cloned row
+            newRow.find('input,textarea,select').each(function () {
+                $(this).val('');
+            });
+            newRow.find('.add_more_div').remove(); // Remove add button from the cloned row
+            // newRow.find('.add-row-work-exp').remove(); // Remove add button from the cloned row
+            // newRow.find('.remove-row-work-exp').remove(); // Remove add button from the cloned row
+            newRow.append('<div class="col-md-6 d-flex gap-3 add_more_div"><button type="button" class="add_more add-row-certificate">ADD MORE +</button><button type="button" class="remove_more remove-row-certificate">REMOVE -</button></div>'); // Add new add and remove buttons
+            $('.work-exp-row').last().after(newRow); // Append the cloned row at the end
+        });
+
+        // Remove row functionality
+        $(document).on('click', '.remove-row-work-exp', function (e) {
+            e.preventDefault(); // Prevent form submission
+            if ($('.work-exp-row').length > 1) {
+                $(this).closest('.work-exp-row').remove(); // Remove the closest row
             } else {
                 alert('At least one row is required.'); // Alert if only one row is left
             }
