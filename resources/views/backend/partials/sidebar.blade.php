@@ -63,12 +63,12 @@
 
             {{------------------Manage Post----------------}}
 
-            {{-- <li class="side-nav-item">
+            <li class="side-nav-item">
                 <a href="{{ route('post.index_post') }}" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
                     <i class="ri-edit-line"></i>                             
                     <span>Manage Post </span>
                 </a>
-            </li> --}}
+            </li>
 
             {{------------------Manage Post----------------}}
 

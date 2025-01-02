@@ -6,18 +6,255 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserDetails;
+use App\Models\Post;
+use App\Models\Like;
 use App\Models\Contact;
 use App\Models\Country;
 use App\Models\Industry;
+use App\Models\Comment;
+use App\Models\SavedPost;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 
 
 class IndexController extends Controller
 {
-    public function index(){
-        return view('frontend.pages.home.index');
+    public function index(Request $request){
+
+        $isSavePost = $request->get('savepost') === 'true';
+        $tag = $request->get('tag');
+        $search = $request->get('search');
+
+        if ($isSavePost) {
+            // Fetch saved posts for the logged-in user
+            $savedPostIds = auth()->user()->savedPosts->pluck('post_id')->toArray();
+            $posts = Post::whereIn('id', $savedPostIds)->latest()->paginate(3); // Paginate saved posts
+        } else {
+            // // Fetch all posts if 'savepost' parameter is not present
+            // $posts = Post::latest()->paginate(3);
+            $query = Post::query();
+
+            if ($tag) {
+                $query->where('content', 'like', "%#{$tag}%");
+            }
+
+            if ($search) {
+                $query->where('content', 'like', "%{$search}%");
+            }
+
+            // Paginate the results
+            $posts = $query->latest()->paginate(3);
+
+        }
+
+        return view('frontend.pages.home.index', compact('posts'));
+    }
+
+    public function fetchPosts(Request $request)
+    {
+        // $posts = Post::latest()->paginate(3); // Fetch 3 posts per request
+        // if ($request->ajax()) {
+        //     return view('frontend.component.post_list', compact('posts'))->render();
+        // }
+
+        // Define a cache key to uniquely identify cached data
+        // $cacheKey = 'posts_page_' . $request->get('page', 1);
+
+        // // Check if cached data exists
+        // $posts = Cache::remember($cacheKey, now()->addMinutes(10), function () {
+        //     return Post::latest()->paginate(3); // Fetch 3 posts per request
+        // });
+
+
+        // if ($request->ajax()) {
+        //     // If no more posts, return a message indicating that
+        //     if ($posts->isEmpty()) {
+        //         return response()->json(['message' => 'No more posts available.'], 204); // 204 No Content
+        //     }
+        //     return response()->json([
+        //         'html' => view('frontend.component.post_list', compact('posts'))->render()
+        //     ]);
+        // }
+        // return view('frontend.pages.home.index', compact('posts'));
+
+        $isSavePost = $request->get('savepost') === 'true';
+        $tag = $request->get('tag');
+        $search = $request->get('search');
+        $page = $request->get('page', 1);
+
+        // Build cache key based on the condition (saved posts or regular posts)
+        $cacheKey = ($isSavePost ? 'saved_posts_' . auth()->id() : 'posts_page_') . "_page_{$page}" . ($tag ? "_tag_{$tag}" : '') . ($search ? "_search_{$search}" : '');
+
+        // Check if the user is logged in for saved posts
+        if ($isSavePost && !auth()->check()) {
+            return response()->json(['message' => 'Unauthorized access'], 403); // Forbidden
+        }
+
+        // Use the cache to store the result of the post query
+        $posts = Cache::remember($cacheKey, now()->addMinutes(10), function () use ($isSavePost, $tag, $search) {
+            if ($isSavePost) {
+                // Fetch only saved post IDs for the logged-in user
+                $savedPostIds = auth()->user()->savedPosts->pluck('post_id');
+                return Post::whereIn('id', $savedPostIds)->latest()->paginate(3);
+
+            } else {
+                $query = Post::query();
+
+                // Add tag filter if present
+                if ($tag) {
+                    // Ensure the tag is safe to use, apply a LIKE filter
+                    $query->where('content', 'like', "%#{$tag}%");
+                }
+
+                if ($search) {
+                    $query->where('content', 'like', "%{$search}%");
+                }
+
+                // Fetch posts and paginate
+                return $query->latest()->paginate(3);
+            }
+        });
+
+        // Return a response based on whether the request is an AJAX request or not
+        if ($request->ajax()) {
+            if ($posts->isEmpty()) {
+                return response()->json(['message' => 'No more posts available.'], 204); // No Content
+            }
+
+            // Return the HTML of the post list for the AJAX request
+            return response()->json([
+                'html' => view('frontend.component.post_list', compact('posts'))->render()
+            ]);
+        }
+
+        // Return the full page view with posts
+        return view('frontend.pages.home.index', compact('posts'));
+    }
+
+
+    public function toggleLike(Request $request)
+    {
+        $postId = $request->post_id;
+        $userId = auth()->user()->id;
+
+        // Check if the user has already liked the post
+        $like = Like::where('user_id', $userId)->where('post_id', $postId)->first();
+
+        if ($like) {
+            // Unlike the post
+            $like->delete();
+            $status = 'unliked';
+        } else {
+            // Like the post
+            Like::create([
+                'user_id' => $userId,
+                'post_id' => $postId,
+            ]);
+            $status = 'liked';
+        }
+
+        // Return the updated like count
+        $likeCount = Like::where('post_id', $postId)->count();
+
+        return response()->json(['status' => $status, 'likeCount' => $likeCount]);
+    }
+
+
+    public function fetchComments($postId)
+    {
+        $comments = Comment::where('post_id', $postId)
+            // ->whereNull('parent_id')
+            ->with('replies.user', 'user')
+            ->latest()
+            ->get();
+
+        // Return the updated Comment count
+        $commentCount = Comment::where('post_id', $postId)->count();
+
+        return response()->json([
+            'comments' => $comments,
+            'commentCount' => $commentCount,
+        ]);
+    }
+
+    public function storeComment(Request $request)
+    {
+        $request->validate([
+            'post_id' => 'required|exists:posts,id',
+            'comment' => 'required|string',
+            'parent_id' => 'nullable|exists:comments,id',
+        ]);
+
+        $comment = Comment::create([
+            'user_id' => auth()->user()->id,
+            'post_id' => $request->post_id,
+            'parent_id' => $request->parent_id,
+            'content' => $request->comment,
+        ]);
+
+        return response()->json(['success' => true, 'comment' => $comment->load('user')]);
+    }
+
+
+    public function destroy($id)
+    {
+        try {
+            $comment = Comment::findOrFail($id);
+
+            // If the comment is a parent comment, delete all its replies
+            if ($comment->parent_id === null) {
+                Comment::where('parent_id', $comment->id)->delete();
+            }
+
+            // Delete the current comment
+            $comment->delete();
+
+            return response()->json(['success' => true, 'message' => 'Comment deleted successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Failed to delete the comment']);
+        }
+    }
+
+    public function getPostLikes(Post $post)
+    {
+        // Fetch the users who liked the post
+        $likes = $post->likes()->with('user:id,username')->get()->pluck('user');
+
+        return response()->json(['likes' => $likes]);
+    }
+
+
+    public function toggleSavePost(Request $request)
+    {
+        $request->validate([
+            'post_id' => 'required|exists:posts,id',
+        ]);
+
+        $user = auth()->user();
+        $postId = $request->post_id;
+
+        // Check if the post is already saved
+        $savedPost = SavedPost::where('user_id', $user->id)->where('post_id', $postId)->first();
+
+        if ($savedPost) {
+            // If saved, remove it (unsave)
+            $savedPost->delete();
+            $saved = false;
+        } else {
+            // If not saved, save it
+            SavedPost::create([
+                'user_id' => $user->id,
+                'post_id' => $postId,
+            ]);
+            $saved = true;
+        }
+
+        return response()->json([
+            'success' => true,
+            'saved' => $saved,
+        ]);
     }
 
 //--------------=============================== other ================================------------------------------
@@ -219,6 +456,7 @@ class IndexController extends Controller
 
     public function edit_personal_information(){
 
+<<<<<<< HEAD
         // Retrieve the session user_id
         $userId = session('user_id'); // Assuming 'user_id' is stored in session
 
@@ -321,10 +559,13 @@ class IndexController extends Controller
         */
     }
 
-    public function notification(){
+        public function notification(){
         return view('frontend.pages.notification.index');
     }
 
+   public function messaging(){
+        return view('frontend.pages.messaging.index');
+    }
 
     public function refund_policy(){
         return view('frontend.pages.refund_policy.index');

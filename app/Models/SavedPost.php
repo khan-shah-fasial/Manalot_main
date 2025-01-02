@@ -5,16 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MediaCoverage extends Model
+class SavedPost extends Model
 {
     use HasFactory;
 
-    protected $table = 'media_coverage';
-
+    protected $table = 'saved_posts';
     protected $fillable = [
-        'title',
-        'url',
-        'image',
-        'status',
+        'user_id',
+        'post_id',
     ];
 }

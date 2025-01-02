@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Cache;
 use App\Models\BusinessSetting;
 use Illuminate\Support\Facades\Http;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
     if (!function_exists('datetimeFormatter')) {
@@ -320,6 +321,33 @@ use Illuminate\Support\Facades\Storage;
 
             $err = curl_error($curl);
             curl_close($curl);	    
+                
+        }
+    }
+
+    if(!function_exists('timeAgo')){
+        function timeAgo($timestamp){
+
+            $time = Carbon::parse($timestamp);
+            $diff = Carbon::now()->diff($time);
+    
+            if ($diff->y > 0) {
+                return $diff->y . ' ' . ($diff->y > 1 ? 'Years ago' : 'Year ago');
+            } elseif ($diff->m > 0) {
+                return $diff->m . ' ' . ($diff->m > 1 ? 'Months ago' : 'Month ago');
+            } elseif ($diff->d > 0) {
+                if ($diff->d >= 7) {
+                    $weeks = floor($diff->d / 7);
+                    return $weeks . ' ' . ($weeks > 1 ? 'Weeks ago' : 'Week ago');
+                }
+                return $diff->d . ' ' . ($diff->d > 1 ? 'Days ago' : 'Day ago');
+            } elseif ($diff->h > 0) {
+                return $diff->h . ' ' . ($diff->h > 1 ? 'Hours ago' : 'Hour ago');
+            } elseif ($diff->i > 0) {
+                return $diff->i . ' ' . ($diff->i > 1 ? 'Minutes ago' : 'Minute ago');
+            } else {
+                return 'Just now';
+            }
                 
         }
     }

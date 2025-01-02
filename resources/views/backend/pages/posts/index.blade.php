@@ -5,7 +5,7 @@
 @section('page.content')
 <div class="card">
     <div class="card-body">
-        <div class="row mb-2">
+        {{-- <div class="row mb-2">
             <div class="col-sm-5">
                 <h3>List</h3>
             </div>
@@ -16,13 +16,13 @@
                             class="mdi mdi-plus-circle"></i> Add Posts</a>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="table-responsive">
             <table id="basic-datatable5" class="table dt-responsive nowrap w-100">
                 <thead>
                     <tr>
                         <th>Sr No</th>
-                        <th>Image</th>
+                        {{-- <th>Image</th> --}}
                         <th>Likes</th>
                         <th>Comments</th>
                         <th>Shares</th>
@@ -41,7 +41,7 @@
                             {!! \Illuminate\Support\Str::words($row->content, $words = 1, $end = '...') !!}
                         </td>
                         <td>{{ $row->event }}</td>--}}
-                        <td>
+                        {{-- <td>
                             @if ($row->image_url)
                                 <img src="{{ asset('storage/' . $row->image_url) }}" alt="Thumbnail" class="thumbnail" onclick="viewMedia('{{ asset('storage/' . $row->image_url) }}', 'image', 'View Image')" style="width: 70px; cursor: pointer;">
                             @endif
@@ -51,7 +51,7 @@
                             @if (!$row->image_url)
                                 N/A
                             @endif
-                        </td>
+                        </td> --}}
                         {{--<td>{{ $row->MediaType }}</td>--}}
                         <td onclick="smallModal('{{ url(route('post.likes_post',['id' => $row->id])) }}', 'Liked By')" style="cursor: pointer;">
                             {{ $row->likes_count }}
@@ -67,10 +67,10 @@
                         </td>
                         <td>{{ $row->created_at->format('d M, Y h:iA') }}</td>
                         <td>
-                            <a href="javascript:void(0);" class="btn btn-info text-white action-icon"
+                            {{-- <a href="javascript:void(0);" class="btn btn-info text-white action-icon"
                                 onclick="largeModal('{{ url(route('post.edit_post',['id' => $row->id])) }}', 'Edit Post ID :{{$row->id}} - {!! \Illuminate\Support\Str::words($row->content, $words = 3, $end = '...') !!}')">
                                 <i class="mdi mdi-square-edit-outline" title="Edit"></i>
-                            </a>
+                            </a> --}}
                             <a href="javascript:void(0);" class="btn btn-warning text-white action-icon"
                                 onclick="largeModal('{{ url(route('post.view_post',['id' => $row->id])) }}', 'View Post ID :{{$row->id}} - {!! \Illuminate\Support\Str::words($row->content, $words = 3, $end = '...') !!}')">
                                 <i class="mdi mdi-eye" title="View"></i>

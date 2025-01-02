@@ -41,6 +41,10 @@
 
     @yield('forgot.scripts')
 
+    @yield('custom-script')
+
+    @yield('search.scripts')
+
     @if (session('toastr'))
         <script>
             $(document).ready(function() {

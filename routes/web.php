@@ -27,6 +27,16 @@ Route::middleware('auth.frontend')->group(function () {
     Route::get('/edit-profile', [IndexController::class, 'edit_personal_information'])->name('user.edit-profile');
     Route::get('/view-profile', [IndexController::class, 'view_personal_information'])->name('user.view-profile');
     Route::any('/update-account/{param}', [UserController::class, 'create_account'])->name('user.save-profile');
+
+    Route::get('/posts', [IndexController::class, 'fetchPosts'])->name('posts.fetch');
+    Route::post('/like-toggle', [IndexController::class, 'toggleLike'])->name('posts.like');
+
+    Route::get('/posts/{postId}/comments', [IndexController::class, 'fetchComments'])->name('posts.comment.fetch');
+    Route::post('/comments', [IndexController::class, 'storeComment'])->name('posts.comment.save');
+    Route::delete('/comments/{id}', [IndexController::class, 'destroy'])->name('comments.destroy');
+
+    Route::get('/posts/{post}/likes', [IndexController::class, 'getPostLikes']);
+    Route::post('/toggle-save-post', [IndexController::class, 'toggleSavePost'])->name('toggle-save-post');
 });
 
 Route::middleware('guest')->group(function () {
@@ -55,6 +65,7 @@ Route::get('/sample-profile', [IndexController::class, 'sample_profile'])->name(
 Route::get('/sample-profile-female', [IndexController::class, 'sample_profile_female'])->name('sample_profile_female');
 Route::get('/personal-information', [IndexController::class, 'personal_information'])->name('personal_information');
 Route::get('/notification', [IndexController::class, 'notification'])->name('notification');
+Route::get('/messaging', [IndexController::class, 'messaging'])->name('messaging');
 Route::get('/refund-policy', [IndexController::class, 'refund_policy'])->name('refund-policy');
 // not allocated route
 

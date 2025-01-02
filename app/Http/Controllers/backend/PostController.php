@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Cache;
 use Carbon\Carbon;
 
 class PostController extends Controller
@@ -18,7 +19,7 @@ class PostController extends Controller
             ->join('users as QP', 'QC.author_id', '=', 'QP.id')
             ->leftJoin('post_likes as PL', 'QC.id', '=', 'PL.post_id')
             ->leftJoin('post_shares as PS', 'QC.id', '=', 'PS.post_id')
-            ->leftJoin('post_comments as PC', 'QC.id', '=', 'PC.post_id')
+            ->leftJoin('comments as PC', 'QC.id', '=', 'PC.post_id')
             ->select(
                 'QC.id',
                 'QC.author_id',
@@ -69,12 +70,12 @@ class PostController extends Controller
     
     private function getComments($postId, $parentId = null, $level = 0)
     {
-        $comments = DB::table('post_comments')
-                    ->join('users', 'post_comments.user_id', '=', 'users.id')
-                    ->select('post_comments.*', 'users.username')
-                    ->where('post_comments.post_id', $postId)
-                    ->where('post_comments.parent_id', $parentId)
-                    ->orderBy('post_comments.created_at', 'asc')
+        $comments = DB::table('comments')
+                    ->join('users', 'comments.user_id', '=', 'users.id')
+                    ->select('comments.*', 'users.username')
+                    ->where('comments.post_id', $postId)
+                    ->where('comments.parent_id', $parentId)
+                    ->orderBy('comments.created_at', 'asc')
                     ->get();
     
         $result = [];
@@ -113,8 +114,9 @@ class PostController extends Controller
         // Validate form data
         $validator = Validator::make($request->all(), [
             'content' => 'required|string',
-            'event' => 'required|string|max:100',
-            'image' => 'nullable|file|mimes:jpeg,webp,png,jpg,gif|max:2048',
+            'event' => 'nullable|string|max:100',
+           'media.*' => 'nullable|file|mimes:jpeg,jpg,png,webp,gif,mp4,mov,avi,wmv|max:10240', // Validate image files only
+        //     'video' => 'nullable|file|mimes:mp4,mov,avi,wmv|max:10240', // Validate video files with a max size of 10MB
         ]);
 
         if ($validator->fails()) {
@@ -129,8 +131,67 @@ class PostController extends Controller
 
         // Handle file uploads
         $imagePathPost = null;
-        if ($request->hasFile('image')) {
-            $imagePathPost = $request->file('image')->store('assets/image/post', 'public');
+        $post_type = null;
+        // if ($request->hasFile('media')) {
+
+            // $file = $request->file('media');
+            // $mimeType = $file->getMimeType();
+
+            // // Check if the media is an image or video based on MIME type
+            // if (strpos($mimeType, 'image') !== false) {
+            //     // It's an image
+            //     $imagePathPost = $file->store('assets/image/post', 'public');
+            //     $type = 'image';
+            // } elseif (strpos($mimeType, 'video') !== false) {
+            //     // It's a video
+            //     $imagePathPost = $file->store('assets/video/post', 'public');
+            //     $type = 'video';
+            // }
+
+            if ($request->hasFile('media')) {
+                $mediaArray = []; // Initialize an array to store the file paths and types
+                $post_type = 'media';
+                foreach ($request->file('media') as $file) {
+                    $mimeType = $file->getMimeType();
+            
+                    // Check if the media is an image or video based on MIME type
+                    if (strpos($mimeType, 'image') !== false) {
+                        // It's an image
+                        $filePath = $file->store('assets/image/post', 'public');
+                        $type = 'image';
+                    } elseif (strpos($mimeType, 'video') !== false) {
+                        // It's a video
+                        $filePath = $file->store('assets/video/post', 'public');
+                        $type = 'video';
+                    } else {
+                        continue; // Skip unsupported file types
+                    }
+            
+                    // Add the file details to the media array
+                    $imagePathPost[] = [
+                        'path' => $filePath,
+                        'type' => $type,
+                    ];
+                }
+            
+                // // You can now save $mediaArray to the database or use it further
+                // return response()->json(['media' => $mediaArray], 200);
+            }
+
+
+        // }
+
+        // if ($request->hasFile('video')) {
+        //     $imagePathPost = $request->file('video')->store('assets/video/post', 'public');
+        //     $type = 'video';
+        // }
+
+        if ($request->has('event')) {
+            $post_type = 'event';
+        }
+
+        if ($request->has('poll')) {
+            $post_type = 'poll';
         }
 
         // Insert post data into the database
@@ -138,13 +199,17 @@ class PostController extends Controller
             'author_id' => $author_id,
             'content' => $request->input('content'),
             'event' => $request->input('event'),
-            'status' => $request->input('status'),
-            'image_url' => $imagePathPost,
+            'status' => $request->input('status', '1'),
+            'image_url' => json_encode($imagePathPost),
+            'media_type' => $post_type,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         if ($post) {
+
+            Cache::flush();
+
             $response = [
                 'status' => true,
                 'notification' => 'Post added successfully!',
@@ -174,7 +239,7 @@ class PostController extends Controller
             ->join('users as QP', 'QC.author_id', '=', 'QP.id')
             ->leftJoin('post_likes as PL', 'QC.id', '=', 'PL.post_id')
             ->leftJoin('post_shares as PS', 'QC.id', '=', 'PS.post_id')
-            ->leftJoin('post_comments as PC', 'QC.id', '=', 'PC.post_id')
+            ->leftJoin('comments as PC', 'QC.id', '=', 'PC.post_id')
             ->select(
                 'QC.id',
                 'QC.author_id',
@@ -254,6 +319,9 @@ class PostController extends Controller
             ]);
 
         if ($affected) {
+
+            Cache::flush();
+
             $response = [
                 'status' => true,
                 'notification' => 'Post updated successfully!',
@@ -283,6 +351,8 @@ class PostController extends Controller
 
         // Delete post record
         DB::table('posts')->where('id', $id)->delete();
+
+        Cache::flush();
 
         $response = [
             'status' => true,

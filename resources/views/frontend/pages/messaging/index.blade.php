@@ -14,8 +14,6 @@
             max-width: 1270px;
         }
     }
-
-  
 body
 {
         background-color: #e7ecef;
@@ -151,7 +149,7 @@ body
                         </div>
                         <div class="language_translator">
                             <img class="icon_language" src="/assets/images/footer_english_filter.svg">
-                         
+                           
                         </div>
                         <strong class="text-center maple_footer_text">Maple Consulting & Services &copy; 2021</strong>
                         <div class="py-5 my-5 d-md-block d-none"></div>
