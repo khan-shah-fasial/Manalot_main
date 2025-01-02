@@ -8,8 +8,10 @@ use App\Models\User;
 use App\Models\UserDetails;
 use App\Models\Contact;
 use App\Models\Country;
+use App\Models\Industry;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 
 class IndexController extends Controller
@@ -246,10 +248,35 @@ class IndexController extends Controller
         }
 
         // Fetch user and userdetails based on user_id
-        $user = User::find($userId);
+        $user = User::with('workExperiences')->find($userId);
         $user_detail = UserDetails::where('user_id', $userId)->first();
 
-        return view('frontend.pages.personal_information.view_profile', compact('user', 'user_detail'));
+        if ($user_detail) {
+            // Decode industry and skills JSON
+            $industryIds = json_decode($user_detail->industry, true) ?? [];
+            $skills = json_decode($user_detail->skill, true) ?? [];
+
+            // Fetch industry names
+            $industries = Industry::whereIn('id', $industryIds)->pluck('name')->toArray();
+        } else {
+            $industries = [];
+            $skills = [];
+        }
+
+        // Fetch all years_of_exp from the 'years_of_exp' table
+        $years_of_exp = DB::table('years_of_exp')
+            ->where('status', '1')
+            ->pluck('year_range', 'id')
+            ->toArray();
+
+        // Fetch all employ_types from the 'employ_types' table
+        $employ_types = DB::table('employ_types')
+            ->where('status', '1')
+            ->pluck('name', 'id')
+            ->toArray();
+
+
+        return view('frontend.pages.personal_information.view_profile', compact('user', 'user_detail', 'industries', 'skills','years_of_exp', 'employ_types'));
     }
 
     private function getCountries()

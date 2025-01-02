@@ -15,21 +15,13 @@
 
 // $experience_status = DB::table('experience_status')->where('status', 1)->get();
 
-$employ_types = DB::table('employ_types')->where('status', 1)->get();
-
-$notice_period_list = DB::table('notice_period')->where('status', 1)->get();
-
-$years_of_exp = DB::table('years_of_exp')->where('status', '1')->get();
-// $job_title = DB::table('job_title')->where('status', '1')->get();
-
-$industry = DB::table('industry')->where('status', '1')->get();
-$groupedIndustries = $industry->where('main', 1);
-
-$skills = DB::table('skills')->where('status', '1')->get();
-
-$currencies = DB::table('currencies')->get(['id','symbol']);
-
+// $notice_period_list = DB::table('notice_period')->where('status', 1)->get();
+// $industry = DB::table('industry')->where('status', '1')->get();
+// $groupedIndustries = $industry->where('main', 1);
+// $currencies = DB::table('currencies')->get(['id','symbol']);
 // $references_from = DB::table('references_from')->where('status', '1')->get();
+
+$userapproval = isset($user->approval) ? $user->approval : null;
 
 $email = isset($user->email) ? $user->email : null;
 
@@ -52,7 +44,7 @@ $address = isset($user_detail->address) ? $user_detail->address : null;
 $wrk_exp__title = isset($user_detail->wrk_exp__title) ? $user_detail->wrk_exp__title : null;
 $wrk_exp_company_name = isset($user_detail->wrk_exp_company_name) ? $user_detail->wrk_exp_company_name : null;
 $wrk_exp_years = isset($user_detail->wrk_exp_years) ? $user_detail->wrk_exp_years : null;
-$industry_check = isset($user_detail->industry) ? $user_detail->industry : '[]';
+// $industry_check = isset($user_detail->industry) ? $user_detail->industry : '[]';
 $experience_letter = isset($user_detail->experience_letter) ? $user_detail->experience_letter : null;
 $employed = isset($user_detail->employed) ? $user_detail->employed : null;
 $skill_check = isset($user_detail->skill) ? $user_detail->skill : '[]';
@@ -72,7 +64,7 @@ $certificate_data = json_decode($certificate_data, true);
 
 $pref_title = isset($user_detail->pref_title) ? $user_detail->pref_title : null;
 $pref_emp_type = isset($user_detail->pref_emp_type) ? $user_detail->pref_emp_type : null;
-$pref_industry_check = isset($user_detail->pref_industry) ? $user_detail->pref_industry : '[]';
+// $pref_industry_check = isset($user_detail->pref_industry) ? $user_detail->pref_industry : '[]';
 $pref_location = isset($user_detail->pref_location) ? $user_detail->pref_location : null;
 
 $current_salary_currency  = isset($user_detail->current_salary_currency) ? $user_detail->current_salary_currency : null;
@@ -147,10 +139,13 @@ header.d-flex.align-items-center.justify-content-between {
 
             <div class="bg-profile-content">
                 <img class="user_img" src="/assets/images/anil_rajkundra.png"/>
-
                 <div class="profile_content_main_div">
                     <div class="profile-content">
-                        <h3>{{$fullname}} <img class="verified" src="/assets/images/verified.svg"> </h3>
+                        <h3>{{$fullname}}
+                            @if($userapproval)
+                                <img class="verified" src="/assets/images/verified.svg">
+                            @endif
+                        </h3>
                         <p> - </p>
                         <span>{{$city}}, {{$state}}, {{$country}}.</span>
                         <div class="d-flex py-3 pt-4 mt-1 profile_view_btn">
@@ -183,10 +178,12 @@ header.d-flex.align-items-center.justify-content-between {
             </div>
 
             <div class="user-profile-social-links">
+                @if($userapproval)
                 <div class="bg_verified_main">
                     <img class="bg_verified_img" src="/assets/images/verified.svg">
                     <p class="bg_verified_text">Background Verified with MLN</p>
                 </div>
+                @endif
                 <div class="bg_verified_main">
                     <img class="bg_verified_img" src="/assets/images/search_user.svg">
                     <p class="bg_verified_text">Looking for : <span class="bg_verified_bold_text">{{$pref_title}}</span></p>
@@ -232,128 +229,52 @@ header.d-flex.align-items-center.justify-content-between {
                 <img class="user_icon" src="/assets/images/suitcase_icon.svg">
                 <h4 class="about_heading">Work Experience</h4>
             </div>
+            @foreach ($user->workExperiences as $experience)
             <div class="col-12">
                 <div class="d-flex align-items-start">
-                    <img class="education_certification_logo" src="/assets/images/favicon.svg" alt="Manalot Logo">
+                    <img class="education_certification_logo" src="/assets/images/favicon.svg" alt="Company Logo">
                     <div class="ms-3">
-                        <h5 class="mb-1">Managing Director</h5>
-                        <p class="">Manalot . Full time . Nov 2016 - Present . 8 yrs 1 mo | Mumbai, Maharashtra</p>
-                        <p class="work_exp_details_text">
-                            As a distinguished leadership advisory and retained executive search firm,
-                            Manalot (formerly Maple Consulting & Services) collaborates as a trusted partner-in-change
-                            for dynamic organizations and senior leadership worldwide. With a steadfast commitment to
-                            building relationships based on trust and agility, <b class="bold_see_more"> …see more</b>
+                        <h5 class="mb-1">{{ $experience->wrk_exp_title }}</h5>
+                        <p>
+                            {{ $experience->wrk_exp_company_name }} .
+                            {{ $years_of_exp[$experience->wrk_exp_years] ?? 'N/A' }}
                         </p>
+                        <p class="work_exp_details_text">
+                            {{ $experience->wrk_exp_responsibilities }}
+                            <b class="bold_see_more"> …see more</b>
+                        </p>
+
                         <div class="industry_main_div">
                             <strong class="industry_main_div_heading">Industry :</strong>
                             <div class="industry_div_list">
+                                @foreach ($industries as $industry)
                                 <div class="bg_verified_main">
                                     <img class="bg_verified_img" src="/assets/images/right_mark.svg">
-                                    <p class="bg_verified_text">Analytics/KPO/Research</p>
+                                    <p class="bg_verified_text">{{ $industry }}</p>
                                 </div>
-                                <div class="bg_verified_main">
-                                    <img class="bg_verified_img" src="/assets/images/right_mark.svg">
-                                    <p class="bg_verified_text">Analytics/KPO/Research</p>
-                                </div>
-                                <div class="bg_verified_main">
-                                    <img class="bg_verified_img" src="/assets/images/right_mark.svg">
-                                    <p class="bg_verified_text">Analytics/KPO/Research</p>
-                                </div>
-                                <div class="bg_verified_main">
-                                    <img class="bg_verified_img" src="/assets/images/right_mark.svg">
-                                    <p class="bg_verified_text">Analytics/KPO/Research</p>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
 
                         <div class="skills_main_div">
                             <strong class="skills_main_div_heading">Skills :</strong>
                             <div class="industry_div_list">
+                                @foreach ($skills as $skill)
                                 <div class="bg_verified_main">
                                     <img class="bg_verified_img" src="/assets/images/right_mark.svg">
-                                    <p class="bg_verified_text">Resourceful Professional</p>
+                                    <p class="bg_verified_text">
+                                        @php
+                                        echo $skill;
+                                        @endphp
+                                    </p>
                                 </div>
-                                <div class="bg_verified_main">
-                                    <img class="bg_verified_img" src="/assets/images/right_mark.svg">
-                                    <p class="bg_verified_text">Talent Management</p>
-                                </div>
-                                <div class="bg_verified_main">
-                                    <img class="bg_verified_img" src="/assets/images/right_mark.svg">
-                                    <p class="bg_verified_text">Talent Acquisition</p>
-                                </div>
-                                <div class="bg_verified_main">
-                                    <img class="bg_verified_img" src="/assets/images/right_mark.svg">
-                                    <p class="bg_verified_text">Expertise in HR Consulting</p>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12">
-                <div class="d-flex align-items-start">
-                    <img class="education_certification_logo" src="/assets/images/sitel_logo.jpg" alt="SITEL Logo">
-                    <div class="ms-3">
-                        <h5 class="mb-1">Director – Talent Acquisition</h5>
-                        <p class="">SITEL | Jan 2011 - 2014 . 3 yrs 1 mo | Mumbai, Maharashtra</p>
-                        <p class="work_exp_details_text">
-                            As a distinguished leadership advisory and retained executive search firm,
-                            Manalot (formerly Maple Consulting & Services) collaborates as a trusted partner-in-change
-                            for dynamic organizations and senior leadership worldwide. With a steadfast commitment to
-                            building relationships based on trust and agility, <b class="bold_see_more"> …see more</b>
-                        </p>
-
-                        <div class="skills_main_div">
-                            <strong class="skills_main_div_heading">Skills :</strong>
-                            <div class="industry_div_list">
-                                <div class="bg_verified_main">
-                                    <img class="bg_verified_img" src="/assets/images/right_mark.svg">
-                                    <p class="bg_verified_text">Resourceful Professional</p>
-                                </div>
-                                <div class="bg_verified_main">
-                                    <img class="bg_verified_img" src="/assets/images/right_mark.svg">
-                                    <p class="bg_verified_text">Talent Management</p>
-                                </div>
-                                <div class="bg_verified_main">
-                                    <img class="bg_verified_img" src="/assets/images/right_mark.svg">
-                                    <p class="bg_verified_text">Talent Acquisition</p>
-                                </div>
-                                <div class="bg_verified_main">
-                                    <img class="bg_verified_img" src="/assets/images/right_mark.svg">
-                                    <p class="bg_verified_text">Expertise in HR Consulting</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="d-flex align-items-start">
-                    <img class="education_certification_logo" src="/assets/images/tricom_img.png" alt="Tricom Logo">
-                    <div class="ms-3">
-                        <h5 class="mb-1">Vice-President - Human Resources</h5>
-                        <p class="mb-0 ">Tricom Document Management | Jan 2010 - 2011 · 1 yr 1 mo | Mumbai, Maharashtra</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="d-flex align-items-start">
-                    <img class="education_certification_logo" src="/assets/images/fis_img.png" alt="FIS Logo">
-                    <div class="ms-3">
-                        <h5 class="mb-1">Head HR</h5>
-                        <p class="mb-0 ">FIS | Feb 2006 - 2010 · 4 yrs | Mumbai, Maharashtra</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="d-flex align-items-start">
-                    <img class="education_certification_logo" src="/assets/images/senior_manager.png" alt="FIS Logo">
-                    <div class="ms-3">
-                        <h5 class="mb-1">Senior Manager – HR</h5>
-                        <p class="mb-0 ">Respondez · Apr 2005 to 2006 · 10 mos | Mumbai Area, India</p>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
 
         <div class="profile-information box_shadows mt-35 padd-40 education_main_div">
