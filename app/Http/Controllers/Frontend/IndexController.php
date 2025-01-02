@@ -456,7 +456,6 @@ class IndexController extends Controller
 
     public function edit_personal_information(){
 
-<<<<<<< HEAD
         // Retrieve the session user_id
         $userId = session('user_id'); // Assuming 'user_id' is stored in session
 

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\AccountController;
 use App\Http\Controllers\Frontend\SocialloginController;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
