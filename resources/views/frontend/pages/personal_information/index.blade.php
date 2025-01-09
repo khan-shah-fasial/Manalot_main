@@ -225,7 +225,7 @@
                     <div class="py-5 my-5 d-md-block d-none"></div>
                 </aside>
             </div>
-            <div class="col-md-9 pt-md-4 main_parent_div">
+            <div class="col-md-9 pt-md-4 main_parent_div mb-md-0 mb-4">
                 <main class="">
                     <div class="tab-content" id="nav-tabContent">
                         <div class="personal_info tab-pane fade show active" id="personal_info"  role="tabpanel" aria-labelledby="personal_info_tab">

@@ -164,7 +164,7 @@ body
                     </aside>
                 </div>
                 
-                <div class="col-md-6 mt-md-4 mt-0 order-md-2 order-1 middle_post_parent_div width_60">
+                <div class="col-md-6 mt-md-4 mt-0 order-md-2 order-1 middle_post_parent_div width_60 mb-md-0 mb-4">
                     <main>
                         {{-- @if(auth()->user()->role_id == 1)
                             <form class="post_form">
