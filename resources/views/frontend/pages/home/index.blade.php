@@ -50,7 +50,7 @@ body
     <section class="pb-5 mt80" style="background-color: #e7ecef">
         <div class="container-lg container-fluid">
             <div class="row">
-                <div class="col-md-3 mt-4 pb-md-5 pb-3 order-md-1 order-3 right_sidebar_parent_div width_20">
+                <div class="col-md-3 mt-4 pb-md-5 pb-3 order-md-1 order-3 right_sidebar_parent_div width_20 d-none d-lg-block">
                     <aside class="right_sidebar">
                         
                             <div class="activity helvetica_font">
@@ -261,7 +261,7 @@ body
                     </main>
                 </div>
 
-                <div class="col-md-3 mt-4 pb-md-5 order-md-3 order-2 left_sidebar_parent_div width_20">
+                <div class="col-md-3 mt-4 pb-md-5 order-md-3 order-2 left_sidebar_parent_div width_20 d-none d-lg-block">
                     <aside class="left_sidebar">
                         {{-- <div class="profile">
                             <img class="img-fluid" src="/assets/images/bg-avatar.jpg" alt="" />

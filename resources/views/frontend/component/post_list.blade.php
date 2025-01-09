@@ -50,20 +50,52 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
                 @php echo nl2br($post->content) @endphp
             </div>
 
-            @if($post->media_type != null && $post->media_type == 'media')
-                @php $media = json_decode($post->image_url) @endphp
-                @foreach($media as $row)
-                    @if($row->type == 'image')
-                        <img width="320" height="240" src="{{ asset('storage/' . $row->path) }}" />
-                    @elseif($row->type == 'video')
-                        <video width="320" height="240" controls>
-                            <source src="{{ asset('storage/' . $row->path) }}" type="video/mp4">
-                        </video>
-                    @endif
-                @endforeach
-            @endif
+         <div id="carouselExample" class="postslider_banner carousel slide w-100" data-bs-ride="carousel" data-bs-interval="3000">
+    @if($post->media_type != null && $post->media_type == 'media')
+        @php 
+            $media = json_decode($post->image_url);
+            $firstSlide = true; // Initialize a flag for the first slide
+        @endphp
 
+        <!-- Dynamic Pagination Indicators -->
+        <div class="carousel-indicators">
+            @foreach($media as $index => $row)
+                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="{{ $index }}" class="{{ $index === 0 ? 'active' : '' }}"></button>
+            @endforeach
         </div>
+
+        <!-- Carousel Items -->
+        <div class="carousel-inner">
+            @foreach($media as $row)
+                @if($row->type == 'image')
+                    <div class="carousel-item {{ $firstSlide ? 'active' : '' }}">
+                        <img width="100%" height="100%" src="{{ asset('storage/' . $row->path) }}" />
+                    </div>
+                @elseif($row->type == 'video')
+                    <div class="carousel-item {{ $firstSlide ? 'active' : '' }}">
+                        <!-- Autoplay Video -->
+                        <video width="100%" height="100%" autoplay loop muted>
+                            <source src="{{ asset('storage/' . $row->path) }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                @endif
+                @php $firstSlide = false; @endphp <!-- Mark that the first slide is processed -->
+            @endforeach
+        </div>
+    @endif
+
+    <!-- Previous and Next Controls -->
+    <button class="carousel-control-prev" data-bs-target="#carouselExample" type="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" data-bs-target="#carouselExample" type="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
         <div class="like_comnt">
             <a href="javascript:void(0);" class="upper-like-count" id="like-count-{{$post->id}}" onclick="openLikeModal({{ $post->id }}, {{ $post->likes->count() }})">{{ $post->likes->count() }}</a>
             <ul class="like_comnt_list">
@@ -120,6 +152,7 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
             <div class="comments-list"></div>
         </div>
 
+    </div>
     </div>
 @endforeach
 

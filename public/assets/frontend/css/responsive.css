@@ -1,0 +1,60 @@
+/*---mobile device start --*/
+
+@media(max-width:767px) {
+    .notification_page .width_60 {
+        width: 100% !important;
+    }
+
+    .notification_tabs_box div#nav-tab {
+        background: #fff;
+        padding: 10px 10px;
+        border-radius: 50px;
+        justify-content: center;
+    }
+
+    .notification_tabs_box .nav-link {
+        font-size: 11px;
+        padding: 2px 5px 3px 5px;
+        width: 80px;
+    }
+
+    .notification_tabs_box button {
+        margin-right: 7px;
+    }
+
+    .userimg img {
+        width: 50px;
+        border-radius: 50px;
+        padding-right: 4px;
+    }
+
+    .notify_box {
+        background: #fff;
+        padding: 10px 13px;
+        border-radius: 35px;
+        margin-top: 15px;
+    }
+
+    .notify_box p {
+        font-size: 11px;
+        line-height: 17px;
+    }
+
+    .notify_box .col-md-1.col-1 {
+        padding-left: 0;
+    }
+
+    .notify_box .col-md-1.col-1 img {
+        position: relative;
+        top: -5px;
+        width: 14px;
+    }
+
+    .width_60 {
+        width: 100% !important;
+    }
+
+    .post {
+        padding: 20px 20px;
+    }
+}

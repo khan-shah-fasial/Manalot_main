@@ -664,7 +664,7 @@ img.like_img {
 }
 
 .post_description {
-    height: 320px;
+    height: auto;
 }
 
 
@@ -4152,4 +4152,26 @@ div#squarePoleModal .modal-body {
 div#squarePoleModal ::-webkit-scrollbar {
     width: 0px;
     height: 0px;
+}
+
+.postslider_banner img {
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+    object-position: center;
+    margin-bottom: 7px;
+}
+
+.postslider_banner video {
+    width: 100%;
+    height: 360px !important;
+    object-fit: cover;
+    object-position: center;
+}
+
+.postslider_banner .carousel-indicators button {
+    height: 0px !important;
+    width: 0px !important;
+    border: 5px solid #fff !important;
+    border-radius: 50px !important;
 }

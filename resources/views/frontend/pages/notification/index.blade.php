@@ -25,7 +25,7 @@ body
     <section class="pb-5 mt80 notification_page" style="background-color: #e7ecef">
         <div class="container-lg container-fluid">
             <div class="row">
-                <div class="col-md-3 mt-4 pb-md-5 pb-3 order-md-1 order-3 right_sidebar_parent_div width_20">
+                <div class="col-md-3 mt-4 pb-md-5 pb-3 order-md-1 order-3 right_sidebar_parent_div width_20 d-lg-block d-none">
                     <aside class="right_sidebar">
                         
                             <div class="activity helvetica_font">
@@ -175,13 +175,13 @@ body
                                 <div class="tab-pane fade show active" id="all-post-tab" role="tabpanel" aria-labelledby="all-post-tab-tab">
                                     <div class="notify_box">
                                         <div class="row align-items-center">
-                                            <div class="col-md-2">
+                                            <div class="col-md-2 col-2">
                                                 <div class="userimg">
                                                     <img src="/assets/images/user_image1.png" />
                                                 </div>
                                                 
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-9">
                                                 <div class="notify_content">
                                                     <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
                                                 </div>
@@ -190,7 +190,32 @@ body
                                                     <p class="pb-0 mb-0">30 Comments</p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-md-1 col-1">
+                                                <p class="pb-0 mb-0 pt-1">2h</p>
+                                                <div>
+                                                    <img src="/assets/images/dots_icons1.svg"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="notify_box">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-2 col-2">
+                                                <div class="userimg">
+                                                    <img src="/assets/images/user_image1.png" />
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="col-md-9 col-9">
+                                                <div class="notify_content">
+                                                    <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
+                                                </div>
+                                                <div class="d-flex gap-4">
+                                                    <p class="pb-0 mb-0">132 Reactions</p>
+                                                    <p class="pb-0 mb-0">30 Comments</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 col-1">
                                                 <p class="pb-0 mb-0 pt-1">2h</p>
                                                 <div>
                                                     <img src="/assets/images/dots_icons1.svg"/>
@@ -199,15 +224,15 @@ body
                                         </div>
                                     </div>
 
-                                     <div class="notify_box">
+                                    <div class="notify_box">
                                         <div class="row align-items-center">
-                                            <div class="col-md-2">
+                                            <div class="col-md-2 col-2">
                                                 <div class="userimg">
                                                     <img src="/assets/images/user_image1.png" />
                                                 </div>
                                                 
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-9">
                                                 <div class="notify_content">
                                                     <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
                                                 </div>
@@ -216,7 +241,7 @@ body
                                                     <p class="pb-0 mb-0">30 Comments</p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-md-1 col-1">
                                                 <p class="pb-0 mb-0 pt-1">2h</p>
                                                 <div>
                                                     <img src="/assets/images/dots_icons1.svg"/>
@@ -225,15 +250,15 @@ body
                                         </div>
                                     </div>
 
-                                     <div class="notify_box">
+                                    <div class="notify_box">
                                         <div class="row align-items-center">
-                                            <div class="col-md-2">
+                                            <div class="col-md-2 col-2">
                                                 <div class="userimg">
                                                     <img src="/assets/images/user_image1.png" />
                                                 </div>
                                                 
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-9">
                                                 <div class="notify_content">
                                                     <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
                                                 </div>
@@ -242,7 +267,7 @@ body
                                                     <p class="pb-0 mb-0">30 Comments</p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-md-1 col-1">
                                                 <p class="pb-0 mb-0 pt-1">2h</p>
                                                 <div>
                                                     <img src="/assets/images/dots_icons1.svg"/>
@@ -251,15 +276,15 @@ body
                                         </div>
                                     </div>
 
-                                     <div class="notify_box">
+                                    <div class="notify_box">
                                         <div class="row align-items-center">
-                                            <div class="col-md-2">
+                                            <div class="col-md-2 col-2">
                                                 <div class="userimg">
                                                     <img src="/assets/images/user_image1.png" />
                                                 </div>
                                                 
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-9">
                                                 <div class="notify_content">
                                                     <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
                                                 </div>
@@ -268,7 +293,7 @@ body
                                                     <p class="pb-0 mb-0">30 Comments</p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-md-1 col-1">
                                                 <p class="pb-0 mb-0 pt-1">2h</p>
                                                 <div>
                                                     <img src="/assets/images/dots_icons1.svg"/>
@@ -277,15 +302,15 @@ body
                                         </div>
                                     </div>
 
-                                     <div class="notify_box">
+                                    <div class="notify_box">
                                         <div class="row align-items-center">
-                                            <div class="col-md-2">
+                                            <div class="col-md-2 col-2">
                                                 <div class="userimg">
                                                     <img src="/assets/images/user_image1.png" />
                                                 </div>
                                                 
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-9">
                                                 <div class="notify_content">
                                                     <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
                                                 </div>
@@ -294,33 +319,7 @@ body
                                                     <p class="pb-0 mb-0">30 Comments</p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1">
-                                                <p class="pb-0 mb-0 pt-1">2h</p>
-                                                <div>
-                                                    <img src="/assets/images/dots_icons1.svg"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                     <div class="notify_box">
-                                        <div class="row align-items-center">
-                                            <div class="col-md-2">
-                                                <div class="userimg">
-                                                    <img src="/assets/images/user_image1.png" />
-                                                </div>
-                                                
-                                            </div>
-                                            <div class="col-md-9">
-                                                <div class="notify_content">
-                                                    <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
-                                                </div>
-                                                <div class="d-flex gap-4">
-                                                    <p class="pb-0 mb-0">132 Reactions</p>
-                                                    <p class="pb-0 mb-0">30 Comments</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-1">
+                                            <div class="col-md-1 col-1">
                                                 <p class="pb-0 mb-0 pt-1">2h</p>
                                                 <div>
                                                     <img src="/assets/images/dots_icons1.svg"/>
@@ -332,13 +331,13 @@ body
                                 <div class="tab-pane fade" id="my-job-tab" role="tabpanel" aria-labelledby="my-job-tab-tab">
                                       <div class="notify_box">
                                         <div class="row align-items-center">
-                                            <div class="col-md-2">
+                                            <div class="col-md-2 col-2">
                                                 <div class="userimg">
                                                     <img src="/assets/images/user_image1.png" />
                                                 </div>
                                                 
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-9">
                                                 <div class="notify_content">
                                                     <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
                                                 </div>
@@ -347,7 +346,7 @@ body
                                                     <p class="pb-0 mb-0">30 Comments</p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-md-1 col-1">
                                                 <p class="pb-0 mb-0 pt-1">2h</p>
                                                 <div>
                                                     <img src="/assets/images/dots_icons1.svg"/>
@@ -356,15 +355,15 @@ body
                                         </div>
                                     </div>
 
-                                      <div class="notify_box">
+                                    <div class="notify_box">
                                         <div class="row align-items-center">
-                                            <div class="col-md-2">
+                                            <div class="col-md-2 col-2">
                                                 <div class="userimg">
                                                     <img src="/assets/images/user_image1.png" />
                                                 </div>
                                                 
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-9">
                                                 <div class="notify_content">
                                                     <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
                                                 </div>
@@ -373,7 +372,7 @@ body
                                                     <p class="pb-0 mb-0">30 Comments</p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-md-1 col-1">
                                                 <p class="pb-0 mb-0 pt-1">2h</p>
                                                 <div>
                                                     <img src="/assets/images/dots_icons1.svg"/>
@@ -382,15 +381,15 @@ body
                                         </div>
                                     </div>
 
-                                      <div class="notify_box">
+                                    <div class="notify_box">
                                         <div class="row align-items-center">
-                                            <div class="col-md-2">
+                                            <div class="col-md-2 col-2">
                                                 <div class="userimg">
                                                     <img src="/assets/images/user_image1.png" />
                                                 </div>
                                                 
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-9">
                                                 <div class="notify_content">
                                                     <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
                                                 </div>
@@ -399,7 +398,7 @@ body
                                                     <p class="pb-0 mb-0">30 Comments</p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-md-1 col-1">
                                                 <p class="pb-0 mb-0 pt-1">2h</p>
                                                 <div>
                                                     <img src="/assets/images/dots_icons1.svg"/>
@@ -408,15 +407,15 @@ body
                                         </div>
                                     </div>
 
-                                      <div class="notify_box">
+                                    <div class="notify_box">
                                         <div class="row align-items-center">
-                                            <div class="col-md-2">
+                                            <div class="col-md-2 col-2">
                                                 <div class="userimg">
                                                     <img src="/assets/images/user_image1.png" />
                                                 </div>
                                                 
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-9">
                                                 <div class="notify_content">
                                                     <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
                                                 </div>
@@ -425,7 +424,7 @@ body
                                                     <p class="pb-0 mb-0">30 Comments</p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-md-1 col-1">
                                                 <p class="pb-0 mb-0 pt-1">2h</p>
                                                 <div>
                                                     <img src="/assets/images/dots_icons1.svg"/>
@@ -434,15 +433,15 @@ body
                                         </div>
                                     </div>
 
-                                      <div class="notify_box">
+                                    <div class="notify_box">
                                         <div class="row align-items-center">
-                                            <div class="col-md-2">
+                                            <div class="col-md-2 col-2">
                                                 <div class="userimg">
                                                     <img src="/assets/images/user_image1.png" />
                                                 </div>
                                                 
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-9">
                                                 <div class="notify_content">
                                                     <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
                                                 </div>
@@ -451,7 +450,7 @@ body
                                                     <p class="pb-0 mb-0">30 Comments</p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-md-1 col-1">
                                                 <p class="pb-0 mb-0 pt-1">2h</p>
                                                 <div>
                                                     <img src="/assets/images/dots_icons1.svg"/>
@@ -460,15 +459,15 @@ body
                                         </div>
                                     </div>
 
-                                      <div class="notify_box">
+                                    <div class="notify_box">
                                         <div class="row align-items-center">
-                                            <div class="col-md-2">
+                                            <div class="col-md-2 col-2">
                                                 <div class="userimg">
                                                     <img src="/assets/images/user_image1.png" />
                                                 </div>
                                                 
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-9">
                                                 <div class="notify_content">
                                                     <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
                                                 </div>
@@ -477,7 +476,7 @@ body
                                                     <p class="pb-0 mb-0">30 Comments</p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-md-1 col-1">
                                                 <p class="pb-0 mb-0 pt-1">2h</p>
                                                 <div>
                                                     <img src="/assets/images/dots_icons1.svg"/>
@@ -485,44 +484,19 @@ body
                                             </div>
                                         </div>
                                     </div>
-
-                                      <div class="notify_box">
-                                        <div class="row align-items-center">
-                                            <div class="col-md-2">
-                                                <div class="userimg">
-                                                    <img src="/assets/images/user_image1.png" />
-                                                </div>
-                                                
-                                            </div>
-                                            <div class="col-md-9">
-                                                <div class="notify_content">
-                                                    <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
-                                                </div>
-                                                <div class="d-flex gap-4">
-                                                    <p class="pb-0 mb-0">132 Reactions</p>
-                                                    <p class="pb-0 mb-0">30 Comments</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-1">
-                                                <p class="pb-0 mb-0 pt-1">2h</p>
-                                                <div>
-                                                    <img src="/assets/images/dots_icons1.svg"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div>
                                 <div class="tab-pane fade" id="my-post-tab" role="tabpanel" aria-labelledby="my-post-tab-tab">
-                                      <div class="notify_box">
+                                    
+                                    
+                                    <div class="notify_box">
                                         <div class="row align-items-center">
-                                            <div class="col-md-2">
+                                            <div class="col-md-2 col-2">
                                                 <div class="userimg">
                                                     <img src="/assets/images/user_image1.png" />
                                                 </div>
                                                 
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-9">
                                                 <div class="notify_content">
                                                     <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
                                                 </div>
@@ -531,7 +505,111 @@ body
                                                     <p class="pb-0 mb-0">30 Comments</p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-md-1 col-1">
+                                                <p class="pb-0 mb-0 pt-1">2h</p>
+                                                <div>
+                                                    <img src="/assets/images/dots_icons1.svg"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="notify_box">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-2 col-2">
+                                                <div class="userimg">
+                                                    <img src="/assets/images/user_image1.png" />
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="col-md-9 col-9">
+                                                <div class="notify_content">
+                                                    <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
+                                                </div>
+                                                <div class="d-flex gap-4">
+                                                    <p class="pb-0 mb-0">132 Reactions</p>
+                                                    <p class="pb-0 mb-0">30 Comments</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 col-1">
+                                                <p class="pb-0 mb-0 pt-1">2h</p>
+                                                <div>
+                                                    <img src="/assets/images/dots_icons1.svg"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="notify_box">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-2 col-2">
+                                                <div class="userimg">
+                                                    <img src="/assets/images/user_image1.png" />
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="col-md-9 col-9">
+                                                <div class="notify_content">
+                                                    <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
+                                                </div>
+                                                <div class="d-flex gap-4">
+                                                    <p class="pb-0 mb-0">132 Reactions</p>
+                                                    <p class="pb-0 mb-0">30 Comments</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 col-1">
+                                                <p class="pb-0 mb-0 pt-1">2h</p>
+                                                <div>
+                                                    <img src="/assets/images/dots_icons1.svg"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="notify_box">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-2 col-2">
+                                                <div class="userimg">
+                                                    <img src="/assets/images/user_image1.png" />
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="col-md-9 col-9">
+                                                <div class="notify_content">
+                                                    <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
+                                                </div>
+                                                <div class="d-flex gap-4">
+                                                    <p class="pb-0 mb-0">132 Reactions</p>
+                                                    <p class="pb-0 mb-0">30 Comments</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 col-1">
+                                                <p class="pb-0 mb-0 pt-1">2h</p>
+                                                <div>
+                                                    <img src="/assets/images/dots_icons1.svg"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="notify_box">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-2 col-2">
+                                                <div class="userimg">
+                                                    <img src="/assets/images/user_image1.png" />
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="col-md-9 col-9">
+                                                <div class="notify_content">
+                                                    <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
+                                                </div>
+                                                <div class="d-flex gap-4">
+                                                    <p class="pb-0 mb-0">132 Reactions</p>
+                                                    <p class="pb-0 mb-0">30 Comments</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 col-1">
                                                 <p class="pb-0 mb-0 pt-1">2h</p>
                                                 <div>
                                                     <img src="/assets/images/dots_icons1.svg"/>
@@ -542,13 +620,13 @@ body
 
                                       <div class="notify_box">
                                         <div class="row align-items-center">
-                                            <div class="col-md-2">
+                                            <div class="col-md-2 col-2">
                                                 <div class="userimg">
                                                     <img src="/assets/images/user_image1.png" />
                                                 </div>
                                                 
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-9 col-9">
                                                 <div class="notify_content">
                                                     <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
                                                 </div>
@@ -557,137 +635,7 @@ body
                                                     <p class="pb-0 mb-0">30 Comments</p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1">
-                                                <p class="pb-0 mb-0 pt-1">2h</p>
-                                                <div>
-                                                    <img src="/assets/images/dots_icons1.svg"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                      <div class="notify_box">
-                                        <div class="row align-items-center">
-                                            <div class="col-md-2">
-                                                <div class="userimg">
-                                                    <img src="/assets/images/user_image1.png" />
-                                                </div>
-                                                
-                                            </div>
-                                            <div class="col-md-9">
-                                                <div class="notify_content">
-                                                    <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
-                                                </div>
-                                                <div class="d-flex gap-4">
-                                                    <p class="pb-0 mb-0">132 Reactions</p>
-                                                    <p class="pb-0 mb-0">30 Comments</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-1">
-                                                <p class="pb-0 mb-0 pt-1">2h</p>
-                                                <div>
-                                                    <img src="/assets/images/dots_icons1.svg"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                      <div class="notify_box">
-                                        <div class="row align-items-center">
-                                            <div class="col-md-2">
-                                                <div class="userimg">
-                                                    <img src="/assets/images/user_image1.png" />
-                                                </div>
-                                                
-                                            </div>
-                                            <div class="col-md-9">
-                                                <div class="notify_content">
-                                                    <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
-                                                </div>
-                                                <div class="d-flex gap-4">
-                                                    <p class="pb-0 mb-0">132 Reactions</p>
-                                                    <p class="pb-0 mb-0">30 Comments</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-1">
-                                                <p class="pb-0 mb-0 pt-1">2h</p>
-                                                <div>
-                                                    <img src="/assets/images/dots_icons1.svg"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                      <div class="notify_box">
-                                        <div class="row align-items-center">
-                                            <div class="col-md-2">
-                                                <div class="userimg">
-                                                    <img src="/assets/images/user_image1.png" />
-                                                </div>
-                                                
-                                            </div>
-                                            <div class="col-md-9">
-                                                <div class="notify_content">
-                                                    <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
-                                                </div>
-                                                <div class="d-flex gap-4">
-                                                    <p class="pb-0 mb-0">132 Reactions</p>
-                                                    <p class="pb-0 mb-0">30 Comments</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-1">
-                                                <p class="pb-0 mb-0 pt-1">2h</p>
-                                                <div>
-                                                    <img src="/assets/images/dots_icons1.svg"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                      <div class="notify_box">
-                                        <div class="row align-items-center">
-                                            <div class="col-md-2">
-                                                <div class="userimg">
-                                                    <img src="/assets/images/user_image1.png" />
-                                                </div>
-                                                
-                                            </div>
-                                            <div class="col-md-9">
-                                                <div class="notify_content">
-                                                    <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
-                                                </div>
-                                                <div class="d-flex gap-4">
-                                                    <p class="pb-0 mb-0">132 Reactions</p>
-                                                    <p class="pb-0 mb-0">30 Comments</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-1">
-                                                <p class="pb-0 mb-0 pt-1">2h</p>
-                                                <div>
-                                                    <img src="/assets/images/dots_icons1.svg"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                      <div class="notify_box">
-                                        <div class="row align-items-center">
-                                            <div class="col-md-2">
-                                                <div class="userimg">
-                                                    <img src="/assets/images/user_image1.png" />
-                                                </div>
-                                                
-                                            </div>
-                                            <div class="col-md-9">
-                                                <div class="notify_content">
-                                                    <p class="mb-2">Trending post from <b>LinkedIn News India</b> Anupam Mittal, founder at Shaadi.com, says that he believes in having long-term confidence and short-term pessimism. This means that even though he is....</p>
-                                                </div>
-                                                <div class="d-flex gap-4">
-                                                    <p class="pb-0 mb-0">132 Reactions</p>
-                                                    <p class="pb-0 mb-0">30 Comments</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-1">
+                                            <div class="col-md-1 col-1">
                                                 <p class="pb-0 mb-0 pt-1">2h</p>
                                                 <div>
                                                     <img src="/assets/images/dots_icons1.svg"/>
@@ -703,7 +651,7 @@ body
                     </main>
                 </div>
 
-                <div class="col-md-3 mt-4 pb-md-5 order-md-3 order-2 left_sidebar_parent_div width_20">
+                <div class="col-md-3 mt-4 pb-md-5 order-md-3 order-2 left_sidebar_parent_div width_20 d-lg-block d-none">
                     <aside class="left_sidebar">
                         {{-- <div class="profile">
                             <img class="img-fluid" src="/assets/images/bg-avatar.jpg" alt="" />
