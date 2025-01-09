@@ -23,7 +23,7 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
     @endphp
 
 
-    <div class="post mt-4 proxima_nova_font">
+    <div class="post mt-md-4 mt-3 proxima_nova_font">
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center gap-2">
                 <img class="user_img" src="{{ $user->profile_photo ? asset('storage/' . $user->profile_photo) : '/assets/images/drishti_img.png' }}" alt="user_img" />
@@ -147,7 +147,7 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
                         </span>
                     </a>
                 </li>
-                <li class="like_comnt_list_item">
+                <li class="like_comnt_list_item d-none d-lg-block">
                     <a class="like_comnt_link" href="">
                         <span class="send_text">
                             <img class="send_img" src="/assets/images/send_icon.svg">
@@ -160,12 +160,12 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
 
 
         <!-- Comments Section -->
-        <div class="comments-section" id="comments-section-{{ $post->id }}" style="display: none;">
+        <div class="comments-section position-relative" id="comments-section-{{ $post->id }}" style="display: none;">
             <!-- Comment Form -->
             <form class="comment-form" data-post-id="{{ $post->id }}">
                 <textarea name="comment" class="comment-input" placeholder="Write a comment..."></textarea>
                 <input type="hidden" name="parent_id" class="parent-id" value="">
-                <button type="submit" class="btn btn-primary btn-sm">Post</button>
+                <button type="submit" class="comment_btns"><img src="/assets/images/post_button_icons.svg"></button>
             </form>
             <div class="comments-list"></div>
         </div>
@@ -405,8 +405,8 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
             // Use the `created_at` value from the comment object
             const commenttime_reply = timeAgo(new Date(comment.created_at));
             repliesHTML = comment.replies.map(reply => `
-                <div class="reply mx-5" id="comment-${reply.id}"> 
-                    <strong>${reply.user.username}:</strong> ${reply.content} <b>${commenttime_reply}</b>
+                <div class="reply" id="comment-${reply.id}"> 
+                    <p class="main_admin_head">${reply.user.username}:</p> ${reply.content} <b>${commenttime_reply}</b>
                     <a href="#" class="reply-link" onclick="reply_form(${reply.parent_id},${reply.post_id},'${reply.user.username}');">Reply</a>
                     ${
                         comment.user_id === loggedInUserId
@@ -422,13 +422,52 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
             const commenttime = timeAgo(new Date(comment.created_at));
             return `
                 <div class="comment" id="comment-${comment.id}">
-                    <strong>${comment.user.username}:</strong> ${comment.content} <b>${commenttime}</b>
-                    <a href="#" class="reply-link" data-parent-id="${comment.id}" data-post-id="${comment.post_id}" data-user-name="${comment.user.username}">Reply</a>
+                <div class="row">
+                    <div class="col-md-9">
+                            <p class="main_admin_head">${comment.user.username}:</p> 
+                   <div class="reply_content">
+                        ${comment.content} 
+                   </div>
+                   
+                    </div>
+
+                     <div class="col-md-3">
+                     <div class="comment_rights">
+                    <div class="">
+                      <b>${commenttime}</b>
+                    </div> 
+                     <div class="comment_rights">
+                            <div class="dropdown">
+            <a class="" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="/assets/images/dots_icons1.svg">
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+               
+                <li>
+                    <a class="dropdown-item" href="#">
+                       Edit
+                    </a>
+                </li>
+                <!-- Delete Action -->
+                <li>
                     ${
                     comment.user_id === loggedInUserId
                         ? `<a href="javascript:void(0);" class="delete-link" data-comment-id="${comment.id}" onclick="deleteComment(${comment.id}, ${comment.post_id}, this)">Delete</a>`
                         : ''
                     }
+                </li>
+            </ul>
+        </div>
+        </div>
+        </div>
+                    </div>
+                </div>
+                    
+                    
+                    
+                    
+                    <a href="#" class="reply-link" data-parent-id="${comment.id}" data-post-id="${comment.post_id}" data-user-name="${comment.user.username}">Reply</a>
+                   
                     <div class="replies">${repliesHTML}</div>
                 </div>
             `;
@@ -441,8 +480,8 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
         let repliesHTML = '';
         const commentjust = timeAgo(new Date(comment.created_at));
         return `
-            <div class="reply mx-5" id="comment-${comment.id}">
-                <strong>${comment.user.username}:</strong> ${comment.content} <b>${commentjust}</b>
+            <div class="reply" id="comment-${comment.id}">
+                <p class="main_admin_head">${comment.user.username}:</p> ${comment.content} <b>${commentjust}</b>
                 ${
                     comment.user_id === loggedInUserId
                     ? `<a href="javascript:void(0);" class="delete-link" data-comment-id="${comment.id}" onclick="deleteComment(${comment.id}, ${comment.post_id}, this)">Delete</a>`

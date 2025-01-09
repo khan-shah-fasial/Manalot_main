@@ -346,7 +346,7 @@ strong.text-lg {
 .header_drishti .dropdown-content {
     border-radius: 50px;
     width: 200px;
-    height: 275px;
+    height: 320px;
     padding: 0px;
     background-color: #ffffff;
     top: 96px;
@@ -356,7 +356,7 @@ strong.text-lg {
 
 .view_profile_child_1 {
     padding: 24px 17px 12px;
-    height: 222px;
+    height: 320px;
 }
 
 a.logout {
@@ -556,7 +556,15 @@ a.logout:hover {
 .post_modal .modal-content {
     border-radius: 50px;
     padding: 26px 40px;
-    height: 563px;
+    min-height: 563px;
+    max-height: max-content;
+}
+
+button#remove-all-media {
+    color: #be2475;
+    text-decoration: underline;
+    background: transparent;
+    border: 0;
 }
 
 .post_modal .modal-header,
@@ -997,7 +1005,7 @@ img.like_img {
 
 .personal_information .form-select {
     background: url('/assets/images/arrow_dropdown.png') no-repeat right 5px center !important;
-    background-size: 5% !important;
+    background-size: 15px !important;
 }
 
 .personal_information .wrk_auth .form-select {
@@ -1056,6 +1064,15 @@ img.like_img {
 
 img.user_img {
     width: 60px;
+    height: 60px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 100px;
+}
+
+.postslider_banner .carousel-inner {
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 .sidebar_footer_quick_links {
@@ -1067,6 +1084,22 @@ img.user_img {
     line-height: 12px;
     margin-top: 12px;
     padding: 0px 5px;
+}
+
+.preview-item {
+    position: relative;
+}
+
+.preview-item button {
+    position: absolute;
+    background: #be2475;
+    color: #fff;
+    border: none;
+    padding: 0px 3px 1px 3px;
+    right: 1px;
+    border-radius: 50px;
+    top: 2px;
+    line-height: 1;
 }
 
 .activity span.text-xs {
@@ -4184,4 +4217,134 @@ div#squarePoleModal ::-webkit-scrollbar {
     width: 0px !important;
     border: 5px solid #fff !important;
     border-radius: 50px !important;
+}
+
+form#personal-work-info span.select2-selection.select2-selection--multiple ul.select2-selection__rendered li.select2-selection__choice {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+    white-space: nowrap;
+    height: 34px !important;
+    padding: 5px 17px 5px 24px !important;
+    border-radius: 50px !important;
+    cursor: pointer;
+    margin-top: 7px;
+    font-weight: 600 !important;
+    background: #cccccc36 !important;
+    font-size: 14px;
+}
+
+form#personal-work-info span.select2-selection__choice__remove {
+    font-size: 20px !important;
+    left: 3px !important;
+}
+
+form#personal-work-info span.select2-dropdown.select2-dropdown--above {
+    width: 300px !important;
+}
+
+form#personal-work-info span.select2.select2-container.select2-container--default.select2-container--below.select2-container--focus {
+    width: 100% !important;
+}
+
+form#personal-work-info span.select2.select2-container.select2-container--default {
+    width: 100% !important;
+}
+
+body .mb_30 {
+    margin-bottom: 30px !important;
+}
+
+section.personal_information div#dropdown-container-new {
+    margin-left: 0px !important;
+    width: 97%;
+    padding-left: 0px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+section.personal_information div#dropdown-container-new a {
+    text-decoration: none;
+}
+
+section.personal_information input#Expected-Salary {
+    padding-bottom: 5px !important;
+}
+
+.comments-section textarea.comment-input {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    padding-top: 7px;
+    padding-left: 15px;
+    margin-top: 16px;
+    font-size: 14px;
+    padding-right: 40px;
+    height: 40px;
+}
+
+button.comment_btns {
+    background: transparent;
+    border: 0;
+    position: absolute;
+    right: 10px;
+    top: 17px;
+    background: #ffffff00;
+    height: 37px;
+}
+
+.post_description {
+    height: auto;
+    font-size: 14px;
+}
+
+.comment-form-reply textarea.comment-input.form-control {
+    width: 100%;
+    border: 1px solid #ccc !important;
+    border-radius: 50px !important;
+    padding-top: 7px !important;
+    padding-left: 15px !important;
+    margin-top: 0px !important;
+    font-size: 14px !important;
+    padding-right: 40px !important;
+    width: 100% !important;
+    height: 40px;
+}
+
+.comments-section .comment {
+    padding-bottom: 10px;
+    margin-top: 5px;
+}
+
+.comments-section .main_admin_head {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 0;
+}
+
+.comment-form-reply button.comment_btns {
+    top: 1px;
+}
+
+.comment_rights {
+    display: flex;
+    float: right;
+    gap: 7px;
+    font-weight: 300;
+    font-size: 12px;
+}
+
+.comment_rights img {
+    width: 13px;
+}
+
+.comments-section .replies .reply {
+    padding-left: 0px;
+    padding-top: 10px;
+}
+
+.reply_content {
+    padding: 5px 0px;
 }

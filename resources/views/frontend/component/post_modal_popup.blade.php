@@ -71,7 +71,7 @@ $profile_photo = Cache::remember('user_profile_photo_' . auth()->user()->id, 10 
                             <button type="button" id="remove-media" class="btn btn-danger btn-sm">×</button>
                         </div> --}}
                         <div id="preview-section" class="d-none">
-                            <div id="media-preview-container"></div>
+                            <div id="media-preview-container" class="d-flex flex-wrap"></div>
                             <button type="button" id="remove-all-media" class="btn btn-danger btn-sm d-none">Remove All</button>
                         </div>
                     </div>
@@ -89,7 +89,7 @@ $profile_photo = Cache::remember('user_profile_photo_' . auth()->user()->id, 10 
                             <button id="event" type="button" class="post_modal_img_btn">
                                 <img class="post_modal_icon_img" src="/assets/images/post_calendar.svg">
                             </button>
-                            <button id="poll" type="button" class="post_modal_img_btn">
+                            <!-- <button id="poll" type="button" class="post_modal_img_btn">
                                 <img class="post_modal_icon_img" src="/assets/images/post_square_pole.svg">
                             </button>
                             <button type="button" class="post_modal_img_btn">
@@ -97,7 +97,7 @@ $profile_photo = Cache::remember('user_profile_photo_' . auth()->user()->id, 10 
                             </button>
                             <button type="button" class="post_modal_img_btn">
                                 <img class="post_modal_icon_img" src="/assets/images/post_suitcase.svg">
-                            </button>
+                            </button> -->
                         </div>
                         <button type="submit" class="ai_search_btn post_modal_btn">Post</button>
                     </div>
@@ -113,6 +113,20 @@ $profile_photo = Cache::remember('user_profile_photo_' . auth()->user()->id, 10 
 
 @section("custom-script")
     <script>
+
+        $(document).ready(function() {
+            initValidate('#add_posts_form');
+        });
+
+        $("#add_posts_form").submit(function(e) {
+            var form = $(this);
+            ajaxSubmit(e, form, responseHandler);
+        });
+
+        var responseHandler = function(response) {
+            location.reload();
+        }
+
         document.getElementById('media-btn').addEventListener('click', () => {
             document.getElementById('media-input').click();
         });
@@ -192,8 +206,13 @@ $profile_photo = Cache::remember('user_profile_photo_' . auth()->user()->id, 10 
 
             // Clear the preview container for fresh uploads
             previewContainer.innerHTML = '';
-            previewSection.classList.remove('d-none');
-            removeAllButton.classList.remove('d-none');
+            if (files.length > 0) {
+                previewSection.classList.remove('d-none');
+                removeAllButton.classList.remove('d-none');
+            } else {
+                previewSection.classList.add('d-none');
+                removeAllButton.classList.add('d-none');
+            }
 
             files.forEach((file, index) => {
                 const fileType = file.type.split('/')[0]; // Get the type (image or video)
@@ -356,9 +375,9 @@ $profile_photo = Cache::remember('user_profile_photo_' . auth()->user()->id, 10 
             handleButtonClick(this, 'event', 'poll');
         });
 
-        document.getElementById('poll').addEventListener('click', function () {
-            handleButtonClick(this, 'poll', 'event');
-        });
+        // document.getElementById('poll').addEventListener('click', function () {
+        //     handleButtonClick(this, 'poll', 'event');
+        // });
 
         function handleButtonClick(button, currentName, otherName) {
             const form = button.closest('form'); // Assuming the button is inside a form
@@ -406,18 +425,7 @@ $profile_photo = Cache::remember('user_profile_photo_' . auth()->user()->id, 10 
         }
 
 
-        $(document).ready(function() {
-            initValidate('#add_posts_form');
-        });
 
-        $("#add_posts_form").submit(function(e) {
-            var form = $(this);
-            ajaxSubmit(e, form, responseHandler);
-        });
-
-        var responseHandler = function(response) {
-            location.reload();
-        }
 
     </script>
 @endsection

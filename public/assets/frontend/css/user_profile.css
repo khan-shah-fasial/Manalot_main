@@ -1,21 +1,20 @@
-
-body
-{
+body {
     background-color: #f6f6f6;
 }
 
-.box_shadows
-{
+.box_shadows {
     /* box-shadow: 0px 8px 40px 0px #0000001A; */
-    background-color:#fff;
+    background-color: #fff;
     border-radius: 50px;
 }
+
 .image-profile.box_shadows {
     border-radius: 50px 50px 50px 50px;
     margin-top: 137px;
 }
 
-.profile-page .container, .profile-page .container-lg{
+.profile-page .container,
+.profile-page .container-lg {
     max-width: 1270px;
 }
 
@@ -95,7 +94,7 @@ p.bg_verified_text {
 }
 
 .mt-35 {
-    margin-top:25px;
+    margin-top: 25px;
 }
 
 .padd-40 {
@@ -121,7 +120,7 @@ p.bg_verified_text {
 }
 
 .profile-page strong {
-    font-weight:bold;
+    font-weight: bold;
 }
 
 .profile-content {
@@ -130,32 +129,38 @@ p.bg_verified_text {
 }
 
 .profile_btn {
-text-decoration: none;
-font-weight: 500;
+    text-decoration: none;
+    font-weight: 500;
 }
 
 .connect_btn {
-color: #fff;
-padding: 7px 25px 8px 25px !important;
-font-weight: 600 !important;
+    color: #fff;
+    padding: 7px 25px 8px 25px !important;
+    font-weight: 600 !important;
 }
 
 .connect_btn:hover {
-color: #fff !important;
+    color: #fff !important;
 }
 
 .connect_btn i {
-padding-right: 5px;
+    padding-right: 5px;
 }
 
 .profile-content .purple_btn {
-/* width: 90%; */
+    /* width: 90%; */
 }
 
-.mngmnt_school span, .profile_manalot_div span {font-size: 14px;font-weight: 400;color: #535353;line-height: 18px;}
+.mngmnt_school span,
+.profile_manalot_div span {
+    font-size: 14px;
+    font-weight: 400;
+    color: #535353;
+    line-height: 18px;
+}
 
 img.profile_study_logo {
-width: 40px;
+    width: 40px;
 }
 
 .telegram_icon {
@@ -167,12 +172,21 @@ width: 40px;
 color: #535353;
 } */
 
-.profile_btn.message_btn {text-decoration: none;font-weight: 500;color: #535353;background: #E7ECEF;padding: 8px 24px 9px 24px;border-radius: 20px;}
-.profile_btn.message_btn:hover {
-color: #535353;
+.profile_btn.message_btn {
+    text-decoration: none;
+    font-weight: 500;
+    color: #535353;
+    background: #E7ECEF;
+    padding: 8px 24px 9px 24px;
+    border-radius: 20px;
 }
 
-.profile_btn.connect_btn, .golden_btn.message_btn {
+.profile_btn.message_btn:hover {
+    color: #535353;
+}
+
+.profile_btn.connect_btn,
+.golden_btn.message_btn {
     border-radius: 15px !important;
     padding: 7px 14px 7px 14px !important;
 }
@@ -186,18 +200,33 @@ color: #535353;
 }
 
 .info-section {
-display: flex;
+    display: flex;
 }
 
-.personal_info_div {display: flex;flex-direction: column;flex-wrap: nowrap;gap: 5px;}
+.personal_info_div {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 5px;
+}
 
-.about_heading_div {display: flex;gap: 22px;align-items: center;margin-bottom: 25px;}
+.about_heading_div {
+    display: flex;
+    gap: 22px;
+    align-items: center;
+    margin-bottom: 25px;
+}
 
 img.user_icon {
-object-fit: contain;
+    object-fit: contain;
 }
 
-.about_heading {margin-bottom: 0px;color: #AE446A;font-size: 20px;font-weight: 600;}
+.about_heading {
+    margin-bottom: 0px;
+    color: #AE446A;
+    font-size: 20px;
+    font-weight: 600;
+}
 
 .profile-information h5 {
     font-weight: 600;
@@ -214,7 +243,7 @@ object-fit: contain;
     font-weight: 400;
 }
 
-.work_exp > div:not(:first-child):not(:last-child) {
+.work_exp>div:not(:first-child):not(:last-child) {
     margin-bottom: 30px;
 }
 
@@ -231,7 +260,8 @@ object-fit: contain;
     font-weight: 700;
 }
 
-.work_exp .industry_main_div, .work_exp .skills_main_div {
+.work_exp .industry_main_div,
+.work_exp .skills_main_div {
     display: flex;
     align-items: start;
     gap: 20px;
@@ -239,7 +269,8 @@ object-fit: contain;
     /* flex-wrap: wrap; */
 }
 
-.work_exp .skills_main_div_heading, .work_exp .industry_main_div {
+.work_exp .skills_main_div_heading,
+.work_exp .industry_main_div {
     font-size: 13px;
     font-weight: 600;
     color: #535353;
@@ -251,7 +282,8 @@ object-fit: contain;
     gap: 10px 20px;
 }
 
-.industry_main_div_heading, .skills_main_div_heading {
+.industry_main_div_heading,
+.skills_main_div_heading {
     width: 80px;
     font-weight: 600 !important;
 }
@@ -288,17 +320,17 @@ a.visit_mln {
     height: 60px;
 }
 
-.education_div > div:nth-child(odd),
-.certification_div > div:nth-child(odd) {
+.education_div>div:nth-child(odd),
+.certification_div>div:nth-child(odd) {
     padding-right: 20px;
 }
 
-.education_div > div:nth-child(even),
-.certification_div > div:nth-child(even) {
+.education_div>div:nth-child(even),
+.certification_div>div:nth-child(even) {
     padding-left: 20px;
 }
 
-.author_main_div p{
+.author_main_div p {
     margin-bottom: 0px;
 }
 
@@ -317,11 +349,12 @@ span.user_yes {
     font-size: 14px;
 }
 
-.education_main_div, .work_exp {
+.education_main_div,
+.work_exp {
     padding-right: 140px;
 }
 
-@media screen and (max-width:991px){
+@media screen and (max-width:991px) {
     .bg-profile-content {
         flex-direction: column;
         align-items: start;
@@ -329,21 +362,21 @@ span.user_yes {
         margin-top: 0px;
         padding: 20px 20px;
     }
-    
+
     .profile_content_main_div {
         flex-direction: column;
         align-items: start;
         gap: 10px;
     }
-    
+
     .profile-content h3 {
         padding-top: 10px;
     }
-    
+
     .profile-page h5 {
         font-size: 17px;
     }
-    
+
     .image-profile.box_shadows {
         border-radius: 40px;
         margin-top: 80px;
@@ -353,16 +386,16 @@ span.user_yes {
         flex-direction: column;
         border-radius: 40px;
     }
-    
+
     .padd-40 {
         padding: 30px 30px;
     }
-    
+
     .personal_info_div {
         gap: 5px;
         margin-bottom: 25px;
     }
-    
+
     .user-social-links {
         gap: 20px;
     }
@@ -370,7 +403,7 @@ span.user_yes {
     .work_exp .col-12 img {
         object-fit: contain;
     }
-    
+
     .work_exp p {
         font-size: 13px;
         line-height: 17px;
@@ -391,19 +424,19 @@ span.user_yes {
 
 }
 
-@media screen and (min-width:768px) and (max-width:991px){
+@media screen and (min-width:768px) and (max-width:991px) {
     .author_main_div div:nth-child(even):not(.author_main_div div:nth-child(even) div) {
         flex-direction: row;
         align-items: start;
         justify-content: space-between;
     }
 
-    .header { 
-        height: 80px; 
+    .header {
+        height: 80px;
         padding: 10px 0px 0px;
     }
 
-    header { 
+    header {
         padding: 0px 0px 0px 10px;
         height: 60px;
         justify-content: space-between;
@@ -421,150 +454,7 @@ span.user_yes {
         width: 60px;
     }
 
-    .image-profile.box_shadows { 
+    .image-profile.box_shadows {
         margin-top: 110px;
-    }
-}
-
-@media screen and (min-width:992px) and (max-width:1200px){
-
-    .bg-profile-content {
-        align-items: end;
-    }
-
-    .industry_main_div_heading, .skills_main_div_heading {
-        width: 90px;
-    }
-}
-
-@media screen and (max-width:767px) {
-    .header { 
-        border-radius: 0px;
-        height: 60px; 
-        padding: 0px 0px 0px;
-    }
-
-    
-    .bg-profile-content .user_img {
-        width: 80%;
-        margin: 0px auto;
-    }
-
-    header { 
-        border-radius: 0px;
-        padding: 0px;
-        height: 60px; 
-    }
-
-    .user_header_mobile header .logo_search_div {
-        justify-content: space-around;
-    }
-
-    .user_header_logo {
-        width: 50px;
-    }
-
-    .search_input input {
-        width: 56vw;
-        padding: 0px;
-        height: 40px;
-        border-radius: 0px;
-        padding: 5px;
-        font-size: 18px;
-        color: #535353;
-        font-weight: 400;
-    }
-
-    .user_header .search_input button {
-        background-color: inherit;
-        padding: 0px;
-        border-radius: 25px;
-        font-size: inherit;
-    }
-
-    .user_header .search_input button i {
-        font-size: 22px;
-    }
-
-    .user_header_mobile .user_header_right {
-        justify-content: space-around !important;
-        gap: 0px
-    }
-
-    .user_header_right a img {
-        height: auto; 
-        width: 27px;
-    }
-    .notification_box {
-        position: absolute;
-        top: 50px;
-        margin-left: -120px;
-    }
-
-    form.search_input {
-        position: relative;
-    }
-
-    .mobile_search_input {
-        position: absolute;
-        flex-direction: row;
-        left: -20px;
-        padding: 0px 5px;
-    }
-
-    .user_header .search_input .mobile_search_input button {
-        background: #e7ecef;
-        padding: 10px;
-        height: 40px;
-    }
-
-    .user_header .search_input .mobile_search_input button.close {
-        border-radius: 10px 0px 0px 10px;
-        font-size: 18px;
-        color: #535353;
-        font-weight: 600;
-        line-height: 19px;
-    }
-
-    .user_header .search_input .mobile_search_input button.searched {
-        border-radius: 0px 10px 10px 0px;
-    }
-
-    .profile_content_main_div a {
-        padding: 7px 20px !important;
-    }
-
-    .profile-content {
-        padding-left: 0px;
-    }
-}
-
-@media screen and (max-width:360px) {
-    
-    .ai_search_bar::placeholder {
-        font-size: 13px !important;
-    }
-
-    .ai_search_bar {
-        background: url(/assets/images/ai_stars.png) no-repeat 11.4em center;
-        background-size: 16px 16px;
-    }
-
-    .like_comnt_list span { 
-        display: flex;
-        flex-direction: column;
-        align-items: start;
-    }
-
-    .like_comnt_link img {
-        margin-bottom: 4px;
-        height: 18px;
-    }
-
-}
-
-@media screen and (min-width:1200px){
-    .work_exp .industry_main_div, .work_exp .skills_main_div {
-        gap: 0px !important;
     }
 }

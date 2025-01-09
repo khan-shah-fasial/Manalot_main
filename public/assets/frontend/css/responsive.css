@@ -13,7 +13,7 @@
     }
 
     .notification_tabs_box .nav-link {
-        font-size: 11px;
+        font-size: 14px;
         padding: 2px 5px 3px 5px;
         width: 80px;
     }
@@ -56,5 +56,209 @@
 
     .post {
         padding: 20px 20px;
+    }
+
+    .personal_information .width_20 {
+        width: 100% !important;
+    }
+
+    .personal_information .left_sidebar {
+        width: 100%;
+    }
+
+    .personal_information aside.left_sidebar .list-group {
+        border-radius: 30px;
+        padding: 30px 20px 25px 20px;
+        background: #fff;
+        height: auto;
+        margin-bottom: 5px;
+    }
+
+    .personal_information .main_parent_div {
+        width: 100%;
+    }
+
+    .personal_information .main_parent_div main {
+        background: #fff;
+        border-radius: 30px;
+        padding: 30px 20px 30px 20px;
+    }
+
+    .personal_information aside.left_sidebar a.list-group-item {
+        margin: 10px 0px;
+        font: 700 14px 'Helvetica' !important;
+        width: 100%;
+    }
+
+    .prsnl_info_heading {
+        font: 400 16px 'Proxima nova';
+        color: #AE446A;
+        margin-bottom: 15px;
+    }
+
+    .personal_information form label {
+        font: 400 14px 'Proxima nova';
+        padding-bottom: 5px;
+    }
+
+    .personal_information form input,
+    .personal_information form textarea,
+    .personal_information form select,
+    .personal_information form input::placeholder,
+    .personal_information form textarea::placeholder,
+    .personal_information form select::placeholder {
+        font: 500 14px / 14px 'Proxima nova' !important;
+        padding-left: 0px !important;
+    }
+
+    .manage_network {
+        font: 700 16px 'Helvetica';
+    }
+
+    .personal_information .main_parent_div form .col-md-4,
+    .personal_information .main_parent_div form .col-md-6,
+    .personal_information .main_parent_div form .col-md-12 {
+        margin-bottom: 15px;
+    }
+
+    .ai_search_bar::placeholder {
+        font: 400 14px 'Lato' !important;
+    }
+
+    .search_bar_new {
+        padding: 10px 15px;
+    }
+
+    .ai_search_btn {
+        font-size: 14px;
+    }
+
+    .post_modal .modal-content {
+        border-radius: 50px;
+        padding: 20px 20px;
+        height: auto;
+    }
+
+    .post_modal .modal-dialog {
+        max-width: 100%;
+        right: 0px;
+    }
+
+    .post_modal textarea::placeholder {
+        font: 400 14px 'Proxima Nova';
+    }
+
+    .user_name_post strong {
+        font-weight: 700;
+        font-size: 14px;
+    }
+
+    img.caret_down_img {
+        padding-left: 0px;
+        width: 8px;
+    }
+
+    .post_modal button.post_modal_img_btn.ai_search_btn {
+        margin-right: 10px;
+    }
+
+    .post_modal .post_modal_img_btn {
+        margin: 0px 10px;
+    }
+
+    img.user_img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .like_comnt_list_item img {
+        padding-right: 2px;
+        position: relative;
+        top: -1px;
+    }
+
+    .post_description {
+        font-size: 14px;
+    }
+
+    section.personal_information input#Expected-Salary {
+        padding-bottom: 2px !important;
+    }
+
+    section.personal_information .reference-row .col-md-6:nth-child(even) {
+        padding-left: 11px;
+    }
+
+    .post {
+        border-radius: 30px;
+    }
+
+    form#searchForm input#searchInput {
+        width: 85%;
+    }
+
+    .user_header_logo {
+        width: 35px;
+        margin-right: 10px;
+    }
+
+    header {
+        padding: 0px 0px 0px 7px;
+        height: 48px;
+    }
+
+    .header {
+        height: 72px;
+    }
+
+    .three_dots {
+        position: absolute;
+        left: -18px;
+        top: 14px;
+        cursor: pointer;
+        z-index: 9;
+        width: 16px;
+    }
+
+    .header_drishti_img {
+        width: 35px;
+        right: 10px;
+        position: relative;
+    }
+
+    .footer_fiexd_action {
+        position: fixed;
+        bottom: 0px !important;
+        top: auto;
+        padding-top: 0;
+        height: auto;
+        background: #fff;
+    }
+
+    .footer_fiexd_action .user_header_right {
+        gap: 10px;
+    }
+
+    .footer_fiexd_action .user_header_right img {
+        width: 25px;
+    }
+
+    .footer_fiexd_action header {
+        height: 60px;
+        padding-top: 8px;
+    }
+
+    .user_header .search_input button {
+        background-color: #e7ecef;
+        padding: 5px 0px 3px 10px;
+        border-radius: 25px 0px 0px 25px;
+    }
+
+    .search_input input {
+        padding: 4px 10px 6px 10px;
+    }
+
+    .header_drishti .dropdown-content {
+        top: 44px;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Auth;
 
 class AuthenticateController extends Controller
@@ -22,6 +23,7 @@ class AuthenticateController extends Controller
         $authenticated = Auth::guard('web')->attempt($request->only(['email', 'password']));
         if($authenticated)
         {
+            Session::put('user_id', auth()->user()->id);
             return redirect()->route('backend.dashboard');
         }
         else

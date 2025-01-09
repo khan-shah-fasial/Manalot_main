@@ -188,7 +188,7 @@
                             </a>
                         </nav>
                     </div>
-                    <div class="mt-4 sidebar_footer_div">
+                    <div class="mt-4 sidebar_footer_div d-none d-lg-block">
                         <span class="side_footer_mln_text">Manalot Leadership Network</span>
                         <ul class="list-unstyled d-flex align-items-center justify-content-center flex-wrap sidebar_footer_quick_links">
                             <li class="list-group-item">
@@ -218,11 +218,11 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="language_translator">
+                    <div class="language_translator d-none d-lg-block">
                         <img class="icon_language" src="/assets/images/footer_english_filter.png">
                         <i class="fa fa-caret-down"></i>
                     </div>
-                    <strong class="text-center maple_footer_text">Maple Consulting & Services &copy; 2021</strong>
+                    <strong class="text-center maple_footer_text d-none d-lg-block">Maple Consulting & Services &copy; 2021</strong>
                     <div class="py-5 my-5 d-md-block d-none"></div>
                 </aside>
             </div>
@@ -235,7 +235,7 @@
                             <form id="personal-info" action="{{ url(route('user.save-profile', ['param' => 'personal-info'])) }}"
                                 method="post" enctype="multipart/form-data" class="d-flex flex-column">
                                 <div class="row">
-                                    <div class="col-md-6 mb-4">
+                                    <div class="col-md-6 mb-md-4 mb-3">
                                         <div class="position-relative form-group">
                                             <label for="first_name" class="form-label">Full Name *</label>
                                             <input type="text" class="form-control is-invalid input_text" name="fullname"
@@ -243,7 +243,7 @@
                                                 maxlength="255" value="{{ isset($fullname) ? $fullname : (Session::has('google_name') ? Session::get('google_name') : '') }}" required />
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mb-4">
+                                    <div class="col-md-6 mb-md-4 mb-3">
                                         <div class="position-relative form-group">
                                             <label for="Gender" class="form-label">Gender *</label>
                                             <select class="select2 form-select form-control is-invalid  input_select old-select2"
@@ -260,7 +260,7 @@
                                         <label for="headline" class="form-label">Headline</label>
                                         <textarea type="text" class="form-control" id="headline" rows="1">Listed as Most Innovative Leadership Advisory Firm – APAC 2024 I Featured as a Top 10...</textarea>
                                     </div>
-                                    <div class="col-md-6 mb-4">
+                                    <div class="col-md-6 mb-md-4 mb-3">
                                         <div class="position-relative form-group">
                                             <label for="formFile" class="form-label" id="profile_photo">Profile Photo {{--<span class="leble_size">(png, jpg)</span>--}}</label>
                                             @if (!empty($profile_photo) && $profile_photo != null)
@@ -274,7 +274,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 mb-4">
+                                    <div class="col-md-6 mb-md-4 mb-3">
                                         <div class="position-relative form-group">
                                             <label for="Date" class="form-label">Date of Birth*</label>
                                             <!-- <img src="/assets/images/calender_icon.png" alt="" class="input_icon"> -->
@@ -284,7 +284,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 mb-4">
+                                    <div class="col-md-6 mb-md-4 mb-3">
                                         <div class="position-relative form-group">
                                             <label for="zip_code" class="form-label">Zip/Postal Code*</label>
                                             <input type="text" class="form-control is-invalid input_text" id="pincode"
@@ -293,7 +293,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 mb-4">
+                                    <div class="col-md-6 mb-md-4 mb-3">
                                         <div class="position-relative form-group">
                                             <label for="city" class="form-label">City*</label>
                                             <input type="text" class="form-control is-invalid input_text" id="city"
@@ -301,7 +301,7 @@
                                                 placeholder="Enter Your City" value="{{ isset($city) ? $city : '' }}" required />
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mb-4">
+                                    <div class="col-md-6 mb-md-4 mb-3">
                                         <div class="position-relative form-group">
                                             <label for="country_name" class="form-label">Country*</label>
                                             <input type="text" value="{{ isset($country) ? $country : '' }}"
@@ -309,7 +309,7 @@
                                                 placeholder="Enter Your country" required />
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mb-4">
+                                    <div class="col-md-6 mb-md-4 mb-3">
                                         <div class="position-relative form-group">
                                             <label for="State" class="form-label">State*</label>
                                             <input type="text" value="{{ isset($state) ? $state : 'Maharashtra' }}"
@@ -319,14 +319,14 @@
                                     </div>
 
 
-                                    <div class="col-md-12 mb-12">
+                                    <div class="col-md-12 mb-md-12 mb-2">
                                         <div class="position-relative form-group">
                                             <label for="address" class="form-label">Address*</label>
                                             <textarea class="form-control is-invalid" rows="1" name="address" id="address" pattern="[0-9A-Za-z]+" placeholder="Address">{{ isset($address) ? $address : '' }}</textarea>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 mb-4">
+                                    <div class="col-md-6 mb-md-4 mb-3">
                                         <div class="position-relative form-group">
                                             <label for="Phone" class="form-label">Phone *</label>
                                             <input type="text" class="form-control is-invalid input_text" id="Mobile"
@@ -335,7 +335,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 mb-4">
+                                    <div class="col-md-6 mb-md-4 mb-3">
                                         <div class="position-relative form-group">
                                             <label for="email" class="form-label">Email Address*</label>
                                             <input type="email" class="form-control is-invalid input_text" id="email" name="email"
@@ -363,7 +363,7 @@
 
                             <form id="change-password" class="proxima_nova_font" action="{{ url(route('user.save-profile', ['param' => 'change-password'])) }}">
                                 <div class="row">
-                                    <div class="col-md-6 mb-4">
+                                    <div class="col-md-6 mb-md-4 mb-3">
                                         <div class="position-relative form-group">
                                             <label for="password" class="form-label">Password *</label>
                                             <img src="/assets/images/key.png" alt="" class="input_icon" />
@@ -373,7 +373,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 mb-4">
+                                    <div class="col-md-6 mb-md-4 mb-3">
                                         <div class="position-relative form-group">
                                             <label for="password" class="form-label">Confirm Password *</label>
                                             <img src="/assets/images/key.png" alt="" class="input_icon" />
@@ -405,8 +405,8 @@
 
                                     @if ($user->workExperiences->isNotEmpty())
                                         @foreach ($user->workExperiences as $workExp)
-                                            <div class="work-exp-row cirtificate_pdd">
-                                                <div class="col-md-6 mb-4">
+                                            <div class="row work-exp-row cirtificate_pdd">
+                                                <div class="col-md-6 mb-md-4 mb-3">
                                                     <div class="position-relative form-group">
                                                         <label for="job_title" class="form-label">Professional Title*</label>
                                                         <input type="text" class="form-control is-invalid input_text" id="job_title"
@@ -415,7 +415,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-6 mb-4">
+                                                <div class="col-md-6 mb-md-4 mb-3">
                                                     <div class="position-relative form-group">
                                                         <label for="company" class="form-label">Company Name*</label>
                                                         <input type="text" class="form-control is-invalid input_text" id="company"
@@ -424,7 +424,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-12 mb-4">
+                                                <div class="col-md-12 mb-md-4 mb-3">
                                                     <div class="position-relative form-group">
                                                         <label for="State" class="form-label">Total Years of Experience *</label>
                                                         <select class="select2 form-select form-control is-invalid input_select old-select2"
@@ -455,8 +455,8 @@
                                         @endforeach
                                     @else
                                         {{-- Render an empty row as fallback --}}
-                                        <div class="work-exp-row cirtificate_pdd">
-                                            <div class="col-md-6 mb-4">
+                                        <div class="row work-exp-row cirtificate_pdd">
+                                            <div class="col-md-6 mb-md-4 mb-3">
                                                 <div class="position-relative form-group">
                                                     <label for="job_title" class="form-label">Professional Title*</label>
                                                     <input type="text" class="form-control is-invalid input_text" id="job_title"
@@ -464,7 +464,7 @@
                                                         minlength="2" maxlength="100" value="" required />
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 mb-4">
+                                            <div class="col-md-6 mb-md-4 mb-3">
                                                 <div class="position-relative form-group">
                                                     <label for="company" class="form-label">Company Name*</label>
                                                     <input type="text" class="form-control is-invalid input_text" id="company"
@@ -501,7 +501,7 @@
                                     </div>
 
 
-                                    <div class="col-md-6 mb-4">
+                                    <div class="col-md-12 mb-md-4 mb-3">
 
                                         <label for="industry" class="form-label">Industries</label>
                                         <div id="list-industry" class="d-none">
@@ -557,9 +557,9 @@
 
                                     </div>
 
-                                    <div class="col-md-12 mb-2">
+                                    <div class="col-md-12 mb-2 mb_30">
                                         <div class="position-relative form-group">
-                                            <label for="skills" class="form-label">Skills*</label>
+                                            <label for="skills" class="form-label w-100">Skills*</label>
                                             <select name="skill[]" multiple="multiple"
                                                 class="select2 form-select form-control is-invalid input_select"
                                                 aria-label="Default select example" id="skills-data" required>
@@ -600,7 +600,7 @@
                                 @if (!empty($edu_data))
                                     @foreach ($edu_data as $index => $education)
                                         <div class="row education-row cirtificate_pdd">
-                                            <div class="col-md-6 mb-4">
+                                            <div class="col-md-6 mb-md-4 mb-3">
                                                 <div class="position-relative form-group">
                                                     <label for="School" class="form-label">School/University Name*</label>
                                                     <input type="text" class="form-control is-invalid input_text certificate_name"
@@ -610,7 +610,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 mb-4">
+                                            <div class="col-md-6 mb-md-4 mb-3">
                                                 <div class="position-relative form-group">
                                                     <label for="Degree" class="form-label">Degree*</label>
                                                     <input type="text" class="form-control is-invalid input_text certificate_name"
@@ -620,7 +620,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 mb-4">
+                                            <div class="col-md-6 mb-md-4 mb-3">
                                                 <div class="position-relative form-group">
                                                     <label for="Certificate" class="form-label">Graduation Year*</label>
                                                     <input type="text" class="form-control is-invalid input_text certificate_name"
@@ -631,7 +631,7 @@
                                             </div>
 
 
-                                            <div class="col-md-6 mb-4">
+                                            <div class="col-md-6 mb-md-4 mb-3">
                                                 <div class="position-relative form-group">
                                                     <label for="Certificate" class="form-label">Major/Field of Study*</label>
                                                     <input type="text" class="form-control is-invalid input_text certificate_name"
@@ -642,14 +642,14 @@
                                             </div>
 
                                             <div class="col-md-12 d-flex gap-3 add_more_div">
-                                                <button type="button" class="add_more add-edu-row">Add More +</button>
-                                                <button type="button" class="remove_more remove-edu-row">Remove -</button>
+                                                <button type="button" class="add_more add-edu-row">ADD MORE +</button>
+                                                <button type="button" class="remove_more remove-edu-row">REMOVE -</button>
                                             </div>
                                         </div>
                                     @endforeach
                                 @else
                                     <div class="row education-row cirtificate_pdd">
-                                        <div class="col-md-6 mb-4">
+                                        <div class="col-md-6 mb-md-4 mb-3">
                                             <div class="position-relative form-group">
                                                 <label for="School" class="form-label">School/University Name*</label>
                                                 <input type="text" class="form-control is-invalid input_text certificate_name"
@@ -659,7 +659,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6 mb-4">
+                                        <div class="col-md-6 mb-md-4 mb-3">
                                             <div class="position-relative form-group">
                                                 <label for="Degree" class="form-label">Degree*</label>
                                                 <input type="text" class="form-control is-invalid input_text certificate_name"
@@ -669,7 +669,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6 mb-4">
+                                        <div class="col-md-6 mb-md-4 mb-3">
                                             <div class="position-relative form-group">
                                                 <label for="Certificate" class="form-label">Graduation Year*</label>
                                                 <input type="text" class="form-control is-invalid input_text certificate_name"
@@ -679,7 +679,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6 mb-4">
+                                        <div class="col-md-6 mb-md-4 mb-3">
                                             <div class="position-relative form-group">
                                                 <label for="Certificate" class="form-label">Major/Field of Study*</label>
                                                 <input type="text" class="form-control is-invalid input_text certificate_name"
@@ -715,7 +715,7 @@
                                 @if (!empty($certificate_data))
                                     @foreach ($certificate_data as $index => $certificate)
                                         <div class="row certificate-row cirtificate_pdd">
-                                            <div class="col-md-12 mb-4">
+                                            <div class="col-md-12 mb-md-4 mb-3">
                                                 <div class="position-relative form-group">
                                                     <label for="Certificate" class="form-label">Certificate Name</label>
                                                     <input required type="text" class="form-control is-invalid input_text certificate_name"
@@ -725,7 +725,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 mb-4">
+                                            <div class="col-md-6 mb-md-4 mb-3">
                                                 <div class="position-relative form-group">
                                                     <label for="Date Obtained*" class="form-label">Date Obtained</label>
                                                     <input required type="date" class="form-control is-invalid input_text certificate_obtn_date register_date_field" max="{{ date('Y-m-d') }}"
@@ -734,7 +734,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 mb-4">
+                                            <div class="col-md-6 mb-md-4 mb-3">
                                                 <div class="position-relative form-group">
                                                     <label for="Issuing Registration*" class="form-label">Issuing Organization</label>
                                                     <input required type="text" class="form-control is-invalid input_text certificate_issuing"
@@ -752,7 +752,7 @@
                                     @endforeach
                                 @else
                                     <div class="row certificate-row cirtificate_pdd">
-                                        <div class="col-md-12 mb-4">
+                                        <div class="col-md-12 mb-md-4 mb-3">
                                             <div class="position-relative form-group">
                                                 <label for="Certificate" class="form-label">Certificate Name</label>
                                                 <input type="text" class="form-control is-invalid input_text certificate_name"
@@ -761,7 +761,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6 mb-4">
+                                        <div class="col-md-6 mb-md-4 mb-3">
                                             <div class="position-relative form-group">
                                                 <label for="Date Obtained*" class="form-label">Date Obtained</label>
                                                 <input type="date" class="form-control is-invalid input_text certificate_obtn_date register_date_field" max="{{ date('Y-m-d') }}"
@@ -769,7 +769,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6 mb-4">
+                                        <div class="col-md-6 mb-md-4 mb-3">
                                             <div class="position-relative form-group">
                                                 <label for="Issuing Registration*" class="form-label">Issuing Organization</label>
                                                 <input type="text" class="form-control is-invalid input_text certificate_issuing"
@@ -800,7 +800,7 @@
                             <form id="preferences-info" class="proxima_nova_font" action="{{ url(route('user.save-profile', ['param' => 'preferences-info'])) }}"
                                 method="post" enctype="multipart/form-data" class="d-flex flex-column">
                                 <div class="row">
-                                    <div class="col-md-6 mb-4">
+                                    <div class="col-md-6 mb-md-4 mb-3">
                                         <div class="position-relative form-group">
                                             <label for="Preferred Title/Role*" class="form-label">Preferred Title/Role*</label>
                                             <input type="text" class="form-control is-invalid input_text" id="Preferred Designation / Title / Role*"
@@ -808,7 +808,7 @@
                                                 minlength="1" maxlength="50" value="{{ $pref_title }}" required />
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mb-4">
+                                    <div class="col-md-6 mb-md-4 mb-3">
                                         <div class="position-relative form-group">
                                             <label for="Employment Type*" class="form-label">Employment Type*</label>
                                             <select class="select2 form-select form-control is-invalid input_select old-select2"
@@ -823,7 +823,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 mb-4">
+                                    <div class="col-md-6 mb-md-4 mb-3">
                                         <div class="position-relative form-group">
 
                                             <label for="preferred-industry" class="form-label-new form-label">Preferred Industries*</label>
@@ -876,7 +876,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 mb-4">
+                                    <div class="col-md-6 mb-md-4 mb-3">
                                         <div class="position-relative form-group">
                                             <label for="Employment Type*" class="form-label">Desired Job Location*</label>
                                             <input type="text" class="form-control is-invalid input_text" id="Desired Job Location*"
@@ -885,7 +885,7 @@
                                                 required />
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mb-4">
+                                    <div class="col-md-6 mb-md-4 mb-3">
                                         <div class="position-relative form-group">
                                             <label for="State" class="form-label d-block">Expected Salary (Per Annum) *</label>
                                             <div class="sallery_width1">
@@ -910,7 +910,7 @@
                                     <h3 class="prsnl_info_heading prsnl_info_heading2">References</h3>
                                     @if (!empty($references_data))
                                         @foreach ($references_data as $index => $reference)
-                                            <div class="row reference-row mt-4">
+                                            <div class="row reference-row mt-md-4">
                                                 <div class="col-md-6 mb-3">
                                                     <div class="position-relative form-group">
                                                         <label for="name" class="form-label">Name *</label>
@@ -937,7 +937,7 @@
                                             </div>
                                         @endforeach
                                     @else
-                                        <div class="row reference-row mt-4">
+                                        <div class="row reference-row mt-md-4">
                                             <div class="col-md-6 mb-3">
                                                 <div class="position-relative form-group">
                                                     <label for="name" class="form-label">Name *</label>
@@ -957,7 +957,7 @@
                                             </div>
 
                                             <div class="col-md-12">
-                                                <button type="button" class="add_more add-reference-row">Add More +</button>
+                                                <button type="button" class="add_more add-reference-row">ADD MORE +</button>
                                             </div>
                                         </div>
                                     @endif
@@ -1038,7 +1038,7 @@
                                 method="post" enctype="multipart/form-data" class="d-flex flex-column">
 
                                 <div class="row">
-                                    <div class="col-md-6 col-12 mb-4">
+                                    <div class="col-md-6 col-12 mb-md-4 mb-3">
                                         <div class="position-relative form-group">
                                             <label for="linkedin" class="form-label">linkedin</label>
                                             <img src="/assets/images/linkedin_icon.svg" alt="" class="input_icon linkedin_icon">
@@ -1046,7 +1046,7 @@
                                             <!-- {{-- <img src="images/linkedin.png" alt="" class="input_icon" /> --}} -->
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-12 mb-4">
+                                    <div class="col-md-6 col-12 mb-md-4 mb-3">
                                         <div class="position-relative form-group">
                                             <label for="Twitter" class="form-label">Twitter</label>
                                             <img src="/assets/images/twitter_icon.svg" alt="" class="input_icon twitter_icon">
@@ -1055,7 +1055,7 @@
                                             <!-- {{-- <img src="images/x.png" alt="" class="input_icon" /> --}} -->
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-12 mb-4">
+                                    <div class="col-md-6 col-12 mb-md-4 mb-3">
                                         <div class="position-relative form-group">
                                             <label for="Instagram" class="form-label">Instagram</label>
                                             <img src="/assets/images/instagram_icon.svg" alt="" class="input_icon insta_icon">
@@ -1064,7 +1064,7 @@
                                             {{-- <img src="images/instagram.png" alt="" class="input_icon" /> --}}
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-12 mb-4">
+                                    <div class="col-md-6 col-12 mb-md-4 mb-3">
                                         <div class="position-relative form-group">
                                             <label for="Facebook" class="form-label">Facebook</label>
                                             <img src="/assets/images/facebook_icon.svg" alt="" class="input_icon facebook_icon">

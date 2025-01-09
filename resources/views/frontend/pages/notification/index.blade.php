@@ -119,7 +119,7 @@ body
                         <!-- <div class="adds mt-4">
                             <img src="/assets/images/offer2.png" class="w-100" alt="" />
                         </div> -->
-                        <div class="mt-4 sidebar_footer_div">
+                        <div class="mt-4 sidebar_footer_div d-none d-lg-block">
                             <span class="side_footer_mln_text">Manalot Leadership Network</span>
                             <ul class="list-unstyled d-flex align-items-center justify-content-center flex-wrap sidebar_footer_quick_links">
                                 <li class="list-group-item">
@@ -159,7 +159,7 @@ body
                     </aside>
                 </div>
                 
-                <div class="col-md-6 mt-4 order-md-2 order-1 middle_post_parent_div width_60">
+                <div class="col-md-6 mt-md-4 mt-3 order-md-2 order-1 middle_post_parent_div width_60">
                     <main>
                        <div class="notification_tabs_box">
                         <nav>

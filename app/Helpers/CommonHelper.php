@@ -342,11 +342,11 @@ use Illuminate\Support\Facades\Storage;
                 }
                 return $diff->d . ' ' . ($diff->d > 1 ? 'Days ago' : 'Day ago');
             } elseif ($diff->h > 0) {
-                return $diff->h . ' ' . ($diff->h > 1 ? 'Hours ago' : 'Hour ago');
+                return $diff->h . ' ' . ($diff->h > 1 ? 'H ago' : 'H ago');
             } elseif ($diff->i > 0) {
-                return $diff->i . ' ' . ($diff->i > 1 ? 'Minutes ago' : 'Minute ago');
+                return $diff->i . ' ' . ($diff->i > 1 ? 'Min ago' : 'min ago');
             } else {
-                return 'Just now';
+                return 'now';
             }
                 
         }

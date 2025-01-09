@@ -457,7 +457,7 @@ class IndexController extends Controller
     public function edit_personal_information(){
 
         // Retrieve the session user_id
-        $userId = session('user_id'); // Assuming 'user_id' is stored in session
+        $userId = auth()->user()->id; // Assuming 'user_id' is stored in session
 
         if (!$userId) {
             // Redirect to login if user_id is not set
@@ -477,7 +477,7 @@ class IndexController extends Controller
 
     public function view_personal_information(){
         // Retrieve the session user_id
-        $userId = session('user_id');
+        $userId = auth()->user()->id;
 
         if (!$userId) {
             // Redirect to login if user_id is not set
