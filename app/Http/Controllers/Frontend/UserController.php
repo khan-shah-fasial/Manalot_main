@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cache;
 
 class UserController extends Controller
 {
@@ -130,6 +131,8 @@ class UserController extends Controller
                 'password' => Hash::make($request->input('password')), // Use Hash::make for better security
             ]);
 
+            Cache::flush();
+
             $rsp_msg['response'] = 'success';
             $rsp_msg['message'] = "Password updated successfully.";
 
@@ -187,6 +190,8 @@ class UserController extends Controller
             'edu_data' => json_encode($edu_data),
         ]);
 
+        Cache::flush();
+
         $rsp_msg['response'] = 'success';
         $rsp_msg['message']  = "User Education Detail Updated successfully!";
 
@@ -236,6 +241,8 @@ class UserController extends Controller
         Userdetails::where('user_id', Session::get('user_id'))->update([
             'certificate_data' => json_encode($certificate_data),
         ]);
+
+        Cache::flush();
 
         $rsp_msg['response'] = 'success';
         $rsp_msg['message']  = "User Certificate Detail Added successfully!";
@@ -307,6 +314,8 @@ class UserController extends Controller
                 'country' => $request->input('country'),
             ]
         );
+
+        Cache::flush();
 
         $rsp_msg['response'] = 'success';
         $rsp_msg['message']  = "User Personal Detail Added successfully!";
@@ -412,6 +421,8 @@ class UserController extends Controller
         // Update work experience entries
         $this->updateUserWorkExperienceData($request, $user_id);
 
+        Cache::flush();
+
         $rsp_msg['response'] = 'success';
         $rsp_msg['message']  = "User Personal and Work Detail Updated successfully!";
 
@@ -448,6 +459,8 @@ class UserController extends Controller
 
         // Insert the new entries
         UserWorkExperience::insert($workExperiences);
+
+        Cache::flush();
     }
 
 
@@ -475,6 +488,8 @@ class UserController extends Controller
             'availability' => $request->input('availability'),
             'notice_period_duration' => $request->input('notice_period_duration'),
         ]);
+
+        Cache::flush();
 
         $rsp_msg['response'] = 'success';
         $rsp_msg['message']  = "User Work Authorization Updated successfully!";
@@ -582,6 +597,8 @@ class UserController extends Controller
             'references' => json_encode($references_data),
         ]);
 
+        Cache::flush();
+
         $rsp_msg['response'] = 'success';
         $rsp_msg['message']  = "User Preferences Detail Added successfully!";
 
@@ -618,6 +635,8 @@ class UserController extends Controller
             'facebook' => $request->input('facebook'),
             'other' => $request->input('other'),
         ]);
+
+        Cache::flush();
 
         $rsp_msg['response'] = 'success';
         $rsp_msg['message']  = "User Social Media Detail Updated successfully!";
