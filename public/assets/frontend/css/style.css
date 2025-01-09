@@ -941,7 +941,7 @@ img.like_img {
 .prsnl_inf_updt_btn {
     /* width: 87px;
     text-align: center;
-    
+
     font: 500 14px 'Proxima Nova' !important;
     letter-spacing: 0.6px; */
     padding: 4px 25px 5px 25px !important;
@@ -950,6 +950,16 @@ img.like_img {
 
 .choose_img_file {
     background-image: url('/assets/images/chooe_img_icon.svg') !important;
+}
+
+.remove_more,
+.remove_more:hover {
+    color: #0c3873;
+    font: 600 12px 'Proxima Nova' !important;
+    border: 0px !important;
+    background: #fff;
+    text-decoration: underline;
+    padding: 0px;
 }
 
 .add_more,
@@ -2132,14 +2142,14 @@ button.btn.btn-danger.remove-reference-row {
     text-decoration: underline;
 }
 
-button.btn.btn-danger.remove-row {
+/* button.btn.btn-danger.remove-row {
     color: #0c3873;
     background: transparent;
     border: 0;
     padding: 0;
     text-decoration: underline;
 
-}
+} */
 
 .btn-check:focus+.btn-success,
 .btn-success:focus {

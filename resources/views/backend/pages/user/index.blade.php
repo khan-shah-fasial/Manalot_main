@@ -21,7 +21,7 @@
                         placeholder="Search by Email">
                 </div>
             </div>
-        
+
             <div class="col">
                 <div class="form-group mb-3">
                     <select name="approval_status" class="text-muted form-control">
@@ -107,7 +107,7 @@
                             <a href="{{ asset('storage/' . $row->experience_letter) }}" target="_blank">Experience Letter</a>
                         @endif
                     @endif
-                </td>           
+                </td>
                 <td>
                     @if($row->approval == 1)
                     <span class="badge bg-success" title="Approved">Approved</span>
@@ -131,13 +131,13 @@
                             <i title="Approve" class="ri-eye-fill"></i>
                         @endif
                     </a>
-                    <a href="javascript:void(0);" class="btn btn-info text-white action-icon" onclick="largeModal('{{ url(route('user.edit',['id' => $row->id])) }}', 'Edit User - {!! \Illuminate\Support\Str::words($row->username, $words = 3, $end = '...') !!}')">
+                    {{-- <a href="javascript:void(0);" class="btn btn-info text-white action-icon" onclick="largeModal('{{ url(route('user.edit',['id' => $row->id])) }}', 'Edit User - {!! \Illuminate\Support\Str::words($row->username, $words = 3, $end = '...') !!}')">
                         <i class="mdi mdi-square-edit-outline" title="Edit"></i>
-                    </a>
+                    </a> --}}
                     <a href="javascript:void(0);" class="btn btn-danger text-white action-icon" onclick="confirmModal('{{ url(route('user.delete', $row->id)) }}', responseHandler,'to Delete User')">
                         <i class="mdi mdi-delete" title="Delete"></i>
                     </a>
-                    <a href="javascript:void(0);" title="View" class="btn btn-info text-white action-icon" onclick="largeModal('{{ url(route('user.view',['id' => $row->id])) }}', 'View - {!! \Illuminate\Support\Str::words($row->username, $words = 3, $end = '...') !!}')">View</a>
+                    {{-- <a href="javascript:void(0);" title="View" class="btn btn-info text-white action-icon" onclick="largeModal('{{ url(route('user.view',['id' => $row->id])) }}', 'View - {!! \Illuminate\Support\Str::words($row->username, $words = 3, $end = '...') !!}')">View</a> --}}
                 </td>
             </tr>
             @endforeach

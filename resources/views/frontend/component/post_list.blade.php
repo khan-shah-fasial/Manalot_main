@@ -41,13 +41,31 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
                 </div>
                 <i class="fa-solid fa-ellipsis-vertical"></i>
             </div>
-            <a class="saved_clip" href="">
-                <img class="saved_clip_img" src="/assets/images/saved_icon.svg">
+            <a class="saved_clip" onclick="saved_post({{ $post->id }}, this);" href="javascript:void(0);" data-post-id="{{ $post->id }}">
+                <img class="saved_clip_img" 
+                     src="{{ auth()->user()->savedPosts->contains('post_id', $post->id) ? '/assets/images/saved_icon.svg' : '/assets/images/grey_saved_icon.svg' }}">
             </a>
         </div>
         <div class="mt-md-3 post_description">
             <div>
-                @php echo nl2br($post->content) @endphp
+                @php
+                    // Define the content
+                    $content = $post->content;
+            
+                    // Use a regular expression to find hashtags and replace them with hyperlinks
+                    $contentWithLinks = preg_replace_callback(
+                        '/#(\w+)/', // Regex to find hashtags (e.g., #something)
+                        function ($matches) {
+                            $tag = $matches[1];
+                            $url = route('index', ['tag' => $tag]);
+                            return "<a href=\"$url\">#{$tag}</a>";
+                        },
+                        $content
+                    );
+            
+                    // Convert line breaks to <br> and output the result
+                    echo nl2br($contentWithLinks);
+                @endphp
             </div>
 
          <div id="carouselExample" class="postslider_banner carousel slide w-100" data-bs-ride="carousel" data-bs-interval="3000">
@@ -271,6 +289,31 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
 
 @section('component.scripts')
 <script>
+
+    const loggedInUserId = {{ auth()->user()->id }};
+
+    function timeAgo(date) {
+        const now = new Date();
+        const seconds = Math.floor((now - date) / 1000);
+        const intervals = {
+            year: 31536000,
+            month: 2592000,
+            day: 86400,
+            hour: 3600,
+            minute: 60,
+            second: 1
+        };
+        for (let key in intervals) {
+            const interval = Math.floor(seconds / intervals[key]);
+            if (interval >= 1) {
+                return `${interval} ${key}${interval > 1 ? 's' : ''} ago`;
+            }
+        }
+        return 'just now';
+    }
+
+
+
     $(document).on('click', '#like_comnt_link_like', function (e) {
         e.preventDefault();
 
@@ -359,32 +402,52 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
     function generateCommentHTML(comment) {
         let repliesHTML = '';
         if (Array.isArray(comment.replies) && comment.replies.length > 0) {
+            // Use the `created_at` value from the comment object
+            const commenttime_reply = timeAgo(new Date(comment.created_at));
             repliesHTML = comment.replies.map(reply => `
-                <div class="reply mx-5" id="comment-${reply.id}">
-                    <strong>${reply.user.username}:</strong> ${reply.content}
+                <div class="reply mx-5" id="comment-${reply.id}"> 
+                    <strong>${reply.user.username}:</strong> ${reply.content} <b>${commenttime_reply}</b>
                     <a href="#" class="reply-link" onclick="reply_form(${reply.parent_id},${reply.post_id},'${reply.user.username}');">Reply</a>
-                    <a href="javascript:void(0);" class="delete-link" data-comment-id="${reply.id}" onclick="deleteComment(${reply.id}, ${comment.post_id}, this)">Delete</a>
+                    ${
+                        comment.user_id === loggedInUserId
+                        ? `<a href="javascript:void(0);" class="delete-link" data-comment-id="${reply.id}" onclick="deleteComment(${reply.id}, ${comment.post_id}, this)">Delete</a>`
+                        : ''
+                    }
                 </div>
             `).join('');
         }
 
-        return `
-            <div class="comment" id="comment-${comment.id}">
-                <strong>${comment.user.username}:</strong> ${comment.content}
-                <a href="#" class="reply-link" data-parent-id="${comment.id}" data-post-id="${comment.post_id}" data-user-name="${comment.user.username}">Reply</a>
-                <a href="javascript:void(0);" class="delete-link" data-comment-id="${comment.id}" onclick="deleteComment(${comment.id}, ${comment.post_id}, this)">Delete</a>
-                <div class="replies">${repliesHTML}</div>
-            </div>
-        `;
+        if(comment.parent_id === null){
+            // Use the `created_at` value from the comment object
+            const commenttime = timeAgo(new Date(comment.created_at));
+            return `
+                <div class="comment" id="comment-${comment.id}">
+                    <strong>${comment.user.username}:</strong> ${comment.content} <b>${commenttime}</b>
+                    <a href="#" class="reply-link" data-parent-id="${comment.id}" data-post-id="${comment.post_id}" data-user-name="${comment.user.username}">Reply</a>
+                    ${
+                    comment.user_id === loggedInUserId
+                        ? `<a href="javascript:void(0);" class="delete-link" data-comment-id="${comment.id}" onclick="deleteComment(${comment.id}, ${comment.post_id}, this)">Delete</a>`
+                        : ''
+                    }
+                    <div class="replies">${repliesHTML}</div>
+                </div>
+            `;
+        }
+
     }
 
 
     function generateReplyCommentHTML(comment) {
         let repliesHTML = '';
+        const commentjust = timeAgo(new Date(comment.created_at));
         return `
             <div class="reply mx-5" id="comment-${comment.id}">
-                <strong>${comment.user.username}:</strong> ${comment.content}
-                <a href="javascript:void(0);" class="delete-link" data-comment-id="${comment.id}" onclick="deleteComment(${comment.id}, ${comment.post_id}, this)">Delete</a>
+                <strong>${comment.user.username}:</strong> ${comment.content} <b>${commentjust}</b>
+                ${
+                    comment.user_id === loggedInUserId
+                    ? `<a href="javascript:void(0);" class="delete-link" data-comment-id="${comment.id}" onclick="deleteComment(${comment.id}, ${comment.post_id}, this)">Delete</a>`
+                    : ''
+                }
             </div>
         `;
     }
@@ -527,6 +590,71 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
                 },
                 error: function(xhr) {
                     alert('An error occurred. Please try again.');
+                }
+            });
+        });
+    }
+
+
+    // function saved_post(postId, element) {
+    //     const icon = $(this).find('.saved_clip_img');
+    //     console.log('working tt 2');
+
+    //     $.get('/csrf-token', function (data) {
+    //         const csrfToken = data.token;
+
+    //         $.ajax({
+    //             url: `{{ url(route('toggle-save-post')) }}`;,
+    //             method: 'POST',
+    //             headers: {
+    //                 'X-CSRF-TOKEN': csrfToken // Set the token in the header
+    //             },
+    //             data: {
+    //                 post_id: postId
+    //             },
+    //             success: function (response) {
+    //                 if (response.success) {
+    //                     if (response.saved) {
+    //                         $icon.attr('src', '/assets/images/saved_icon.svg');
+    //                     } else {
+    //                         $icon.attr('src', '/assets/images/grey_saved_icon.svg');
+    //                     }
+    //                 }
+    //             },
+    //             error: function () {
+    //                 alert('Failed to toggle save status. Please try again.');
+    //             }
+    //         });
+    //     });
+    // };
+
+    function saved_post(postId, element) {
+        const $icon = $(element).find('.saved_clip_img'); // Find the image element within the clicked element
+
+        $.get('/csrf-token', function (data) {
+            const csrfToken = data.token;
+
+            $.ajax({
+                url: `{{ url(route('toggle-save-post')) }}`, // Correct syntax
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken // Set the CSRF token in the header
+                },
+                data: {
+                    post_id: postId
+                },
+                success: function (response) {
+                    if (response.success) {
+                        // Update the image source based on the response
+                        if (response.saved) {
+                            $icon.attr('src', '/assets/images/saved_icon.svg');
+                        } else {
+                            $icon.attr('src', '/assets/images/grey_saved_icon.svg');
+                        }
+                    }
+                },
+                error: function () {
+                    alert('Failed to toggle save status. Please try again.');
                 }
             });
         });

@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\IndexController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\AccountController;
 use App\Http\Controllers\Frontend\SocialloginController;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +24,10 @@ use App\Http\Controllers\Frontend\SocialloginController;
 Route::middleware('auth.frontend')->group(function () {
     Route::get('/', [IndexController::class, 'index'])->name('index');
     Route::get('/logout', [AccountController::class, 'customer_logout'])->name('customer.logout');
-    Route::get('/edit-profile', [IndexController::class, 'edit_profile'])->name('user.edit-profile');
+    // Route::get('/edit-profile', [IndexController::class, 'edit_profile'])->name('user.edit-profile');
+    Route::get('/edit-profile', [IndexController::class, 'edit_personal_information'])->name('user.edit-profile');
+    Route::get('/view-profile', [IndexController::class, 'view_personal_information'])->name('user.view-profile');
+    Route::any('/update-account/{param}', [UserController::class, 'create_account'])->name('user.save-profile');
 
     Route::get('/posts', [IndexController::class, 'fetchPosts'])->name('posts.fetch');
     Route::post('/like-toggle', [IndexController::class, 'toggleLike'])->name('posts.like');
@@ -32,6 +37,7 @@ Route::middleware('auth.frontend')->group(function () {
     Route::delete('/comments/{id}', [IndexController::class, 'destroy'])->name('comments.destroy');
 
     Route::get('/posts/{post}/likes', [IndexController::class, 'getPostLikes']);
+    Route::post('/toggle-save-post', [IndexController::class, 'toggleSavePost'])->name('toggle-save-post');
 });
 
 Route::middleware('guest')->group(function () {
@@ -41,10 +47,10 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/registration', [AccountController::class, 'registration_page'])->name('registration');
     Route::any('/create-account/{param}', [AccountController::class, 'create_account'])->name('account.create');
-    
+
     Route::get('/login', [AccountController::class, 'login'])->name('login');
     Route::post('/login', [AccountController::class, 'customer_login'])->name('customer.login');
-    
+
     Route::any('/forgot-password/{param}', [AccountController::class, 'forgot_password'])->name('customer.forgot');
 });
 
@@ -120,7 +126,7 @@ Route::get('/key-generate', function () {
 
 Route::get('/create-storage-link', function () {
     $exitCode = Artisan::call('storage:link');
-    
+
     if ($exitCode === 0) {
         return 'Storage link created successfully.';
     } else {

@@ -368,7 +368,7 @@ body
                         --}}
 
                         <div class="saved_items_main_div activity helvetica_font">
-                            <a href="" class="d-flex gap-3">
+                            <a href="{{ url(route('index')) }}?savepost=true" class="d-flex gap-3">
                                 <img src="/assets/images/saved_icon.svg" alt="icon" class="icon">
                                 <strong class="text-sm">Saved items</strong>
                             </a>
@@ -422,11 +422,36 @@ body
     };
 
     function loadMorePosts() {
-        loading = true; // Prevent concurrent requests
+        if (loading) return; // Prevent concurrent requests
+        loading = true;
         page++;
-        const url = `{{ url(route('posts.fetch')) }}?page=${page}`;
+        // const url = `{{ url(route('posts.fetch')) }}?page=${page}&savepost=true`;
         const loadingIndicator = document.getElementById('loading');
         loadingIndicator.style.display = 'block';
+
+
+        // Check if the current URL contains ?savepost=true
+        const urlParams = new URLSearchParams(window.location.search);
+        const isSavePost = urlParams.get('savepost') === 'true';
+        const isTagPost = urlParams.get('tag');
+        const isSearchPost = urlParams.get('search');
+
+        console.log(isSearchPost);
+
+        // Construct the URL with or without savepost=true
+        let url = `{{ url(route('posts.fetch')) }}?page=${page}`;
+        if (isSavePost) {
+            url += '&savepost=true';
+        }
+
+        if (isTagPost) {
+            url += `&tag=${isTagPost}`;
+        }
+
+        if (isSearchPost) {
+            url += `&search=${encodeURIComponent(isSearchPost)}`; // Encode special characters
+            console.log('Constructed URL:', url);
+        }
 
         setTimeout(() => {
             fetch(url, {

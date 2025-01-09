@@ -48,11 +48,22 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function workExperiences()
+    {
+        return $this->hasMany(UserWorkExperience::class);
+    }
+
+
     /**
      * Define the relationship between User and Likes.
      */
     public function likes()
     {
         return $this->hasMany(Like::class);
+    }
+
+    public function savedPosts()
+    {
+        return $this->hasMany(SavedPost::class, 'user_id', 'id');
     }
 }
