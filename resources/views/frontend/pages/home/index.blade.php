@@ -164,7 +164,7 @@ body
                     </aside>
                 </div>
                 
-                <div class="col-md-6 mt-md-4 mt-3 order-md-2 order-1 middle_post_parent_div width_60">
+                <div class="col-md-6 mt-md-4 mt-0 order-md-2 order-1 middle_post_parent_div width_60">
                     <main>
                         {{-- @if(auth()->user()->role_id == 1)
                             <form class="post_form">
@@ -200,7 +200,7 @@ body
                         @endif --}}
 
                         @if(auth()->user()->role_id == 1)
-                            <div class="search_bar_new">
+                            <div class="search_bar_new mb-md-0 mb-3 mt-md-0 mt-3">
                                 <div class="input_search">
                                     <input type="text" class="ai_search_bar" placeholder="Start a post, Try writing with AI ">
                                     <button type="button" class="ai_search_btn " data-bs-toggle="modal" data-bs-target="#postmodal">Post</button>
