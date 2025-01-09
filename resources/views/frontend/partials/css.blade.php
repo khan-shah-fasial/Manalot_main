@@ -15,7 +15,7 @@
 <!-- <link rel="stylesheet" href="/assets/frontend/css/aos.css" /> -->
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" >
 
-<link rel="stylesheet" href="/assets/frontend/css/responsive.css" />
+<link rel="stylesheet" href="/assets/frontend/css/responsive.css?v=1.4.4" />
 <link rel="stylesheet" href="/assets/frontend/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/assets/frontend/css/owl.carousel.min.css" />
 <link rel="stylesheet" href="/assets/frontend/css/owl.theme.default.min.css" />
