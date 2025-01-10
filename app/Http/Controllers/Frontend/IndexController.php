@@ -181,20 +181,41 @@ class IndexController extends Controller
 
     public function storeComment(Request $request)
     {
-        $request->validate([
-            'post_id' => 'required|exists:posts,id',
-            'comment' => 'required|string',
-            'parent_id' => 'nullable|exists:comments,id',
-        ]);
+        if($request->has('comment_id')) {
+            // Validate the request for updating a comment
+            $request->validate([
+                'comment_id' => 'required|exists:comments,id',
+                'comment' => 'required|string',
+                'parent_id' => 'nullable|exists:comments,id',
+            ]);
 
-        $comment = Comment::create([
-            'user_id' => auth()->user()->id,
-            'post_id' => $request->post_id,
-            'parent_id' => $request->parent_id,
-            'content' => $request->comment,
-        ]);
+            // Update the comment content
+            $comment = Comment::findOrFail($request->comment_id);
+            $comment->update([
+                'content' => $request->comment,
+            ]);
 
-        return response()->json(['success' => true, 'comment' => $comment->load('user')]);
+            // Return the updated comment with user details
+            return response()->json(['success' => true, 'comment' => $comment->load('user')]);
+
+        } else {
+            $request->validate([
+                'post_id' => 'required|exists:posts,id',
+                'comment' => 'required|string',
+                'parent_id' => 'nullable|exists:comments,id',
+            ]);
+    
+            $comment = Comment::create([
+                'user_id' => auth()->user()->id,
+                'post_id' => $request->post_id,
+                'parent_id' => $request->parent_id,
+                'content' => $request->comment,
+            ]);
+    
+            return response()->json(['success' => true, 'comment' => $comment->load('user')]);
+        }
+
+
     }
 
 
