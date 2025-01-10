@@ -202,8 +202,15 @@ body
                         @if(auth()->user()->role_id == 1)
                             <div class="search_bar_new mb-md-0 mb-3 mt-md-0 mt-3">
                                 <div class="input_search">
-                                    <input type="text" class="ai_search_bar" placeholder="Start a post, Try writing with AI ">
+                                    <input type="text" disabled class="ai_search_bar" placeholder="Start a post, Try writing with AI ">
                                     <button type="button" class="ai_search_btn " data-bs-toggle="modal" data-bs-target="#postmodal">Post</button>
+                                </div>
+                            </div>
+                        @else
+                            <div class="search_bar_new mb-md-0 mb-3 mt-md-0 mt-3">
+                                <div class="input_search">
+                                    <input type="text" disabled  class="ai_search_bar" placeholder="Start a post, Try writing with AI ">
+                                    <button type="button" class="ai_search_btn ">Post</button>
                                 </div>
                             </div>
                         @endif

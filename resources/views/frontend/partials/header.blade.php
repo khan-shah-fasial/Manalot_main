@@ -1,4 +1,16 @@
 @if(auth()->user())
+
+    @php
+
+
+        $user_profile = Cache::remember('user_profile_' . auth()->user()->id, 600, function () {
+            return DB::table('userdetails')
+                ->where('user_id', auth()->user()->id)
+                ->value('profile_photo');
+        });
+
+    @endphp
+
     <div class="header user_header helvetica_font">
         <div class="container-lg container-fluid">
             <header class="d-flex align-items-center justify-content-between">
@@ -54,7 +66,8 @@
                     </a>
                     <div class="header_drishti">
 						<img class="three_dots" src="/assets/images/three_dots.svg"  id="dropdownTrigger">
-                        <img class="header_drishti_img" src="/assets/images/drishti_img2.png" alt="user image">
+                        <img class="header_drishti_img" src="{{ $user_profile ? asset('storage/' . $user_profile) : '/assets/images/drishti_img2.png' }}" alt="user image">
+                        
                         <div class="logout dropdown-content" id="dropdownContent">
                             <div class="view_profile_child_1">
                                 <div class="d-flex align-items-center gap-2">

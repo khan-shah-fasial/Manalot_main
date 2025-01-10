@@ -405,12 +405,20 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
             // Use the `created_at` value from the comment object
             const commenttime_reply = timeAgo(new Date(comment.created_at));
             repliesHTML = comment.replies.map(reply => `
-                <div class="reply" id="comment-${reply.id}"> 
+                <div class="reply" id="comment-${reply.id}">
+                    <img class="user_img" 
+                        src="${reply.userdetails?.profile_photo 
+                                ? `/storage/${reply.userdetails.profile_photo}` 
+                                : '/assets/images/drishti_img.png'}" 
+                        alt="user_img" />
                     <p class="main_admin_head">${reply.user.username}:</p> ${reply.content} <b>${commenttime_reply}</b>
                     <a href="#" class="reply-link" onclick="reply_form(${reply.parent_id},${reply.post_id},'${reply.user.username}');">Reply</a>
                     ${
-                        comment.user_id === loggedInUserId
-                        ? `<a href="javascript:void(0);" class="delete-link" data-comment-id="${reply.id}" onclick="deleteComment(${reply.id}, ${comment.post_id}, this)">Delete</a>`
+                    comment.user_id === loggedInUserId
+                        ? `
+                            <a href="javascript:void(0);" class="delete-link" data-comment-id="${reply.id}" onclick="deleteComment(${reply.id}, ${comment.post_id}, this)">Delete</a>
+                            <a href="javascript:void(0);" class="edit-link" data-comment-id="${reply.id}" onclick="edit_form(${reply.parent_id}, ${reply.id}, '${reply.content}');">Edit</a>
+                        `
                         : ''
                     }
                 </div>
@@ -423,6 +431,11 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
             return `
                 <div class="comment" id="comment-${comment.id}">
                 <div class="row">
+                    <img class="user_img" 
+                     src="${comment.userdetails?.profile_photo 
+                            ? `/storage/${comment.userdetails.profile_photo}` 
+                            : '/assets/images/drishti_img.png'}" 
+                     alt="user_img" />
                     <div class="col-md-9">
                             <p class="main_admin_head">${comment.user.username}:</p> 
                    <div class="reply_content">
@@ -438,21 +451,27 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
                     </div> 
                      <div class="comment_rights">
                             <div class="dropdown">
-            <a class="" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="/assets/images/dots_icons1.svg">
-            </a>
+                        ${
+                    comment.user_id === loggedInUserId
+                    ? `<a class="" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="/assets/images/dots_icons1.svg">
+                    </a>`
+                        : ''
+                    }
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-               
-                <li>
-                    <a class="dropdown-item" href="#">
-                       Edit
-                    </a>
-                </li>
-                <!-- Delete Action -->
                 <li>
                     ${
                     comment.user_id === loggedInUserId
                         ? `<a href="javascript:void(0);" class="delete-link" data-comment-id="${comment.id}" onclick="deleteComment(${comment.id}, ${comment.post_id}, this)">Delete</a>`
+                        : ''
+                    }
+                </li>
+                <li>
+                    ${
+                    comment.user_id === loggedInUserId
+                        ? `<a class="edit-link dropdown-item" href="javascript:void(0);" data-parent-id="${comment.id}" data-comment-id="${comment.id}" data-contain="${comment.content}" onclick="edit_form(${comment.id}, ${comment.id}, '${comment.content}');">
+                            Edit
+                        </a>`
                         : ''
                     }
                 </li>
@@ -483,8 +502,11 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
             <div class="reply" id="comment-${comment.id}">
                 <p class="main_admin_head">${comment.user.username}:</p> ${comment.content} <b>${commentjust}</b>
                 ${
-                    comment.user_id === loggedInUserId
-                    ? `<a href="javascript:void(0);" class="delete-link" data-comment-id="${comment.id}" onclick="deleteComment(${comment.id}, ${comment.post_id}, this)">Delete</a>`
+                comment.user_id === loggedInUserId
+                    ? `
+                        <a href="javascript:void(0);" class="delete-link" data-comment-id="${comment.id}" onclick="deleteComment(${comment.id}, ${comment.post_id}, this)">Delete</a>
+                        <a href="javascript:void(0);" class="edit-link" data-comment-id="${comment.id}" onclick="edit_form(${comment.parent_id}, ${comment.id}, '${comment.content}');">Edit</a>
+                    `
                     : ''
                 }
             </div>
@@ -601,6 +623,57 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
             parentDiv.after(replyFormHTML);
         }
     }
+
+    // $(document).on('click', '.edit-link', function (e) {
+    //     e.preventDefault();
+
+    //     const parentId = $(this).data('parent-id');
+    //     const commentId = $(this).data('comment-id');
+    //     const repliesDiv = $(this).siblings('.replies');
+    //     const contain = $(this).data('contain');
+
+    //     // Check if a reply form already exists
+    //     const existingForm = repliesDiv.find('.comment-form-reply');
+
+    //     if (existingForm.length > 0) {
+    //         // If the form exists, remove it
+    //         existingForm.remove();
+    //     } else {
+    //         // If the form doesn't exist, create and append it
+    //         const replyFormHTML = `
+    //             <form class="comment-form-reply mt-2" data-comment-id="${commentId}">
+    //                 <textarea name="comment" class="comment-input form-control" placeholder="Write a comment...">${contain}</textarea>
+    //                 <input type="hidden" name="comment_id" class="comment-id" value="${commentId}">
+    //                 <button type="submit" class="btn btn-primary btn-sm mt-2">Post</button>
+    //             </form>
+    //         `;
+    //         repliesDiv.append(replyFormHTML);
+    //     }
+    // });
+
+    function edit_form(parentId, commentId, contain) {
+        // Remove any existing reply form
+        $('.comment-form-reply').remove();
+
+        // Locate the parent comment div
+        const parentDiv = $(`#comment-${parentId}`);
+
+        // Check if the form is already appended
+        if (parentDiv.find('.comment-form-reply').length === 0) {
+            // Create the reply form
+            const replyFormHTML = `
+                <form class="comment-form-reply mt-2" data-comment-id="${commentId}">
+                    <textarea name="comment" class="comment-input form-control" placeholder="Write a comment...">${contain}</textarea>
+                    <input type="hidden" name="comment_id" class="comment-id" value="${commentId}">
+                    <button type="submit" class="btn btn-primary btn-sm mt-2">Post</button>
+                </form>
+            `;
+
+            // Append the form immediately after the parent div
+            parentDiv.after(replyFormHTML);
+        }
+    }
+
     
     function deleteComment(commentId, postId, element) {
         // if (!confirm("Are you sure you want to delete this comment?")) {

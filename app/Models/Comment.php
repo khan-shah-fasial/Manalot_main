@@ -35,6 +35,10 @@ class Comment extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function userdetails()
+    {
+        return $this->hasOne(UserDetails::class, 'user_id', 'user_id');
+    }
 
 
 

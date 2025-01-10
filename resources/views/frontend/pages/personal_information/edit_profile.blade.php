@@ -950,7 +950,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-12">
+                                            <div class="col-md-12 add_more_div">
                                                 <button type="button" class="add_more add-reference-row">ADD MORE +</button>
                                             </div>
                                         </div>
@@ -1249,7 +1249,7 @@
             newRow.find('.add_more_div').remove(); // Remove add button from the cloned row
             // newRow.find('.add-row-work-exp').remove(); // Remove add button from the cloned row
             // newRow.find('.remove-row-work-exp').remove(); // Remove add button from the cloned row
-            newRow.append('<div class="col-md-6 d-flex gap-3 add_more_div"><button type="button" class="add_more add-row-certificate">ADD MORE +</button><button type="button" class="remove_more remove-row-certificate">REMOVE -</button></div>'); // Add new add and remove buttons
+            newRow.append('<div class="col-md-6 d-flex gap-3 add_more_div"><button type="button" class="add_more add-row-work-exp">ADD MORE +</button><button type="button" class="remove_more remove-row-work-exp">REMOVE -</button></div>'); // Add new add and remove buttons
             $('.work-exp-row').last().after(newRow); // Append the cloned row at the end
         });
 

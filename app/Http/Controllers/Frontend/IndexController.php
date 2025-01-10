@@ -166,7 +166,7 @@ class IndexController extends Controller
     {
         $comments = Comment::where('post_id', $postId)
             // ->whereNull('parent_id')
-            ->with('replies.user', 'user')
+            ->with('replies.user', 'user','userdetails', 'replies.userdetails')
             ->latest()
             ->get();
 
