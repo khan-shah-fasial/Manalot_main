@@ -521,6 +521,9 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
         const postId = form.data('post-id');
         const comment = form.find('.comment-input').val();
         const parentId = form.find('.parent-id').val();
+        const comment_id = form.find('.comment_id').val();
+
+        console.log(comment_id);
 
 
         $.get('/csrf-token', function (data) {
@@ -534,30 +537,43 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
                 data: {
                     post_id: postId,
                     comment: comment,
-                    parent_id: parentId
+                    parent_id: parentId,
+                    comment_id: comment_id
                 },
                 success: function (response) {
                     if (response.success) {
                         form.find('.comment-input').val(''); // Clear input
                         form.find('.parent-id').val('');    // Reset parent ID
 
-                        // Remove any existing .comment-form-reply forms
-                        if ($('.comment-form-reply').length > 0) {
-                            $('.comment-form-reply').remove();
+                        if(comment_id){
 
-                                                // Add the new comment or reply to the DOM
-                            const newCommentHTML = generateReplyCommentHTML(response.comment);
+                            $(`#comment-${parentId} .row .col-md-9 .reply_content`).html(response.comment.content);
+                            // const newCommentHTML = generateReplyCommentHTML(response.comment);
+                            // $(`#comment-${parentId}`).append(newCommentHTML);
 
-                            if (parentId) {
-                                // If it's a reply, append it to the appropriate reply section
-                                $(`#comment-${parentId} .replies`).append(newCommentHTML);
-                            } else {
-                                // If it's a new comment, append it to the main comments list
-                                $(`#comments-section-${postId} .comments-list`).append(newCommentHTML);
+                        } else {
+
+                            // Remove any existing .comment-form-reply forms
+                            if ($('.comment-form-reply').length > 0) {
+                                $('.comment-form-reply').remove();
+
+                                                    // Add the new comment or reply to the DOM
+                                const newCommentHTML = generateReplyCommentHTML(response.comment);
+
+                                if (parentId) {
+                                    // If it's a reply, append it to the appropriate reply section
+                                    $(`#comment-${parentId} .replies`).append(newCommentHTML);
+                                } else {
+                                    // If it's a new comment, append it to the main comments list
+                                    $(`#comments-section-${postId} .comments-list`).append(newCommentHTML);
+                                }
+
+
                             }
 
-
                         }
+
+
 
                         fetchComments(postId);              // Refresh comments
 
@@ -565,7 +581,18 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
                     }
                 },
                 error: function (xhr) {
-                    console.error('Error submitting comment:', xhr.responseText);
+                    // console.error('Error submitting comment:', xhr.responseText);
+                    const response = JSON.parse(xhr.responseText);
+                    const errorMessage = response.message || 'An error occurred.';
+                    Command: toastr.error(
+                        errorMessage,
+                        "error",
+                        {
+                            closeButton: true,
+                            progressBar: true,
+                            tapToDismiss: false,
+                        }
+                    );
                 }
             });
         });
@@ -579,6 +606,10 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
         const post_id = $(this).data('post-id');
         const repliesDiv = $(this).siblings('.replies');
         const user_name = $(this).data('user-name');
+
+
+        // Remove any existing reply form
+        $('.comment-form-reply').remove();
 
         // Check if a reply form already exists
         const existingForm = repliesDiv.find('.comment-form-reply');
@@ -624,33 +655,6 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
         }
     }
 
-    // $(document).on('click', '.edit-link', function (e) {
-    //     e.preventDefault();
-
-    //     const parentId = $(this).data('parent-id');
-    //     const commentId = $(this).data('comment-id');
-    //     const repliesDiv = $(this).siblings('.replies');
-    //     const contain = $(this).data('contain');
-
-    //     // Check if a reply form already exists
-    //     const existingForm = repliesDiv.find('.comment-form-reply');
-
-    //     if (existingForm.length > 0) {
-    //         // If the form exists, remove it
-    //         existingForm.remove();
-    //     } else {
-    //         // If the form doesn't exist, create and append it
-    //         const replyFormHTML = `
-    //             <form class="comment-form-reply mt-2" data-comment-id="${commentId}">
-    //                 <textarea name="comment" class="comment-input form-control" placeholder="Write a comment...">${contain}</textarea>
-    //                 <input type="hidden" name="comment_id" class="comment-id" value="${commentId}">
-    //                 <button type="submit" class="btn btn-primary btn-sm mt-2">Post</button>
-    //             </form>
-    //         `;
-    //         repliesDiv.append(replyFormHTML);
-    //     }
-    // });
-
     function edit_form(parentId, commentId, contain) {
         // Remove any existing reply form
         $('.comment-form-reply').remove();
@@ -664,7 +668,8 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
             const replyFormHTML = `
                 <form class="comment-form-reply mt-2" data-comment-id="${commentId}">
                     <textarea name="comment" class="comment-input form-control" placeholder="Write a comment...">${contain}</textarea>
-                    <input type="hidden" name="comment_id" class="comment-id" value="${commentId}">
+                    <input type="hidden" name="comment_id" class="comment_id" value="${commentId}">
+                    <input type="hidden" name="parent_id" class="parent-id" value="${parentId}">
                     <button type="submit" class="btn btn-primary btn-sm mt-2">Post</button>
                 </form>
             `;
