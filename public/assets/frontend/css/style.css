@@ -442,6 +442,10 @@ a.logout:hover {
 
 .header_drishti_img {
     width: 100px;
+    border-radius: 100%;
+    height: 100px;
+    object-fit: cover;
+    object-position: center;
 }
 
 /* .header_drishti_img:hover {
@@ -4346,5 +4350,20 @@ button.comment_btns {
 }
 
 .reply_content {
-    padding: 5px 0px;
+    padding: 0px 0px;
+}
+
+.comments-section .comments-list img.user_img {
+    width: 32px;
+    height: 32px;
+}
+
+.comments-section .comments-list .replies img.user_img {
+    width: 24px;
+    height: 24px;
+}
+
+.reply-link {
+    color: #969696;
+    text-decoration: none;
 }

@@ -299,17 +299,17 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
             year: 31536000,
             month: 2592000,
             day: 86400,
-            hour: 3600,
-            minute: 60,
-            second: 1
+            h: 3600,
+            min: 60,
+            sec: 1
         };
         for (let key in intervals) {
             const interval = Math.floor(seconds / intervals[key]);
             if (interval >= 1) {
-                return `${interval} ${key}${interval > 1 ? 's' : ''} ago`;
+                return `${interval} ${key}${interval > 1 ? '' : ''}`;
             }
         }
-        return 'just now';
+        return 'now';
     }
 
 
@@ -406,21 +406,51 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
             const commenttime_reply = timeAgo(new Date(comment.created_at));
             repliesHTML = comment.replies.map(reply => `
                 <div class="reply" id="comment-${reply.id}">
-                    <img class="user_img" 
+
+                       <div class="row">
+                           <div class="col-md-1">
+                                <img class="user_img" 
                         src="${reply.userdetails?.profile_photo 
                                 ? `/storage/${reply.userdetails.profile_photo}` 
                                 : '/assets/images/drishti_img.png'}" 
                         alt="user_img" />
-                    <p class="main_admin_head">${reply.user.username}:</p> ${reply.content} <b>${commenttime_reply}</b>
-                    <a href="#" class="reply-link" onclick="reply_form(${reply.parent_id},${reply.post_id},'${reply.user.username}');">Reply</a>
-                    ${
+                           </div>
+                           <div class="col-md-9 ps-1">
+                                <p class="main_admin_head">${reply.user.username}:</p>
+                                <div class="reply_content">
+                                   ${reply.content}
+                                </div>
+                                
+                                 <a href="#" class="reply-link" onclick="reply_form(${reply.parent_id},${reply.post_id},'${reply.user.username}');">Reply</a>
+                           </div>
+
+                           <div class="col-md-2">
+                           <div class="comment_rights">
+                           <div class=""><b>${commenttime_reply}</b></div>
+
+                           <div class="dropdown">
+                                <a class="" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="/assets/images/dots_icons1.svg">
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <!-- Add Action -->
+                                   
+                                        ${
                     comment.user_id === loggedInUserId
                         ? `
-                            <a href="javascript:void(0);" class="delete-link" data-comment-id="${reply.id}" onclick="deleteComment(${reply.id}, ${comment.post_id}, this)">Delete</a>
-                            <a href="javascript:void(0);" class="edit-link" data-comment-id="${reply.id}" onclick="edit_form(${reply.parent_id}, ${reply.id}, '${reply.content}');">Edit</a>
+                           <li> <a href="javascript:void(0);" class="delete-link" data-comment-id="${reply.id}" onclick="deleteComment(${reply.id}, ${comment.post_id}, this)">Delete</a></li>
+                           <li><a href="javascript:void(0);" class="edit-link" data-comment-id="${reply.id}" onclick="edit_form(${reply.parent_id}, ${reply.id}, '${reply.content}');">Edit</a></li>
                         `
                         : ''
                     }
+                                   
+                                    
+                                </ul>
+                            </div>
+                              
+                           </div>
+                           </div>
+                       </div>
                 </div>
             `).join('');
         }
@@ -431,25 +461,32 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
             return `
                 <div class="comment" id="comment-${comment.id}">
                 <div class="row">
-                    <img class="user_img" 
+                <div class="col-md-1">
+                   <img class="user_img" 
                      src="${comment.userdetails?.profile_photo 
                             ? `/storage/${comment.userdetails.profile_photo}` 
                             : '/assets/images/drishti_img.png'}" 
                      alt="user_img" />
-                    <div class="col-md-9">
+                </div>
+                   
+                    <div class="col-md-9 ps-1">
                             <p class="main_admin_head">${comment.user.username}:</p> 
                    <div class="reply_content">
                         ${comment.content} 
                    </div>
+
+                   <a href="#" class="reply-link" data-parent-id="${comment.id}" data-post-id="${comment.post_id}" data-user-name="${comment.user.username}">Reply</a>
+                   
+                   
                    
                     </div>
 
-                     <div class="col-md-3">
+                     <div class="col-md-2">
                      <div class="comment_rights">
                     <div class="">
                       <b>${commenttime}</b>
                     </div> 
-                     <div class="comment_rights">
+                       <div class="comment_rights">
                             <div class="dropdown">
                         ${
                     comment.user_id === loggedInUserId
@@ -458,36 +495,34 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
                     </a>`
                         : ''
                     }
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li>
-                    ${
-                    comment.user_id === loggedInUserId
-                        ? `<a href="javascript:void(0);" class="delete-link" data-comment-id="${comment.id}" onclick="deleteComment(${comment.id}, ${comment.post_id}, this)">Delete</a>`
-                        : ''
-                    }
-                </li>
-                <li>
-                    ${
-                    comment.user_id === loggedInUserId
-                        ? `<a class="edit-link dropdown-item" href="javascript:void(0);" data-parent-id="${comment.id}" data-comment-id="${comment.id}" data-contain="${comment.content}" onclick="edit_form(${comment.id}, ${comment.id}, '${comment.content}');">
-                            Edit
-                        </a>`
-                        : ''
-                    }
-                </li>
-            </ul>
-        </div>
-        </div>
-        </div>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li>
+                                    ${
+                                    comment.user_id === loggedInUserId
+                                        ? `<a href="javascript:void(0);" class="delete-link" data-comment-id="${comment.id}" onclick="deleteComment(${comment.id}, ${comment.post_id}, this)">Delete</a>`
+                                        : ''
+                                    }
+                                </li>
+                                <li>
+                                    ${
+                                    comment.user_id === loggedInUserId
+                                        ? `<a class="edit-link dropdown-item" href="javascript:void(0);" data-parent-id="${comment.id}" data-comment-id="${comment.id}" data-contain="${comment.content}" onclick="edit_form(${comment.id}, ${comment.id}, '${comment.content}');">
+                                            Edit
+                                        </a>`
+                                        : ''
+                                    }
+                                </li>
+                            </ul>
+                          </div>
+                        </div>
+                       </div>
+                    </div>
+
+
+                    <div class="col-md-12">
+                         <div class="replies ps-5">${repliesHTML}</div>
                     </div>
                 </div>
-                    
-                    
-                    
-                    
-                    <a href="#" class="reply-link" data-parent-id="${comment.id}" data-post-id="${comment.post_id}" data-user-name="${comment.user.username}">Reply</a>
-                   
-                    <div class="replies">${repliesHTML}</div>
                 </div>
             `;
         }
@@ -499,16 +534,61 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
         let repliesHTML = '';
         const commentjust = timeAgo(new Date(comment.created_at));
         return `
-            <div class="reply" id="comment-${comment.id}">
-                <p class="main_admin_head">${comment.user.username}:</p> ${comment.content} <b>${commentjust}</b>
-                ${
+            
+        
+
+        <div class="reply" id="comment-${comment.id}">
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-8">
+             <p class="main_admin_head">${comment.user.username}:</p> 
+                  <div class="reply_content">
+                        ${comment.content} 
+                   </div>
+
+            </div>
+            <div class="col-md-3">
+                 <div class="comment_rights">
+                 <div class="">
+                     ${commentjust}
+                 </div>
+                            <div class="dropdown">
+                        ${
+                    comment.user_id === loggedInUserId
+                    ? `<a class="" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="/assets/images/dots_icons1.svg">
+                    </a>`
+                        : ''
+                    }
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li>
+                                    ${
                 comment.user_id === loggedInUserId
                     ? `
                         <a href="javascript:void(0);" class="delete-link" data-comment-id="${comment.id}" onclick="deleteComment(${comment.id}, ${comment.post_id}, this)">Delete</a>
+                        `
+                    : ''
+                }
+                                </li>
+                                <li>
+                                    ${
+                comment.user_id === loggedInUserId
+                    ? `
                         <a href="javascript:void(0);" class="edit-link" data-comment-id="${comment.id}" onclick="edit_form(${comment.parent_id}, ${comment.id}, '${comment.content}');">Edit</a>
                     `
                     : ''
                 }
+                                </li>
+                            </ul>
+                          </div>
+                        </div>
+            
+            </div>
+        </div>
+
+              
+               
             </div>
         `;
     }
@@ -589,11 +669,11 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
         } else {
             // If the form doesn't exist, create and append it
             const replyFormHTML = `
-                <form class="comment-form-reply mt-2" data-post-id="${post_id}">
+                <form class="comment-form-reply mt-2 position-relative" data-post-id="${post_id}">
                     <textarea name="comment" class="comment-input form-control" placeholder="Write a comment...">${user_name} </textarea>
                     <input type="hidden" name="parent_id" class="parent-id" value="${parentId}">
                     <input type="hidden" name="parent_id" class="post_id" value="${post_id}">
-                    <button type="submit" class="btn btn-primary btn-sm mt-2">Post</button>
+                    <button type="submit" class="comment_btns"><img src="/assets/images/post_button_icons.svg"></button>
                 </form>
             `;
             repliesDiv.append(replyFormHTML);
@@ -611,11 +691,11 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
         if (parentDiv.find('.comment-form-reply').length === 0) {
             // Create the reply form
             const replyFormHTML = `
-                <form class="comment-form-reply mt-2" data-post-id="${postId}">
+                <form class="comment-form-reply mt-2 position-relative" data-post-id="${postId}">
                     <textarea name="comment" class="comment-input form-control" placeholder="Write a comment...">${userName}</textarea>
                     <input type="hidden" name="parent_id" class="parent-id" value="${parentId}">
                     <input type="hidden" name="post_id" class="post-id" value="${postId}">
-                    <button type="submit" class="btn btn-primary btn-sm mt-2">Post</button>
+                    <button type="submit" class="comment_btns"><img src="/assets/images/post_button_icons.svg"></button>
                 </form>
             `;
 
@@ -662,10 +742,10 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
         if (parentDiv.find('.comment-form-reply').length === 0) {
             // Create the reply form
             const replyFormHTML = `
-                <form class="comment-form-reply mt-2" data-comment-id="${commentId}">
+                <form class="comment-form-reply mt-2 position-relative" data-comment-id="${commentId}">
                     <textarea name="comment" class="comment-input form-control" placeholder="Write a comment...">${contain}</textarea>
                     <input type="hidden" name="comment_id" class="comment-id" value="${commentId}">
-                    <button type="submit" class="btn btn-primary btn-sm mt-2">Post</button>
+                    <button type="submit" class="comment_btns"><img src="/assets/images/post_button_icons.svg"></button>
                 </form>
             `;
 
