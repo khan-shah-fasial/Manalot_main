@@ -4367,3 +4367,7 @@ button.comment_btns {
     color: #969696;
     text-decoration: none;
 }
+
+.image-profile .bg-profile-content img {
+    height: auto;
+}

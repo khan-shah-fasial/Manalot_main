@@ -475,7 +475,7 @@
                                     @endif
 
                                     <div class="col-md-6">
-                                        <label for="start_date" class="form-label">Start Date* ----</label>
+                                        <label for="start_date" class="form-label">Start Month* ----</label>
                                         <input type="text" class="form-control" id="start_date" placeholder="-">
                                     </div>
 
@@ -485,7 +485,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label for="end_date" class="form-label">End Date* ----</label>
+                                        <label for="end_date" class="form-label">End Month* ----</label>
                                         <input type="text" class="form-control" id="end_date" placeholder="-">
                                     </div>
 

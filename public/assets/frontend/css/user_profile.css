@@ -23,6 +23,7 @@ body {
     font-weight: 600;
     font-size: 28px;
     color: #1B1919;
+    min-width: 400px;
 }
 
 .profile-content p {
@@ -231,6 +232,7 @@ img.user_icon {
 .profile-information h5 {
     font-weight: 600;
     font-size: 17px;
+    text-transform: capitalize;
 }
 
 .personal_info .fa {
@@ -452,9 +454,14 @@ span.user_yes {
 
     .header_drishti_img {
         width: 60px;
+        height: 60px;
     }
 
     .image-profile.box_shadows {
         margin-top: 110px;
     }
+}
+
+form#preferences-info .intl-tel-input input#Phone1 {
+    padding-left: 50px !important;
 }

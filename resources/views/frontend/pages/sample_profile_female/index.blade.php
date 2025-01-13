@@ -269,7 +269,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4 d-flex flex-column gap-lg-0 gap-lg-4 gap-2 pe-md-3">
+				<div class="col-lg-12 d-flex flex-column gap-lg-0 gap-lg-4 gap-2 pe-md-3">
 					<div class="profile_manalot_div d-flex align-items-center gap-2 mb-lg-3 mb-1">
 						<img class="profile_study_logo" src="/assets/images/favicon3.png">
 						<span>Manalot</span>
@@ -436,7 +436,7 @@
 						As a distinguished leadership advisory and retained executive search firm,
 						Manalot (formerly Maple Consulting & Services) collaborates as a trusted partner-in-change
 						for dynamic organizations and senior leadership worldwide. With a steadfast commitment to
-						building relationships based on trust and agility, <b class="bold_see_more"> …see more</b>
+						building relationships based on trust and agility, <b class="bold_see_more"></b>
 					</p>
 					<div class="industry_main_div">
 						<strong class="industry_main_div_heading">Industry :</strong>
