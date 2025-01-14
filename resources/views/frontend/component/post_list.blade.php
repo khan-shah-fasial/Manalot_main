@@ -24,7 +24,7 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
 
 
     <div class="post mt-md-4 mt-3 proxima_nova_font">
-        <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center justify-content-between paddleftright40">
             <div class="d-flex align-items-center gap-2">
                 <img class="user_img" src="{{ $user->profile_photo ? asset('storage/' . $user->profile_photo) : '/assets/images/drishti_img.png' }}" alt="user_img" />
                 <div class="user_name_post">
@@ -47,7 +47,7 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
             </a>
         </div>
         <div class="mt-md-3 post_description">
-            <div>
+            <div class="paddleftright40">
                 @php
                     // Define the content
                     $content = $post->content;
@@ -114,7 +114,7 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
     </button>
 </div>
 
-        <div class="like_comnt">
+        <div class="like_comnt paddleftright40">
             <a href="javascript:void(0);" class="upper-like-count" id="like-count-{{$post->id}}" onclick="openLikeModal({{ $post->id }}, {{ $post->likes->count() }})">{{ $post->likes->count() }}</a>
             <ul class="like_comnt_list">
                 <li class="like_comnt_list_item">
@@ -160,9 +160,9 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
 
 
         <!-- Comments Section -->
-        <div class="comments-section position-relative" id="comments-section-{{ $post->id }}" style="display: none;">
+        <div class="comments-section position-relative paddleftright40" id="comments-section-{{ $post->id }}" style="display: none;">
             <!-- Comment Form -->
-            <form class="comment-form" data-post-id="{{ $post->id }}">
+            <form class="comment-form position-relative" data-post-id="{{ $post->id }}">
                 <textarea name="comment" class="comment-input" placeholder="Write a comment..."></textarea>
                 <input type="hidden" name="parent_id" class="parent-id" value="">
                 <button type="submit" class="comment_btns"><img src="/assets/images/post_button_icons.svg"></button>

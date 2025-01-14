@@ -55,7 +55,12 @@
     }
 
     .post {
-        padding: 20px 20px;
+        padding: 20px 0px;
+    }
+
+    .postslider_banner img {
+        width: 100%;
+        height: 250px;
     }
 
     .personal_information .width_20 {
@@ -194,7 +199,7 @@
     }
 
     form#searchForm input#searchInput {
-        width: 85%;
+        width: 80%;
     }
 
     .user_header_logo {
@@ -224,6 +229,11 @@
         width: 35px;
         right: 10px;
         position: relative;
+        height: 35px;
+    }
+
+    .search_input input {
+        font: 400 14px 'Lato';
     }
 
     .footer_fiexd_action {
@@ -233,6 +243,18 @@
         padding-top: 0;
         height: auto;
         background: #fff;
+    }
+
+    .user_header_right {
+        gap: 0px;
+    }
+
+    .user_header_right a img {
+        height: auto;
+        padding-bottom: 0px;
+        margin-top: 2px;
+        width: 30px;
+        margin-right: -6px;
     }
 
     .footer_fiexd_action .user_header_right {
@@ -255,7 +277,7 @@
     }
 
     .search_input input {
-        padding: 4px 10px 6px 10px;
+        padding: 8px 10px 7px 10px;
     }
 
     .header_drishti .dropdown-content {

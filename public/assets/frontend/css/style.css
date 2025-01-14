@@ -742,7 +742,7 @@ img.like_img {
 .post {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     background: white;
-    padding: 20px 40px;
+    padding: 20px 0px;
     border-radius: 50px;
 }
 
@@ -753,6 +753,10 @@ img.like_img {
 
 .post .fa-ellipsis-vertical {
     cursor: pointer;
+}
+
+.paddleftright40 {
+    padding: 0px 25px;
 }
 
 .search_bar_new {
@@ -4289,19 +4293,87 @@ section.personal_information input#Expected-Salary {
     height: 40px;
 }
 
+.postslider_banner .carousel-indicators {
+    margin-bottom: 2rem;
+}
+
+.comment_rights ul.dropdown-menu {
+    left: -96px !important;
+    padding: 0;
+    border: 0;
+    background: #fff;
+    box-shadow: 0px 2px 10px -3px #ccc;
+    min-width: 7rem;
+}
+
+.comment_rights ul.dropdown-menu a:hover {
+    background: #fff;
+}
+
+.comment_rights ul.dropdown-menu a {
+    color: #535353;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-bottom: 1px solid #cccccc78;
+    width: 100%;
+    display: block;
+    font-size: 14px;
+}
+
 button.comment_btns {
     background: transparent;
     border: 0;
     position: absolute;
-    right: 10px;
+    right: 15px;
     top: 17px;
     background: #ffffff00;
     height: 37px;
 }
 
+div#likeModal .modal-content {
+    border-radius: 00px;
+    padding: 25px 25px;
+    height: 565px;
+    overflow-y: scroll;
+}
+
+div#likeModal .modal-header {
+    align-items: start;
+    padding-top: 12px;
+    border: 0px;
+    padding: 0px;
+}
+
+div#likeModal .modal-body {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+div#likeModal li.list-group-item {
+    border: 0;
+    border-bottom: 1px solid #cccccc4f;
+    border-radius: 0;
+    padding-left: 10px;
+}
+
+div#likeModal button.btn-close {
+    position: relative;
+    background-size: 50%;
+    margin-top: -5px;
+}
+
 .post_description {
     height: auto;
     font-size: 14px;
+}
+
+.like_comnt.paddleftright40 {
+    padding-top: 10px;
+}
+
+.like_comnt .upper-like-count {
+    color: #535353;
+    text-decoration: none;
 }
 
 .comment-form-reply textarea.comment-input.form-control {

@@ -50,11 +50,11 @@
                         </div>
                         <span>Messages</span>
                     </a>
-                    <a href="/notification" class="d-lg-block d-none text-center align-items-center text-decoration-none inherit text-dark text-xs notification_button">
+                    <a href="/notification" class="text-center align-items-center text-decoration-none inherit text-dark text-xs notification_button">
                         <div>
                             <img src="/assets/images/notification_icon3.svg" alt="Notification icon" />
                         </div>
-                        <span>Notification</span>
+                        <span class="d-lg-block d-none">Notification</span>
                     </a>
                     
 					
@@ -125,12 +125,7 @@
                         </div>
                         <span>Messages</span>
                     </a>
-                    <a href="/notification" class="text-center align-items-center text-decoration-none inherit text-dark text-xs notification_button">
-                        <div>
-                            <img src="/assets/images/notification_icon3.svg" alt="Notification icon" />
-                        </div>
-                        <span>Notification</span>
-                    </a>
+                  
                     
 					
 					<a href="#" class="text-center align-items-center text-decoration-none inherit text-dark text-xs notification_button">
