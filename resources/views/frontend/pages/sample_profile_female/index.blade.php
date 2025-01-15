@@ -17,21 +17,12 @@
 		color: #535353;
 	}
 
-	.profile-page .container {
-    	width: 86%;
-	}
-
-	.header .container-lg {
-		width: 89.7% !important;
-	}
 
 	header.d-flex.align-items-center.justify-content-between {
 		width: 100%;
 		    pointer-events: none;
 	}
-	    .container, .container-lg, .container-md, .container-sm, .container-xl {
-        max-width: 1230px;
-    }
+	   
 </style>
 
 

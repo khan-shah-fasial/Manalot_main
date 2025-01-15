@@ -106,10 +106,7 @@
             width: 100%;
         }
     }
-  .container, .container-lg, .container-md, .container-sm, .container-xl {
-        max-width: 1270px;
-    }
-
+  
     body#index {
         background-color: #e7ecef;
     }

@@ -110,24 +110,10 @@ body {
     color: #535353;
 }
 
-.profile-page .container {
-width: 86%;
-}
-
-.header .container-lg {
-    width: 89.7% !important;
-}
-
-header.d-flex.align-items-center.justify-content-between {
-    width: 96%;
-}
-
 .user_header .search_input button {
     padding: 8px 0px 8px 20px;
 }
-.header > .container-lg.container-fluid {
-    padding: 0px;
-}
+
 </style>
 
 <div class="profile-page pb-5 proxima_nova_font ">

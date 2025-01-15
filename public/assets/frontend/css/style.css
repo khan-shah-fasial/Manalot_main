@@ -293,11 +293,11 @@ strong.text-lg {
 }
 
 .width_20 {
-    width: 22% !important;
+    width: 22.5% !important;
 }
 
 .width_60 {
-    width: 56% !important;
+    width: 55% !important;
 }
 
 .search_input input {
@@ -767,7 +767,7 @@ img.like_img {
 
 .ai_search_bar {
     border: none;
-    width: 78%;
+    width: 76%;
     font: 400 18px 'Lato';
     color: #999999;
 }
@@ -870,7 +870,7 @@ img.like_img {
 }
 
 .personal_information .left_sidebar {
-    width: 295px;
+    width: 268px;
 }
 
 .personal_information .main_parent_div {
@@ -1064,7 +1064,7 @@ img.like_img {
 
 .activity {
     border-radius: 50px;
-    padding: 30px 30px;
+    padding: 30px 25px;
     width: 100%;
     /* box-shadow: rgba(149, 157, 165, 0.2) 5px 10px 24px; */
     background: #fff;
@@ -4031,11 +4031,6 @@ div#phone_otp_model .modal-footer {
     }
 }
 
-@media screen and (min-width: 1400px) {
-    .user_header>div:not(.profile-page .user_header > div) {
-        padding: 0px 0px;
-    }
-}
 
 header.d-flex.align-items-center.justify-content-between {
     width: 100%;
@@ -4075,15 +4070,15 @@ a.saved_clip img {
 }
 
 .notification_page .right_sidebar {
-    width: 270px;
+    max-width: 240px;
 }
 
 .notification_page .left_sidebar {
-    width: 270px;
+    max-width: 240px;
 }
 
 .notification_page .width_20 {
-    width: 23% !important;
+    width: 22.5% !important;
 }
 
 .notification_page .activity .trending_link {
@@ -4091,7 +4086,7 @@ a.saved_clip img {
 }
 
 .notification_page .width_60 {
-    width: 54% !important;
+    width: 55% !important;
 }
 
 .notification_page .activity ul li img {
@@ -4443,3 +4438,14 @@ div#likeModal button.btn-close {
 .image-profile .bg-profile-content img {
     height: auto;
 }
+
+
+/* @media(min-width:1170px) and (max-width:1400px) {
+    .right_sidebar {
+        padding-right: 5px;
+    }
+
+    .personal_information .left_sidebar {
+        width: 268px;
+    }
+} */

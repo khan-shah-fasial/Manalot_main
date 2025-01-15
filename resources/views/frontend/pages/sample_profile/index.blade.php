@@ -16,10 +16,7 @@
 		color: #535353;
 	}
 
-	    .container, .container-lg, .container-md, .container-sm, .container-xl {
-        max-width: 1230px;
-    }
-
+	 
 	header.d-flex.align-items-center.justify-content-between {
 		width:100%;
 		    pointer-events: none;

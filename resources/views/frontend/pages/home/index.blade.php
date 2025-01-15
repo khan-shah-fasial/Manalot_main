@@ -9,18 +9,14 @@
 @section('page.content')
 
 <style>
-    @media screen and (min-width: 1200px) {
-        .container, .container-lg, .container-md, .container-sm, .container-xl {
-            max-width: 1270px;
-        }
-    }
+   
 
     .right_sidebar {
-    width: 257px;
+    max-width: 240px;
 }
 
 .left_sidebar {
-    width: 257px;
+    max-width: 240px;
 }
 body
 {
