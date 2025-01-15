@@ -5,6 +5,17 @@
         width: 100% !important;
     }
 
+    .post_images_icons {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .post_name_ftr span {
+        position: relative;
+        top: -7px;
+        left: 2px;
+    }
+
     .notification_tabs_box div#nav-tab {
         background: #fff;
         padding: 10px 10px;
@@ -266,8 +277,8 @@
     }
 
     .footer_fiexd_action header {
-        height: 60px;
-        padding-top: 8px;
+        height: 55px;
+        padding-top: 0px;
     }
 
     .user_header .search_input button {

@@ -429,9 +429,14 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
                            <div class=""><b>${commenttime_reply}</b></div>
 
                            <div class="dropdown">
-                                <a class="" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            ${
+                            comment.user_id === loggedInUserId
+                            ? ` <a class="" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="/assets/images/dots_icons1.svg">
                                 </a>
+                            `
+                            : ''
+                            }
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <!-- Add Action -->
                                    
@@ -476,7 +481,7 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
                    </div>
 
                    <a href="#" class="reply-link" data-parent-id="${comment.id}" data-post-id="${comment.post_id}" data-user-name="${comment.user.username}">Reply</a>
-                   
+                   <div class="replies">${repliesHTML}</div>
                    
                    
                     </div>
@@ -520,7 +525,7 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
 
 
                     <div class="col-md-12">
-                         <div class="replies ps-5">${repliesHTML}</div>
+                         
                     </div>
                 </div>
                 </div>
