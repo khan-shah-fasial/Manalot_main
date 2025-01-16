@@ -1534,7 +1534,7 @@ ul.select2-results__options li.select2-results__option:hover {
     background-size: 17px;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
+input[type="date"]::-webkit-calendar-picker-indicator, input[type="month"]::-webkit-calendar-picker-indicator {
     opacity: 0;
     cursor: pointer;
 }
