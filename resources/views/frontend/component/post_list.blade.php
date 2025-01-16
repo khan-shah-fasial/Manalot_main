@@ -484,7 +484,7 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
                    </div>
 
                    <a href="#" class="reply-link" data-parent-id="${comment.id}" data-post-id="${comment.post_id}" data-user-name="${comment.user.username}">Reply</a>
-                   <div class="replies">${repliesHTML}</div>
+
                    
                    
                     </div>
@@ -528,7 +528,7 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
 
 
                     <div class="col-md-12">
-                         
+                        <div class="replies ps-5">${repliesHTML}</div>
                     </div>
                 </div>
                 </div>
@@ -635,7 +635,7 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
 
                         if(comment_id){
 
-                            $(`#comment-${parentId} .row .col-md-9 .reply_content`).html(response.comment.content);
+                            $(`#comment-${comment_id} .row .col-md-9 .reply_content`).html(response.comment.content);
                             // const newCommentHTML = generateReplyCommentHTML(response.comment);
                             // $(`#comment-${parentId}`).append(newCommentHTML);
 
@@ -692,7 +692,7 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
 
         const parentId = $(this).data('parent-id');
         const post_id = $(this).data('post-id');
-        const repliesDiv = $(this).siblings('.replies');
+        const repliesDiv = $(`#comment-${parentId}`);
         const user_name = $(this).data('user-name');
 
 
