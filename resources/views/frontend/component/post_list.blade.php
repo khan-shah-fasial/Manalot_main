@@ -403,8 +403,10 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
         let repliesHTML = '';
         if (Array.isArray(comment.replies) && comment.replies.length > 0) {
             // Use the `created_at` value from the comment object
-            const commenttime_reply = timeAgo(new Date(comment.created_at));
-            repliesHTML = comment.replies.map(reply => `
+
+            repliesHTML = comment.replies.map(reply => {
+            const commenttime_reply = timeAgo(new Date(reply.created_at));
+            return `
                 <div class="reply" id="comment-${reply.id}">
 
                        <div class="row">
@@ -457,7 +459,8 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
                            </div>
                        </div>
                 </div>
-            `).join('');
+            `;
+            }).join('');
         }
 
         if(comment.parent_id === null){
