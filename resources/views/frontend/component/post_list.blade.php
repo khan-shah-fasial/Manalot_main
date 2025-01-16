@@ -423,7 +423,7 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
                                    ${reply.content}
                                 </div>
                                 
-                                 <a href="#" class="reply-link" onclick="reply_form(${reply.parent_id},${reply.post_id},'${reply.user.username}');">Reply</a>
+                                 <a href="#" class="reply-link1" onclick="reply_form(${reply.parent_id},${reply.post_id},'${reply.user.username}');">Reply</a>
                            </div>
 
                            <div class="col-md-2">
@@ -432,7 +432,7 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
 
                            <div class="dropdown">
                             ${
-                            comment.user_id === loggedInUserId
+                            reply.user_id === loggedInUserId
                             ? ` <a class="" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="/assets/images/dots_icons1.svg">
                                 </a>
@@ -443,7 +443,7 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
                                     <!-- Add Action -->
                                    
                                         ${
-                    comment.user_id === loggedInUserId
+                            reply.user_id === loggedInUserId
                         ? `
                            <li> <a href="javascript:void(0);" class="delete-link" data-comment-id="${reply.id}" onclick="deleteComment(${reply.id}, ${comment.post_id}, this)">Delete</a></li>
                            <li><a href="javascript:void(0);" class="edit-link" data-comment-id="${reply.id}" onclick="edit_form(${reply.parent_id}, ${reply.id}, '${reply.content}');">Edit</a></li>
@@ -611,7 +611,7 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
         const parentId = form.find('.parent-id').val();
         const comment_id = form.find('.comment_id').val();
 
-        console.log(comment_id);
+        // console.log(comment_id);
 
 
         $.get('/csrf-token', function (data) {
