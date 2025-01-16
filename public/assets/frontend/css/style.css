@@ -4200,9 +4200,31 @@ div#squarePoleModal ::-webkit-scrollbar {
     height: 0px;
 }
 
+.left_sidebar {
+    scrollbar-width: none;
+    /* Hides the scrollbar */
+    -ms-overflow-style: none;
+    /* For Internet Explorer 10+ */
+}
+
+.right_sidebar {
+    scrollbar-width: none;
+    /* Hides the scrollbar */
+    -ms-overflow-style: none;
+    /* For Internet Explorer 10+ */
+}
+
+body,
+html {
+    scrollbar-width: none;
+    /* Hides the scrollbar */
+    -ms-overflow-style: none;
+    /* For Internet Explorer 10+ */
+}
+
 .postslider_banner img {
     width: 100%;
-    height: 360px;
+    height: auto;
     object-fit: cover;
     object-position: center;
     margin-bottom: 7px;
