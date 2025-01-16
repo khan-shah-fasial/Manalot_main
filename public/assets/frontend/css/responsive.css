@@ -71,7 +71,7 @@
 
     .postslider_banner img {
         width: 100%;
-        height: 250px;
+        height: auto;
     }
 
     .personal_information .width_20 {
@@ -273,7 +273,7 @@
     }
 
     .footer_fiexd_action .user_header_right img {
-        width: 25px;
+        width: 33px;
     }
 
     .footer_fiexd_action header {
