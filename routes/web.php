@@ -134,25 +134,3 @@ Route::get('/create-storage-link', function () {
     }
 });
 
-Route::get('/send-test-email', function () {
-    Mail::raw('Test email content', function ($message) {
-        $message->to('khanfaisal.makent@gmail.com')
-                ->subject('Test Email');
-    });
-
-    return 'Test email sent!';
-});
-
-
-Route::get('/test-otp', function () {
-    $sessionData = Session()->all();
-
-    // Print session data
-    dd($sessionData);
-});
-
-Route::get('/clear-session', function () {
-    Session()->flush();
-
-    echo"clear";
-});
