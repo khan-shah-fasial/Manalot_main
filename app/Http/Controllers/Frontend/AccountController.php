@@ -54,6 +54,17 @@ class AccountController extends Controller
 
             if($user){
 
+                if($user->role_id == '1'){
+
+                    Session::put('user_id', auth()->user()->id);
+
+                    $rsp_msg['response'] = 'success';
+                    $rsp_msg['message']  = "Successfully logged in";
+
+                    return response()->json(array('response_message' => $rsp_msg));
+
+                }
+
                 if ($user->completed_status == '0'){
 
                     Session()->flush();
