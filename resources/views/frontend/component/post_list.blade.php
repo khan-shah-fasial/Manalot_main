@@ -423,7 +423,7 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
                                    ${reply.content}
                                 </div>
                                 
-                                 <a href="#" class="reply-link1" onclick="reply_form(${reply.parent_id},${reply.post_id},'${reply.user.username}');">Reply</a>
+                                 <a href="javascript:void(0);" class="reply-link1" onclick="reply_form(${reply.parent_id},${reply.post_id},'${reply.user.username}');">Reply</a>
                            </div>
 
                            <div class="col-md-2">
@@ -731,7 +731,7 @@ $userDetails = Cache::remember('user_details_' . implode('_', $userIds->toArray(
             // Create the reply form
             const replyFormHTML = `
                 <form class="comment-form-reply mt-2 position-relative" data-post-id="${postId}">
-                    <textarea name="comment" class="comment-input form-control" placeholder="Write a comment...">${userName}</textarea>
+                    <textarea name="comment" class="comment-input form-control" placeholder="Write a comment...">${userName} </textarea>
                     <input type="hidden" name="parent_id" class="parent-id" value="${parentId}">
                     <input type="hidden" name="post_id" class="post-id" value="${postId}">
                     <button type="submit" class="comment_btns"><img src="/assets/images/post_button_icons.svg"></button>
