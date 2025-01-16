@@ -325,97 +325,11 @@ class UserController extends Controller
     }
 
     public function create_personal_work_info($request){
-
-        $validator = Validator::make($request->all(), [
-            // 'wrk_exp_company_name' => 'required|regex:/^[A-Za-z\s,.\'\/&]+$/|min:3',
-            // 'wrk_exp__title' => 'required|regex:/^[A-Za-z0-9\s,.\/\'&]+$/i|min:2|max:100',
-            'industry.*' => 'required', // If it's an array of industries
-            // 'wrk_exp_responsibilities' => 'required|string|min:2',
-            'skill' => 'required|array|min:1', // Assuming 'skill' is an array
-        ], [
-            // 'wrk_exp_company_name.required' => 'The Company Name is required.',
-            // 'wrk_exp_company_name.regex' => 'The Company Name format is invalid.',
-            // 'wrk_exp_company_name.min' => 'The Company Name must be at least 3 characters.',
-
-            // 'wrk_exp__title.required' => 'The Professional Title is required.',
-            // 'wrk_exp__title.regex' => 'The Professional Title format is invalid.',
-            // 'wrk_exp__title.min' => 'The Professional Title must be at least 2 characters.',
-            // 'wrk_exp__title.max' => 'The Professional Title may not be greater than 100 characters.',
-
-            'industry.*.required' => 'The Industry field is required.',
-
-            // 'wrk_exp_responsibilities.required' => 'The Responsibilities field is required.',
-            // 'wrk_exp_responsibilities.string' => 'The Responsibilities must be a string.',
-            // 'wrk_exp_responsibilities.min' => 'The Responsibilities must be at least 2 characters.',
-
-            'skill.required' => 'The Skill field is required.',
-            'skill.array' => 'The Skills must be an array.',
-            'skill.min' => 'At least one skill is required.',
-        ]);
-
-        if ($validator->fails()) {
-            $rsp_msg['response'] = 'error';
-            $rsp_msg['message']  = $validator->errors()->all();
-
-            return $rsp_msg;
-        }
-
-        $skill = $request->input('skill');
-
-        foreach($skill as $row){
-            $skill_data = DB::table('skills')->where('name', $row)->get()->first();
-
-            if(!$skill_data){
-                 DB::table('skills')->insert([
-                    'name' => $row,
-                    'status' => 1,
-                ]);
-            }
-        }
-
-        $industry = $request->input('industry');
-
-        $industry_elements = explode(',', $industry[0]);
-
-        // Trim spaces from each element
-        $industry_elements = array_map('trim', $industry_elements);
-
         // Get the user_id from session
         $user_id = Session::get('user_id'); // Using user_id from session
-        $userDetail = UserDetails::where('user_id', $user_id)->first();
-
-        // Handle file upload for experience letter
-        if ($request->hasFile('experience_letter') && $request->file('experience_letter')->isValid()) {
-
-            $users_email_temp = User::where('id', $user_id)->value('email');
-
-            $users_email_temp = str_replace(['@', '.'], '_', $users_email_temp);
-
-            $newFileName = 'experience_letter_' . $users_email_temp . '_' . now()->format('YmdHis') . '.' . $request->file('experience_letter')->getClientOriginalExtension();
-            $path = $request->file('experience_letter')->storeAs('user_data/experience_letters', $newFileName, 'public');
-
-            $result = file_upload_od($newFileName, $path);
-            if($result != 'error on uploding'){
-                if (Storage::disk('public')->exists($path)) {
-                    // Storage::disk('public')->delete($path);
-                }
-                $path = $result;
-            }
-
-        } else {
-            // Check if existing path should be retained or set to null
-            $path = $userDetail ? $userDetail->experience_letter : null;
-        }
 
         Userdetails::where('user_id', $user_id)->update([
-            // 'wrk_exp__title' => $request->input('wrk_exp__title'),
-            // 'wrk_exp_company_name' => $request->input('wrk_exp_company_name'),
-            // 'wrk_exp_years' => $request->input('wrk_exp_years'),
-            // 'wrk_exp_responsibilities' => $request->input('wrk_exp_responsibilities'),
-            'industry' => json_encode($industry_elements),
-            'skill' => json_encode($skill),
             'employed' => $request->input('Employed'),
-            'experience_letter' => $path,
         ]);
 
         // Update work experience entries
@@ -436,19 +350,82 @@ class UserController extends Controller
         $request->validate([
             'wrk_exp__title.*' => 'required|string|max:100',
             'wrk_exp_company_name.*' => 'required|string|max:100',
-            'wrk_exp_years.*' => 'required|integer',
             'wrk_exp_responsibilities.*' => 'required|string',
+            'experience_letter.*' => 'required|string',
+            'industry.*' => 'required',
+            'skill.*' => 'required',
         ]);
+
+        // Get the industry data from the request
+        $industryInputs = $request->input('industry');
 
         // Prepare the data for insertion
         $workExperiences = [];
+
         foreach ($request->input('wrk_exp__title') as $key => $title) {
+
+            // Handle file upload for experience letter
+            if ($request->hasFile('experience_letter') && $request->file('experience_letter')[$key]->isValid()) {
+
+                $users_email_temp = User::where('id', $user_id)->value('email');
+
+                $users_email_temp = str_replace(['@', '.'], '_', $users_email_temp);
+
+                $newFileName = 'experience_letter_' . $users_email_temp . '_' . now()->format('YmdHis') . '.' . $request->file('experience_letter')->getClientOriginalExtension();
+                $path = $request->file('experience_letter')->storeAs('user_data/experience_letters', $newFileName, 'public');
+
+                $result = file_upload_od($newFileName, $path);
+                if($result != 'error on uploding'){
+                    if (Storage::disk('public')->exists($path)) {
+                        // Storage::disk('public')->delete($path);
+                    }
+                    $path = $result;
+                }
+
+            } else {
+
+                $path = null;
+            }
+
+            // Get the corresponding industries for the current work experience
+            $industries = isset($industryInputs[$key]) ? $industryInputs[$key] : [];
+
+            // Explode the string by comma and sanitize values
+            $industries_t = explode(',', $industries[0]);
+
+            // Trim spaces from each element
+            $industries = array_map('trim', $industries_t);
+
+            // Encode industries as JSON for storing in the database
+            $encodedIndustries = json_encode($industries);  // Store as JSON encoded array
+
+            // Parse and process skills
+            $skills = $request->input("skill.$key", []);
+            $skills = array_map('trim', $skills);
+
+            foreach ($skills as $skill) {
+                $existingSkill = DB::table('skills')->where('name', $skill)->first();
+                if (!$existingSkill) {
+                    DB::table('skills')->insert([
+                        'name' => $skill,
+                        'status' => 1,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+            }
+
+            // Prepare the current work experience data
             $workExperiences[] = [
                 'user_id' => $user_id,
                 'wrk_exp_title' => $title,
-                'wrk_exp_company_name' => $request->input('wrk_exp_company_name')[$key],
-                'wrk_exp_years' => $request->input('wrk_exp_years')[$key],
-                'wrk_exp_responsibilities' => $request->input('wrk_exp_responsibilities')[$key],
+                'wrk_exp_company_name' => $request->input('wrk_exp_company_name')[$key] ?? null,
+                'wrk_exp_responsibilities' => $request->input('wrk_exp_responsibilities')[$key] ?? null,
+                'start_month_year' => $request->input('start_month_year')[$key] ?? null,
+                'end_month_year' => $request->input('end_month_year')[$key] ?? null,
+                'experience_letter' => $path ?? null,
+                'industry' => $encodedIndustries ?? null, // Encode the industries array as JSON
+                'skill' => json_encode($skills) ?? null, // Encode the list of skills as JSON
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
@@ -457,9 +434,10 @@ class UserController extends Controller
         // Delete old entries for the user
         UserWorkExperience::where('user_id', $user_id)->delete();
 
-        // Insert the new entries
+        // Insert the new entries into the database
         UserWorkExperience::insert($workExperiences);
 
+        // Clear the cache after the update
         Cache::flush();
     }
 
