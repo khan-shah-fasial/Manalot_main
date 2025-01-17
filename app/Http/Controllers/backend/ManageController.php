@@ -131,7 +131,7 @@ class ManageController extends Controller
 
     public function index_industry(Request $request)
     {
-        $perPage = $request->input('per_page', 10);
+        $perPage = $request->input('per_page', 300);
         $industry = DB::table('industry')->orderBy('id','DESC')->paginate($perPage);
         return view('backend.pages.industry.index', compact('industry'));
     }
@@ -289,7 +289,7 @@ class ManageController extends Controller
 
     public function index_job_title(Request $request)
     {
-        $perPage = $request->input('per_page', 10);
+        $perPage = $request->input('per_page', 300);
         $currencies = DB::table('currencies')->orderBy('id','DESC')->paginate($perPage);
         return view('backend.pages.currencies.index', compact('currencies'));
     }
@@ -528,7 +528,16 @@ class ManageController extends Controller
     public function index_skills(Request $request)
     {
         $perPage = $request->input('per_page', 50);
-        $skills = DB::table('skills')->orderBy('id','DESC')->paginate($perPage);
+        $query = DB::table('skills')->orderBy('id', 'DESC');
+    
+        // Apply search filter if the search parameter is present
+        if ($request->has('search') && !empty($request->input('search'))) {
+            $searchTerm = $request->input('search');
+            $query->where('name', 'like', '%' . $searchTerm . '%');
+        }
+    
+        $skills = $query->paginate($perPage);
+    
         return view('backend.pages.skills.index', compact('skills'));
     }
 
