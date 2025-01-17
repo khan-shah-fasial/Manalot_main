@@ -85,6 +85,9 @@
                                 <a href="" class="view_profile_quick_menu">Setting & Privacy</a>
                                 <a href="" class="view_profile_quick_menu">Help</a>
                                 <a href="" class="view_profile_quick_menu">Language</a>
+                                @if(auth()->user()->role_id == 1)
+                                <a href="{{ url(route('backend.dashboard')) }}" class="view_profile_quick_menu">Go to Admin</a>
+                                @endif
                             </div>
                             <a href="{{ url(route('customer.logout')) }}" class="logout">Sign Out</a>
                         </div>
@@ -114,22 +117,7 @@
                         <span> Network</span>
                     </a>
 
-                     @if(auth()->user()->role_id == 1)
-                           
-                               <a data-bs-toggle="modal" data-bs-target="#postmodal" class="text-center align-items-center text-decoration-none text-dark text-xs post_name_ftr">
-                                    <div>
-                                        <img src="/assets/images/add-post.svg" class="post_images_icons" alt="people icon" />
-                                    </div>
-                                    <span> New Post</span>
-                                </a>
-                        @else
-                               <a href="/" class="text-center align-items-center text-decoration-none text-dark text-xs post_name_ftr">
-                                    <div>
-                                        <img src="/assets/images/add-post.svg" class="post_images_icons" alt="people icon" />
-                                    </div>
-                                    <span> New Post</span>
-                                </a>
-                        @endif
+                    
                     <a href="/" class="text-center align-items-center text-decoration-none text-dark text-xs ">
                         <div>
                             <img src="/assets/images/suitcase_icon3.svg" alt="suitcase icon" />

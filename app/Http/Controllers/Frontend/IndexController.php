@@ -193,6 +193,7 @@ class IndexController extends Controller
             $comment = Comment::findOrFail($request->comment_id);
             $comment->update([
                 'content' => $request->comment,
+                'updated_at' => now(),
             ]);
 
             // Return the updated comment with user details
@@ -210,6 +211,8 @@ class IndexController extends Controller
                 'post_id' => $request->post_id,
                 'parent_id' => $request->parent_id,
                 'content' => $request->comment,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
     
             return response()->json(['success' => true, 'comment' => $comment->load('user')]);

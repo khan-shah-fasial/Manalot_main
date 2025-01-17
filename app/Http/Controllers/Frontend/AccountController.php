@@ -54,6 +54,17 @@ class AccountController extends Controller
 
             if($user){
 
+                if($user->role_id == '1'){
+
+                    Session::put('user_id', auth()->user()->id);
+
+                    $rsp_msg['response'] = 'success';
+                    $rsp_msg['message']  = "Successfully logged in";
+
+                    return response()->json(array('response_message' => $rsp_msg));
+
+                }
+
                 if ($user->completed_status == '0'){
 
                     Session()->flush();
@@ -1185,6 +1196,34 @@ class AccountController extends Controller
             'wrk_exp_responsibilities.*' => 'required|string',
         ]);
 
+        $userDetail = UserWorkExperience::where('user_id', $user_id)->whereNotNull('experience_letter')->first();
+
+        if ($request->hasFile('experience_letter') && $request->file('experience_letter')->isValid()) {
+
+            $users_email_temp = DB::table('users')->where('id', Session::get('temp_user_id'))->value('email');
+
+            $users_email_temp = str_replace(['@', '.'], '_', $users_email_temp);
+
+            $newFileName = 'experience_letter_' . $users_email_temp . '_' . now()->format('YmdHis') . '.' . $request->file('experience_letter')->getClientOriginalExtension();
+            $path = $request->file('experience_letter')->storeAs('user_data/experience_letters', $newFileName, 'public');
+
+
+
+            $path = $request->file('experience_letter')->store('user_data/experience_letters', 'public');
+
+            $result = file_upload_od($newFileName, $path);
+            if($result != 'error on uploding'){
+                if (Storage::disk('public')->exists($path)) {
+                    // Storage::disk('public')->delete($path);
+                }
+                $path = $result;
+            }
+
+        } else {
+            // Check if existing path should be retained or set to null
+            $path = $userDetail ? $userDetail->experience_letter : null;
+        }
+
         // Prepare the data for insertion
         $workExperiences = [];
         foreach ($request->input('wrk_exp__title') as $key => $title) {
@@ -1192,8 +1231,11 @@ class AccountController extends Controller
                 'user_id' => $user_id,
                 'wrk_exp_title' => $title,
                 'wrk_exp_company_name' => $request->input('wrk_exp_company_name')[$key],
-                'wrk_exp_years' => $request->input('wrk_exp_years')[$key],
+                // 'wrk_exp_years' => $request->input('wrk_exp_years')[$key],
+                'start_month_year' => $request->input('start_month_year')[$key],
+                'end_month_year' => $request->input('end_month_year')[$key],
                 'wrk_exp_responsibilities' => $request->input('wrk_exp_responsibilities')[$key],
+                'experience_letter' => $path,
                 'created_at' => now(),
                 'updated_at' => now(),
             ];

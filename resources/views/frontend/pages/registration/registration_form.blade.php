@@ -34,6 +34,8 @@
 
     $currencies = DB::table('currencies')->get(['id','symbol']);
 
+    $userWorkExp = DB::table('user_work_experience')->where('user_id', Session::get('temp_user_id'))->orderBy('id', 'asc')->first();
+
     // $references_from = DB::table('references_from')->where('status', '1')->get();
 
     $fullname = isset($user_detail->fullname) ? $user_detail->fullname : null;
@@ -46,14 +48,16 @@
     $state = isset($user_detail->state) ? $user_detail->state : null;
     $address = isset($user_detail->address) ? $user_detail->address : null;
 
-    $wrk_exp__title = isset($user_detail->wrk_exp__title) ? $user_detail->wrk_exp__title : null;
-    $wrk_exp_company_name = isset($user_detail->wrk_exp_company_name) ? $user_detail->wrk_exp_company_name : null;
-    $wrk_exp_years = isset($user_detail->wrk_exp_years) ? $user_detail->wrk_exp_years : null;
+    $wrk_exp__title = isset($userWorkExp->wrk_exp_title) ? $userWorkExp->wrk_exp_title : null;
+    $wrk_exp_company_name = isset($userWorkExp->wrk_exp_company_name) ? $userWorkExp->wrk_exp_company_name : null;
+    // $wrk_exp_years = isset($userWorkExp->wrk_exp_years) ? $userWorkExp->wrk_exp_years : null;
+    $start_month_year = isset($userWorkExp->start_month_year) ? $userWorkExp->start_month_year : null;
+    $end_month_year = isset($userWorkExp->end_month_year) ? $userWorkExp->end_month_year : null;
     $industry_check = isset($user_detail->industry) ? $user_detail->industry : '[]';
     $experience_letter = isset($user_detail->experience_letter) ? $user_detail->experience_letter : null;
     $employed = isset($user_detail->employed) ? $user_detail->employed : null;
     $skill_check = isset($user_detail->skill) ? $user_detail->skill : '[]';
-    $wrk_exp_responsibilities = isset($user_detail->wrk_exp_responsibilities) ? $user_detail->wrk_exp_responsibilities : null;
+    $wrk_exp_responsibilities = isset($userWorkExp->wrk_exp_responsibilities) ? $userWorkExp->wrk_exp_responsibilities : null;
     $address = isset($user_detail->address) ? $user_detail->address : null;
 
     $edu_clg_name = isset($user_detail->edu_clg_name) ? $user_detail->edu_clg_name : null;
@@ -492,7 +496,7 @@
                     <div class="position-relative form-group">
                         <label for="job_title" class="form-label">Current Designation / Title *</label>
                         <input type="text" class="form-control is-invalid input_text" id="job_title"
-                            name="wrk_exp__title" placeholder="Enter your Job Title" pattern="[A-Za-z]+"
+                            name="wrk_exp__title[]" placeholder="Enter your Job Title" pattern="[A-Za-z]+"
                             minlength="2" maxlength="100" value="{{ $wrk_exp__title }}" required />
                     </div>
                 </div>
@@ -501,17 +505,17 @@
                     <div class="position-relative form-group">
                         <label for="company" class="form-label">Company Name *</label>
                         <input type="text" class="form-control is-invalid input_text" id="company"
-                            name="wrk_exp_company_name" placeholder="Enter your Company Name" pattern="[A-Za-z]+"
+                            name="wrk_exp_company_name[]" placeholder="Enter your Company Name" pattern="[A-Za-z]+"
                             minlength="1" maxlength="100" value="{{ $wrk_exp_company_name }}"
                             required>
                     </div>
                 </div>
 
-                <div class="col-md-6 mb-4">
+                {{-- <div class="col-md-6 mb-4">
                     <div class="position-relative form-group">
                         <label for="State" class="form-label">Total Years of Experience *</label>
                         <select class="select2 form-select form-control is-invalid input_select old-select2"
-                            aria-label="Default select example" id="wrk_exp_years" name="wrk_exp_years" required>
+                            aria-label="Default select example" id="wrk_exp_years" name="wrk_exp_years[]" required>
                             <option value="">Select Experience</option>
                             @foreach ($years_of_exp as $row)
                                 <option value="{{ $row->id }}" @if ($wrk_exp_years == $row->id) selected @endif>
@@ -520,6 +524,18 @@
                             @endforeach
                         </select>
                     </div>
+                </div> --}}
+
+                <div class="col-md-6 mb-4">
+                    <label for="start_month_year">Start Month and Year:</label>
+                    <input type="month" class="form-control is-invalid input_text register_date_field" id="start_month_year" name="start_month_year[]"
+                    value="{{ $start_month_year }}" required>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <label for="end_month_year">End Month and Year:</label>
+                    <input type="month" class="form-control is-invalid input_text register_date_field" id="end_month_year" name="end_month_year[]"
+                    value="{{ $end_month_year }}" required>
                 </div>
 
                  <div class="col-md-6 mb-4">
@@ -690,7 +706,7 @@
                 <div class="col-md-12 pt-4">
                     <div class="form-group">
                         <label for="Responsibilities" class="form-label">Responsibilities/Achievements*</label>
-                        <textarea class="form-control is-invalid" rows="4" cols="45" name="wrk_exp_responsibilities"
+                        <textarea class="form-control is-invalid" rows="4" cols="45" name="wrk_exp_responsibilities[]"
                             placeholder="Message" required>{{ $wrk_exp_responsibilities }}</textarea>
                     </div>
                 </div>

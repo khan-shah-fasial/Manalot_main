@@ -408,6 +408,9 @@
                                     <i class="mdi mdi-square-edit-outline"></i>
                                     <span>Profile</span>
                                 </a>
+                                @if(auth()->user()->role_id == 1)
+                                <a class="dropdown-item" href="{{ url(route('index')) }}" class="view_profile_quick_menu">Go to Front</a>
+                                @endif
                                 {{-- <a onclick="smallModal('{{ url(route('user.password',['id' => auth()->user()->id])) }}', 'Reset Password')" class="dropdown-item">
                                     <i class="mdi mdi-square-edit-outline"></i>
                                     <span>Reset Password</span>
