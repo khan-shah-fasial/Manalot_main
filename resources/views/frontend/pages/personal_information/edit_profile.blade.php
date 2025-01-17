@@ -580,13 +580,13 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                             <span class="leble_size">(docx, pdf -  up to 5MB)</span></label>
                                                         {{-- <img src="images/file.png" alt="" class="input_icon" />
                                                     </div>
-                                                    
+
                                                         @if ($experience_letter)
                                                         <div class="mt-2">
                                                             <a href="{{ asset('storage/' . $experience_letter) }}" class="btn btn-success add-row" target="_blank">View Last Experience | Relieving letter</a>
                                                         </div>
                                                     @endif
-                                                   
+
                                                 </div> --}}
                                                 <div class="col-md-12 mb-md-4 mb-3">
 
@@ -673,7 +673,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                         @endforeach
                                     @else
                                         {{-- Render an empty row as fallback --}}
-                                        <div class="row work-exp-row cirtificate_pdd">
+                                        <div class="row work-exp-row cirtificate_pdd" data-index="0">
                                             <div class="col-md-6 mb-md-4 mb-3">
                                                 <div class="position-relative form-group">
                                                     <label for="job_title" class="form-label">Professional Title*</label>
@@ -1463,30 +1463,83 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
             }
         });
 
+        // Function to update the add/remove buttons based on row position
+        function updateRowIndexesAndButtons() {
+            $('.work-exp-row').each(function (index) {
+                const row = $(this);
+
+                // Update the data-index attribute
+                row.attr('data-index', index);
+
+                // Update skill dropdown attributes (data-index, name, id)
+                const skillDropdown = row.find('.skill-dropdown');
+                skillDropdown.attr({
+                    'data-index': index,
+                    'name': `skill[${index}][]`,
+                    'id': `skills_${index}`
+                });
+
+                // Update the related container ID for skill dropdown using closest
+                const relatedContainer = row.find('.skill-dropdown').closest('.col-md-12').find(`#option-skills_${skillDropdown.data('index')-1}`);
+                relatedContainer.attr('id', `option-skills_${index}`);
+
+                // Destroy and reinitialize the skill dropdown
+                initializeSkillDropdown(`#skills_${index}`, '{{ url(route('get.skills')) }}');
+
+                // Clear existing add/remove buttons
+                row.find('.add_more_div').remove();
+
+                if ($('.work-exp-row').length === 1) {
+                    // Case 1: Single row - Only "Add More" button
+                    row.append(`
+                        <div class="col-md-6 d-flex gap-3 add_more_div">
+                            <button type="button" class="add_more add-row-work-exp">ADD MORE +</button>
+                        </div>
+                    `);
+                } else if (index === $('.work-exp-row').length - 1) {
+                    // Case 4: Last row - Both "Add More" and "Remove" buttons
+                    row.append(`
+                        <div class="col-md-6 d-flex gap-3 add_more_div">
+                            <button type="button" class="add_more add-row-work-exp">ADD MORE +</button>
+                            <button type="button" class="remove_more remove-row-work-exp">REMOVE -</button>
+                        </div>
+                    `);
+                } else {
+                    // Middle rows or rows that are not the last - Only "Remove" button
+                    row.append(`
+                        <div class="col-md-6 d-flex gap-3 add_more_div">
+                            <button type="button" class="remove_more remove-row-work-exp">REMOVE -</button>
+                        </div>
+                    `);
+                }
+            });
+        }
 
         // Add row functionality
         $(document).on('click', '.add-row-work-exp', function (e) {
-            e.preventDefault(); // Prevent form submission
+            e.preventDefault();
 
             var newRow = $('.work-exp-row').first().clone(); // Clone the first row
+
             // Clear input values in the cloned row
             newRow.find('input,textarea,select').each(function () {
                 $(this).val('');
             });
 
-            newRow.find('.add_more_div').remove(); // Remove add button from the cloned row
-            // newRow.find('.add-row-work-exp').remove(); // Remove add button from the cloned row
-            // newRow.find('.remove-row-work-exp').remove(); // Remove add button from the cloned row
+            // Remove the extra span created by select2
+            newRow.find('.select2-container').remove(); // Remove the extra select2 span
 
-            // Assign a unique class to the skill dropdown in the cloned row
-            const uniqueClass = 'skill-dropdown-' + ($('.work-exp-row').length + 1);
-            newRow.find('.skill-dropdown').removeClass('skill-dropdown').addClass(uniqueClass);
+            // Append the cloned row at the end
+            $('.work-exp-row').last().after(newRow);
 
-            // Initialize the skill dropdown for the new row using the unique class
-            initializeSkillDropdown(`.${uniqueClass}`, '{{ url(route('get.skills')) }}');
+            // Update row indexes and buttons
+            updateRowIndexesAndButtons();
 
-            newRow.append('<div class="col-md-6 d-flex gap-3 add_more_div"><button type="button" class="remove_more remove-row-work-exp">REMOVE -</button></div>'); // Add new add and remove buttons
-            $('.work-exp-row').last().after(newRow); // Append the cloned row at the end
+            // Reinitialize the select2 dropdown for the new row
+            newRow.find('.skill-dropdown').each(function () {
+                initializeSkillDropdown(this, '{{ url(route('get.skills')) }}'); // Reinitialize select2 for the new row
+            });
+
         });
 
         // Remove row functionality
@@ -1494,10 +1547,15 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
             e.preventDefault(); // Prevent form submission
             if ($('.work-exp-row').length > 1) {
                 $(this).closest('.work-exp-row').remove(); // Remove the closest row
+                // Update row indexes and buttons
+                updateRowIndexesAndButtons();
             } else {
                 alert('At least one row is required.'); // Alert if only one row is left
             }
         });
+
+
+        updateRowIndexesAndButtons();
 
 
         // Add row for Education
@@ -1575,7 +1633,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
             const index = $dropdown.data('index'); // Fetch index if exists
             const relatedSkillsContainer = index !== undefined
                 ? `#option-skills-${index}`
-                : '#option-skills'; // Default container if no index
+                : `#option-skills_${index}`; // Default container if no index
             let selectedSkillsOrder = [];
             let updating = false;
 
