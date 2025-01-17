@@ -364,28 +364,28 @@ class UserController extends Controller
 
         foreach ($request->input('wrk_exp__title') as $key => $title) {
 
-            // Handle file upload for experience letter
-            if ($request->hasFile('experience_letter') && $request->file('experience_letter')[$key]->isValid()) {
+            // // Handle file upload for experience letter
+            // if ($request->hasFile('experience_letter') && $request->file('experience_letter')[$key]->isValid()) {
 
-                $users_email_temp = User::where('id', $user_id)->value('email');
+            //     $users_email_temp = User::where('id', $user_id)->value('email');
 
-                $users_email_temp = str_replace(['@', '.'], '_', $users_email_temp);
+            //     $users_email_temp = str_replace(['@', '.'], '_', $users_email_temp);
 
-                $newFileName = 'experience_letter_' . $users_email_temp . '_' . now()->format('YmdHis') . '.' . $request->file('experience_letter')->getClientOriginalExtension();
-                $path = $request->file('experience_letter')->storeAs('user_data/experience_letters', $newFileName, 'public');
+            //     $newFileName = 'experience_letter_' . $users_email_temp . '_' . now()->format('YmdHis') . '.' . $request->file('experience_letter')->getClientOriginalExtension();
+            //     $path = $request->file('experience_letter')->storeAs('user_data/experience_letters', $newFileName, 'public');
 
-                $result = file_upload_od($newFileName, $path);
-                if($result != 'error on uploding'){
-                    if (Storage::disk('public')->exists($path)) {
-                        // Storage::disk('public')->delete($path);
-                    }
-                    $path = $result;
-                }
+            //     $result = file_upload_od($newFileName, $path);
+            //     if($result != 'error on uploding'){
+            //         if (Storage::disk('public')->exists($path)) {
+            //             // Storage::disk('public')->delete($path);
+            //         }
+            //         $path = $result;
+            //     }
 
-            } else {
+            // } else {
 
-                $path = null;
-            }
+            //     $path = null;
+            // }
 
             // Get the corresponding industries for the current work experience
             $industries = isset($industryInputs[$key]) ? $industryInputs[$key] : [];
@@ -423,7 +423,7 @@ class UserController extends Controller
                 'wrk_exp_responsibilities' => $request->input('wrk_exp_responsibilities')[$key] ?? null,
                 'start_month_year' => $request->input('start_month_year')[$key] ?? null,
                 'end_month_year' => $request->input('end_month_year')[$key] ?? null,
-                'experience_letter' => $path ?? null,
+                'experience_letter' => null,
                 'industry' => $encodedIndustries ?? null, // Encode the industries array as JSON
                 'skill' => json_encode($skills) ?? null, // Encode the list of skills as JSON
                 'created_at' => now(),

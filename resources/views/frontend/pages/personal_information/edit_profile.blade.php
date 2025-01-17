@@ -571,23 +571,23 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-6 mb-4">
+                                                {{-- <div class="col-md-6 mb-4">
                                                     <div class="position-relative">
                                                         <label for="experience_letter" class="form-label">Upload Last Experience | Relieving letter
                                                         <img src="/assets/images/pdf_icon.png" alt="" class="input_icon" />
                                                         <input class="form-control" type="file" id="formFile" name="experience_letter[]"
                                                             accept=".pdf,.doc,.docx,application/msword,image/*,.webp" />
                                                             <span class="leble_size">(docx, pdf -  up to 5MB)</span></label>
-                                                        {{-- <img src="images/file.png" alt="" class="input_icon" /> --}}
+                                                        {{-- <img src="images/file.png" alt="" class="input_icon" />
                                                     </div>
-                                                    {{--
+                                                    
                                                         @if ($experience_letter)
                                                         <div class="mt-2">
                                                             <a href="{{ asset('storage/' . $experience_letter) }}" class="btn btn-success add-row" target="_blank">View Last Experience | Relieving letter</a>
                                                         </div>
                                                     @endif
-                                                    --}}
-                                                </div>
+                                                   
+                                                </div> --}}
                                                 <div class="col-md-12 mb-md-4 mb-3">
 
                                                     <label for="industry_{{ $index }}" class="form-label">Industries</label>
@@ -708,7 +708,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 mb-4">
+                                            {{-- <div class="col-md-6 mb-4">
                                                 <div class="position-relative">
                                                     <label for="experience_letter" class="form-label">Upload Last Experience | Relieving letter
                                                     <img src="/assets/images/pdf_icon.png" alt="" class="input_icon" />
@@ -716,7 +716,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                         accept=".pdf,.doc,.docx,application/msword,image/*,.webp" />
                                                         <span class="leble_size">(docx, pdf -  up to 5MB)</span></label>
                                                 </div>
-                                            </div>
+                                            </div> --}}
 
                                             <div class="col-md-12 mb-md-4 mb-3">
 
@@ -1467,6 +1467,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
         // Add row functionality
         $(document).on('click', '.add-row-work-exp', function (e) {
             e.preventDefault(); // Prevent form submission
+
             var newRow = $('.work-exp-row').first().clone(); // Clone the first row
             // Clear input values in the cloned row
             newRow.find('input,textarea,select').each(function () {
@@ -1476,7 +1477,15 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
             newRow.find('.add_more_div').remove(); // Remove add button from the cloned row
             // newRow.find('.add-row-work-exp').remove(); // Remove add button from the cloned row
             // newRow.find('.remove-row-work-exp').remove(); // Remove add button from the cloned row
-            newRow.append('<div class="col-md-6 d-flex gap-3 add_more_div"><button type="button" class="add_more add-row-work-exp">ADD MORE +</button><button type="button" class="remove_more remove-row-work-exp">REMOVE -</button></div>'); // Add new add and remove buttons
+
+            // Assign a unique class to the skill dropdown in the cloned row
+            const uniqueClass = 'skill-dropdown-' + ($('.work-exp-row').length + 1);
+            newRow.find('.skill-dropdown').removeClass('skill-dropdown').addClass(uniqueClass);
+
+            // Initialize the skill dropdown for the new row using the unique class
+            initializeSkillDropdown(`.${uniqueClass}`, '{{ url(route('get.skills')) }}');
+
+            newRow.append('<div class="col-md-6 d-flex gap-3 add_more_div"><button type="button" class="remove_more remove-row-work-exp">REMOVE -</button></div>'); // Add new add and remove buttons
             $('.work-exp-row').last().after(newRow); // Append the cloned row at the end
         });
 
