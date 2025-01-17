@@ -439,7 +439,7 @@ body
         const isTagPost = urlParams.get('tag');
         const isSearchPost = urlParams.get('search');
 
-        console.log(isSearchPost);
+        // console.log(isSearchPost);
 
         // Construct the URL with or without savepost=true
         let url = `{{ url(route('posts.fetch')) }}?page=${page}`;

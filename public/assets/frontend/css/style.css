@@ -4452,7 +4452,7 @@ div#likeModal button.btn-close {
     height: 24px;
 }
 
-.reply-link {
+.reply-link, .reply-link1 {
     color: #969696;
     text-decoration: none;
 }

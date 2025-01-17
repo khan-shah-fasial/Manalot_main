@@ -26,14 +26,15 @@
                 <div class="d-flex align-items-center gap-2">
                     <label for="rowsPerPage">Show</label>
                     <select id="rowsPerPage" onchange="updateRowsPerPage()" class="form-select form-select-sm">
-                        <option value="10" {{ request()->get('per_page') == 10 ? 'selected' : '' }}>10</option>
-                        <option value="25" {{ request()->get('per_page') == 25 ? 'selected' : '' }}>25</option>
-                        <option value="50" {{ request()->get('per_page') == 50 ? 'selected' : '' }}>50</option>
-                        <option value="100" {{ request()->get('per_page') == 100 ? 'selected' : '' }}>100</option>
+                        <option value="10" {{ request()->get('per_page') == 50 ? 'selected' : '' }}>50</option>
+                        <option value="25" {{ request()->get('per_page') == 100 ? 'selected' : '' }}>100</option>
+                        <option value="50" {{ request()->get('per_page') == 200 ? 'selected' : '' }}>200</option>
+                        <option value="100" {{ request()->get('per_page') == 300 ? 'selected' : '' }}>300</option>
                     </select>
                     <span>entries</span>
                 </div>
             </div>
+            <input type="text" id="customSearch" placeholder="Search skills..." class="form-control my-3">
             <table id="basic-datatable5" class="table dt-responsive nowrap w-100">
                 <thead>
                     <tr>
@@ -86,12 +87,48 @@
 
 @section("page.scripts")
 <script>
-$(document).ready(function() {
-    var table = $('#basic-datatable5').DataTable({
-        paging: false,
-        info: false
+    $(document).ready(function() {
+
+        var urlParams = new URLSearchParams(window.location.search);
+        var searchParam = urlParams.get('search');
+        if (searchParam) {
+            $('#customSearch').val(decodeURIComponent(searchParam));
+        }
+
+        var table = $('#basic-datatable5').DataTable({
+            paging: false,
+            info: false,
+            dom: 'lrtip' // Correctly using 'dom' to hide default search
+        });
+
+        // Debounce function to add a delay
+        function debounce(func, delay) {
+            let timer;
+            return function(...args) {
+                clearTimeout(timer);
+                timer = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+
+        // Custom search input functionality with debounce
+        $('#customSearch').on(
+            'keyup',
+            debounce(function() {
+                var searchTerm = $(this).val();
+                // Redirect with search term as GET parameter
+                if (searchTerm.length >= 3) {
+                    if (searchTerm.trim() !== '') {
+                        window.location.href = `{{ url(route('manage.index_skills')) }}?search=${encodeURIComponent(searchTerm)}`;
+                    } else {
+                        window.location.href = window.location.pathname; // Clear search when input is empty
+                    }
+                } else if (searchTerm.trim() === '') {
+                    // Clear search if input becomes empty
+                    window.location.href = `{{ url(route('manage.index_skills')) }}`;
+                }
+            }, 500) // 500ms delay
+        );
     });
-});
 </script>
 
 <script>

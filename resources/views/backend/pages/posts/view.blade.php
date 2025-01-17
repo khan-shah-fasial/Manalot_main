@@ -7,15 +7,39 @@
     <div class="col-6 mb-3">
         <h4>Image:</h4>
         <div>
-            @if ($post->image_url)
-            <img src="{{ asset('storage/' . $post->image_url) }}" class="w-50" alt="Post Image">
+            @if (!empty($post->image_url) && $post->image_url != 'null')
+                @php
+                    $media = json_decode($post->image_url);
+                @endphp
+                @if (!empty($media) && is_array($media))
+                    <div class="carousel-inner">
+                        @php $firstSlide = true; @endphp
+                        @foreach ($media as $row)
+                            @if (isset($row->type) && $row->type == 'image')
+                                <div class="carousel-item {{ $firstSlide ? 'active' : '' }}">
+                                    <img width="100%" height="100%" src="{{ asset('storage/' . $row->path) }}" />
+                                </div>
+                            @elseif (isset($row->type) && $row->type == 'video')
+                                <div class="carousel-item {{ $firstSlide ? 'active' : '' }}">
+                                    <video width="100%" height="100%" autoplay loop muted>
+                                        <source src="{{ asset('storage/' . $row->path) }}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            @endif
+                            @php $firstSlide = false; @endphp
+                        @endforeach
+                    </div>
+                @endif
+            @else
+                    <p>No media</p>
             @endif
         </div>
     </div>
 
     <div class="col-6 mb-3">
         <h4>Event:</h4>
-        <p>{{ $post->event }}</p>
+        <p>{{ $post->event ? 'Active' : '-' }}</p>
     </div>
     <div class="col-6 mb-3">
         <div class="d-flex align-items-center justify-content-between mt-3 col-12">

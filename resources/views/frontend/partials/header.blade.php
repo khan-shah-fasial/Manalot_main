@@ -85,6 +85,9 @@
                                 <a href="" class="view_profile_quick_menu">Setting & Privacy</a>
                                 <a href="" class="view_profile_quick_menu">Help</a>
                                 <a href="" class="view_profile_quick_menu">Language</a>
+                                @if(auth()->user()->role_id == 1)
+                                <a href="{{ url(route('backend.dashboard')) }}" class="view_profile_quick_menu">Go to Admin</a>
+                                @endif
                             </div>
                             <a href="{{ url(route('customer.logout')) }}" class="logout">Sign Out</a>
                         </div>
