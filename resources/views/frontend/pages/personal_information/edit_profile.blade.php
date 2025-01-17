@@ -588,7 +588,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                     @endif
 
                                                 </div> --}}
-                                                <div class="col-md-12 mb-md-4 mb-3">
+                                                {{-- <div class="col-md-12 mb-md-4 mb-3">
 
                                                     <label for="industry_{{ $index }}" class="form-label">Industries</label>
                                                     <div id="list-industry_{{ $index }}" class="d-none">
@@ -596,7 +596,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                     </div>
 
                                                     <div id="dropdown-container_{{ $index }}">
-                                                        {{-- <div id="selected-values">Selected values will be shown here.</div> --}}
+                                                        <div id="selected-values">Selected values will be shown here.</div>
                                                         <input type="hidden" id="selected-values-ids_{{ $index }}" name="industry[{{ $index }}][]" value="">
 
 
@@ -662,7 +662,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                         </select>
                                                     </div>
                                                     <div class="d-none" id="option-skills{{ isset($index) ? '-' . $index : '' }}"></div>
-                                                </div>
+                                                </div> --}}
 
 
                                                 <div class="col-md-6 d-flex gap-3 add_more_div">
@@ -718,7 +718,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                 </div>
                                             </div> --}}
 
-                                            <div class="col-md-12 mb-md-4 mb-3">
+                                            {{-- <div class="col-md-12 mb-md-4 mb-3">
 
                                                 <label for="industry" class="form-label">Industries</label>
                                                 <div id="list-industry" class="d-none">
@@ -726,7 +726,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                 </div>
 
                                                 <div id="dropdown-container">
-                                                    {{-- <div id="selected-values">Selected values will be shown here.</div> --}}
+                                                    <div id="selected-values">Selected values will be shown here.</div>
                                                     <input type="hidden" id="selected-values-ids" name="industry[]" value="">
 
 
@@ -789,7 +789,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                     </select>
                                                 </div>
                                                 <div class="d-none" id="option-skills_0"></div>
-                                            </div>
+                                            </div> --}}
 
                                             <div class="col-md-6 d-flex gap-3 add_more_div">
                                                 <button type="button" class="add_more add-row-work-exp">ADD MORE +</button>

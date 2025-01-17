@@ -380,6 +380,7 @@ class AccountController extends Controller
                 }
             })
             ->groupBy('name')
+            ->limit('10')
             ->get(['name']);
 
         return response()->json($skills);

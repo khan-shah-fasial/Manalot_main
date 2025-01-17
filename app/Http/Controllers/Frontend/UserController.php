@@ -388,32 +388,32 @@ class UserController extends Controller
             // }
 
             // Get the corresponding industries for the current work experience
-            $industries = isset($industryInputs[$key]) ? $industryInputs[$key] : [];
+            // $industries = isset($industryInputs[$key]) ? $industryInputs[$key] : [];
 
-            // Explode the string by comma and sanitize values
-            $industries_t = explode(',', $industries[0]);
+            // // Explode the string by comma and sanitize values
+            // $industries_t = explode(',', $industries[0]);
 
-            // Trim spaces from each element
-            $industries = array_map('trim', $industries_t);
+            // // Trim spaces from each element
+            // $industries = array_map('trim', $industries_t);
 
-            // Encode industries as JSON for storing in the database
-            $encodedIndustries = json_encode($industries);  // Store as JSON encoded array
+            // // Encode industries as JSON for storing in the database
+            // $encodedIndustries = json_encode($industries);  // Store as JSON encoded array
 
-            // Parse and process skills
-            $skills = $request->input("skill.$key", []);
-            $skills = array_map('trim', $skills);
+            // // Parse and process skills
+            // $skills = $request->input("skill.$key", []);
+            // $skills = array_map('trim', $skills);
 
-            foreach ($skills as $skill) {
-                $existingSkill = DB::table('skills')->where('name', $skill)->first();
-                if (!$existingSkill) {
-                    DB::table('skills')->insert([
-                        'name' => $skill,
-                        'status' => 1,
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ]);
-                }
-            }
+            // foreach ($skills as $skill) {
+            //     $existingSkill = DB::table('skills')->where('name', $skill)->first();
+            //     if (!$existingSkill) {
+            //         DB::table('skills')->insert([
+            //             'name' => $skill,
+            //             'status' => 1,
+            //             'created_at' => now(),
+            //             'updated_at' => now(),
+            //         ]);
+            //     }
+            // }
 
             // Prepare the current work experience data
             $workExperiences[] = [
@@ -424,8 +424,8 @@ class UserController extends Controller
                 'start_month_year' => $request->input('start_month_year')[$key] ?? null,
                 'end_month_year' => $request->input('end_month_year')[$key] ?? null,
                 'experience_letter' => null,
-                'industry' => $encodedIndustries ?? null, // Encode the industries array as JSON
-                'skill' => json_encode($skills) ?? null, // Encode the list of skills as JSON
+                'industry' => null, // Encode the industries array as JSON
+                'skill' =>  null, // Encode the list of skills as JSON
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
