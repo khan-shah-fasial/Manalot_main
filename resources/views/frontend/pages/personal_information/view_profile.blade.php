@@ -110,10 +110,6 @@ body {
     color: #535353;
 }
 
-.user_header .search_input button {
-    padding: 8px 0px 8px 20px;
-}
-
 </style>
 
 <div class="profile-page pb-5 proxima_nova_font ">
@@ -263,7 +259,7 @@ body {
             @endforeach
         </div>
 
-        <div class="profile-information box_shadows mt-35 padd-40 education_main_div">
+        <div class="profile-information box_shadows mt-35 padd-40 education_main_div mb-md-0 mb-4">
             <!-- Education Section -->
             <div class="about_heading_div">
                 <img class="user_icon" src="/assets/images/education_icon.svg">
@@ -281,7 +277,7 @@ body {
                         @endphp
 
                         <div class="col-md-6 col-12 mb-3">
-                            <div class="d-flex pb-md-3 align-items-center">
+                            <div class="d-flex pb-md-3 align-items-md-center">
                                 <img class="education_certification_logo" src="/assets/images/logo-welingkar.png" alt="Welingkar Logo">
                                 <div class="ms-3">
                                     <h5 class="mb-1">{{ htmlspecialchars($collegeName) }}</h5>
@@ -300,7 +296,7 @@ body {
             <div class="d-flex flex-md-row flex-column certification_div">
                 @foreach($certificate_data as $certificate)
                     <div class="col-md-6 mb-3">
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-md-center">
                             <img class="education_certification_logo" src="/assets/images/ma_foi.jpeg" alt="Certification Logo">
                             <div class="ms-3">
                                 <h5 class="mb-1">{{ $certificate['certificate_name'] }}</h5>
@@ -316,7 +312,7 @@ body {
             </div>
         </div>
 
-        <div class="maple_consulting_div">
+        <div class="maple_consulting_div d-lg-block d-none">
             <h5 class="maple_consluting text-center">
                 © Maple Consulting and Services
             </h5>
