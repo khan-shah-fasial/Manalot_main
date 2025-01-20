@@ -663,7 +663,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                                 @endforeach
                                                             </select>
                                                         </div>
-                                                        <div class="d-none" id="option-skills{{ isset($index) ? '-' . $index : '' }}"></div>
+                                                        <div class="d-none" id="option-skills{{ isset($index) ? '_' . $index : '' }}"></div>
                                                     </div>
 
                                                 @else
