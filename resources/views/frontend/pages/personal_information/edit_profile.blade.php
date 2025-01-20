@@ -7,6 +7,136 @@
 @section('page.type', 'website')
 
 @section('page.content')
+<style>
+    /* Select elements with IDs starting with 'list-industry_' or 'list-preferred-industry_' */
+div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
+    height: 34px !important;
+    padding: 5px 17px 5px 24px !important;
+    border-radius: 50px !important;
+    cursor: pointer;
+    margin-top: 7px;
+    font-weight: 600 !important;
+    background: #cccccc36 !important;
+    font-size: 14px;
+    list-style: none;
+    float: left;
+    margin-right: 5px;
+    border: 1px solid #aaaaaa52 !important;
+}
+
+
+    /* styles.css */
+    #dropdown-container {
+        margin: 20px;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-toggle {
+        background-color: #007bff;
+        color: white;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        z-index: 1000;
+        width: 300px;
+        max-height: 300px;
+        overflow-y: auto;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .title {
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .option {
+        margin-top: 10px;
+    }
+
+    .child-options {
+        margin-left: 20px;
+    }
+
+    #selected-values {
+        margin-top: 20px;
+        font-size: 16px;
+        color: #333;
+    }
+
+    /* #selected-values-ids {
+        margin-top: 10px;
+        font-size: 16px;
+        color: #333;
+    } */
+
+    #dropdown-container-new {
+        margin: 20px;
+    }
+
+    .dropdown-new {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-toggle-new {
+        background-color: #007bff;
+        color: white;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    .dropdown-menu-new {
+        display: none;
+        position: absolute;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        width: 300px;
+        max-height: 300px;
+        overflow-y: auto;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .title-new {
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .option-new {
+        margin-top: 10px;
+    }
+
+    .child-options-new {
+        margin-left: 20px;
+    }
+
+    #selected-values-new {
+        margin-top: 20px;
+        font-size: 16px;
+        color: #333;
+    }
+
+</style>
 
 @php
 // var_dump($user);
@@ -98,7 +228,7 @@
 @endphp
 <style>
     @media screen and (min-width: 1200px) {
-       
+
         header.d-flex.align-items-center.justify-content-between {
             width: 100%;
         }
@@ -109,7 +239,7 @@
         background-color: #e7ecef;
     }
 
-    
+
     .education-row .col-md-6:nth-child(odd) {
     padding-left: 12px;
     padding-right: 12px !important;
@@ -395,7 +525,7 @@
                                 <div class="row">
 
                                     @if ($user->workExperiences->isNotEmpty())
-                                        @foreach ($user->workExperiences as $workExp)
+                                        @foreach ($user->workExperiences as $index => $workExp)
                                             <div class="row work-exp-row cirtificate_pdd">
                                                 <div class="col-md-6 mb-md-4 mb-3">
                                                     <div class="position-relative form-group">
@@ -415,19 +545,22 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-12 mb-md-4 mb-3">
-                                                    <div class="position-relative form-group">
-                                                        <label for="State" class="form-label">Total Years of Experience *</label>
-                                                        <select class="select2 form-select form-control is-invalid input_select old-select2"
-                                                            aria-label="Default select example" id="wrk_exp_years" name="wrk_exp_years[]" required>
-                                                            <option value="">Select Experience</option>
-                                                            @foreach ($years_of_exp as $row)
-                                                                <option value="{{ $row->id }}" @if ($workExp->wrk_exp_years == $row->id) selected @endif>
-                                                                    {{ ucfirst($row->year_range) }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
+                                                <div class="col-md-6">
+                                                    <label for="start_month_year">Start Month and Year:</label>
+                                                    <input type="month"
+                                                           class="form-control is-invalid input_text"
+                                                           id="start_month_year"
+                                                           name="start_month_year[]"
+                                                           value="{{ isset($workExp->start_month_year) ? $workExp->start_month_year : '' }}">
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="end_month_year">End Month and Year:</label>
+                                                    <input type="month"
+                                                           class="form-control is-invalid input_text"
+                                                           id="end_month_year"
+                                                           name="end_month_year[]"
+                                                           value="{{ isset($workExp->end_month_year) ? $workExp->end_month_year : '' }}">
                                                 </div>
 
                                                 <div class="col-md-12 pt-4">
@@ -438,6 +571,124 @@
                                                     </div>
                                                 </div>
 
+                                                {{-- <div class="col-md-6 mb-4">
+                                                    <div class="position-relative">
+                                                        <label for="experience_letter" class="form-label">Upload Last Experience | Relieving letter
+                                                        <img src="/assets/images/pdf_icon.png" alt="" class="input_icon" />
+                                                        <input class="form-control" type="file" id="formFile" name="experience_letter[]"
+                                                            accept=".pdf,.doc,.docx,application/msword,image/*,.webp" />
+                                                            <span class="leble_size">(docx, pdf -  up to 5MB)</span></label>
+                                                        {{-- <img src="images/file.png" alt="" class="input_icon" />
+                                                    </div>
+
+                                                        @if ($experience_letter)
+                                                        <div class="mt-2">
+                                                            <a href="{{ asset('storage/' . $experience_letter) }}" class="btn btn-success add-row" target="_blank">View Last Experience | Relieving letter</a>
+                                                        </div>
+                                                    @endif
+
+                                                </div> --}}
+                                                <div class="col-md-12 mb-md-4 mb-3">
+
+                                                    <label for="industry_{{ $index }}" class="form-label">Industries</label>
+                                                    <div id="list-industry_{{ $index }}" class="d-none">
+
+                                                    </div>
+
+                                                    <div id="dropdown-container_{{ $index }}">
+                                                        <div id="selected-values">Selected values will be shown here.</div>
+                                                        <input type="hidden" class="selected-values-ids_opt" id="selected-values-ids_{{ $index }}" name="industry[{{ $index }}][]" value="">
+
+
+                                                        <div class="dropdown industry_option_dropdown">
+                                                            <a class="dropdown-toggle industry_option" id="dropdown-toggle_{{ $index }}">Select Industries Served</a>
+                                                            <div class="dropdown-menu industry-check-box industry_option_dropdown_box" id="dropdown-menu_{{ $index }}">
+                                                                @foreach ($groupedIndustries as $mainIndustry)
+                                                                    <div class="title" style="background: #d5d5d563; padding: 10px; font-weight: 600">
+                                                                        {{ $mainIndustry->name }}
+                                                                    </div>
+
+                                                                    @php
+                                                                        $sub_Catg = $industry->where('main_partent_id', $mainIndustry->id);
+                                                                    @endphp
+
+                                                                    @if (count($sub_Catg) != 0)
+                                                                        @foreach ($sub_Catg as $subIndustry)
+                                                                            <div class="option custom-languages pt-1">
+
+                                                                                <input type="checkbox" id="subindustry_{{ $index }}_{{ $subIndustry->id }}"
+                                                                                data-id="{{ $subIndustry->id }}" @if (in_array($subIndustry->id, is_string($workExp->industry) ? json_decode($workExp->industry, true) : (is_array($workExp->industry) ? $workExp->industry : []))) checked @endif>
+                                                                                <label for="subindustry_{{ $index }}_{{ $subIndustry->id }}">{{ $subIndustry->name }}</label>
+
+                                                                                @php
+                                                                                    $child_Catg = $industry->where('sub_parent_id', $subIndustry->id);
+                                                                                @endphp
+
+                                                                                @if (count($child_Catg) != 0)
+                                                                                    <div class="child-options">
+                                                                                        @foreach ($child_Catg as $childIndustry)
+                                                                                        <div class="field_option pt-1">
+                                                                                            <input type="checkbox" id="childindustry_{{ $index }}_{{ $childIndustry->id }}" data-id="{{ $childIndustry->id }}" @if (in_array($childIndustry->id, is_string($workExp->industry) ? json_decode($workExp->industry, true) : (is_array($workExp->industry) ? $workExp->industry : []))) checked @endif>
+                                                                                            <label for="childindustry_{{ $index }}_{{ $childIndustry->id }}">{{ $childIndustry->name }}</label>
+                                                                                        </div>
+                                                                                        @endforeach
+                                                                                    </div>
+                                                                                @endif
+                                                                            </div>
+                                                                        @endforeach
+                                                                    @endif
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                @if(!empty($workExp->skill))
+
+                                                    <div class="col-md-12 mb-2 mb_30">
+                                                        <div class="position-relative form-group">
+                                                            <label for="skills{{ isset($index) ? '_' . $index : '' }}" class="form-label w-100">Skills*</label>
+                                                            <select name="skill{{ isset($index) ? '[' . $index . ']' : '' }}[]" multiple="multiple"
+                                                                    class="select2 form-select form-control is-invalid input_select skill-dropdown"
+                                                                    aria-label="Default select example"
+                                                                    id="skills{{ isset($index) ? '_' . $index : '' }}"
+                                                                    {{ isset($index) ? 'data-index=' . $index : '' }} required>
+                                                                <option value=""> </option>
+                                                                @foreach ($skills as $row)
+                                                                    <option value="{{ $row->name }}"
+                                                                        @if (in_array($row->name, is_string($workExp->skill ?? '') ? json_decode($workExp->skill, true) : (is_array($workExp->skill ?? '') ? $workExp->skill : []))) selected @endif>
+                                                                        {{ ucfirst($row->name) }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="d-none" id="option-skills{{ isset($index) ? '-' . $index : '' }}"></div>
+                                                    </div>
+
+                                                @else
+
+                                                    <div class="col-md-12 mb-2 mb_30">
+                                                        <div class="position-relative form-group">
+                                                            <label for="skills_0" class="form-label w-100">Skills*</label>
+                                                            <select name="skill[0][]" multiple="multiple"
+                                                                    class="select2 form-select form-control is-invalid input_select skill-dropdown"
+                                                                    aria-label="Default select example"
+                                                                    id="skills_0" data-index="0" required>
+                                                                <option value=""> </option>
+                                                                @foreach ($skills as $row)
+                                                                    <option value="{{ $row->name }}" >
+                                                                        {{ ucfirst($row->name) }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="d-none" id="option-skills_0"></div>
+                                                    </div>
+
+                                                @endif
+
+
                                                 <div class="col-md-6 d-flex gap-3 add_more_div">
                                                     <button type="button" class="add_more add-row-work-exp">ADD MORE +</button>
                                                     <button type="button" class="remove_more remove-row-work-exp">REMOVE -</button>
@@ -446,7 +697,7 @@
                                         @endforeach
                                     @else
                                         {{-- Render an empty row as fallback --}}
-                                        <div class="row work-exp-row cirtificate_pdd">
+                                        <div class="row work-exp-row cirtificate_pdd" data-index="0">
                                             <div class="col-md-6 mb-md-4 mb-3">
                                                 <div class="position-relative form-group">
                                                     <label for="job_title" class="form-label">Professional Title*</label>
@@ -464,110 +715,112 @@
                                                 </div>
                                             </div>
 
+                                            <div class="col-md-6">
+                                                <label for="start_month_year">Start Month and Year:</label>
+                                                <input type="month" class="form-control is-invalid input_text" id="start_month_year" name="start_month_year[]">
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="end_month_year">End Month and Year:</label>
+                                                <input type="month" class="form-control is-invalid input_text" id="end_month_year" name="end_month_year[]">
+                                            </div>
+
+                                            <div class="col-md-12 pt-4">
+                                                <div class="form-group">
+                                                    <label for="Responsibilities" class="form-label">Responsibilities/Achievements*</label>
+                                                    <textarea class="form-control is-invalid" rows="4" cols="45" name="wrk_exp_responsibilities[]" placeholder="Message" required></textarea>
+                                                </div>
+                                            </div>
+
+                                            {{-- <div class="col-md-6 mb-4">
+                                                <div class="position-relative">
+                                                    <label for="experience_letter" class="form-label">Upload Last Experience | Relieving letter
+                                                    <img src="/assets/images/pdf_icon.png" alt="" class="input_icon" />
+                                                    <input class="form-control" type="file" id="formFile" name="experience_letter[]"
+                                                        accept=".pdf,.doc,.docx,application/msword,image/*,.webp" />
+                                                        <span class="leble_size">(docx, pdf -  up to 5MB)</span></label>
+                                                </div>
+                                            </div> --}}
+
+                                            <div class="col-md-12 mb-md-4 mb-3">
+
+                                                <label for="industry_0" class="form-label">Industries</label>
+                                                <div id="list-industry_0" class="d-none">
+
+                                                </div>
+
+                                                <div id="dropdown-container_0">
+                                                    <div id="selected-values">Selected values will be shown here.</div>
+                                                    <input type="hidden" class="selected-values-ids_opt" id="selected-values-ids_0" name="industry[0][]" value="">
+
+
+                                                    <div class="dropdown industry_option_dropdown">
+                                                        <a class="dropdown-toggle industry_option" id="dropdown-toggle_0">Select Industries Served</a>
+                                                        <div class="dropdown-menu industry-check-box industry_option_dropdown_box" id="dropdown-menu_0">
+                                                            @foreach ($groupedIndustries as $mainIndustry)
+                                                                <div class="title" style="background: #d5d5d563; padding: 10px; font-weight: 600">
+                                                                    {{ $mainIndustry->name }}
+                                                                </div>
+
+                                                                @php
+                                                                    $sub_Catg = $industry->where('main_partent_id', $mainIndustry->id);
+                                                                @endphp
+
+                                                                @if (count($sub_Catg) != 0)
+                                                                    @foreach ($sub_Catg as $subIndustry)
+                                                                        <div class="option custom-languages pt-1">
+
+                                                                            <input type="checkbox" id="subindustry_0_{{ $subIndustry->id }}" data-id="{{ $subIndustry->id }}">
+                                                                            <label for="{{ $subIndustry->id }}">{{ $subIndustry->name }}</label>
+
+                                                                            @php
+                                                                                $child_Catg = $industry->where('sub_parent_id', $subIndustry->id);
+                                                                            @endphp
+
+                                                                            @if (count($child_Catg) != 0)
+                                                                                <div class="child-options">
+                                                                                    @foreach ($child_Catg as $childIndustry)
+                                                                                    <div class="field_option pt-1">
+                                                                                        <input type="checkbox" id="childindustry_0_{{ $childIndustry->id }}" data-id="{{ $childIndustry->id }}">
+                                                                                        <label for="{{ $childIndustry->id }}">{{ $childIndustry->name }}</label>
+                                                                                    </div>
+                                                                                    @endforeach
+                                                                                </div>
+                                                                            @endif
+                                                                        </div>
+                                                                    @endforeach
+                                                                @endif
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-md-12 mb-2 mb_30">
+                                                <div class="position-relative form-group">
+                                                    <label for="skills_0" class="form-label w-100">Skills*</label>
+                                                    <select name="skill[0][]" multiple="multiple"
+                                                            class="select2 form-select form-control is-invalid input_select skill-dropdown"
+                                                            aria-label="Default select example"
+                                                            id="skills_0" data-index="0" required>
+                                                        <option value=""> </option>
+                                                        @foreach ($skills as $row)
+                                                            <option value="{{ $row->name }}" >
+                                                                {{ ucfirst($row->name) }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="d-none" id="option-skills_0"></div>
+                                            </div>
+
                                             <div class="col-md-6 d-flex gap-3 add_more_div">
                                                 <button type="button" class="add_more add-row-work-exp">ADD MORE +</button>
                                                 <button type="button" class="remove_more remove-row-work-exp">REMOVE -</button>
                                             </div>
                                         </div>
                                     @endif
-
-                                    <div class="col-md-6">
-                                        <label for="start_date" class="form-label">Start Month* ----</label>
-                                        <input type="text" class="form-control" id="start_date" placeholder="-">
-                                    </div>
-
-                                    <div class="col-md-6">
-                                    <label for="start_date2" class="form-label"> </label>
-                                        <input type="number" class="form-control" id="start_date2"  placeholder="-">
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="end_date" class="form-label">End Month* ----</label>
-                                        <input type="text" class="form-control" id="end_date" placeholder="-">
-                                    </div>
-
-                                    <div class="col-md-6">
-                                    <label for="end_date2" class="form-label"> </label>
-                                        <input type="number" class="form-control" id="end_date2" placeholder="-">
-                                    </div>
-
-
-                                    <div class="col-md-12 mb-md-4 mb-3">
-
-                                        <label for="industry" class="form-label">Industries</label>
-                                        <div id="list-industry" class="d-none">
-
-                                        </div>
-
-                                        <div id="dropdown-container">
-                                            {{-- <div id="selected-values">Selected values will be shown here.</div> --}}
-                                            <input type="hidden" id="selected-values-ids" name="industry[]" value="">
-
-
-                                            <div class="dropdown industry_option_dropdown">
-                                                <a class="dropdown-toggle industry_option">Select Industries Served </a>
-                                                <div class="dropdown-menu industry-check-box industry_option_dropdown_box">
-                                                    @foreach ($groupedIndustries as $mainIndustry)
-                                                        <div class="title" style="background: #d5d5d563; padding: 10px; font-weight: 600">
-                                                            {{ $mainIndustry->name }}
-                                                        </div>
-
-                                                        @php
-                                                            $sub_Catg = $industry->where('main_partent_id', $mainIndustry->id);
-                                                        @endphp
-
-                                                        @if (count($sub_Catg) != 0)
-                                                            @foreach ($sub_Catg as $subIndustry)
-                                                                <div class="option custom-languages pt-1">
-
-                                                                    <input type="checkbox" id="{{ $subIndustry->id }}"
-                                                                    data-id="{{ $subIndustry->id }}" @if (in_array($subIndustry->id, json_decode($industry_check, true))) checked @endif>
-                                                                    <label for="{{ $subIndustry->id }}">{{ $subIndustry->name }}</label>
-
-                                                                    @php
-                                                                        $child_Catg = $industry->where('sub_parent_id', $subIndustry->id);
-                                                                    @endphp
-
-                                                                    @if (count($child_Catg) != 0)
-                                                                        <div class="child-options">
-                                                                            @foreach ($child_Catg as $childIndustry)
-                                                                            <div class="field_option pt-1">
-                                                                                <input type="checkbox" id="{{ $childIndustry->id }}" data-id="{{ $childIndustry->id }}" @if (in_array($childIndustry->id, json_decode($industry_check, true))) checked @endif>
-                                                                                <label for="{{ $childIndustry->id }}">{{ $childIndustry->name }}</label>
-                                                                            </div>
-                                                                            @endforeach
-                                                                        </div>
-                                                                    @endif
-                                                                </div>
-                                                            @endforeach
-                                                        @endif
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-md-12 mb-2 mb_30">
-                                        <div class="position-relative form-group">
-                                            <label for="skills" class="form-label w-100">Skills*</label>
-                                            <select name="skill[]" multiple="multiple"
-                                                class="select2 form-select form-control is-invalid input_select"
-                                                aria-label="Default select example" id="skills-data" required>
-                                                <option value=""> </option>
-                                                @foreach ($skills as $row)
-                                                    <option value="{{ $row->name }}"
-                                                        @if (in_array($row->name, json_decode($skill_check, true))) selected @endif>
-                                                        {{ ucfirst($row->name) }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-none" id="option-skills"></div>
-
-
 
                                 </div>
                                 <div class="purple_btn text-start">
@@ -1234,32 +1487,172 @@
             }
         });
 
+        // Function to update the add/remove buttons based on row position
+        function updateRowIndexesAndButtons(status = null, delrow = null) {
+            $('.work-exp-row').each(function (index) {
+                const row = $(this);
+
+                // Update the data-index attribute
+                row.attr('data-index', index);
+
+                if (status === null) {
+                
+                    // Update skill dropdown attributes (data-index, name, id)
+                    const skillDropdown = row.find('.skill-dropdown');
+                    skillDropdown.attr({
+                        'data-index': index,
+                        'name': `skill[${index}][]`,
+                        'id': `skills_${index}`
+                    });
+
+                    // Update the related container ID for skill dropdown using closest
+                    const relatedContainer = row.find('.skill-dropdown').closest('.col-md-12').find(`#option-skills_${skillDropdown.data('index')-1}`);
+                    relatedContainer.attr('id', `option-skills_${index}`);
+
+                    initializeSkillDropdown(`#skills_${index}`, '{{ url(route('get.RelatedSkills')) }}');
+
+                } else {
+
+
+                    if(delrow === null) {
+
+                        if(index === $('.work-exp-row').length - 1){
+
+                            const skillDropdown = row.find('.skill-dropdown');
+                            skillDropdown.attr({
+                                'data-index': index,
+                                'name': `skill[${index}][]`,
+                                'id': `skills_${index}`
+                            });
+
+                            // Update the related container ID for skill dropdown using closest
+                            const relatedContainer = row.find('.skill-dropdown').closest('.col-md-12').find(`#option-skills_${skillDropdown.data('index')-1}`);
+                            relatedContainer.attr('id', `option-skills_${index}`);
+
+                            row.find(`#option-skills_0`).attr('id', `option-skills_${index}`);
+
+                            row.find(`#list-industry_0`).attr('id', `list-industry_${index}`);
+                            row.find(`#dropdown-container_0`).attr('id', `dropdown-container_${index}`);
+
+                            row.find(`#selected-values-ids_0`).attr({
+                                id: `selected-values-ids_${index}`,          // Update the ID to match the current index
+                                name: `industry[${index}][]`,               // Update the name attribute with the current index
+                                value: ''                                   // Reset the value to an empty string
+                            });
+
+                            row.find(`#dropdown-toggle_0`).attr('id', `dropdown-toggle_${index}`);
+                            row.find(`#dropdown-menu_0`).attr('id', `dropdown-menu_${index}`);
+                            
+                            const dropdownMenu = document.querySelector(`#dropdown-menu_${index}`);
+                            if (dropdownMenu) {
+                                const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]');
+                                checkboxes.forEach(checkbox => {
+                                    checkbox.checked = false; // Uncheck each checkbox
+                                });
+                            } else {
+                                console.error(`Element with ID #dropdown-menu_${index} not found.`);
+                            }
+                            
+                        }  
+                    }  else {
+                        
+                        row.find(`.selected-values-ids_opt`).attr({
+                            id: `selected-values-ids_${index}`,          
+                            name: `industry[${index}][]`,           
+                        });
+
+                        console.log('working');
+
+                    }
+
+                }
+                
+                // Clear existing add/remove buttons
+                row.find('.add_more_div').remove();
+
+                if ($('.work-exp-row').length === 1) {
+                    // Case 1: Single row - Only "Add More" button
+                    row.append(`
+                        <div class="col-md-6 d-flex gap-3 add_more_div">
+                            <button type="button" class="add_more add-row-work-exp">ADD MORE +</button>
+                        </div>
+                    `);
+                } else if (index === $('.work-exp-row').length - 1) {
+                    // Case 4: Last row - Both "Add More" and "Remove" buttons
+                    row.append(`
+                        <div class="col-md-6 d-flex gap-3 add_more_div">
+                            <button type="button" class="add_more add-row-work-exp">ADD MORE +</button>
+                            <button type="button" class="remove_more remove-row-work-exp">REMOVE -</button>
+                        </div>
+                    `);
+                } else {
+                    // Middle rows or rows that are not the last - Only "Remove" button
+                    row.append(`
+                        <div class="col-md-6 d-flex gap-3 add_more_div">
+                            <button type="button" class="remove_more remove-row-work-exp">REMOVE -</button>
+                        </div>
+                    `);
+                }
+            });
+        }
 
         // Add row functionality
         $(document).on('click', '.add-row-work-exp', function (e) {
-            e.preventDefault(); // Prevent form submission
+            e.preventDefault();
+
             var newRow = $('.work-exp-row').first().clone(); // Clone the first row
+
             // Clear input values in the cloned row
             newRow.find('input,textarea,select').each(function () {
                 $(this).val('');
             });
-            newRow.find('.add_more_div').remove(); // Remove add button from the cloned row
-            // newRow.find('.add-row-work-exp').remove(); // Remove add button from the cloned row
-            // newRow.find('.remove-row-work-exp').remove(); // Remove add button from the cloned row
-            newRow.append('<div class="col-md-6 d-flex gap-3 add_more_div"><button type="button" class="add_more add-row-work-exp">ADD MORE +</button><button type="button" class="remove_more remove-row-work-exp">REMOVE -</button></div>'); // Add new add and remove buttons
-            $('.work-exp-row').last().after(newRow); // Append the cloned row at the end
+
+            // Remove the extra span created by select2
+            newRow.find('.select2-container').remove(); // Remove the extra select2 span
+
+            // Append the cloned row at the end
+            $('.work-exp-row').last().after(newRow);
+
+
+            // // Update row indexes and buttons
+            updateRowIndexesAndButtons(false);
+
+            let updatedIndex = newRow.attr('data-index');
+
+            setupDropdown({
+                dropdownContainerId: `#dropdown-container_${updatedIndex}`, // Unique container ID
+                toggleClass: `#dropdown-toggle_${updatedIndex}`,            // Unique toggle button ID
+                menuClass: `#dropdown-menu_${updatedIndex}`,                // Unique dropdown menu ID
+                hiddenInputId: `selected-values-ids_${updatedIndex}`,        // Unique hidden input ID
+                listId: `list-industry_${updatedIndex}`,                    // Unique list ID
+                hiddenListClass: 'd-none',
+                childOptionClass: '.child-options',
+                mainOptionClass: '.option'
+            });
+
+            initializeSkillDropdown(`#skills_${updatedIndex}`, '{{ url(route('get.RelatedSkills')) }}');
+
+            // Initialize skill dropdowns for all previous rows
+            for (let i = 0; i <= updatedIndex; i++) {
+                initializeSkillDropdown(`#skills_${i}`, '{{ url(route('get.RelatedSkills')) }}');
+            }
+
         });
 
         // Remove row functionality
         $(document).on('click', '.remove-row-work-exp', function (e) {
             e.preventDefault(); // Prevent form submission
             if ($('.work-exp-row').length > 1) {
+                const delrow = parseInt($(this).closest('.work-exp-row').attr('data-index'), 10);
                 $(this).closest('.work-exp-row').remove(); // Remove the closest row
+                // Update row indexes and buttons
+                updateRowIndexesAndButtons(false, delrow);
             } else {
                 alert('At least one row is required.'); // Alert if only one row is left
             }
         });
 
+        updateRowIndexesAndButtons();
 
         // Add row for Education
         $(document).on('click', '.add-edu-row', function () {
@@ -1330,213 +1723,242 @@
 
     });
 
+    function initializeSkillDropdown(selector, relatedSkillsEndpoint) {
+        const $dropdown = $(selector);
 
-    $('#skills-data').on('focusout', function() {
-        $('#option-skills').addClass('d-none');
-    });
+        if (!$dropdown.length) return; // Exit if the dropdown doesn't exist
+        const index = $dropdown.data('index'); // Fetch index if exists
 
-    function skill_dropdown(){
-        $('#skills-data').select2({
+
+        const relatedSkillsContainer = `#option-skills_${index}`; // Container for related skills
+        let selectedSkillsOrder = [];
+        let updating = false;
+
+        // Initialize the select2 dropdown
+        $dropdown.select2({
             placeholder: 'Select Key Relevant Skills',
             minimumInputLength: 2,
             tags: true,
             ajax: {
-                url: '{{ url(route('get.skills')) }}',
+                url: relatedSkillsEndpoint,
                 dataType: 'json',
                 delay: 250,
-                data: function(params) {
+                data: function (params) {
                     return {
-                        q: params.term // search term
+                        q: params.term // Search term
                     };
                 },
-                processResults: function(data) {
+                processResults: function (data) {
                     return {
-                        results: $.map(data, function(item) {
+                        results: $.map(data, function (item) {
                             return {
                                 text: item.name,
                                 id: item.name
-                            }
+                            };
                         })
                     };
                 },
                 cache: true
             }
         });
-    }
 
-    $(document).ready(function() {
-        let selectedSkillsOrder = [];
-        let updating = false; // Flag to prevent recursive loop
-
-        skill_dropdown();
-
-        $('#skills-data').on('change', function() {
-            if (updating) return; // Prevent recursive call
-            const selectedSkills = $(this).val() || [];
-            // console.log(selectedSkills);
+        // Manage skill selection and ordering
+        $dropdown.on('change', function () {
+            if (updating) return; // Prevent recursive calls
+            const selectedSkills = $dropdown.val() || [];
             selectedSkillsOrder = selectedSkillsOrder.filter(skill => selectedSkills.includes(skill));
             selectedSkills.forEach(skill => {
                 if (!selectedSkillsOrder.includes(skill)) {
                     selectedSkillsOrder.push(skill);
                 }
             });
-            // console.log(selectedSkillsOrder);
             renderSkills();
             loadRelatedSkills(selectedSkillsOrder[selectedSkillsOrder.length - 1]);
         });
 
         function renderSkills() {
-            updating = true; // Set flag to prevent recursive call
-            const $select = $('#skills-data');
+            updating = true;
             const options = selectedSkillsOrder.map(skill => `<option value="${skill}" selected>${skill}</option>`);
-            $select.html(options.join('')).trigger('change');
-            updating = false; // Reset flag
+            $dropdown.html(options.join('')).trigger('change');
+            updating = false;
         }
 
+        // Load related skills when a new skill is selected
         function loadRelatedSkills(skill) {
             if (skill) {
                 $.ajax({
-                    url: '/related-skills',
+                    url: relatedSkillsEndpoint,
                     data: { skill: skill },
-                    success: function(data) {
+                    success: function (data) {
                         let optionsHtml = '';
-                        data.forEach(function(skill) {
-                            optionsHtml += '<li class="list-group-item">' + skill.name + '</li>';
+                        data.forEach(function (relatedSkill) {
+                            optionsHtml += `<li class="list-group-item">${relatedSkill.name}</li>`;
                         });
-                        $('#option-skills').html('<ul class="list-group">' + optionsHtml + '</ul>').removeClass('d-none');
+                        $(relatedSkillsContainer).html(`<ul class="list-group">${optionsHtml}</ul>`).removeClass('d-none');
                     }
                 });
             } else {
-                $('#option-skills').addClass('d-none');
+                $(relatedSkillsContainer).addClass('d-none');
             }
         }
 
-        $('#option-skills').on('click', 'li', function() {
+        // Handle adding related skills on click
+        $(relatedSkillsContainer).on('click', 'li', function () {
             const skillText = $(this).text();
             if (!selectedSkillsOrder.includes(skillText)) {
                 selectedSkillsOrder.push(skillText);
                 renderSkills();
             }
-            $('#option-skills').addClass('d-none');
-            loadRelatedSkills(skillText)
+            $(relatedSkillsContainer).addClass('d-none');
+            loadRelatedSkills(skillText);
         });
-    });
 
-    $(document).on('click', function(event) {
-        var $optionSkills = $('#option-skills');
-        if (!$optionSkills.is(event.target) && $optionSkills.has(event.target).length === 0) {
-            $optionSkills.addClass('d-none');
-        }
-    });
-
-</script>
-<script>
-    function setupDropdown({
-        dropdownContainerId,
-        toggleClass,
-        menuClass,
-        hiddenInputId,
-        listId,
-        hiddenListClass,
-        childOptionClass,
-        mainOptionClass
-    }) {
-        const listElement = document.getElementById(listId);
-        const hiddenInput = document.getElementById(hiddenInputId);
-
-        function processList(input) {
-            listElement.innerHTML = ''; // Clear the list
-
-            if (!input.trim()) {
-                listElement.classList.add(hiddenListClass);
-                return;
+        // Hide the related skills container on outside click
+        $(document).on('click', function (event) {
+            if (!$(relatedSkillsContainer).is(event.target) && $(relatedSkillsContainer).has(event.target).length === 0) {
+                $(relatedSkillsContainer).addClass('d-none');
             }
-
-            const items = input.split(',').map(item => item.trim());
-
-            items.forEach(item => {
-                const li = document.createElement('li');
-                li.textContent = item;
-                listElement.appendChild(li);
-            });
-
-            listElement.classList.remove(hiddenListClass);
-        }
-
-        $(document).ready(function () {
-            // Show/hide dropdown menu
-            $(toggleClass).click(function () {
-                $(menuClass).toggle();
-            });
-
-            function updateMainCheckbox(mainCheckbox) {
-                const hasCheckedChild = $(mainCheckbox)
-                    .siblings(childOptionClass)
-                    .find('input[type="checkbox"]:checked').length > 0;
-
-                $(mainCheckbox).prop('checked', hasCheckedChild);
-            }
-
-            function updateList() {
-                const selectedLabels = [];
-                const selectedIds = [];
-
-                $(`${dropdownContainerId} input[type="checkbox"]:checked`).each(function () {
-                    selectedLabels.push($(this).next('label').text());
-                    selectedIds.push($(this).data('id'));
-                });
-
-                hiddenInput.value = selectedIds.join(', '); // Update hidden input
-                processList(selectedLabels.join(', ')); // Update the list
-            }
-
-            // Handle child checkbox changes
-            $(`${dropdownContainerId}`).on('change', `${childOptionClass} input[type="checkbox"]`, function () {
-                const mainCheckbox = $(this).closest(mainOptionClass).find('input[type="checkbox"]').first();
-                updateMainCheckbox(mainCheckbox);
-                updateList();
-            });
-
-            // Handle main checkbox changes
-            $(`${dropdownContainerId}`).on('change', `${mainOptionClass} > input[type="checkbox"]`, function () {
-                const isChecked = $(this).prop('checked');
-                $(this).siblings(childOptionClass).find('input[type="checkbox"]').prop('checked', isChecked);
-                updateList();
-            });
-
-            // Close dropdown when clicking outside
-            $(document).click(function (event) {
-                if (!$(event.target).closest(menuClass).length && !$(event.target).closest(toggleClass).length) {
-                    $(menuClass).hide();
-                }
-            });
-
-            updateList(); // Initial list update
         });
     }
 
-    // Initialize the dropdowns
-    setupDropdown({
-        dropdownContainerId: '#dropdown-container',
-        toggleClass: '.dropdown-toggle',
-        menuClass: '.dropdown-menu',
-        hiddenInputId: 'selected-values-ids',
-        listId: 'list-industry',
-        hiddenListClass: 'd-none',
-        childOptionClass: '.child-options',
-        mainOptionClass: '.option'
-    });
 
-    setupDropdown({
-        dropdownContainerId: '#dropdown-container-new',
-        toggleClass: '.dropdown-toggle-new',
-        menuClass: '.dropdown-menu-new',
-        hiddenInputId: 'selected-values-ids-new',
-        listId: 'list-preferred-industry',
-        hiddenListClass: 'd-none-new',
-        childOptionClass: '.child-options-new',
-        mainOptionClass: '.option-new'
-    });
-</script>
+    function setupDropdown({
+     dropdownContainerId,
+     toggleClass,
+     menuClass,
+     hiddenInputId,
+     listId,
+     hiddenListClass,
+     childOptionClass,
+     mainOptionClass
+ }) {
+     const listElement = document.getElementById(listId);
+     const hiddenInput = document.getElementById(hiddenInputId);
+
+     // Ensure the hidden input exists
+     if (!hiddenInput) {
+         console.error(`Hidden input with ID ${hiddenInputId} not found.`);
+         return; // Exit if the hidden input element does not exist
+     }
+
+     function processList(input) {
+         listElement.innerHTML = ''; // Clear the list
+
+         if (!input.trim()) {
+             listElement.classList.add(hiddenListClass);
+             return;
+         }
+
+         const items = input.split(',').map(item => item.trim());
+
+         items.forEach(item => {
+             const li = document.createElement('li');
+             li.textContent = item;
+             listElement.appendChild(li);
+         });
+
+         listElement.classList.remove(hiddenListClass);
+     }
+
+     $(document).ready(function () {
+         // Show/hide dropdown menu
+         $(toggleClass).click(function () {
+             $(menuClass).toggle();
+         });
+
+         function updateMainCheckbox(mainCheckbox) {
+             const hasCheckedChild = $(mainCheckbox)
+                 .siblings(childOptionClass)
+                 .find('input[type="checkbox"]:checked').length > 0;
+
+             $(mainCheckbox).prop('checked', hasCheckedChild);
+         }
+
+         function updateList() {
+             const selectedLabels = [];
+             const selectedIds = [];
+
+             // Check if the container exists before proceeding
+             $(`${dropdownContainerId} input[type="checkbox"]:checked`).each(function () {
+                 selectedLabels.push($(this).next('label').text());
+                 selectedIds.push($(this).data('id'));
+             });
+
+             // Update hidden input only if it exists
+             if (hiddenInput) {
+                 hiddenInput.value = selectedIds.join(', '); // Update hidden input
+             }
+
+             processList(selectedLabels.join(', ')); // Update the list
+         }
+
+         // Handle child checkbox changes
+         $(`${dropdownContainerId}`).on('change', `${childOptionClass} input[type="checkbox"]`, function () {
+             const mainCheckbox = $(this).closest(mainOptionClass).find('input[type="checkbox"]').first();
+             updateMainCheckbox(mainCheckbox);
+             updateList();
+         });
+
+         // Handle main checkbox changes
+         $(`${dropdownContainerId}`).on('change', `${mainOptionClass} > input[type="checkbox"]`, function () {
+             const isChecked = $(this).prop('checked');
+             $(this).siblings(childOptionClass).find('input[type="checkbox"]').prop('checked', isChecked);
+             updateList();
+         });
+
+         // Close dropdown when clicking outside
+         $(document).click(function (event) {
+             if (!$(event.target).closest(menuClass).length && !$(event.target).closest(toggleClass).length) {
+                 $(menuClass).hide();
+             }
+         });
+
+         updateList(); // Initial list update
+     });
+ }
+
+ @if ($user->workExperiences->isNotEmpty())
+    // Initialize the dropdowns for each work experience entry
+    @foreach ($user->workExperiences as $index => $workExp)
+        setupDropdown({
+            dropdownContainerId: '#dropdown-container_{{ $index }}', // Use the unique ID for each container
+            toggleClass: '#dropdown-toggle_{{ $index }}',            // Use the unique toggle button
+            menuClass: '#dropdown-menu_{{ $index }}',                // Use the unique dropdown menu
+            hiddenInputId: 'selected-values-ids_{{ $index }}',       // Use the unique hidden input ID
+            listId: 'list-industry_{{ $index }}',                    // Use the unique list ID
+            hiddenListClass: 'd-none',
+            childOptionClass: '.child-options',
+            mainOptionClass: '.option'
+        });
+    @endforeach
+
+@else
+
+        // Initialize the dropdowns
+        setupDropdown({
+            dropdownContainerId: '#dropdown-container_0', 
+            toggleClass: '#dropdown-toggle_0',            
+            menuClass: '#dropdown-menu_0',                
+            hiddenInputId: 'selected-values-ids_0',       
+            listId: 'list-industry_0',                    
+            hiddenListClass: 'd-none',
+            childOptionClass: '.child-options',
+            mainOptionClass: '.option'
+        });
+
+@endif
+
+
+     setupDropdown({
+         dropdownContainerId: '#dropdown-container-new',
+         toggleClass: '.dropdown-toggle-new',
+         menuClass: '.dropdown-menu-new',
+         hiddenInputId: 'selected-values-ids-new',
+         listId: 'list-preferred-industry',
+         hiddenListClass: 'd-none-new',
+         childOptionClass: '.child-options-new',
+         mainOptionClass: '.option-new'
+     });
+ </script>
 
 @endsection
