@@ -293,7 +293,7 @@ body {
                 <img class="user_icon" src="/assets/images/certificate_icon.svg">
                 <h4 class="about_heading">Certifications</h4>
             </div>
-            <div class="d-flex flex-md-row flex-column certification_div">
+            <div class="d-flex flex-md-row flex-row flex-column flex-wrap certification_div">
                 @foreach($certificate_data as $certificate)
                     <div class="col-md-6 mb-3">
                         <div class="d-flex align-items-md-center">
