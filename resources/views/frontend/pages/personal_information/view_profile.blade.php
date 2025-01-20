@@ -218,51 +218,55 @@ body {
                     <div class="ms-3">
                         <h5 class="mb-1">{{ $experience->wrk_exp_title }}</h5>
                         <p>
-                            {{ $experience->wrk_exp_company_name }} .
+                            {{ $experience->wrk_exp_company_name ?? 'N/A' }} .
                             {{ $experience->start_month_year.' - '.$experience->end_month_year ?? 'N/A' }}
                         </p>
                         <p class="work_exp_details_text">
-                            @php echo nl2br($experience->wrk_exp_responsibilities); @endphp
+                            @php echo nl2br($experience->wrk_exp_responsibilities ?? 'N/A'); @endphp
                             <b class="bold_see_more"> </b>
                         </p>
 
-                        <div class="industry_main_div">
-                            <strong class="industry_main_div_heading">Industry :</strong>
-                            <div class="industry_div_list">
+                        @if(!empty($experience->industry))
+                            <div class="industry_main_div">
+                                <strong class="industry_main_div_heading">Industry :</strong>
+                                <div class="industry_div_list">
 
-                                @php
-                                    $exp_industry = json_Decode($experience->industry);
-                                @endphp
-                                @foreach ($exp_industry as $industry)
-                                @php
-                                    $industry_name = DB::table('industry')->where('id', $industry)->value('name'); 
-                                @endphp
-                                <div class="bg_verified_main">
-                                    <img class="bg_verified_img" src="/assets/images/right_mark.svg">
-                                    <p class="bg_verified_text">{{ $industry_name }}</p>
+                                    @php
+                                        $exp_industry = json_Decode($experience->industry);
+                                    @endphp
+                                    @foreach ($exp_industry as $industry)
+                                    @php
+                                        $industry_name = DB::table('industry')->where('id', $industry)->value('name'); 
+                                    @endphp
+                                    <div class="bg_verified_main">
+                                        <img class="bg_verified_img" src="/assets/images/right_mark.svg">
+                                        <p class="bg_verified_text">{{ $industry_name }}</p>
+                                    </div>
+                                    @endforeach
                                 </div>
-                                @endforeach
                             </div>
-                        </div>
+                        @endif
 
-                        <div class="skills_main_div">
-                            <strong class="skills_main_div_heading">Skills :</strong>
-                            <div class="industry_div_list">
-                                @php
-                                    $exp_skills = json_Decode($experience->skill);
-                                @endphp
-                                @foreach ($exp_skills as $skill)
-                                <div class="bg_verified_main">
-                                    <img class="bg_verified_img" src="/assets/images/right_mark.svg">
-                                    <p class="bg_verified_text">
-                                        @php
-                                        echo $skill;
-                                        @endphp
-                                    </p>
+                        @if(!empty($experience->skill))
+                            <div class="skills_main_div">
+                                <strong class="skills_main_div_heading">Skills :</strong>
+                                <div class="industry_div_list">
+                                    @php
+                                        $exp_skills = json_Decode($experience->skill);
+                                    @endphp
+                                    @foreach ($exp_skills as $skill)
+                                    <div class="bg_verified_main">
+                                        <img class="bg_verified_img" src="/assets/images/right_mark.svg">
+                                        <p class="bg_verified_text">
+                                            @php
+                                            echo $skill;
+                                            @endphp
+                                        </p>
+                                    </div>
+                                    @endforeach
                                 </div>
-                                @endforeach
                             </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
