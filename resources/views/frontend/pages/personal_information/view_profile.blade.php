@@ -226,7 +226,7 @@ body {
                             {{ $experience->start_month_year.' - '.$experience->end_month_year ?? 'N/A' }}
                         </p>
                         <p class="work_exp_details_text">
-                            {{ $experience->wrk_exp_responsibilities }}
+                            @php echo nl2br($experience->wrk_exp_responsibilities); @endphp
                             <b class="bold_see_more"> </b>
                         </p>
 

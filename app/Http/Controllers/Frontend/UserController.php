@@ -364,56 +364,35 @@ class UserController extends Controller
 
         foreach ($request->input('wrk_exp__title') as $key => $title) {
 
-            // // Handle file upload for experience letter
-            // if ($request->hasFile('experience_letter') && $request->file('experience_letter')[$key]->isValid()) {
-
-            //     $users_email_temp = User::where('id', $user_id)->value('email');
-
-            //     $users_email_temp = str_replace(['@', '.'], '_', $users_email_temp);
-
-            //     $newFileName = 'experience_letter_' . $users_email_temp . '_' . now()->format('YmdHis') . '.' . $request->file('experience_letter')->getClientOriginalExtension();
-            //     $path = $request->file('experience_letter')->storeAs('user_data/experience_letters', $newFileName, 'public');
-
-            //     $result = file_upload_od($newFileName, $path);
-            //     if($result != 'error on uploding'){
-            //         if (Storage::disk('public')->exists($path)) {
-            //             // Storage::disk('public')->delete($path);
-            //         }
-            //         $path = $result;
-            //     }
-
-            // } else {
-
-            //     $path = null;
-            // }
 
             // Get the corresponding industries for the current work experience
-            // $industries = isset($industryInputs[$key]) ? $industryInputs[$key] : [];
+            $industries = isset($industryInputs[$key]) ? $industryInputs[$key] : [];
 
-            // // Explode the string by comma and sanitize values
-            // $industries_t = explode(',', $industries[0]);
+            // Explode the string by comma and sanitize values
+            $industries_t = explode(',', $industries[0]);
 
-            // // Trim spaces from each element
-            // $industries = array_map('trim', $industries_t);
+            // Trim spaces from each element
+            $industries = array_map('trim', $industries_t);
 
-            // // Encode industries as JSON for storing in the database
-            // $encodedIndustries = json_encode($industries);  // Store as JSON encoded array
+            // Encode industries as JSON for storing in the database
+            $encodedIndustries = json_encode($industries);  // Store as JSON encoded array
 
-            // // Parse and process skills
-            // $skills = $request->input("skill.$key", []);
-            // $skills = array_map('trim', $skills);
 
-            // foreach ($skills as $skill) {
-            //     $existingSkill = DB::table('skills')->where('name', $skill)->first();
-            //     if (!$existingSkill) {
-            //         DB::table('skills')->insert([
-            //             'name' => $skill,
-            //             'status' => 1,
-            //             'created_at' => now(),
-            //             'updated_at' => now(),
-            //         ]);
-            //     }
-            // }
+            // Parse and process skills
+            $skills = $request->input("skill.$key", []);
+            $skills = array_map('trim', $skills);
+
+            foreach ($skills as $skill) {
+                $existingSkill = DB::table('skills')->where('name', $skill)->first();
+                if (!$existingSkill) {
+                    DB::table('skills')->insert([
+                        'name' => $skill,
+                        'status' => 1,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+            }
 
             // Prepare the current work experience data
             $workExperiences[] = [
@@ -424,8 +403,8 @@ class UserController extends Controller
                 'start_month_year' => $request->input('start_month_year')[$key] ?? null,
                 'end_month_year' => $request->input('end_month_year')[$key] ?? null,
                 'experience_letter' => null,
-                'industry' => null, // Encode the industries array as JSON
-                'skill' =>  null, // Encode the list of skills as JSON
+                'industry' => $encodedIndustries ?? null, // Encode the industries array as JSON
+                'skill' => json_encode($skills) ?? null, // Encode the list of skills as JSON
                 'created_at' => now(),
                 'updated_at' => now(),
             ];

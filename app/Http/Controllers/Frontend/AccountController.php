@@ -390,7 +390,7 @@ class AccountController extends Controller
                     $query->orWhere('name', 'LIKE', "$term%");
                 }
             })
-            ->groupBy('name')
+            ->wherenot('name',$search)
             ->limit('10')
             ->get(['name']);
 

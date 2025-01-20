@@ -588,7 +588,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                     @endif
 
                                                 </div> --}}
-                                                {{-- <div class="col-md-12 mb-md-4 mb-3">
+                                                <div class="col-md-12 mb-md-4 mb-3">
 
                                                     <label for="industry_{{ $index }}" class="form-label">Industries</label>
                                                     <div id="list-industry_{{ $index }}" class="d-none">
@@ -597,7 +597,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
 
                                                     <div id="dropdown-container_{{ $index }}">
                                                         <div id="selected-values">Selected values will be shown here.</div>
-                                                        <input type="hidden" id="selected-values-ids_{{ $index }}" name="industry[{{ $index }}][]" value="">
+                                                        <input type="hidden" class="selected-values-ids_opt" id="selected-values-ids_{{ $index }}" name="industry[{{ $index }}][]" value="">
 
 
                                                         <div class="dropdown industry_option_dropdown">
@@ -644,25 +644,49 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
 
                                                 </div>
 
-                                                <div class="col-md-12 mb-2 mb_30">
-                                                    <div class="position-relative form-group">
-                                                        <label for="skills{{ isset($index) ? '_' . $index : '' }}" class="form-label w-100">Skills*</label>
-                                                        <select name="skill{{ isset($index) ? '[' . $index . ']' : '' }}[]" multiple="multiple"
-                                                                class="select2 form-select form-control is-invalid input_select skill-dropdown"
-                                                                aria-label="Default select example"
-                                                                id="skills{{ isset($index) ? '_' . $index : '' }}"
-                                                                {{ isset($index) ? 'data-index=' . $index : '' }} required>
-                                                            <option value=""> </option>
-                                                            @foreach ($skills as $row)
-                                                                <option value="{{ $row->name }}"
-                                                                    @if (in_array($row->name, is_string($workExp->skill ?? '') ? json_decode($workExp->skill, true) : (is_array($workExp->skill ?? '') ? $workExp->skill : []))) selected @endif>
-                                                                    {{ ucfirst($row->name) }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
+                                                @if(!empty($workExp->skill))
+
+                                                    <div class="col-md-12 mb-2 mb_30">
+                                                        <div class="position-relative form-group">
+                                                            <label for="skills{{ isset($index) ? '_' . $index : '' }}" class="form-label w-100">Skills*</label>
+                                                            <select name="skill{{ isset($index) ? '[' . $index . ']' : '' }}[]" multiple="multiple"
+                                                                    class="select2 form-select form-control is-invalid input_select skill-dropdown"
+                                                                    aria-label="Default select example"
+                                                                    id="skills{{ isset($index) ? '_' . $index : '' }}"
+                                                                    {{ isset($index) ? 'data-index=' . $index : '' }} required>
+                                                                <option value=""> </option>
+                                                                @foreach ($skills as $row)
+                                                                    <option value="{{ $row->name }}"
+                                                                        @if (in_array($row->name, is_string($workExp->skill ?? '') ? json_decode($workExp->skill, true) : (is_array($workExp->skill ?? '') ? $workExp->skill : []))) selected @endif>
+                                                                        {{ ucfirst($row->name) }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="d-none" id="option-skills{{ isset($index) ? '-' . $index : '' }}"></div>
                                                     </div>
-                                                    <div class="d-none" id="option-skills{{ isset($index) ? '-' . $index : '' }}"></div>
-                                                </div> --}}
+
+                                                @else
+
+                                                    <div class="col-md-12 mb-2 mb_30">
+                                                        <div class="position-relative form-group">
+                                                            <label for="skills_0" class="form-label w-100">Skills*</label>
+                                                            <select name="skill[0][]" multiple="multiple"
+                                                                    class="select2 form-select form-control is-invalid input_select skill-dropdown"
+                                                                    aria-label="Default select example"
+                                                                    id="skills_0" data-index="0" required>
+                                                                <option value=""> </option>
+                                                                @foreach ($skills as $row)
+                                                                    <option value="{{ $row->name }}" >
+                                                                        {{ ucfirst($row->name) }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="d-none" id="option-skills_0"></div>
+                                                    </div>
+
+                                                @endif
 
 
                                                 <div class="col-md-6 d-flex gap-3 add_more_div">
@@ -718,21 +742,21 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                 </div>
                                             </div> --}}
 
-                                            {{-- <div class="col-md-12 mb-md-4 mb-3">
+                                            <div class="col-md-12 mb-md-4 mb-3">
 
-                                                <label for="industry" class="form-label">Industries</label>
-                                                <div id="list-industry" class="d-none">
+                                                <label for="industry_0" class="form-label">Industries</label>
+                                                <div id="list-industry_0" class="d-none">
 
                                                 </div>
 
-                                                <div id="dropdown-container">
+                                                <div id="dropdown-container_0">
                                                     <div id="selected-values">Selected values will be shown here.</div>
-                                                    <input type="hidden" id="selected-values-ids" name="industry[]" value="">
+                                                    <input type="hidden" class="selected-values-ids_opt" id="selected-values-ids_0" name="industry[0][]" value="">
 
 
                                                     <div class="dropdown industry_option_dropdown">
-                                                        <a class="dropdown-toggle industry_option">Select Industries Served </a>
-                                                        <div class="dropdown-menu industry-check-box industry_option_dropdown_box">
+                                                        <a class="dropdown-toggle industry_option" id="dropdown-toggle_0">Select Industries Served</a>
+                                                        <div class="dropdown-menu industry-check-box industry_option_dropdown_box" id="dropdown-menu_0">
                                                             @foreach ($groupedIndustries as $mainIndustry)
                                                                 <div class="title" style="background: #d5d5d563; padding: 10px; font-weight: 600">
                                                                     {{ $mainIndustry->name }}
@@ -746,7 +770,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                                     @foreach ($sub_Catg as $subIndustry)
                                                                         <div class="option custom-languages pt-1">
 
-                                                                            <input type="checkbox" id="{{ $subIndustry->id }}" data-id="{{ $subIndustry->id }}">
+                                                                            <input type="checkbox" id="subindustry_0_{{ $subIndustry->id }}" data-id="{{ $subIndustry->id }}">
                                                                             <label for="{{ $subIndustry->id }}">{{ $subIndustry->name }}</label>
 
                                                                             @php
@@ -757,7 +781,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                                                 <div class="child-options">
                                                                                     @foreach ($child_Catg as $childIndustry)
                                                                                     <div class="field_option pt-1">
-                                                                                        <input type="checkbox" id="{{ $childIndustry->id }}" data-id="{{ $childIndustry->id }}">
+                                                                                        <input type="checkbox" id="childindustry_0_{{ $childIndustry->id }}" data-id="{{ $childIndustry->id }}">
                                                                                         <label for="{{ $childIndustry->id }}">{{ $childIndustry->name }}</label>
                                                                                     </div>
                                                                                     @endforeach
@@ -789,7 +813,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                     </select>
                                                 </div>
                                                 <div class="d-none" id="option-skills_0"></div>
-                                            </div> --}}
+                                            </div>
 
                                             <div class="col-md-6 d-flex gap-3 add_more_div">
                                                 <button type="button" class="add_more add-row-work-exp">ADD MORE +</button>
@@ -1464,28 +1488,85 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
         });
 
         // Function to update the add/remove buttons based on row position
-        function updateRowIndexesAndButtons() {
+        function updateRowIndexesAndButtons(status = null, delrow = null) {
             $('.work-exp-row').each(function (index) {
                 const row = $(this);
 
                 // Update the data-index attribute
                 row.attr('data-index', index);
 
-                // Update skill dropdown attributes (data-index, name, id)
-                const skillDropdown = row.find('.skill-dropdown');
-                skillDropdown.attr({
-                    'data-index': index,
-                    'name': `skill[${index}][]`,
-                    'id': `skills_${index}`
-                });
+                if (status === null) {
+                
+                    // Update skill dropdown attributes (data-index, name, id)
+                    const skillDropdown = row.find('.skill-dropdown');
+                    skillDropdown.attr({
+                        'data-index': index,
+                        'name': `skill[${index}][]`,
+                        'id': `skills_${index}`
+                    });
 
-                // Update the related container ID for skill dropdown using closest
-                const relatedContainer = row.find('.skill-dropdown').closest('.col-md-12').find(`#option-skills_${skillDropdown.data('index')-1}`);
-                relatedContainer.attr('id', `option-skills_${index}`);
+                    // Update the related container ID for skill dropdown using closest
+                    const relatedContainer = row.find('.skill-dropdown').closest('.col-md-12').find(`#option-skills_${skillDropdown.data('index')-1}`);
+                    relatedContainer.attr('id', `option-skills_${index}`);
 
-                // Destroy and reinitialize the skill dropdown
-                initializeSkillDropdown(`#skills_${index}`, '{{ url(route('get.skills')) }}');
+                    initializeSkillDropdown(`#skills_${index}`, '{{ url(route('get.RelatedSkills')) }}');
 
+                } else {
+
+
+                    if(delrow === null) {
+
+                        if(index === $('.work-exp-row').length - 1){
+
+                            const skillDropdown = row.find('.skill-dropdown');
+                            skillDropdown.attr({
+                                'data-index': index,
+                                'name': `skill[${index}][]`,
+                                'id': `skills_${index}`
+                            });
+
+                            // Update the related container ID for skill dropdown using closest
+                            const relatedContainer = row.find('.skill-dropdown').closest('.col-md-12').find(`#option-skills_${skillDropdown.data('index')-1}`);
+                            relatedContainer.attr('id', `option-skills_${index}`);
+
+                            row.find(`#option-skills_0`).attr('id', `option-skills_${index}`);
+
+                            row.find(`#list-industry_0`).attr('id', `list-industry_${index}`);
+                            row.find(`#dropdown-container_0`).attr('id', `dropdown-container_${index}`);
+
+                            row.find(`#selected-values-ids_0`).attr({
+                                id: `selected-values-ids_${index}`,          // Update the ID to match the current index
+                                name: `industry[${index}][]`,               // Update the name attribute with the current index
+                                value: ''                                   // Reset the value to an empty string
+                            });
+
+                            row.find(`#dropdown-toggle_0`).attr('id', `dropdown-toggle_${index}`);
+                            row.find(`#dropdown-menu_0`).attr('id', `dropdown-menu_${index}`);
+                            
+                            const dropdownMenu = document.querySelector(`#dropdown-menu_${index}`);
+                            if (dropdownMenu) {
+                                const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]');
+                                checkboxes.forEach(checkbox => {
+                                    checkbox.checked = false; // Uncheck each checkbox
+                                });
+                            } else {
+                                console.error(`Element with ID #dropdown-menu_${index} not found.`);
+                            }
+                            
+                        }  
+                    }  else {
+                        
+                        row.find(`.selected-values-ids_opt`).attr({
+                            id: `selected-values-ids_${index}`,          
+                            name: `industry[${index}][]`,           
+                        });
+
+                        console.log('working');
+
+                    }
+
+                }
+                
                 // Clear existing add/remove buttons
                 row.find('.add_more_div').remove();
 
@@ -1532,13 +1613,29 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
             // Append the cloned row at the end
             $('.work-exp-row').last().after(newRow);
 
-            // Update row indexes and buttons
-            updateRowIndexesAndButtons();
 
-            // Reinitialize the select2 dropdown for the new row
-            newRow.find('.skill-dropdown').each(function () {
-                initializeSkillDropdown(this, '{{ url(route('get.skills')) }}'); // Reinitialize select2 for the new row
+            // // Update row indexes and buttons
+            updateRowIndexesAndButtons(false);
+
+            let updatedIndex = newRow.attr('data-index');
+
+            setupDropdown({
+                dropdownContainerId: `#dropdown-container_${updatedIndex}`, // Unique container ID
+                toggleClass: `#dropdown-toggle_${updatedIndex}`,            // Unique toggle button ID
+                menuClass: `#dropdown-menu_${updatedIndex}`,                // Unique dropdown menu ID
+                hiddenInputId: `selected-values-ids_${updatedIndex}`,        // Unique hidden input ID
+                listId: `list-industry_${updatedIndex}`,                    // Unique list ID
+                hiddenListClass: 'd-none',
+                childOptionClass: '.child-options',
+                mainOptionClass: '.option'
             });
+
+            initializeSkillDropdown(`#skills_${updatedIndex}`, '{{ url(route('get.RelatedSkills')) }}');
+
+            // Initialize skill dropdowns for all previous rows
+            for (let i = 0; i <= updatedIndex; i++) {
+                initializeSkillDropdown(`#skills_${i}`, '{{ url(route('get.RelatedSkills')) }}');
+            }
 
         });
 
@@ -1546,17 +1643,16 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
         $(document).on('click', '.remove-row-work-exp', function (e) {
             e.preventDefault(); // Prevent form submission
             if ($('.work-exp-row').length > 1) {
+                const delrow = parseInt($(this).closest('.work-exp-row').attr('data-index'), 10);
                 $(this).closest('.work-exp-row').remove(); // Remove the closest row
                 // Update row indexes and buttons
-                updateRowIndexesAndButtons();
+                updateRowIndexesAndButtons(false, delrow);
             } else {
                 alert('At least one row is required.'); // Alert if only one row is left
             }
         });
 
-
         updateRowIndexesAndButtons();
-
 
         // Add row for Education
         $(document).on('click', '.add-edu-row', function () {
@@ -1628,209 +1724,104 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
     });
 
     function initializeSkillDropdown(selector, relatedSkillsEndpoint) {
-        $(selector).each(function () {
-            const $dropdown = $(this);
-            const index = $dropdown.data('index'); // Fetch index if exists
-            const relatedSkillsContainer = index !== undefined
-                ? `#option-skills-${index}`
-                : `#option-skills_${index}`; // Default container if no index
-            let selectedSkillsOrder = [];
-            let updating = false;
+        const $dropdown = $(selector);
 
-            // Initialize the select2 dropdown
-            $dropdown.select2({
-                placeholder: 'Select Key Relevant Skills',
-                minimumInputLength: 2,
-                tags: true,
-                ajax: {
-                    url: relatedSkillsEndpoint,
-                    dataType: 'json',
-                    delay: 250,
-                    data: function (params) {
-                        return {
-                            q: params.term // search term
-                        };
-                    },
-                    processResults: function (data) {
-                        return {
-                            results: $.map(data, function (item) {
-                                return {
-                                    text: item.name,
-                                    id: item.name
-                                };
-                            })
-                        };
-                    },
-                    cache: true
+        if (!$dropdown.length) return; // Exit if the dropdown doesn't exist
+        const index = $dropdown.data('index'); // Fetch index if exists
+
+
+        const relatedSkillsContainer = `#option-skills_${index}`; // Container for related skills
+        let selectedSkillsOrder = [];
+        let updating = false;
+
+        // Initialize the select2 dropdown
+        $dropdown.select2({
+            placeholder: 'Select Key Relevant Skills',
+            minimumInputLength: 2,
+            tags: true,
+            ajax: {
+                url: relatedSkillsEndpoint,
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term // Search term
+                    };
+                },
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: item.name,
+                                id: item.name
+                            };
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+
+        // Manage skill selection and ordering
+        $dropdown.on('change', function () {
+            if (updating) return; // Prevent recursive calls
+            const selectedSkills = $dropdown.val() || [];
+            selectedSkillsOrder = selectedSkillsOrder.filter(skill => selectedSkills.includes(skill));
+            selectedSkills.forEach(skill => {
+                if (!selectedSkillsOrder.includes(skill)) {
+                    selectedSkillsOrder.push(skill);
                 }
             });
+            renderSkills();
+            loadRelatedSkills(selectedSkillsOrder[selectedSkillsOrder.length - 1]);
+        });
 
-            // Manage skill selection and ordering
-            $dropdown.on('change', function () {
-                if (updating) return; // Prevent recursive call
-                const selectedSkills = $dropdown.val() || [];
-                selectedSkillsOrder = selectedSkillsOrder.filter(skill => selectedSkills.includes(skill));
-                selectedSkills.forEach(skill => {
-                    if (!selectedSkillsOrder.includes(skill)) {
-                        selectedSkillsOrder.push(skill);
+        function renderSkills() {
+            updating = true;
+            const options = selectedSkillsOrder.map(skill => `<option value="${skill}" selected>${skill}</option>`);
+            $dropdown.html(options.join('')).trigger('change');
+            updating = false;
+        }
+
+        // Load related skills when a new skill is selected
+        function loadRelatedSkills(skill) {
+            if (skill) {
+                $.ajax({
+                    url: relatedSkillsEndpoint,
+                    data: { skill: skill },
+                    success: function (data) {
+                        let optionsHtml = '';
+                        data.forEach(function (relatedSkill) {
+                            optionsHtml += `<li class="list-group-item">${relatedSkill.name}</li>`;
+                        });
+                        $(relatedSkillsContainer).html(`<ul class="list-group">${optionsHtml}</ul>`).removeClass('d-none');
                     }
                 });
-                renderSkills();
-                loadRelatedSkills(selectedSkillsOrder[selectedSkillsOrder.length - 1]);
-            });
-
-            function renderSkills() {
-                updating = true;
-                const options = selectedSkillsOrder.map(skill => `<option value="${skill}" selected>${skill}</option>`);
-                $dropdown.html(options.join('')).trigger('change');
-                updating = false;
-            }
-
-            // Load related skills when a new skill is selected
-            function loadRelatedSkills(skill) {
-                if (skill) {
-                    $.ajax({
-                        url: relatedSkillsEndpoint,
-                        data: { skill: skill },
-                        success: function (data) {
-                            let optionsHtml = '';
-                            data.forEach(function (relatedSkill) {
-                                optionsHtml += `<li class="list-group-item">${relatedSkill.name}</li>`;
-                            });
-                            $(relatedSkillsContainer).html(`<ul class="list-group">${optionsHtml}</ul>`).removeClass('d-none');
-                        }
-                    });
-                } else {
-                    $(relatedSkillsContainer).addClass('d-none');
-                }
-            }
-
-            // Handle adding related skills on click
-            $(relatedSkillsContainer).on('click', 'li', function () {
-                const skillText = $(this).text();
-                if (!selectedSkillsOrder.includes(skillText)) {
-                    selectedSkillsOrder.push(skillText);
-                    renderSkills();
-                }
+            } else {
                 $(relatedSkillsContainer).addClass('d-none');
-                loadRelatedSkills(skillText);
-            });
+            }
+        }
 
-            // Hide the related skills container on outside click
-            $(document).on('click', function (event) {
-                if (!$(relatedSkillsContainer).is(event.target) && $(relatedSkillsContainer).has(event.target).length === 0) {
-                    $(relatedSkillsContainer).addClass('d-none');
-                }
-            });
+        // Handle adding related skills on click
+        $(relatedSkillsContainer).on('click', 'li', function () {
+            const skillText = $(this).text();
+            if (!selectedSkillsOrder.includes(skillText)) {
+                selectedSkillsOrder.push(skillText);
+                renderSkills();
+            }
+            $(relatedSkillsContainer).addClass('d-none');
+            loadRelatedSkills(skillText);
+        });
+
+        // Hide the related skills container on outside click
+        $(document).on('click', function (event) {
+            if (!$(relatedSkillsContainer).is(event.target) && $(relatedSkillsContainer).has(event.target).length === 0) {
+                $(relatedSkillsContainer).addClass('d-none');
+            }
         });
     }
 
-    $(document).ready(function () {
-        initializeSkillDropdown('.skill-dropdown', '{{ url(route('get.skills')) }}');
-    });
 
-
-
-    // $('#skills-data').on('focusout', function() {
-    //     $('#option-skills').addClass('d-none');
-    // });
-
-    // function skill_dropdown(){
-    //     $('#skills-data').select2({
-    //         placeholder: 'Select Key Relevant Skills',
-    //         minimumInputLength: 2,
-    //         tags: true,
-    //         ajax: {
-    //             url: '{{ url(route('get.skills')) }}',
-    //             dataType: 'json',
-    //             delay: 250,
-    //             data: function(params) {
-    //                 return {
-    //                     q: params.term // search term
-    //                 };
-    //             },
-    //             processResults: function(data) {
-    //                 return {
-    //                     results: $.map(data, function(item) {
-    //                         return {
-    //                             text: item.name,
-    //                             id: item.name
-    //                         }
-    //                     })
-    //                 };
-    //             },
-    //             cache: true
-    //         }
-    //     });
-    // }
-
-    // $(document).ready(function() {
-    //     let selectedSkillsOrder = [];
-    //     let updating = false; // Flag to prevent recursive loop
-
-    //     skill_dropdown();
-
-    //     $('#skills-data').on('change', function() {
-    //         if (updating) return; // Prevent recursive call
-    //         const selectedSkills = $(this).val() || [];
-    //         // console.log(selectedSkills);
-    //         selectedSkillsOrder = selectedSkillsOrder.filter(skill => selectedSkills.includes(skill));
-    //         selectedSkills.forEach(skill => {
-    //             if (!selectedSkillsOrder.includes(skill)) {
-    //                 selectedSkillsOrder.push(skill);
-    //             }
-    //         });
-    //         // console.log(selectedSkillsOrder);
-    //         renderSkills();
-    //         loadRelatedSkills(selectedSkillsOrder[selectedSkillsOrder.length - 1]);
-    //     });
-
-    //     function renderSkills() {
-    //         updating = true; // Set flag to prevent recursive call
-    //         const $select = $('#skills-data');
-    //         const options = selectedSkillsOrder.map(skill => `<option value="${skill}" selected>${skill}</option>`);
-    //         $select.html(options.join('')).trigger('change');
-    //         updating = false; // Reset flag
-    //     }
-
-    //     function loadRelatedSkills(skill) {
-    //         if (skill) {
-    //             $.ajax({
-    //                 url: '/related-skills',
-    //                 data: { skill: skill },
-    //                 success: function(data) {
-    //                     let optionsHtml = '';
-    //                     data.forEach(function(skill) {
-    //                         optionsHtml += '<li class="list-group-item">' + skill.name + '</li>';
-    //                     });
-    //                     $('#option-skills').html('<ul class="list-group">' + optionsHtml + '</ul>').removeClass('d-none');
-    //                 }
-    //             });
-    //         } else {
-    //             $('#option-skills').addClass('d-none');
-    //         }
-    //     }
-
-    //     $('#option-skills').on('click', 'li', function() {
-    //         const skillText = $(this).text();
-    //         if (!selectedSkillsOrder.includes(skillText)) {
-    //             selectedSkillsOrder.push(skillText);
-    //             renderSkills();
-    //         }
-    //         $('#option-skills').addClass('d-none');
-    //         loadRelatedSkills(skillText)
-    //     });
-    // });
-
-    // $(document).on('click', function(event) {
-    //     var $optionSkills = $('#option-skills');
-    //     if (!$optionSkills.is(event.target) && $optionSkills.has(event.target).length === 0) {
-    //         $optionSkills.addClass('d-none');
-    //     }
-    // });
-
-</script>
-<script>
     function setupDropdown({
      dropdownContainerId,
      toggleClass,
@@ -1940,19 +1931,23 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
             mainOptionClass: '.option'
         });
     @endforeach
+
 @else
+
         // Initialize the dropdowns
         setupDropdown({
-            dropdownContainerId: '#dropdown-container',
-            toggleClass: '.dropdown-toggle',
-            menuClass: '.dropdown-menu',
-            hiddenInputId: 'selected-values-ids',
-            listId: 'list-industry',
+            dropdownContainerId: '#dropdown-container_0', 
+            toggleClass: '#dropdown-toggle_0',            
+            menuClass: '#dropdown-menu_0',                
+            hiddenInputId: 'selected-values-ids_0',       
+            listId: 'list-industry_0',                    
             hiddenListClass: 'd-none',
             childOptionClass: '.child-options',
             mainOptionClass: '.option'
         });
+
 @endif
+
 
      setupDropdown({
          dropdownContainerId: '#dropdown-container-new',
