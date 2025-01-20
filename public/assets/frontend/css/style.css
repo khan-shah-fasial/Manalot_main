@@ -1534,7 +1534,8 @@ ul.select2-results__options li.select2-results__option:hover {
     background-size: 17px;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator, input[type="month"]::-webkit-calendar-picker-indicator {
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="month"]::-webkit-calendar-picker-indicator {
     opacity: 0;
     cursor: pointer;
 }
@@ -2570,11 +2571,20 @@ button.btn.btn-danger.remove-edu-row {
     width: 100% !important;
 }
 
+.skill_lst {
+    float: left;
+    width: 100%;
+    display: block !important;
+    clear: both;
+    margin-top: 10px;
+}
+
 div#option-skills ul {
     float: left;
     width: 100%;
     display: block;
     clear: both;
+    margin-top: 10px;
 }
 
 div#option-skills ul li {
@@ -2591,6 +2601,33 @@ div#option-skills ul li {
     background: #fff;
 }
 
+.skill_lst li {
+    float: left;
+    height: 36px;
+    text-align: center;
+    padding: 6px 19px;
+    margin-bottom: 11px;
+    border: 1px solid #aaaaaa52 !important;
+    margin-right: 6px;
+    border-radius: 50px !important;
+    cursor: pointer;
+    font-size: 14px;
+    background: #fff;
+}
+
+div#list-industry_0,
+div#list-industry_1,
+div#list-industry_2,
+div#list-industry_4,
+div#list-industry_5,
+div#list-industry_6,
+div#list-industry_7,
+div#list-industry_8,
+div#list-industry_9,
+div#list-industry_10 {
+    display: flex;
+    flex-wrap: wrap;
+}
 
 #work-details-div .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
     font-size: 20px !important;
@@ -4452,7 +4489,8 @@ div#likeModal button.btn-close {
     height: 24px;
 }
 
-.reply-link, .reply-link1 {
+.reply-link,
+.reply-link1 {
     color: #969696;
     text-decoration: none;
 }

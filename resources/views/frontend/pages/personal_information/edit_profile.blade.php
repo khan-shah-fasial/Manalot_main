@@ -73,7 +73,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
     }
 
     #selected-values {
-        margin-top: 20px;
+        margin-top: 50px;
         font-size: 16px;
         color: #333;
     }
@@ -548,7 +548,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                 <div class="col-md-6">
                                                     <label for="start_month_year">Start Month and Year:</label>
                                                     <input type="month"
-                                                           class="form-control is-invalid input_text"
+                                                           class="form-control is-invalid input_text register_date_field"
                                                            id="start_month_year"
                                                            name="start_month_year[]"
                                                            value="{{ isset($workExp->start_month_year) ? $workExp->start_month_year : '' }}">
@@ -557,7 +557,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                 <div class="col-md-6">
                                                     <label for="end_month_year">End Month and Year:</label>
                                                     <input type="month"
-                                                           class="form-control is-invalid input_text"
+                                                           class="form-control is-invalid input_text register_date_field"
                                                            id="end_month_year"
                                                            name="end_month_year[]"
                                                            value="{{ isset($workExp->end_month_year) ? $workExp->end_month_year : '' }}">
@@ -596,7 +596,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                     </div>
 
                                                     <div id="dropdown-container_{{ $index }}">
-                                                        <div id="selected-values">Selected values will be shown here.</div>
+                                                        <!-- <div id="selected-values">Selected values will be shown here.</div> -->
                                                         <input type="hidden" class="selected-values-ids_opt" id="selected-values-ids_{{ $index }}" name="industry[{{ $index }}][]" value="">
 
 
@@ -742,7 +742,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                 </div>
                                             </div> --}}
 
-                                            <div class="col-md-12 mb-md-4 mb-3">
+                                            <div class="col-md-12 mb-md-4 mb-3 ">
 
                                                 <label for="industry_0" class="form-label">Industries</label>
                                                 <div id="list-industry_0" class="d-none">
@@ -750,7 +750,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                 </div>
 
                                                 <div id="dropdown-container_0">
-                                                    <div id="selected-values">Selected values will be shown here.</div>
+                                                    <!-- <div id="selected-values">Selected values will be shown here.</div> -->
                                                     <input type="hidden" class="selected-values-ids_opt" id="selected-values-ids_0" name="industry[0][]" value="">
 
 
@@ -812,7 +812,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <div class="d-none" id="option-skills_0"></div>
+                                                <div class="d-none skill_position_css" id="option-skills_0"></div>
                                             </div>
 
                                             <div class="col-md-6 d-flex gap-3 add_more_div">
@@ -1794,7 +1794,7 @@ div[id^="list-industry_"] li, div[id^="list-preferred-industry_"] li {
                         data.forEach(function (relatedSkill) {
                             optionsHtml += `<li class="list-group-item">${relatedSkill.name}</li>`;
                         });
-                        $(relatedSkillsContainer).html(`<ul class="list-group">${optionsHtml}</ul>`).removeClass('d-none');
+                        $(relatedSkillsContainer).html(`<ul class="list-group skill_lst">${optionsHtml}</ul>`).removeClass('d-none');
                     }
                 });
             } else {
