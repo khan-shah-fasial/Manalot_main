@@ -349,7 +349,7 @@ span.user_yes {
 
 .education_main_div,
 .work_exp {
-    padding-right: 140px;
+    padding-right: 70px;
 }
 
 @media screen and (max-width:991px) {
